@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button';
-import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
 import { LP_IMAGES } from '@/lp-images';
+import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
+import { Link } from 'wouter';
 
-const DM_URL = 'https://ig.me/m/locamo.ink';
-const IG_URL = 'https://www.instagram.com/locamo.ink/';
+import { DM_URL, IG_URL } from '@/constants/locamo';
 
 export default function Contact() {
   const faqs = [
@@ -41,7 +41,7 @@ export default function Contact() {
 
         {/* Main CTA */}
         <section className="mb-12 animate-fade-in-up">
-          <div className="lp-soft-band rounded-[1.5rem] border border-sky-100 p-8 text-center shadow-sm shadow-sky-950/5 md:p-12">
+          <div className="lp-soft-band flex flex-col items-stretch rounded-[1.5rem] border border-sky-100 px-5 py-10 text-center shadow-sm shadow-sky-950/5 sm:px-8 md:p-12">
             <div className="mx-auto mb-7 max-w-2xl overflow-hidden rounded-xl border border-sky-100/80">
               <img
                 src={LP_IMAGES.servicesBanner}
@@ -56,20 +56,28 @@ export default function Contact() {
             <h3 className="text-xl md:text-2xl font-bold mb-3">
               Instagram DMでお問合せ
             </h3>
-            <p className="text-muted-foreground text-sm mb-7 max-w-md mx-auto leading-relaxed">
+            <p className="mb-8 max-w-md self-center text-sm leading-relaxed text-muted-foreground">
               フォームは使用していません。Locamoの公式Instagramアカウントに
               ダイレクトメッセージをお送りください。
             </p>
-            <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="inline-block">
+            <div className="flex w-full justify-center px-2">
               <Button
                 size="lg"
-                className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground"
+                className="btn-primary inline-flex max-w-[min(100%,22rem)] w-full justify-center px-6 py-6 text-sm font-semibold text-primary-foreground"
+                asChild
               >
-                <MessageCircle size={18} className="mr-2" />
-                Instagram DMで連絡する
-                <ArrowRight size={16} className="ml-2" />
+                <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="gap-2">
+                  <MessageCircle size={18} className="shrink-0" aria-hidden />
+                  Instagram DMで連絡する
+                  <ArrowRight size={16} className="shrink-0" aria-hidden />
+                </a>
               </Button>
-            </a>
+            </div>
+            <p className="mt-5 text-center text-sm">
+              <Link href="/services/lp" className="font-medium text-accent underline-offset-4 hover:underline">
+                サービスの詳細を見る
+              </Link>
+            </p>
           </div>
         </section>
 

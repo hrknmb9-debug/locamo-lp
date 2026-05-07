@@ -1,78 +1,15 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, Check } from 'lucide-react';
+import { Link } from 'wouter';
+import { DM_URL } from '@/constants/locamo';
+import { SERVICE_PLANS } from '@/data/servicePlans';
 import { LP_IMAGES } from '@/lp-images';
-
-const DM_URL = 'https://ig.me/m/locamo.ink';
-
-interface ServicePlan {
-  id: string;
-  title: string;
-  description: string;
-  pages: string;
-  features: string[];
-  timeline: string;
-  price: string;
-  highlight?: boolean;
-}
 
 export default function Services() {
   const [expandedPlan, setExpandedPlan] = useState<string | null>(null);
 
-  const plans: ServicePlan[] = [
-    {
-      id: 'lp',
-      title: 'LP制作',
-      description: '1ページ完結型。店舗情報・メニュー・アクセス・問合せをまとめたランディングページ。',
-      pages: '1ページ',
-      features: [
-        '店舗情報の掲載',
-        'メニュー・料金表',
-        'アクセス・営業時間',
-        'お問合せ導線',
-        'Instagram連携',
-        'モバイル対応',
-        'SEO基本対応',
-      ],
-      timeline: '2週間目安',
-      price: '3万円〜',
-    },
-    {
-      id: 'hp',
-      title: 'ホームページ制作',
-      description: '複数ページ構成。ブランドとして育てる本格的なホームページ。',
-      pages: '複数ページ',
-      features: [
-        'トップページ',
-        'サービス紹介',
-        'ブログ機能',
-        'ギャラリー',
-        'お問合せフォーム',
-        'Instagram連携',
-        'モバイル対応',
-        'SEO対策',
-        'Google Analytics連携',
-      ],
-      timeline: '3〜4週間目安',
-      price: '要相談',
-      highlight: true,
-    },
-    {
-      id: 'instagram',
-      title: 'Instagram連携設計',
-      description: '既存Instagramからの流入導線をLP/HPに組み込む設計。上記2プランに含まれます。',
-      pages: 'LP or HP',
-      features: [
-        'Instagramフィード埋め込み',
-        'Instagram投稿へのリンク',
-        'フォロー導線の最適化',
-        'DM誘導ボタン',
-        'ストーリーズ連携',
-      ],
-      timeline: '制作に含む',
-      price: '無料',
-    },
-  ];
+  const plans = SERVICE_PLANS;
 
   const toggleExpand = (id: string) => {
     setExpandedPlan(expandedPlan === id ? null : id);
@@ -121,8 +58,8 @@ export default function Services() {
                 <div className="absolute top-0 left-0 right-0 h-0.5 bg-accent" />
               )}
               {plan.highlight && (
-                <div className="absolute top-3 right-3">
-                  <span className="rounded-full border border-sky-200 bg-sky-50 px-2 py-0.5 text-[10px] font-semibold text-accent">
+                <div className="absolute right-3 top-3 shrink-0">
+                  <span className="rounded-full border border-primary/40 bg-orange-50/95 px-2.5 py-1 text-[10px] font-semibold leading-none text-primary">
                     おすすめ
                   </span>
                 </div>
@@ -130,7 +67,7 @@ export default function Services() {
 
               {/* Card Header */}
               <div className="p-5 pb-4 border-b border-border">
-                <h3 className="text-lg font-bold mb-1">{plan.title}</h3>
+                <h3 className="mb-2 pr-12 text-lg font-bold md:pr-0">{plan.title}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">{plan.description}</p>
               </div>
 
@@ -176,15 +113,17 @@ export default function Services() {
               </div>
 
               {/* CTA */}
-              <div className="p-5 pt-0">
+              <div className="flex min-h-[3.75rem] w-full shrink-0 flex-col px-5 pb-5 pt-0">
                 <Button
-                  className={`w-full rounded-full text-sm font-semibold transition-all ${
-                    plan.highlight
-                      ? 'btn-primary text-primary-foreground'
-                      : 'border border-sky-200 bg-white text-foreground hover:bg-sky-50'
+                  variant={plan.highlight ? 'default' : 'outline'}
+                  asChild
+                  className={`h-12 w-full min-w-0 max-w-full rounded-full text-center text-sm font-semibold ${
+                    plan.highlight ? 'btn-primary text-primary-foreground' : 'border-sky-200 bg-white hover:bg-sky-50'
                   }`}
                 >
-                  詳細を見る
+                  <Link href={`/services/${plan.id}`} className="inline-flex w-full justify-center px-6">
+                    詳細を見る
+                  </Link>
                 </Button>
               </div>
             </div>

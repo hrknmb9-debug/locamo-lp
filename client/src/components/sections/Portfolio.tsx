@@ -1,5 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'wouter';
+import { DM_URL } from '@/constants/locamo';
+import type { PlanId } from '@/data/servicePlans';
 import { LP_IMAGES } from '@/lp-images';
 
 /**
@@ -11,30 +14,40 @@ import { LP_IMAGES } from '@/lp-images';
  */
 
 export default function Portfolio() {
-  const portfolioItems = [
+  const portfolioItems: {
+    id: number;
+    storeName: string;
+    category: string;
+    description: string;
+    planId: PlanId;
+  }[] = [
     {
       id: 1,
       storeName: 'Sample Store 1',
       category: '飲食店',
       description: 'LP制作',
+      planId: 'lp',
     },
     {
       id: 2,
       storeName: 'Sample Store 2',
       category: '小売店',
       description: 'ホームページ制作',
+      planId: 'hp',
     },
     {
       id: 3,
       storeName: 'Sample Store 3',
       category: '専門店',
       description: 'LP制作 + Instagram連携',
+      planId: 'lp',
     },
     {
       id: 4,
       storeName: 'Sample Store 4',
       category: '飲食店',
       description: 'ホームページ制作',
+      planId: 'hp',
     },
   ];
 
@@ -96,26 +109,30 @@ export default function Portfolio() {
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
-                <button className="text-accent hover:text-accent/80 transition-colors text-sm font-semibold flex items-center gap-1">
+                <Link
+                  href={`/services/${item.planId}`}
+                  className="text-accent hover:text-accent/80 transition-colors inline-flex items-center gap-1 text-sm font-semibold underline-offset-2 hover:underline"
+                >
                   詳細を見る
                   <ArrowRight size={16} />
-                </button>
+                </Link>
               </div>
             </div>
           ))}
         </div>
 
         {/* Early Client Recruitment */}
-        <div className="lp-card animate-fade-in-up rounded-[1.25rem] border-2 border-accent p-8 text-center md:p-12 shadow-md shadow-sky-200/40">
-          <h3 className="text-2xl font-bold mb-4">
+        <div className="lp-card animate-fade-in-up overflow-hidden rounded-[1.25rem] border-2 border-accent px-6 py-10 text-center shadow-md shadow-sky-200/40 sm:px-8 md:p-12">
+          <h3 className="mb-4 text-xl font-bold sm:text-2xl">
             初期クライアント様を<span className="text-accent">特別価格</span>で募集中！
           </h3>
-          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Locamoは現在、初期段階のため、実績構築のため初期クライアント様を特別価格でお受けしています。
-            この機会にぜひご利用ください。
-          </p>
+          <div className="mx-auto mb-6 max-w-2xl text-pretty px-1 text-muted-foreground sm:px-0">
+            <p>
+              Locamoは現在、初期段階のため、実績構築のため初期クライアント様を特別価格でお受けしています。この機会にぜひご利用ください。
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
             {[
               { title: '通常より', desc: '20%オフ' },
               { title: '無料診断', desc: '詳細コンサル付き' },
@@ -128,10 +145,14 @@ export default function Portfolio() {
             ))}
           </div>
 
-          <Button size="lg" className="btn-primary px-8 py-7 text-base font-semibold text-primary-foreground">
-            初期クライアント価格で申し込む
-            <ArrowRight className="ml-2" size={20} />
-          </Button>
+          <div className="flex w-full justify-center px-1 sm:px-3">
+            <Button size="lg" className="btn-primary mx-auto inline-flex max-w-[min(100%,22rem)] min-w-0 flex-nowrap px-6 py-7 text-[15px] font-semibold text-primary-foreground sm:py-8" asChild>
+              <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="w-full justify-center gap-2">
+                初期クライアント価格で申し込む
+                <ArrowRight className="size-5 shrink-0" aria-hidden />
+              </a>
+            </Button>
+          </div>
         </div>
 
         {/* Stats */}
