@@ -8,7 +8,7 @@ export default function Pricing() {
   const faqs = [
     {
       q: 'サーバーやドメインは別途必要ですか？',
-      a: 'はい、サーバーとドメインは別途実費となります。年間約2,000円〜の費用が必要です。初期設定のサポートは制作費に含まれています。',
+      a: 'はい、サーバーとドメインは別途実費となります。月額約300円〜（サーバー約200円〜＋ドメイン約100円〜）の費用が必要です。初期設定のサポートは制作費に含まれています。',
     },
     {
       q: '制作後の修正や更新はできますか？',
@@ -64,15 +64,15 @@ export default function Pricing() {
         {/* Pricing Highlight */}
         <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-7 md:p-10 mb-14 text-center animate-fade-in-up">
           <h3 className="text-xl md:text-2xl font-bold mb-3">
-            制作費は買い切り。<span className="text-accent">月額費用なし。</span>
+            制作費は買い切り。<span className="text-accent">サブスク不要。</span>
           </h3>
           <p className="text-muted-foreground text-sm mb-6">
-            一度ご契約いただければ、毎月の費用は発生しません。
+            一度ご契約いただければ、管理費・手数料などは発生しません。
           </p>
           <div className="bg-white border border-border rounded-xl p-5 inline-block shadow-sm">
             <p className="text-xs text-muted-foreground mb-1">サーバー・ドメイン費用（別途実費）</p>
-            <p className="text-2xl font-bold text-foreground">年間 約2,000円〜</p>
-            <p className="text-xs text-muted-foreground mt-1">初期設定サポート込み</p>
+            <p className="text-2xl font-bold text-foreground">月額 約300円〜</p>
+            <p className="text-xs text-muted-foreground mt-1">サーバー約200円〜＋ドメイン約100円〜 / 初期設定サポート込み</p>
           </div>
         </div>
 
@@ -92,8 +92,8 @@ export default function Pricing() {
                 {[
                   { item: '制作費', lp: '要相談', hp: '要相談' },
                   { item: '月額費用', lp: '0円', hp: '0円' },
-                  { item: 'サーバー費用', lp: '年2,000円〜', hp: '年2,000円〜' },
-                  { item: 'ドメイン費用', lp: '年1,000円〜', hp: '年1,000円〜' },
+                  { item: 'サーバー費用', lp: '月200円〜', hp: '月200円〜' },
+                  { item: 'ドメイン費用', lp: '月100円〜', hp: '月100円〜' },
                   { item: '納期', lp: '2週間', hp: '3〜4週間' },
                   { item: '修正対応', lp: '簡易修正無料', hp: '簡易修正無料' },
                 ].map((row, idx) => (
