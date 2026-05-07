@@ -20,7 +20,7 @@ export default function Services() {
     {
       id: 'lp',
       title: 'LP制作',
-      description: '1ページ完結型。店舗情報・メニュー・アクセス・問合せをまとめたランディングページ。',
+      description: '1ページ完結型。Googleで見つけてもらい、来店につなげる。個人店に特化したランディングページ。',
       pages: '1ページ',
       features: [
         '店舗情報の掲載',
@@ -32,7 +32,7 @@ export default function Services() {
         'SEO基本対応',
       ],
       timeline: '2週間目安',
-      price: '要相談',
+      price: '3万円〜',
     },
     {
       id: 'hp',
@@ -161,15 +161,17 @@ export default function Services() {
 
               {/* CTA */}
               <div className="p-5 pt-0">
-                <Button
-                  className={`w-full text-sm rounded-lg font-semibold transition-all ${
-                    plan.highlight
-                      ? 'btn-primary bg-accent text-accent-foreground'
-                      : 'bg-secondary text-foreground hover:bg-secondary/70 border border-border'
-                  }`}
-                >
-                  詳細を見る
-                </Button>
+                <a href="https://ig.me/m/locamo.ink" target="_blank" rel="noopener noreferrer" className="block">
+                  <Button
+                    className={`w-full text-sm rounded-lg font-semibold transition-all ${
+                      plan.highlight
+                        ? 'btn-primary bg-accent text-accent-foreground'
+                        : 'bg-secondary text-foreground hover:bg-secondary/70 border border-border'
+                    }`}
+                  >
+                    無料で相談する
+                  </Button>
+                </a>
               </div>
             </div>
           ))}
@@ -212,14 +214,19 @@ export default function Services() {
         {/* CTA */}
         <div className="text-center mt-12 animate-fade-in-up">
           <p className="text-muted-foreground text-sm mb-4">
-            ご質問やご不明な点がございましたら、お気軽にお問合せください
+            ご質問・お見積もりはInstagram DMからお気軽にどうぞ
           </p>
-          <Button
-            size="lg"
-            className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
-          >
-            無料診断を受ける
-          </Button>
+          <a href="https://ig.me/m/locamo.ink" target="_blank" rel="noopener noreferrer">
+            <Button
+              size="lg"
+              className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
+            >
+              無料診断を受ける（完全無料）
+            </Button>
+          </a>
+          <p className="text-xs text-muted-foreground mt-4">
+            ※サーバー・ドメイン費用として月額3,000円〜（実費）が別途必要です。制作費以外に当社へのお支払いはありません。
+          </p>
         </div>
       </div>
     </div>

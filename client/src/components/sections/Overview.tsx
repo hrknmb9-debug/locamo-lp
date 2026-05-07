@@ -14,8 +14,8 @@ function StatsSection() {
         <p className="text-xs md:text-sm text-muted-foreground mt-1">制作実績</p>
       </div>
       <div>
-        <div className="text-3xl md:text-4xl font-bold text-accent">0円</div>
-        <p className="text-xs md:text-sm text-muted-foreground mt-1">月額費用</p>
+        <div className="text-3xl md:text-4xl font-bold text-accent">3万円〜</div>
+        <p className="text-xs md:text-sm text-muted-foreground mt-1">LP制作費</p>
       </div>
       <div>
         <div className="text-3xl md:text-4xl font-bold text-accent">2週間</div>
@@ -60,8 +60,8 @@ export default function Overview() {
             className="text-base md:text-lg text-muted-foreground mb-8 max-w-xl mx-auto animate-fade-in-up"
             style={{ animationDelay: '0.35s' }}
           >
-            大阪の個人店向けLP・ホームページ制作。
-            Instagramとの連携を前提に設計された、買い切り型のWeb制作サービス。
+            Instagramのフォロワーを「来店客」に変える仕組みを、3万円〜で。
+            大阪の個人店専門、買い切り型LP制作サービス。
           </p>
 
           {/* CTA Buttons */}
@@ -69,13 +69,15 @@ export default function Overview() {
             className="flex flex-col sm:flex-row gap-3 justify-center mb-12 animate-fade-in-up"
             style={{ animationDelay: '0.5s' }}
           >
-            <Button
-              size="lg"
-              className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
-            >
-              無料診断を受ける
-              <ArrowRight className="ml-1.5" size={17} />
-            </Button>
+            <a href="https://ig.me/m/locamo.ink" target="_blank" rel="noopener noreferrer">
+              <Button
+                size="lg"
+                className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
+              >
+                無料診断を受ける（完全無料）
+                <ArrowRight className="ml-1.5" size={17} />
+              </Button>
+            </a>
             <Button
               size="lg"
               variant="outline"
@@ -158,7 +160,7 @@ export default function Overview() {
               },
               {
                 title: '買い切り型',
-                desc: '制作費は一括買い切り。月額費用なし。ランニングコストゼロ。',
+                desc: '制作費は一括払いで月額のサービス料なし。※サーバー・ドメインは月額3,000円〜の実費が別途必要です。',
               },
               {
                 title: 'Instagram連携設計',
@@ -170,13 +172,16 @@ export default function Overview() {
           </div>
 
           <div className="text-center">
-            <Button
-              size="lg"
-              className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
-            >
-              まずは無料診断
-              <ArrowRight className="ml-1.5" size={17} />
-            </Button>
+            <a href="https://ig.me/m/locamo.ink" target="_blank" rel="noopener noreferrer">
+              <Button
+                size="lg"
+                className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
+              >
+                まずは無料診断（Instagram DM）
+                <ArrowRight className="ml-1.5" size={17} />
+              </Button>
+            </a>
+            <p className="text-xs text-muted-foreground mt-3">診断後のご契約は任意です。費用は一切かかりません。</p>
           </div>
         </div>
       </section>

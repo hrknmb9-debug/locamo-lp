@@ -29,10 +29,10 @@ export default function Contact() {
           Contact
         </p>
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
-          お問合せ
+          まずは無料診断から
         </h2>
         <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm">
-          ご質問・ご相談は、Instagram DMからお気軽にご連絡ください
+          Instagram DMに「無料診断希望」と送るだけ。費用・契約は一切不要です。
         </p>
 
         {/* Main CTA */}
@@ -42,14 +42,17 @@ export default function Contact() {
               <Instagram className="w-7 h-7 text-accent" />
             </div>
             <h3 className="text-xl md:text-2xl font-bold mb-3">
-              Instagram DMでお問合せ
+              今すぐInstagram DMで無料診断
             </h3>
-            <p className="text-muted-foreground text-sm mb-7 max-w-md mx-auto leading-relaxed">
-              フォームは使用していません。Locamoの公式Instagramアカウントに
-              ダイレクトメッセージをお送りください。
+            <p className="text-muted-foreground text-sm mb-2 max-w-md mx-auto leading-relaxed">
+              「無料診断を希望します」と送るだけでOK。
+              あなたのお店に最適なプランをご提案します。
+            </p>
+            <p className="text-xs text-muted-foreground mb-7">
+              ※LP制作費：3万円〜　別途サーバー・ドメイン費用：月額3,000円〜（実費）
             </p>
             <a
-              href="https://instagram.com"
+              href="https://ig.me/m/locamo.ink"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block"
@@ -113,10 +116,10 @@ export default function Contact() {
         <section className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <div className="bg-accent rounded-2xl p-7 md:p-10 text-center text-white">
             <h3 className="text-xl font-bold mb-2">
-              無料診断は完全無料。
+              診断〜お見積もりまで完全無料。
             </h3>
             <p className="text-white/80 text-sm">
-              ご契約まで費用は発生しません。まずはお気軽にお問合せください。
+              ご契約まで費用は一切かかりません。断っても大丈夫です。
             </p>
           </div>
         </section>
@@ -141,13 +144,13 @@ export default function Contact() {
         <section className="text-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
           <div className="bg-secondary rounded-2xl p-8 md:p-12 border border-border">
             <h3 className="text-xl font-bold mb-2">
-              Instagramだけでは、もったいない。
+              3万円〜で、Googleからも選ばれるお店へ。
             </h3>
             <p className="text-muted-foreground text-sm mb-7">
-              Locamoで、あなたの店舗の集客を次のレベルへ。
+              InstagramもGoogleも、両方から集客できる仕組みをLocamoで。
             </p>
             <a
-              href="https://instagram.com"
+              href="https://ig.me/m/locamo.ink"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block"
@@ -167,7 +170,7 @@ export default function Contact() {
         <section className="mt-12 text-center">
           <p className="text-muted-foreground text-xs mb-1">NANBA企画（個人事業主）· 大阪府</p>
           <a
-            href="https://instagram.com"
+            href="https://ig.me/m/locamo.ink"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-sm text-accent hover:underline transition-colors"

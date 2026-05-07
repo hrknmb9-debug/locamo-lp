@@ -90,7 +90,7 @@ export default function Pricing() {
               </thead>
               <tbody>
                 {[
-                  { item: '制作費', lp: '要相談', hp: '要相談' },
+                  { item: '制作費', lp: '3万円〜', hp: '要相談' },
                   { item: '月額費用', lp: '0円', hp: '0円' },
                   { item: 'サーバー費用', lp: '月3,000円〜に込み', hp: '月3,000円〜に込み' },
                   { item: 'ドメイン費用', lp: '月3,000円〜に込み', hp: '月3,000円〜に込み' },
@@ -166,14 +166,16 @@ export default function Pricing() {
         {/* CTA */}
         <div className="text-center animate-fade-in-up">
           <p className="text-muted-foreground text-sm mb-4">
-            ご不明な点やご質問がございましたら、お気軽にお問合せください
+            ご不明な点やご質問は、Instagram DMからお気軽にどうぞ
           </p>
-          <Button
-            size="lg"
-            className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
-          >
-            無料診断を受ける
-          </Button>
+          <a href="https://ig.me/m/locamo.ink" target="_blank" rel="noopener noreferrer">
+            <Button
+              size="lg"
+              className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
+            >
+              無料診断を受ける（完全無料）
+            </Button>
+          </a>
         </div>
       </div>
     </div>

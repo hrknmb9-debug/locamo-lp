@@ -168,13 +168,13 @@ export default function Home() {
                 Instagram DMからお気軽にご連絡ください
               </p>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/locamo.ink?igsh=ZGVvcXFneDdseDY2&utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs text-accent hover:underline transition-colors"
               >
                 <Instagram size={14} />
-                @locamo
+                @locamo.ink
               </a>
             </div>
           </div>

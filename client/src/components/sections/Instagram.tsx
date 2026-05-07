@@ -153,21 +153,36 @@ export default function InstagramPage() {
               最新情報やお役立ち情報を発信しています
             </p>
 
-            <a
-              href="https://www.instagram.com/locamo.ink?igsh=ZGVvcXFneDdseDY2&utm_source=qr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block"
-            >
-              <Button
-                size="lg"
-                className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 flex items-center gap-2"
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="https://ig.me/m/locamo.ink"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Instagram size={24} />
-                Locamoをフォロー
-                <ArrowRight size={20} />
-              </Button>
-            </a>
+                <Button
+                  size="lg"
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 flex items-center gap-2"
+                >
+                  <Instagram size={24} />
+                  無料診断を受ける（Instagram DM）
+                  <ArrowRight size={20} />
+                </Button>
+              </a>
+              <a
+                href="https://www.instagram.com/locamo.ink?igsh=ZGVvcXFneDdseDY2&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="font-semibold px-8 py-6 flex items-center gap-2"
+                >
+                  <Instagram size={20} />
+                  アカウントをフォロー
+                </Button>
+              </a>
+            </div>
           </div>
         </section>
 
