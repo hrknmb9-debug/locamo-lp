@@ -8,7 +8,7 @@ export default function Pricing() {
   const faqs = [
     {
       q: 'サーバーやドメインは別途必要ですか？',
-      a: 'はい、サーバーとドメインは別途実費となります。月額約300円〜（サーバー約200円〜＋ドメイン約100円〜）の費用が必要です。初期設定のサポートは制作費に含まれています。',
+      a: 'はい、サーバーとドメインは別途実費となります。月額3,000円〜（サーバー・ドメイン込み）の費用が必要です。初期設定のサポートは制作費に含まれています。',
     },
     {
       q: '制作後の修正や更新はできますか？',
@@ -71,8 +71,8 @@ export default function Pricing() {
           </p>
           <div className="bg-white border border-border rounded-xl p-5 inline-block shadow-sm">
             <p className="text-xs text-muted-foreground mb-1">サーバー・ドメイン費用（別途実費）</p>
-            <p className="text-2xl font-bold text-foreground">月額 約300円〜</p>
-            <p className="text-xs text-muted-foreground mt-1">サーバー約200円〜＋ドメイン約100円〜 / 初期設定サポート込み</p>
+            <p className="text-2xl font-bold text-foreground">月額 3,000円〜</p>
+            <p className="text-xs text-muted-foreground mt-1">サーバー・ドメイン込み / 初期設定サポート込み</p>
           </div>
         </div>
 
@@ -92,8 +92,8 @@ export default function Pricing() {
                 {[
                   { item: '制作費', lp: '要相談', hp: '要相談' },
                   { item: '月額費用', lp: '0円', hp: '0円' },
-                  { item: 'サーバー費用', lp: '月200円〜', hp: '月200円〜' },
-                  { item: 'ドメイン費用', lp: '月100円〜', hp: '月100円〜' },
+                  { item: 'サーバー費用', lp: '月3,000円〜に込み', hp: '月3,000円〜に込み' },
+                  { item: 'ドメイン費用', lp: '月3,000円〜に込み', hp: '月3,000円〜に込み' },
                   { item: '納期', lp: '2週間', hp: '3〜4週間' },
                   { item: '修正対応', lp: '簡易修正無料', hp: '簡易修正無料' },
                 ].map((row, idx) => (
