@@ -228,9 +228,34 @@
     }
   }
 
-  /* Zine LP */
+  /* Zine LP — quadrant crops of the same hero collage */
   .font-zine-script {
     font-family: 'Caveat', cursive;
+  }
+
+  .lp-collage-quarter-tl,
+  .lp-collage-quarter-tr,
+  .lp-collage-quarter-bl,
+  .lp-collage-quarter-br {
+    background-image: url(/images/course-collage.png);
+    background-repeat: no-repeat;
+    background-size: 200% 200%;
+  }
+
+  .lp-collage-quarter-tl {
+    background-position: 0% 0%;
+  }
+
+  .lp-collage-quarter-tr {
+    background-position: 100% 0%;
+  }
+
+  .lp-collage-quarter-bl {
+    background-position: 0% 100%;
+  }
+
+  .lp-collage-quarter-br {
+    background-position: 100% 100%;
   }
 
   .lp-dots-soft {

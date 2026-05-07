@@ -2,90 +2,13 @@ import { useEffect, useState } from 'react';
 import { Instagram, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-/** 視覚の芯はこの2枚のみ（以降はトリミングとオーバーレイで統一） */
-const IMG_HERO = '/images/lp-hero.png';
-const IMG_OPENING = '/images/lp-panel-opening.png';
+const COLLAGE = '/images/course-collage.png';
 
 const NAV: { id: string; label: string }[] = [
   { id: 'hero', label: '01 ヒーロー' },
   { id: 'spread', label: '02 ビジュアル' },
   { id: 'panels', label: '03 パネル' },
   { id: 'cta', label: '04 申込' },
-];
-
-/** ヒーロー／オープニングの画像をクロップして再利用 */
-function ZineCropFigure({
-  src,
-  alt,
-  objectPosition = 'center',
-  caption,
-}: {
-  src: string;
-  alt: string;
-  objectPosition?: string;
-  caption: string;
-}) {
-  return (
-    <figure className="group relative overflow-hidden rounded-3xl border-[3px] border-zinc-900 shadow-[8px_8px_0_#18181b] transition hover:-rotate-1">
-      <div className="aspect-[5/7] w-full md:aspect-[4/5] overflow-hidden bg-zinc-200">
-        <img
-          src={src}
-          alt={alt}
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-          style={{ objectPosition }}
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <figcaption className="border-t-[3px] border-zinc-900 bg-white px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-zinc-800">
-        {caption}
-      </figcaption>
-    </figure>
-  );
-}
-
-const SPREAD_TILES: { src: string; alt: string; objectPosition: string; caption: string }[] = [
-  { src: IMG_OPENING, alt: 'オープニングビジュアル（トリミング）', objectPosition: '48% 28%', caption: 'Key 02 — Crop A' },
-  { src: IMG_HERO, alt: 'ヒーロービジュアル（トリミング）', objectPosition: '52% 38%', caption: 'Key 01 — Crop A' },
-  { src: IMG_OPENING, alt: 'オープニングビジュアル（トリミング）', objectPosition: '22% 55%', caption: 'Key 02 — Crop B' },
-  { src: IMG_HERO, alt: 'ヒーロービジュアル（トリミング）', objectPosition: '78% 42%', caption: 'Key 01 — Crop B' },
-];
-
-const PANEL_ROWS: {
-  id: string;
-  title: string;
-  desc: string;
-  src: string;
-  objectPosition: string;
-}[] = [
-  {
-    id: 'p1',
-    title: '世界観の宣言',
-    desc: '色面・筆致・ポートレートまで含めたキャッチ。オープニングのキーを大きく掲載し、第一印象をロックします。',
-    src: IMG_OPENING,
-    objectPosition: '50% 35%',
-  },
-  {
-    id: 'p2',
-    title: 'カリキュラム概要',
-    desc: 'メインヒーローから別トリミングを当てれば、資料のページ送りのようなリズムになります。',
-    src: IMG_HERO,
-    objectPosition: '45% 30%',
-  },
-  {
-    id: 'p3',
-    title: 'こんな人へ',
-    desc: '同じテイストのまま拡大・寄りで視線の動きだけ変えられます。',
-    src: IMG_OPENING,
-    objectPosition: '30% 60%',
-  },
-  {
-    id: 'p4',
-    title: '開催情報と申込',
-    desc: '日時・場所・定員などのリストと並べるサムネも、ヒーロー／オープニングのクロップのみで統一できます。',
-    src: IMG_HERO,
-    objectPosition: '62% 55%',
-  },
 ];
 
 function SectionLabel({ n, title }: { n: string; title: string }) {
@@ -194,7 +117,7 @@ export default function Home() {
                   伝わるポートフォリオから、クリエイターの最初の一歩を。
                 </h1>
                 <p className="max-w-xl text-pretty text-sm leading-relaxed text-zinc-700 md:text-base">
-                  ビジュアルは<strong className="font-bold">ヒーロー</strong>と<strong className="font-bold">オープニング</strong>の2枚だけ。あとはトリミングとレイアウトでテイストを揃え、見せ方だけを変えています。
+                  このLPは講座の世界観をそのまま持ち運べるように、キービジュアルの写真・コラージュをセクション単位でも何度でも使いました。質感や色がブレないのが強みです。
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <button
@@ -218,17 +141,17 @@ export default function Home() {
                 <div className="pointer-events-none absolute inset-[-8%] -z-10 rotate-[-2deg] rounded-[34px] border-2 border-dashed border-zinc-900/25" />
                 <figure className="lp-tape-edge relative rotate-[1.75deg] overflow-hidden rounded-[28px] border-[3px] border-zinc-900 bg-white">
                   <img
-                    src={IMG_HERO}
-                    alt="若手クリエイター向けポートフォリオ講座のキービジュアル（ヒーロー）"
-                    className="h-auto w-full object-cover object-[50%_40%]"
+                    src={COLLAGE}
+                    alt="若手クリエイター向けポートフォリオ講座のキービジュアルコラージュ"
+                    className="h-auto w-full object-cover"
                     width={960}
                     height={960}
                     loading="eager"
                     decoding="async"
                   />
                   <figcaption className="flex items-center justify-between gap-4 border-t-2 border-zinc-900 bg-[#ff4f8b] px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-white">
-                    <span>Key visual 01</span>
-                    <span className="tabular-nums">Hero</span>
+                    <span>Four-panel collage</span>
+                    <span className="tabular-nums">01 — 04</span>
                   </figcaption>
                 </figure>
               </div>
@@ -243,41 +166,47 @@ export default function Home() {
           <div className="container relative mx-auto max-w-[1180px] px-4">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
-                <SectionLabel n="02" title="ビジュアル展開（2枚だけで統一）" />
+                <SectionLabel n="02" title="ビジュアル展開（同一画像の切り替え）" />
                 <h2 className="mt-4 text-2xl font-black md:text-3xl">
-                  ヒーロー × オープニングだけを、トリミングで何度でも使う
+                  「一枚のデザインデータ」を、サイト上で繰り返し使う
                 </h2>
               </div>
               <p className="max-w-md text-xs leading-relaxed text-zinc-800 md:text-sm">
-                異なる作画テイストの画像を増やさず、同じ2枚から切り取り位置とオーバーレイだけを変えています。
+                印刷物でもWebでも、この一枚を起点に統一されます。スクロールのたびに角度とトリミングを変えれば、資料のページ送りみたいにリズムが出ます。
               </p>
             </div>
 
             <div className="mt-10 grid gap-6 md:grid-cols-12">
               <div className="md:col-span-8">
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-5">
-                  {SPREAD_TILES.map(tile => (
-                    <ZineCropFigure
-                      key={`${tile.caption}-${tile.objectPosition}`}
-                      src={tile.src}
-                      alt={tile.alt}
-                      objectPosition={tile.objectPosition}
-                      caption={tile.caption}
-                    />
+                  {(
+                    [
+                      ['lp-collage-quarter-tl', 'Panel 01 — Opening'],
+                      ['lp-collage-quarter-tr', 'Panel 02 — Curriculum'],
+                      ['lp-collage-quarter-bl', 'Panel 03 — Target'],
+                      ['lp-collage-quarter-br', 'Panel 04 — Detail & QR'],
+                    ] as const
+                  ).map(([cls, caption]) => (
+                    <figure
+                      key={cls}
+                      className={cn(
+                        cls,
+                        'group relative overflow-hidden rounded-3xl border-[3px] border-zinc-900 shadow-[8px_8px_0_#18181b] transition hover:-rotate-1'
+                      )}
+                    >
+                      <div className="aspect-[5/7] w-full md:aspect-[4/5]" />
+                      <figcaption className="border-t-[3px] border-zinc-900 bg-white px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-zinc-800">
+                        {caption}
+                      </figcaption>
+                    </figure>
                   ))}
                 </div>
               </div>
 
               <div className="md:col-span-4 md:self-stretch">
                 <div className="relative h-full min-h-[240px] overflow-hidden rounded-3xl border-[3px] border-zinc-900 bg-black shadow-[12px_12px_0_#daf54c] md:min-h-0">
-                  <img
-                    src={IMG_OPENING}
-                    alt=""
-                    className="h-full min-h-[280px] w-full scale-110 object-cover object-[42%_45%] opacity-95 md:min-h-0 md:scale-125"
-                    aria-hidden
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 mix-blend-screen bg-gradient-to-tr from-[#22d3ee]/35 via-transparent to-[#f472b6]/40" />
+                  <img src={COLLAGE} alt="" className="h-full w-full object-cover opacity-90" aria-hidden loading="lazy" />
+                  <div className="absolute inset-0 mix-blend-screen bg-gradient-to-tr from-[#22d3ee]/40 via-transparent to-[#f472b6]/45" />
                   <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/30 bg-white/85 p-3 text-[11px] font-semibold backdrop-blur">
                     メインビジュアルと同じアセットで、色相とブレンドを足すだけで「別ページにした」ような表情にできます。
                   </div>
@@ -288,9 +217,9 @@ export default function Home() {
             <div className="mt-12 overflow-hidden rounded-3xl border-[3px] border-zinc-900 bg-[#0f172a] shadow-[10px_10px_0_#ec4899]">
               <div className="grid md:grid-cols-[1.05fr_minmax(0,0.95fr)]">
                 <img
-                  src={IMG_OPENING}
+                  src={COLLAGE}
                   alt=""
-                  className="max-h-[min(52vw,320px)] w-full object-cover object-[45%_32%] md:max-h-none md:min-h-[220px]"
+                  className="h-full w-full object-cover saturate-125 contrast-105"
                   loading="lazy"
                 />
                 <div className="relative px-7 py-8 text-[#eef2ff]">
@@ -298,7 +227,7 @@ export default function Home() {
                   <p className="font-zine-script text-[2rem] leading-none text-[#c7d2fe]">Poster strip</p>
                   <p className="mt-5 text-lg font-black md:text-xl">ヒーロー直下でも、一覧でも、インパクトある帯広告として機能</p>
                   <p className="mt-3 text-xs leading-relaxed text-indigo-100/85 md:text-sm">
-                    SNS・LP・メールでも、同じ2枚のクロップを横長に載せればトーンがぶれません。
+                    SNS・LP・メール・印刷のどれでも、この横長トリミングを流用すると世界観のブレがありません。
                   </p>
                 </div>
               </div>
@@ -313,12 +242,39 @@ export default function Home() {
             <div>
               <SectionLabel n="03" title="パネルを縦スクロールに落とす" />
               <h2 className="mt-4 text-2xl font-black md:text-3xl">
-                「同じキー2枚」を、スクロールの流れで切り替えて見せる
+                「スライド4枚」を、LPの縦ストーリーに沿って配置
               </h2>
             </div>
 
             <div className="grid gap-8 lg:gap-14">
-              {PANEL_ROWS.map((row, idx) => (
+              {(
+                [
+                  {
+                    id: 'p1',
+                    q: 'lp-collage-quarter-tl' as const,
+                    title: '世界観の宣言',
+                    desc: '色面・筆迹・ポートレートまで含めたキャッチ。そのまま大きく掲載し、第一印象をロックします。',
+                  },
+                  {
+                    id: 'p2',
+                    q: 'lp-collage-quarter-tr' as const,
+                    title: 'カリキュラム概要',
+                    desc: '構成の核はアイコン付きステップ。このパネルを右側／背景に載せて、スクロールに合わせて見せます。',
+                  },
+                  {
+                    id: 'p3',
+                    q: 'lp-collage-quarter-bl' as const,
+                    title: 'こんな人へ',
+                    desc: '悩みのチェックと実物モックアップのコラージュで共感から反応への導線を作ります。',
+                  },
+                  {
+                    id: 'p4',
+                    q: 'lp-collage-quarter-br' as const,
+                    title: '開催情報と申込',
+                    desc: '日時・場所・定員などのリストと QR／ボタンの塊。このブロックだけを差し替えやすくしてあります。',
+                  },
+                ]
+              ).map((row, idx) => (
                 <article
                   key={row.id}
                   className={cn(
@@ -326,16 +282,8 @@ export default function Home() {
                     idx % 2 === 1 && 'md:[&>div:first-child]:order-2'
                   )}
                 >
-                  <div className="relative overflow-hidden rounded-[26px] border-2 border-zinc-900 bg-zinc-200">
-                    <div className="aspect-[5/7] w-full overflow-hidden md:aspect-[16/11]">
-                      <img
-                        src={row.src}
-                        alt={`${row.title}の説明に用いたビジュアル`}
-                        className="h-full w-full object-cover"
-                        style={{ objectPosition: row.objectPosition }}
-                        loading="lazy"
-                      />
-                    </div>
+                  <div className={cn('relative overflow-hidden rounded-[26px] border-2 border-zinc-900', row.q)}>
+                    <div className="aspect-[5/7] w-full md:aspect-[16/11]" />
                     <span className="absolute left-4 top-4 rounded-full border border-zinc-900 bg-white px-3 py-1 text-[10px] font-black">
                       Slide {String(idx + 1).padStart(2, '0')}
                     </span>
@@ -362,7 +310,7 @@ export default function Home() {
                     LINE / DM / フォーム、どこに誘導しても視覚の芯は崩さない。
                   </h2>
                   <p className="text-sm leading-relaxed text-zinc-800 md:text-[15px]">
-                    実QRに差し替える前は、同じキーをモザイク調に見せるだけでも雰囲気がそろいます。
+                    ここだけ差し替えれば運用フェーズにも耐えられます（QRダミーでも雰囲気チェックできます）。
                   </p>
                   <dl className="grid gap-3 border-t border-zinc-900/15 pt-4 text-sm">
                     <div className="flex justify-between gap-4">
@@ -381,18 +329,10 @@ export default function Home() {
                 </div>
 
                 <figure className="relative w-full max-w-[340px] self-center md:self-auto">
-                  <div className="absolute -top-10 right-[-6%] z-10 h-36 w-36 rotate-[8deg] overflow-hidden rounded-[40%] border-[3px] border-zinc-900 shadow-[10px_10px_0_#22d3ee]">
-                    <img src={IMG_HERO} alt="" className="h-full w-full object-cover object-[55%_40%]" loading="lazy" />
-                  </div>
+                  <div className="absolute -top-10 right-[-6%] h-36 w-36 rotate-[8deg] rounded-[40%] border-[3px] border-zinc-900 bg-black/85 lp-collage-quarter-br shadow-[10px_10px_0_#22d3ee]" />
                   <div className="relative overflow-hidden rounded-[36px] border-[3px] border-zinc-900 bg-white p-5 shadow-[10px_10px_0_#18181b]">
-                    <div className="relative mx-auto mb-5 aspect-square max-w-[200px] overflow-hidden rounded-3xl border-2 border-zinc-900 bg-zinc-900">
-                      <img
-                        src={IMG_OPENING}
-                        alt="申込ブロックを象徴する装飾（オープニングキーのクロップ）"
-                        className="h-full w-full scale-150 object-cover object-[48%_50%]"
-                        loading="lazy"
-                      />
-                      <div className="pointer-events-none absolute inset-0 mix-blend-overlay bg-[radial-gradient(circle_at_center,transparent_0,transparent_40%,rgba(0,0,0,0.12)_41%,transparent_43%)] bg-[length:10px_10px]" />
+                    <div className="mx-auto mb-5 grid aspect-square max-w-[200px] place-items-center rounded-3xl border-2 border-dashed border-zinc-400 bg-zinc-100 text-[11px] font-bold text-zinc-600">
+                      QR プレースホルダー
                     </div>
                     <div className="flex flex-wrap gap-2">
                       <a
@@ -428,7 +368,7 @@ export default function Home() {
           <div className="md:col-span-5 space-y-3">
             <div className="text-lg font-black">Locamo</div>
             <p className="max-w-md text-[13px] leading-relaxed text-zinc-300">
-              「ヒーロー＋オープニング」の2枚からLPを組み立てるデモ構成です。文章・トリミング・リンクは案件に合わせて差し替え可能です。
+              「一枚の強い画像」からLPを組み立てるデモ構成です。文章・項目・リンクは案件に合わせて差し替え可能です。
             </p>
           </div>
           <div className="hidden md:col-span-3 md:block" />
