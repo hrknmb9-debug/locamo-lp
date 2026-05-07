@@ -154,7 +154,7 @@ export default function InstagramPage() {
             </p>
 
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/locamo.ink?igsh=ZGVvcXFneDdseDY2&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block"
