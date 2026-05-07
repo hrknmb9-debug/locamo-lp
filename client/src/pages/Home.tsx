@@ -63,15 +63,15 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       {/* Header */}
       <header
-        className={`sticky top-0 z-50 bg-white/95 backdrop-blur transition-shadow ${
-          scrolled ? 'shadow-sm border-b border-border' : 'border-b border-transparent'
+        className={`sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 backdrop-blur transition-shadow ${
+          scrolled ? 'shadow-sm shadow-sky-200/40' : 'border-transparent'
         }`}
       >
         <div className="container mx-auto px-4 h-14 flex items-center justify-between">
           {/* Logo */}
           <button
             onClick={() => handleTabClick('overview')}
-            className="text-xl font-bold tracking-tight"
+            className="text-xl font-bold tracking-tight text-sky-950"
           >
             Loca<span className="text-accent">mo</span>
           </button>
@@ -82,10 +82,10 @@ export default function Home() {
               <button
                 key={tab.id}
                 onClick={() => handleTabClick(tab.id)}
-                className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all ${
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
                   activeTab === tab.id
-                    ? 'bg-accent text-white'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+                    ? 'bg-accent text-white shadow-sm shadow-sky-300/40'
+                    : 'text-sky-900/80 hover:bg-sky-50'
                 }`}
               >
                 {tab.label}
@@ -96,7 +96,7 @@ export default function Home() {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors text-foreground"
+            className="md:hidden rounded-xl border border-sky-200 p-2 text-sky-950 transition-colors hover:bg-sky-50"
             aria-label="メニュー"
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -105,16 +105,16 @@ export default function Home() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <nav className="md:hidden border-t border-border bg-white">
+          <nav className="md:hidden border-t border-sky-100 bg-[#f8fcff]">
             <div className="container mx-auto px-4 py-3 flex flex-col gap-1">
               {TABS.map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => handleTabClick(tab.id)}
-                  className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                  className={`w-full rounded-full px-4 py-3 text-left text-sm font-semibold transition-all ${
                     activeTab === tab.id
                       ? 'bg-accent text-white'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+                      : 'text-sky-900 hover:bg-sky-50'
                   }`}
                 >
                   {tab.label}
@@ -131,7 +131,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-secondary/50 border-t border-border mt-8">
+      <footer className="mt-8 border-t border-sky-100 bg-sky-50/60">
         <div className="container mx-auto px-4 py-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {/* Brand */}

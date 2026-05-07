@@ -49,7 +49,7 @@ export default function Portfolio() {
         </p>
 
         {/* Coming Soon Banner */}
-        <div className="bg-gradient-to-r from-accent/10 to-blue-500/10 border border-accent/30 rounded-lg p-8 md:p-12 mb-12 text-center animate-fade-in-up">
+        <div className="mb-12 animate-fade-in-up rounded-[1.25rem] border border-sky-100 bg-gradient-to-r from-sky-50 via-cyan-50/70 to-white p-8 text-center shadow-sm shadow-sky-950/5 md:p-12">
           <h3 className="text-2xl font-bold mb-2">制作実績 Coming Soon</h3>
           <p className="text-muted-foreground mb-4">
             現在、初期クライアント様を募集中です。
@@ -64,11 +64,11 @@ export default function Portfolio() {
           {portfolioItems.map((item, idx) => (
             <div
               key={item.id}
-              className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg hover:shadow-accent/20 transition-all hover:-translate-y-2 animate-fade-in-up"
+              className="lp-card group overflow-hidden rounded-[1.25rem] transition-all animate-fade-in-up hover:-translate-y-2 hover:shadow-lg hover:shadow-sky-200/50"
               style={{ animationDelay: `${0.1 * idx}s` }}
             >
               {/* Placeholder Image */}
-              <div className="w-full h-48 bg-gradient-to-br from-secondary to-muted flex items-center justify-center">
+              <div className="flex h-48 w-full items-center justify-center bg-gradient-to-br from-sky-50 to-secondary">
                 <div className="text-center">
                   <div className="text-4xl font-bold text-muted-foreground/30 mb-2">
                     {item.id}
@@ -96,7 +96,7 @@ export default function Portfolio() {
         </div>
 
         {/* Early Client Recruitment */}
-        <div className="bg-card border-2 border-accent rounded-lg p-8 md:p-12 text-center animate-fade-in-up">
+        <div className="lp-card animate-fade-in-up rounded-[1.25rem] border-2 border-accent p-8 text-center md:p-12 shadow-md shadow-sky-200/40">
           <h3 className="text-2xl font-bold mb-4">
             初期クライアント様を<span className="text-accent">特別価格</span>で募集中！
           </h3>
@@ -111,17 +111,14 @@ export default function Portfolio() {
               { title: '無料診断', desc: '詳細コンサル付き' },
               { title: 'サポート', desc: '手厚い対応' },
             ].map((benefit, idx) => (
-              <div key={idx} className="bg-secondary rounded-lg p-4">
+              <div key={idx} className="rounded-[1rem] bg-secondary p-4">
                 <p className="text-sm text-muted-foreground mb-1">{benefit.title}</p>
                 <p className="text-lg font-bold text-accent">{benefit.desc}</p>
               </div>
             ))}
           </div>
 
-          <Button
-            size="lg"
-            className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6"
-          >
+          <Button size="lg" className="btn-primary px-8 py-7 text-base font-semibold text-primary-foreground">
             初期クライアント価格で申し込む
             <ArrowRight className="ml-2" size={20} />
           </Button>

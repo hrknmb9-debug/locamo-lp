@@ -38,17 +38,17 @@ export default function Overview() {
       {/* Hero Section */}
       <section className="min-h-[90vh] flex flex-col justify-center items-center px-4 py-20 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-32 -right-32 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
-          <div className="absolute top-1/2 -left-24 w-72 h-72 bg-indigo-100 rounded-full blur-3xl opacity-40"></div>
+          <div className="absolute -top-32 -right-32 size-96 rounded-full bg-sky-100 blur-3xl opacity-55" />
+          <div className="absolute top-1/2 -left-24 size-72 rounded-full bg-cyan-100 blur-3xl opacity-45" />
         </div>
 
         <div className="relative z-10 max-w-3xl mx-auto text-center px-2">
           {/* Badge */}
           <div
-            className="inline-flex items-center gap-2 bg-blue-50 text-accent text-xs font-semibold px-3 py-1.5 rounded-full mb-6 border border-blue-100 animate-fade-in"
+            className="animate-fade-in mb-6 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-xs font-semibold text-sky-800"
             style={{ animationDelay: '0.1s' }}
           >
-            <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
+            <span className="size-1.5 rounded-full bg-accent" />
             大阪の個人店専門 · Web制作サービス
           </div>
 
@@ -78,7 +78,7 @@ export default function Overview() {
             <a href={DM_URL} target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"
-                className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg w-full sm:w-auto"
+                className="btn-primary w-full px-8 py-6 text-sm font-semibold text-primary-foreground sm:w-auto"
               >
                 無料診断を受ける
                 <ArrowRight className="ml-1.5" size={17} />
@@ -87,7 +87,7 @@ export default function Overview() {
             <Button
               size="lg"
               variant="outline"
-              className="border-border text-foreground hover:bg-secondary font-semibold px-7 py-5 text-sm rounded-lg"
+              className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold text-foreground hover:bg-sky-50"
             >
               サービスを見る
             </Button>
@@ -146,7 +146,7 @@ export default function Overview() {
       </section>
 
       {/* About Locamo Section */}
-      <section className="py-16 md:py-24 px-4 bg-secondary/50">
+      <section className="lp-soft-band py-16 md:py-24 px-4">
         <div className="container mx-auto max-w-4xl">
           <p className="text-xs font-semibold tracking-widest text-accent uppercase text-center mb-3">
             About
@@ -179,10 +179,7 @@ export default function Overview() {
 
           <div className="text-center">
             <a href={DM_URL} target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
-              >
+              <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground">
                 まずは無料診断
                 <ArrowRight className="ml-1.5" size={17} />
               </Button>
@@ -200,12 +197,12 @@ function ProblemCard({ item, delay }: { item: any; delay: number }) {
   return (
     <div
       ref={ref}
-      className={`bg-card border border-border rounded-xl p-5 hover:shadow-md hover:border-blue-200 transition-all ${
+      className={`lp-card p-6 ${
         isVisible ? 'animate-fade-in-up' : 'opacity-0'
       }`}
       style={{ animationDelay: `${0.08 * delay}s` }}
     >
-      <div className="w-9 h-9 bg-blue-50 rounded-lg flex items-center justify-center text-accent mb-3">
+      <div className="mb-3 flex size-9 items-center justify-center rounded-xl bg-sky-50 text-accent [&_svg]:stroke-[1.75]">
         {item.icon}
       </div>
       <h3 className="text-base font-semibold mb-1">{item.title}</h3>
@@ -220,13 +217,13 @@ function FeatureCard({ feature, delay }: { feature: any; delay: number }) {
   return (
     <div
       ref={ref}
-      className={`bg-card border border-border rounded-xl p-6 text-center hover:shadow-md hover:border-blue-200 transition-all ${
+      className={`lp-card p-7 text-center ${
         isVisible ? 'animate-fade-in-up' : 'opacity-0'
       }`}
       style={{ animationDelay: `${0.1 * delay}s` }}
     >
-      <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-3">
-        <span className="text-base font-bold text-accent">{delay + 1}</span>
+      <div className="mx-auto mb-3 flex size-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-sm shadow-sky-200/60">
+        <span className="text-base font-bold text-accent-foreground">{delay + 1}</span>
       </div>
       <h3 className="text-base font-semibold mb-2">{feature.title}</h3>
       <p className="text-muted-foreground text-sm leading-relaxed">{feature.desc}</p>

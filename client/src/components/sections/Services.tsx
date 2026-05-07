@@ -96,10 +96,10 @@ export default function Services() {
           {plans.map((plan, idx) => (
             <div
               key={plan.id}
-              className={`relative bg-card border rounded-2xl overflow-hidden flex flex-col transition-shadow hover:shadow-lg animate-fade-in-up ${
+              className={`relative flex flex-col overflow-hidden rounded-[1.25rem] border bg-card transition-shadow animate-fade-in-up ${
                 plan.highlight
-                  ? 'border-accent shadow-md shadow-blue-100'
-                  : 'border-border'
+                  ? 'border-accent shadow-lg shadow-sky-200/60 ring-1 ring-sky-100'
+                  : 'border-sky-100 lp-card shadow-sm'
               }`}
               style={{ animationDelay: `${0.1 * idx}s` }}
             >
@@ -108,7 +108,7 @@ export default function Services() {
               )}
               {plan.highlight && (
                 <div className="absolute top-3 right-3">
-                  <span className="text-[10px] font-semibold bg-blue-50 text-accent px-2 py-0.5 rounded-full border border-blue-100">
+                  <span className="rounded-full border border-sky-200 bg-sky-50 px-2 py-0.5 text-[10px] font-semibold text-accent">
                     おすすめ
                   </span>
                 </div>
@@ -164,10 +164,10 @@ export default function Services() {
               {/* CTA */}
               <div className="p-5 pt-0">
                 <Button
-                  className={`w-full text-sm rounded-lg font-semibold transition-all ${
+                  className={`w-full rounded-full text-sm font-semibold transition-all ${
                     plan.highlight
-                      ? 'btn-primary bg-accent text-accent-foreground'
-                      : 'bg-secondary text-foreground hover:bg-secondary/70 border border-border'
+                      ? 'btn-primary text-primary-foreground'
+                      : 'border border-sky-200 bg-white text-foreground hover:bg-sky-50'
                   }`}
                 >
                   詳細を見る
@@ -180,7 +180,7 @@ export default function Services() {
         {/* Comparison Table */}
         <div className="animate-fade-in-up">
           <h3 className="text-xl font-bold mb-5">プラン比較</h3>
-          <div className="overflow-x-auto rounded-xl border border-border">
+          <div className="overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-sm shadow-sky-950/5">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-secondary/50 border-b border-border">
@@ -222,10 +222,7 @@ export default function Services() {
             ご質問やご不明な点がございましたら、お気軽にお問合せください
           </p>
           <a href={DM_URL} target="_blank" rel="noopener noreferrer">
-            <Button
-              size="lg"
-              className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
-            >
+            <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground">
               無料診断を受ける
             </Button>
           </a>

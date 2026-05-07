@@ -64,14 +64,14 @@ export default function Pricing() {
         </p>
 
         {/* Pricing Highlight */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-7 md:p-10 mb-14 text-center animate-fade-in-up">
+        <div className="lp-soft-band mb-14 animate-fade-in-up rounded-[1.5rem] border border-sky-100 p-7 text-center shadow-sm shadow-sky-950/5 md:p-10">
           <h3 className="text-xl md:text-2xl font-bold mb-3">
             LP制作費<span className="text-accent">3万円〜</span>の買い切り。月額不要。
           </h3>
           <p className="text-muted-foreground text-sm mb-6">
             制作費は一括払い。毎月かかるのはサーバー・ドメインのみです。
           </p>
-          <div className="bg-white border border-border rounded-xl p-5 inline-block shadow-sm">
+          <div className="inline-block rounded-[1.25rem] border border-sky-100 bg-white p-5 shadow-sm">
             <p className="text-xs text-muted-foreground mb-1">サーバー・ドメイン費用（込み）</p>
             <p className="text-2xl font-bold text-foreground">月3,000円〜</p>
             <p className="text-xs text-muted-foreground mt-1">初期設定サポート込み</p>
@@ -81,7 +81,7 @@ export default function Pricing() {
         {/* Pricing Table */}
         <div className="mb-14 animate-fade-in-up">
           <h3 className="text-xl font-bold mb-5">料金比較</h3>
-          <div className="overflow-x-auto rounded-xl border border-border">
+          <div className="mb-14 animate-fade-in-up overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-sm shadow-sky-950/5">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-secondary/50 border-b border-border">
@@ -116,9 +116,9 @@ export default function Pricing() {
             {steps.map((step, idx) => (
               <div key={idx} className="flex gap-4 relative">
                 {idx !== steps.length - 1 && (
-                  <div className="absolute left-4 top-10 bottom-0 w-px bg-border" />
+                  <div className="absolute bottom-0 left-4 top-10 w-px bg-sky-200" />
                 )}
-                <div className="flex-shrink-0 w-8 h-8 bg-accent text-accent-foreground rounded-full flex items-center justify-center text-xs font-bold z-10">
+                <div className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground shadow-sm shadow-sky-300/50">
                   {step.num}
                 </div>
                 <div className="pb-8">
@@ -135,7 +135,7 @@ export default function Pricing() {
           <h3 className="text-xl font-bold mb-6">よくある質問</h3>
           <div className="space-y-2">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="border border-border rounded-xl overflow-hidden">
+              <div key={idx} className="overflow-hidden rounded-[1.25rem] border border-sky-100 bg-card shadow-sm shadow-sky-950/5">
                 <button
                   onClick={() => setExpandedFaq(expandedFaq === idx ? null : idx)}
                   className="w-full flex items-center justify-between px-5 py-4 bg-card hover:bg-secondary/50 transition-colors text-left"
@@ -164,10 +164,7 @@ export default function Pricing() {
             ご不明な点やご質問がございましたら、お気軽にお問合せください
           </p>
           <a href={DM_URL} target="_blank" rel="noopener noreferrer">
-            <Button
-              size="lg"
-              className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
-            >
+            <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground">
               無料診断を受ける
             </Button>
           </a>

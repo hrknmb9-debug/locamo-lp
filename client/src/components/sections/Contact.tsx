@@ -40,8 +40,8 @@ export default function Contact() {
 
         {/* Main CTA */}
         <section className="mb-12 animate-fade-in-up">
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-8 md:p-12 text-center">
-            <div className="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-5 border border-border">
+          <div className="lp-soft-band rounded-[1.5rem] border border-sky-100 p-8 text-center shadow-sm shadow-sky-950/5 md:p-12">
+            <div className="mx-auto mb-5 flex size-14 items-center justify-center rounded-2xl border border-sky-100 bg-white shadow-sm">
               <Instagram className="w-7 h-7 text-accent" />
             </div>
             <h3 className="text-xl md:text-2xl font-bold mb-3">
@@ -54,7 +54,7 @@ export default function Contact() {
             <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="inline-block">
               <Button
                 size="lg"
-                className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
+                className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground"
               >
                 <MessageCircle size={18} className="mr-2" />
                 Instagram DMで連絡する
@@ -92,10 +92,10 @@ export default function Contact() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="bg-card border border-border rounded-xl p-5 flex gap-4 hover:shadow-md hover:border-blue-200 transition-all animate-fade-in-up"
+                className="animate-fade-in-up flex gap-4 rounded-[1.25rem] border border-sky-100 bg-card p-5 transition-all hover:border-sky-200 hover:shadow-md"
                 style={{ animationDelay: `${0.08 * idx}s` }}
               >
-                <div className="flex-shrink-0 w-8 h-8 bg-accent text-accent-foreground rounded-full flex items-center justify-center font-bold text-xs">
+                <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground shadow-sm shadow-sky-300/50">
                   {item.step}
                 </div>
                 <div>
@@ -112,7 +112,7 @@ export default function Contact() {
 
         {/* Highlight Banner */}
         <section className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-          <div className="bg-accent rounded-2xl p-7 md:p-10 text-center text-white">
+          <div className="rounded-[1.5rem] bg-accent p-7 text-center text-white shadow-lg shadow-sky-400/35 md:p-10">
             <h3 className="text-xl font-bold mb-2">
               無料診断は完全無料。
             </h3>
@@ -129,7 +129,7 @@ export default function Contact() {
             {faqs.map((faq, idx) => (
               <div
                 key={idx}
-                className="bg-card border border-border rounded-xl p-5 hover:shadow-md hover:border-blue-200 transition-all"
+                className="rounded-[1.25rem] border border-sky-100 bg-card p-5 transition-all hover:border-sky-200 hover:shadow-sm"
               >
                 <h4 className="font-semibold text-sm mb-2">{faq.q}</h4>
                 <p className="text-muted-foreground text-xs leading-relaxed">{faq.a}</p>
@@ -140,7 +140,7 @@ export default function Contact() {
 
         {/* Final CTA */}
         <section className="text-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-          <div className="bg-secondary rounded-2xl p-8 md:p-12 border border-border">
+          <div className="rounded-[1.5rem] border border-sky-100 bg-secondary p-8 md:p-12">
             <h3 className="text-xl font-bold mb-2">
               フォロワーを来店客に、3万円〜で。
             </h3>
@@ -150,7 +150,7 @@ export default function Contact() {
             <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="inline-block">
               <Button
                 size="lg"
-                className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
+                className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground"
               >
                 今すぐ無料診断を受ける
                 <ArrowRight className="ml-2" size={16} />

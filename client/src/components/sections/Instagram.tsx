@@ -27,7 +27,7 @@ export default function InstagramPage() {
             Instagramのみ運用の課題
           </h3>
 
-          <div className="bg-card border border-border rounded-lg p-8 md:p-12 mb-8">
+          <div className="lp-card overflow-hidden rounded-[1.25rem] border border-sky-100 p-8 md:p-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Left: Diagram */}
               <div className="flex items-center justify-center">
@@ -78,7 +78,7 @@ export default function InstagramPage() {
             Locamo + Instagramの組み合わせ
           </h3>
 
-          <div className="bg-gradient-to-r from-accent/10 to-blue-500/10 border border-accent/30 rounded-lg p-8 md:p-12">
+          <div className="rounded-[1.25rem] border border-accent/35 bg-gradient-to-r from-sky-50 via-cyan-50/80 to-white p-8 shadow-sm shadow-sky-950/5 md:p-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Left: Diagram */}
               <div className="flex items-center justify-center">
@@ -132,7 +132,7 @@ export default function InstagramPage() {
 
         {/* Key Message */}
         <section className="mb-16 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-          <div className="bg-card border-2 border-accent rounded-lg p-8 md:p-12 text-center">
+          <div className="rounded-[1.25rem] border-2 border-accent bg-card p-8 text-center md:p-12 shadow-md shadow-sky-200/40">
             <h3 className="text-2xl font-bold mb-4">
               InstagramはそのままでOK。
               <br />
@@ -161,7 +161,7 @@ export default function InstagramPage() {
             >
               <Button
                 size="lg"
-                className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 flex items-center gap-2"
+                className="btn-primary flex items-center gap-2 px-8 py-7 text-base font-semibold text-primary-foreground"
               >
                 <Instagram size={24} />
                 Locamoをフォロー
@@ -173,17 +173,14 @@ export default function InstagramPage() {
 
         {/* CTA */}
         <section className="mt-16 text-center animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-          <div className="bg-secondary rounded-lg p-8 md:p-12">
+          <div className="rounded-[1.25rem] bg-secondary p-8 md:p-12">
             <h3 className="text-2xl font-bold mb-4">
               Instagramとの連携を前提にしたLP制作
             </h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
               Locamoなら、Instagramからの流入を最大化するLP設計が標準装備です
             </p>
-            <Button
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6"
-            >
+            <Button size="lg" className="btn-primary px-8 py-7 text-base font-semibold text-primary-foreground">
               無料診断を受ける
             </Button>
           </div>
