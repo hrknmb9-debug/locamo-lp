@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
 
+const DM_URL = 'https://ig.me/m/locamo.ink';
+
 export default function Pricing() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
   const faqs = [
     {
       q: 'サーバーやドメインは別途必要ですか？',
-      a: 'はい、サーバーとドメインは別途実費となります。年間約2,000円〜の費用が必要です。初期設定のサポートは制作費に含まれています。',
+      a: 'サーバーとドメインは別途実費となります。両方込みで月3,000円〜が目安です。初期設定のサポートは制作費に含まれています。',
     },
     {
       q: '制作後の修正や更新はできますか？',
@@ -64,14 +66,14 @@ export default function Pricing() {
         {/* Pricing Highlight */}
         <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-7 md:p-10 mb-14 text-center animate-fade-in-up">
           <h3 className="text-xl md:text-2xl font-bold mb-3">
-            制作費は買い切り。<span className="text-accent">月額費用なし。</span>
+            LP制作費<span className="text-accent">3万円〜</span>の買い切り。月額不要。
           </h3>
           <p className="text-muted-foreground text-sm mb-6">
-            一度ご契約いただければ、毎月の費用は発生しません。
+            制作費は一括払い。毎月かかるのはサーバー・ドメインのみです。
           </p>
           <div className="bg-white border border-border rounded-xl p-5 inline-block shadow-sm">
-            <p className="text-xs text-muted-foreground mb-1">サーバー・ドメイン費用（別途実費）</p>
-            <p className="text-2xl font-bold text-foreground">年間 約2,000円〜</p>
+            <p className="text-xs text-muted-foreground mb-1">サーバー・ドメイン費用（込み）</p>
+            <p className="text-2xl font-bold text-foreground">月3,000円〜</p>
             <p className="text-xs text-muted-foreground mt-1">初期設定サポート込み</p>
           </div>
         </div>
@@ -90,10 +92,9 @@ export default function Pricing() {
               </thead>
               <tbody>
                 {[
-                  { item: '制作費', lp: '要相談', hp: '要相談' },
+                  { item: '制作費', lp: '3万円〜', hp: '要相談' },
                   { item: '月額費用', lp: '0円', hp: '0円' },
-                  { item: 'サーバー費用', lp: '年2,000円〜', hp: '年2,000円〜' },
-                  { item: 'ドメイン費用', lp: '年1,000円〜', hp: '年1,000円〜' },
+                  { item: 'サーバー・ドメイン', lp: '月3,000円〜', hp: '月3,000円〜' },
                   { item: '納期', lp: '2週間', hp: '3〜4週間' },
                   { item: '修正対応', lp: '簡易修正無料', hp: '簡易修正無料' },
                 ].map((row, idx) => (
@@ -114,15 +115,12 @@ export default function Pricing() {
           <div className="space-y-0">
             {steps.map((step, idx) => (
               <div key={idx} className="flex gap-4 relative">
-                {/* Line */}
                 {idx !== steps.length - 1 && (
                   <div className="absolute left-4 top-10 bottom-0 w-px bg-border" />
                 )}
-                {/* Number */}
                 <div className="flex-shrink-0 w-8 h-8 bg-accent text-accent-foreground rounded-full flex items-center justify-center text-xs font-bold z-10">
                   {step.num}
                 </div>
-                {/* Content */}
                 <div className="pb-8">
                   <h4 className="text-sm font-semibold mb-1 mt-1">{step.title}</h4>
                   <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
@@ -137,10 +135,7 @@ export default function Pricing() {
           <h3 className="text-xl font-bold mb-6">よくある質問</h3>
           <div className="space-y-2">
             {faqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className="border border-border rounded-xl overflow-hidden"
-              >
+              <div key={idx} className="border border-border rounded-xl overflow-hidden">
                 <button
                   onClick={() => setExpandedFaq(expandedFaq === idx ? null : idx)}
                   className="w-full flex items-center justify-between px-5 py-4 bg-card hover:bg-secondary/50 transition-colors text-left"
@@ -168,12 +163,14 @@ export default function Pricing() {
           <p className="text-muted-foreground text-sm mb-4">
             ご不明な点やご質問がございましたら、お気軽にお問合せください
           </p>
-          <Button
-            size="lg"
-            className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
-          >
-            無料診断を受ける
-          </Button>
+          <a href={DM_URL} target="_blank" rel="noopener noreferrer">
+            <Button
+              size="lg"
+              className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
+            >
+              無料診断を受ける
+            </Button>
+          </a>
         </div>
       </div>
     </div>

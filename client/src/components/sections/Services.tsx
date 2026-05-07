@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, Check } from 'lucide-react';
 
+const DM_URL = 'https://ig.me/m/locamo.ink';
+
 interface ServicePlan {
   id: string;
   title: string;
@@ -32,7 +34,7 @@ export default function Services() {
         'SEO基本対応',
       ],
       timeline: '2週間目安',
-      price: '要相談',
+      price: '3万円〜',
     },
     {
       id: 'hp',
@@ -209,17 +211,24 @@ export default function Services() {
           </div>
         </div>
 
+        {/* Monthly cost note */}
+        <p className="text-xs text-muted-foreground text-center mt-4">
+          ※別途 サーバー・ドメイン費用 月3,000円〜（込み）
+        </p>
+
         {/* CTA */}
         <div className="text-center mt-12 animate-fade-in-up">
           <p className="text-muted-foreground text-sm mb-4">
             ご質問やご不明な点がございましたら、お気軽にお問合せください
           </p>
-          <Button
-            size="lg"
-            className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
-          >
-            無料診断を受ける
-          </Button>
+          <a href={DM_URL} target="_blank" rel="noopener noreferrer">
+            <Button
+              size="lg"
+              className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
+            >
+              無料診断を受ける
+            </Button>
+          </a>
         </div>
       </div>
     </div>

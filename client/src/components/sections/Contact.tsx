@@ -1,6 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
 
+const DM_URL = 'https://ig.me/m/locamo.ink';
+const IG_URL = 'https://www.instagram.com/locamo.ink/';
+
 export default function Contact() {
   const faqs = [
     {
@@ -48,12 +51,7 @@ export default function Contact() {
               フォームは使用していません。Locamoの公式Instagramアカウントに
               ダイレクトメッセージをお送りください。
             </p>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block"
-            >
+            <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="inline-block">
               <Button
                 size="lg"
                 className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
@@ -107,6 +105,9 @@ export default function Contact() {
               </div>
             ))}
           </div>
+          <p className="text-xs text-muted-foreground text-center mt-4">
+            ※別途 サーバー・ドメイン費用 月3,000円〜（込み）
+          </p>
         </section>
 
         {/* Highlight Banner */}
@@ -141,17 +142,12 @@ export default function Contact() {
         <section className="text-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
           <div className="bg-secondary rounded-2xl p-8 md:p-12 border border-border">
             <h3 className="text-xl font-bold mb-2">
-              Instagramだけでは、もったいない。
+              フォロワーを来店客に、3万円〜で。
             </h3>
             <p className="text-muted-foreground text-sm mb-7">
               Locamoで、あなたの店舗の集客を次のレベルへ。
             </p>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block"
-            >
+            <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="inline-block">
               <Button
                 size="lg"
                 className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
@@ -167,13 +163,13 @@ export default function Contact() {
         <section className="mt-12 text-center">
           <p className="text-muted-foreground text-xs mb-1">NANBA企画（個人事業主）· 大阪府</p>
           <a
-            href="https://instagram.com"
+            href={IG_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-sm text-accent hover:underline transition-colors"
           >
             <Instagram size={15} />
-            @locamo
+            @locamo.ink
           </a>
         </section>
       </div>

@@ -3,24 +3,31 @@ import { ArrowRight, Zap, DollarSign, Share2, Search } from 'lucide-react';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { useCountUp } from '@/hooks/useCountUp';
 
+const DM_URL = 'https://ig.me/m/locamo.ink';
+
 function StatsSection() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.5 });
   const count = useCountUp(50, 2000, isVisible);
 
   return (
-    <div ref={ref} className="grid grid-cols-3 gap-4 md:gap-8 text-center animate-fade-in-up">
-      <div>
-        <div className="text-3xl md:text-4xl font-bold text-accent">{count}+</div>
-        <p className="text-xs md:text-sm text-muted-foreground mt-1">制作実績</p>
+    <div ref={ref} className="space-y-3 animate-fade-in-up">
+      <div className="grid grid-cols-3 gap-4 md:gap-8 text-center">
+        <div>
+          <div className="text-3xl md:text-4xl font-bold text-accent">{count}+</div>
+          <p className="text-xs md:text-sm text-muted-foreground mt-1">制作実績</p>
+        </div>
+        <div>
+          <div className="text-3xl md:text-4xl font-bold text-accent">3万円〜</div>
+          <p className="text-xs md:text-sm text-muted-foreground mt-1">LP制作費</p>
+        </div>
+        <div>
+          <div className="text-3xl md:text-4xl font-bold text-accent">2週間</div>
+          <p className="text-xs md:text-sm text-muted-foreground mt-1">納期目安</p>
+        </div>
       </div>
-      <div>
-        <div className="text-3xl md:text-4xl font-bold text-accent">0円</div>
-        <p className="text-xs md:text-sm text-muted-foreground mt-1">月額費用</p>
-      </div>
-      <div>
-        <div className="text-3xl md:text-4xl font-bold text-accent">2週間</div>
-        <p className="text-xs md:text-sm text-muted-foreground mt-1">納期目安</p>
-      </div>
+      <p className="text-xs text-muted-foreground text-center">
+        ※別途 サーバー・ドメイン費用 月3,000円〜（込み）
+      </p>
     </div>
   );
 }
@@ -30,7 +37,6 @@ export default function Overview() {
     <div className="space-y-16 md:space-y-24">
       {/* Hero Section */}
       <section className="min-h-[90vh] flex flex-col justify-center items-center px-4 py-20 relative overflow-hidden">
-        {/* Subtle background gradients */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute -top-32 -right-32 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
           <div className="absolute top-1/2 -left-24 w-72 h-72 bg-indigo-100 rounded-full blur-3xl opacity-40"></div>
@@ -51,8 +57,8 @@ export default function Overview() {
             className="text-4xl md:text-6xl font-bold mb-5 leading-tight tracking-tight animate-fade-in-up"
             style={{ animationDelay: '0.2s' }}
           >
-            Instagramだけでは、<br className="hidden sm:block" />
-            もったいない。
+            フォロワーを来店客に、<br className="hidden sm:block" />
+            3万円〜で。
           </h1>
 
           {/* Subheading */}
@@ -60,8 +66,8 @@ export default function Overview() {
             className="text-base md:text-lg text-muted-foreground mb-8 max-w-xl mx-auto animate-fade-in-up"
             style={{ animationDelay: '0.35s' }}
           >
-            大阪の個人店向けLP・ホームページ制作。
-            Instagramとの連携を前提に設計された、買い切り型のWeb制作サービス。
+            大阪の個人店向けLP制作は3万円〜。
+            Instagramとの連携を前提に設計された、月額不要のWeb制作サービス。
           </p>
 
           {/* CTA Buttons */}
@@ -69,13 +75,15 @@ export default function Overview() {
             className="flex flex-col sm:flex-row gap-3 justify-center mb-12 animate-fade-in-up"
             style={{ animationDelay: '0.5s' }}
           >
-            <Button
-              size="lg"
-              className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
-            >
-              無料診断を受ける
-              <ArrowRight className="ml-1.5" size={17} />
-            </Button>
+            <a href={DM_URL} target="_blank" rel="noopener noreferrer">
+              <Button
+                size="lg"
+                className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg w-full sm:w-auto"
+              >
+                無料診断を受ける
+                <ArrowRight className="ml-1.5" size={17} />
+              </Button>
+            </a>
             <Button
               size="lg"
               variant="outline"
@@ -158,7 +166,7 @@ export default function Overview() {
               },
               {
                 title: '買い切り型',
-                desc: '制作費は一括買い切り。月額費用なし。ランニングコストゼロ。',
+                desc: 'LP制作費3万円〜の買い切り。サーバー・ドメイン込み月3,000円〜のランニングコストのみ。',
               },
               {
                 title: 'Instagram連携設計',
@@ -170,13 +178,15 @@ export default function Overview() {
           </div>
 
           <div className="text-center">
-            <Button
-              size="lg"
-              className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
-            >
-              まずは無料診断
-              <ArrowRight className="ml-1.5" size={17} />
-            </Button>
+            <a href={DM_URL} target="_blank" rel="noopener noreferrer">
+              <Button
+                size="lg"
+                className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
+              >
+                まずは無料診断
+                <ArrowRight className="ml-1.5" size={17} />
+              </Button>
+            </a>
           </div>
         </div>
       </section>
