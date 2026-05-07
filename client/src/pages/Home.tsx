@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
 import { Menu, X, Instagram } from 'lucide-react';
 import Overview from '@/components/sections/Overview';
 import Services from '@/components/sections/Services';
@@ -8,17 +7,9 @@ import Portfolio from '@/components/sections/Portfolio';
 import InstagramPage from '@/components/sections/Instagram';
 import Contact from '@/components/sections/Contact';
 
-/**
- * Design Philosophy: Neo-Tokyo Minimal
- * - Dark base (#0f0f0f) with neon green accent (#00ff88)
- * - Modern sans-serif (Geist/Outfit) + Noto Sans JP
- * - Scroll-driven animations, smooth interactions
- * - Mobile-first, SPA-style tab navigation
- */
-
 type TabType = 'overview' | 'services' | 'pricing' | 'portfolio' | 'instagram' | 'contact';
 
-const TABS: { id: TabType; label: string; icon?: string }[] = [
+const TABS: { id: TabType; label: string }[] = [
   { id: 'overview', label: '概要' },
   { id: 'services', label: 'サービス' },
   { id: 'pricing', label: '料金' },
@@ -30,8 +21,14 @@ const TABS: { id: TabType; label: string; icon?: string }[] = [
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabType>('overview');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Handle hash-based navigation
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.slice(1) as TabType;
@@ -39,10 +36,8 @@ export default function Home() {
         setActiveTab(hash);
       }
     };
-
     window.addEventListener('hashchange', handleHashChange);
     handleHashChange();
-
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
@@ -54,45 +49,43 @@ export default function Home() {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'overview':
-        return <Overview />;
-      case 'services':
-        return <Services />;
-      case 'pricing':
-        return <Pricing />;
-      case 'portfolio':
-        return <Portfolio />;
-      case 'instagram':
-        return <InstagramPage />;
-      case 'contact':
-        return <Contact />;
-      default:
-        return <Overview />;
+      case 'overview':   return <Overview />;
+      case 'services':   return <Services />;
+      case 'pricing':    return <Pricing />;
+      case 'portfolio':  return <Portfolio />;
+      case 'instagram':  return <InstagramPage />;
+      case 'contact':    return <Contact />;
+      default:           return <Overview />;
     }
   };
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <header
+        className={`sticky top-0 z-50 bg-white/95 backdrop-blur transition-shadow ${
+          scrolled ? 'shadow-sm border-b border-border' : 'border-b border-transparent'
+        }`}
+      >
+        <div className="container mx-auto px-4 h-14 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2">
-            <span className="text-2xl font-bold font-['Geist']">
-              Loca<span className="text-accent">mo</span>
-            </span>
-          </div>
+          <button
+            onClick={() => handleTabClick('overview')}
+            className="text-xl font-bold tracking-tight"
+          >
+            Loca<span className="text-accent">mo</span>
+          </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-0.5">
             {TABS.map(tab => (
               <button
                 key={tab.id}
                 onClick={() => handleTabClick(tab.id)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all ${
                   activeTab === tab.id
-                    ? 'bg-accent text-accent-foreground'
-                    : 'text-foreground hover:bg-secondary'
+                    ? 'bg-accent text-white'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
                 }`}
               >
                 {tab.label}
@@ -103,24 +96,25 @@ export default function Home() {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 hover:bg-secondary rounded-md transition-colors"
+            className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors text-foreground"
+            aria-label="メニュー"
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <nav className="md:hidden border-t border-border bg-background">
-            <div className="container mx-auto px-4 py-4 flex flex-col gap-2">
+          <nav className="md:hidden border-t border-border bg-white">
+            <div className="container mx-auto px-4 py-3 flex flex-col gap-1">
               {TABS.map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => handleTabClick(tab.id)}
-                  className={`w-full text-left px-4 py-3 rounded-md text-sm font-medium transition-all ${
+                  className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${
                     activeTab === tab.id
-                      ? 'bg-accent text-accent-foreground'
-                      : 'text-foreground hover:bg-secondary'
+                      ? 'bg-accent text-white'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
                   }`}
                 >
                   {tab.label}
@@ -137,28 +131,28 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-card border-t border-border mt-16">
-        <div className="container mx-auto px-4 py-12">
+      <footer className="bg-secondary/50 border-t border-border mt-8">
+        <div className="container mx-auto px-4 py-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {/* Brand */}
             <div>
-              <div className="text-xl font-bold font-['Geist'] mb-4">
+              <div className="text-lg font-bold mb-2">
                 Loca<span className="text-accent">mo</span>
               </div>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-muted-foreground text-xs leading-relaxed">
                 大阪の個人店向けLP・ホームページ制作サービス
               </p>
             </div>
 
             {/* Links */}
             <div>
-              <h4 className="font-semibold mb-4">ページ</h4>
-              <ul className="space-y-2 text-sm">
+              <h4 className="font-semibold text-sm mb-3">ページ</h4>
+              <ul className="space-y-1.5">
                 {TABS.map(tab => (
                   <li key={tab.id}>
                     <button
                       onClick={() => handleTabClick(tab.id)}
-                      className="text-muted-foreground hover:text-accent transition-colors"
+                      className="text-muted-foreground hover:text-accent text-xs transition-colors"
                     >
                       {tab.label}
                     </button>
@@ -169,25 +163,24 @@ export default function Home() {
 
             {/* Contact */}
             <div>
-              <h4 className="font-semibold mb-4">お問合せ</h4>
-              <p className="text-muted-foreground text-sm mb-4">
+              <h4 className="font-semibold text-sm mb-3">お問合せ</h4>
+              <p className="text-muted-foreground text-xs mb-3 leading-relaxed">
                 Instagram DMからお気軽にご連絡ください
               </p>
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs text-accent hover:underline transition-colors"
               >
-                <Instagram size={20} />
-                <span>Locamo</span>
+                <Instagram size={14} />
+                @locamo
               </a>
             </div>
           </div>
 
-          {/* Copyright */}
-          <div className="border-t border-border pt-8 text-center text-muted-foreground text-sm">
-            <p>&copy; 2025 NANBA企画. All rights reserved.</p>
+          <div className="border-t border-border pt-6 text-center text-muted-foreground text-xs">
+            &copy; 2025 NANBA企画. All rights reserved.
           </div>
         </div>
       </footer>

@@ -1,14 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ChevronDown } from 'lucide-react';
-
-/**
- * Services Section
- * Design: Neo-Tokyo Minimal
- * - Service cards with accordion details
- * - Plan comparison
- * - Feature highlights
- */
+import { ChevronDown, Check } from 'lucide-react';
 
 interface ServicePlan {
   id: string;
@@ -18,7 +10,7 @@ interface ServicePlan {
   features: string[];
   timeline: string;
   price: string;
-  expanded?: boolean;
+  highlight?: boolean;
 }
 
 export default function Services() {
@@ -58,8 +50,9 @@ export default function Services() {
         'SEO対策',
         'Google Analytics連携',
       ],
-      timeline: '3～4週間目安',
+      timeline: '3〜4週間目安',
       price: '要相談',
+      highlight: true,
     },
     {
       id: 'instagram',
@@ -83,80 +76,97 @@ export default function Services() {
   };
 
   return (
-    <div className="space-y-16 md:space-y-24 py-16 md:py-24 px-4">
+    <div className="py-16 md:py-24 px-4">
       <div className="container mx-auto max-w-5xl">
         {/* Header */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
+        <p className="text-xs font-semibold tracking-widest text-accent uppercase text-center mb-3">
+          Services
+        </p>
+        <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           サービス内容
         </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+        <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm">
           大阪の個人店向けに、3つのプランをご用意しています
         </p>
 
         {/* Service Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
           {plans.map((plan, idx) => (
             <div
               key={plan.id}
-              className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg hover:shadow-accent/20 transition-all hover:-translate-y-2 animate-fade-in-up"
+              className={`relative bg-card border rounded-2xl overflow-hidden flex flex-col transition-shadow hover:shadow-lg animate-fade-in-up ${
+                plan.highlight
+                  ? 'border-accent shadow-md shadow-blue-100'
+                  : 'border-border'
+              }`}
               style={{ animationDelay: `${0.1 * idx}s` }}
             >
+              {plan.highlight && (
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-accent" />
+              )}
+              {plan.highlight && (
+                <div className="absolute top-3 right-3">
+                  <span className="text-[10px] font-semibold bg-blue-50 text-accent px-2 py-0.5 rounded-full border border-blue-100">
+                    おすすめ
+                  </span>
+                </div>
+              )}
+
               {/* Card Header */}
-              <div className="bg-gradient-to-r from-accent/10 to-blue-500/10 p-6 border-b border-border">
-                <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
-                <p className="text-sm text-muted-foreground">{plan.description}</p>
+              <div className="p-5 pb-4 border-b border-border">
+                <h3 className="text-lg font-bold mb-1">{plan.title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">{plan.description}</p>
               </div>
 
               {/* Card Body */}
-              <div className="p-6">
-                {/* Quick Info */}
-                <div className="space-y-3 mb-6 pb-6 border-b border-border">
-                  <div className="flex justify-between items-center">
+              <div className="p-5 flex-1">
+                <div className="space-y-2.5 mb-5 pb-5 border-b border-border">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-muted-foreground">ページ数</span>
                     <span className="font-semibold">{plan.pages}</span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-muted-foreground">納期</span>
                     <span className="font-semibold">{plan.timeline}</span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-muted-foreground">料金</span>
-                    <span className="font-semibold text-accent">{plan.price}</span>
+                    <span className={`font-bold ${plan.highlight ? 'text-accent' : ''}`}>{plan.price}</span>
                   </div>
                 </div>
 
-                {/* Accordion Button */}
+                {/* Accordion */}
                 <button
                   onClick={() => toggleExpand(plan.id)}
-                  className="w-full flex items-center justify-between px-4 py-2 bg-secondary hover:bg-secondary/80 rounded-md transition-colors mb-4"
+                  className="w-full flex items-center justify-between text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mb-3"
                 >
-                  <span className="font-semibold text-sm">詳しく見る</span>
+                  <span>含まれる機能を見る</span>
                   <ChevronDown
-                    size={20}
+                    size={16}
                     className={`transition-transform ${expandedPlan === plan.id ? 'rotate-180' : ''}`}
                   />
                 </button>
 
-                {/* Expanded Content */}
                 {expandedPlan === plan.id && (
-                  <div className="mt-4 pt-4 border-t border-border space-y-3 animate-fade-in-up">
-                    <h4 className="font-semibold text-sm text-accent">含まれる機能</h4>
-                    <ul className="space-y-2">
-                      {plan.features.map((feature, fidx) => (
-                        <li key={fidx} className="flex items-start gap-2 text-sm">
-                          <span className="text-accent mt-1">✓</span>
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <ul className="space-y-1.5 animate-fade-in">
+                    {plan.features.map((feature, fidx) => (
+                      <li key={fidx} className="flex items-start gap-2 text-sm">
+                        <Check size={14} className="text-accent mt-0.5 flex-shrink-0" />
+                        <span className="text-foreground">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 )}
               </div>
 
-              {/* CTA Button */}
-              <div className="p-6 border-t border-border">
+              {/* CTA */}
+              <div className="p-5 pt-0">
                 <Button
-                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold transition-all hover:scale-105 btn-shimmer"
+                  className={`w-full text-sm rounded-lg font-semibold transition-all ${
+                    plan.highlight
+                      ? 'btn-primary bg-accent text-accent-foreground'
+                      : 'bg-secondary text-foreground hover:bg-secondary/70 border border-border'
+                  }`}
                 >
                   詳細を見る
                 </Button>
@@ -166,15 +176,15 @@ export default function Services() {
         </div>
 
         {/* Comparison Table */}
-        <div className="mt-16 animate-fade-in-up">
-          <h3 className="text-2xl font-bold mb-6">プラン比較</h3>
-          <div className="overflow-x-auto">
+        <div className="animate-fade-in-up">
+          <h3 className="text-xl font-bold mb-5">プラン比較</h3>
+          <div className="overflow-x-auto rounded-xl border border-border">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left py-4 px-4 font-semibold">機能</th>
-                  <th className="text-center py-4 px-4 font-semibold">LP制作</th>
-                  <th className="text-center py-4 px-4 font-semibold">ホームページ</th>
+                <tr className="bg-secondary/50 border-b border-border">
+                  <th className="text-left py-3.5 px-4 font-semibold text-foreground">機能</th>
+                  <th className="text-center py-3.5 px-4 font-semibold text-foreground">LP制作</th>
+                  <th className="text-center py-3.5 px-4 font-semibold text-accent">ホームページ</th>
                 </tr>
               </thead>
               <tbody>
@@ -182,16 +192,16 @@ export default function Services() {
                   { feature: 'ページ数', lp: '1ページ', hp: '複数ページ' },
                   { feature: 'レスポンシブ対応', lp: '○', hp: '○' },
                   { feature: 'SEO対応', lp: '基本', hp: '詳細' },
-                  { feature: 'ブログ機能', lp: '×', hp: '○' },
+                  { feature: 'ブログ機能', lp: '—', hp: '○' },
                   { feature: 'ギャラリー', lp: '基本', hp: '充実' },
                   { feature: 'Instagram連携', lp: '○', hp: '○' },
                   { feature: 'Google Analytics', lp: '○', hp: '○' },
-                  { feature: '納期', lp: '2週間', hp: '3～4週間' },
+                  { feature: '納期', lp: '2週間', hp: '3〜4週間' },
                 ].map((row, idx) => (
-                  <tr key={idx} className="border-b border-border hover:bg-secondary/50 transition-colors">
-                    <td className="py-4 px-4">{row.feature}</td>
-                    <td className="text-center py-4 px-4">{row.lp}</td>
-                    <td className="text-center py-4 px-4">{row.hp}</td>
+                  <tr key={idx} className="border-b border-border last:border-0 hover:bg-secondary/30 transition-colors">
+                    <td className="py-3.5 px-4 font-medium text-foreground">{row.feature}</td>
+                    <td className="text-center py-3.5 px-4 text-muted-foreground">{row.lp}</td>
+                    <td className="text-center py-3.5 px-4 text-muted-foreground">{row.hp}</td>
                   </tr>
                 ))}
               </tbody>
@@ -201,12 +211,12 @@ export default function Services() {
 
         {/* CTA */}
         <div className="text-center mt-12 animate-fade-in-up">
-          <p className="text-muted-foreground mb-4">
+          <p className="text-muted-foreground text-sm mb-4">
             ご質問やご不明な点がございましたら、お気軽にお問合せください
           </p>
           <Button
             size="lg"
-            className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6"
+            className="btn-primary bg-accent text-accent-foreground font-semibold px-7 py-5 text-sm rounded-lg"
           >
             無料診断を受ける
           </Button>
