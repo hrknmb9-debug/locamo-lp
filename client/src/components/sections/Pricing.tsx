@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
+import { LP_IMAGES } from '@/lp-images';
 
 const DM_URL = 'https://ig.me/m/locamo.ink';
 
@@ -62,6 +63,16 @@ export default function Pricing() {
         <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm">
           透明性のある料金体系と、シンプルな制作フロー
         </p>
+
+        <figure className="mx-auto mb-12 max-w-3xl overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-md shadow-sky-200/25">
+          <img
+            src={LP_IMAGES.servicesBanner}
+            alt=""
+            loading="lazy"
+            className="aspect-[21/9] max-h-[9rem] w-full object-cover md:max-h-[10rem]"
+          />
+          <figcaption className="sr-only">料金と制作フローを象徴するイメージ</figcaption>
+        </figure>
 
         {/* Pricing Highlight */}
         <div className="lp-soft-band mb-14 animate-fade-in-up rounded-[1.5rem] border border-sky-100 p-7 text-center shadow-sm shadow-sky-950/5 md:p-10">

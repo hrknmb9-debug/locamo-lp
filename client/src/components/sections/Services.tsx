@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, Check } from 'lucide-react';
+import { LP_IMAGES } from '@/lp-images';
 
 const DM_URL = 'https://ig.me/m/locamo.ink';
 
@@ -90,6 +91,19 @@ export default function Services() {
         <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm">
           大阪の個人店向けに、3つのプランをご用意しています
         </p>
+
+        <figure className="mx-auto mb-12 max-w-5xl overflow-hidden rounded-[1.35rem] border border-sky-100 shadow-md shadow-sky-200/30">
+          <img
+            src={LP_IMAGES.servicesBanner}
+            alt=""
+            width={1728}
+            height={576}
+            loading="lazy"
+            decoding="async"
+            className="aspect-[21/9] max-h-[12rem] w-full object-cover sm:max-h-[13rem]"
+          />
+          <figcaption className="sr-only">サービスラインアップのイメージ</figcaption>
+        </figure>
 
         {/* Service Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">

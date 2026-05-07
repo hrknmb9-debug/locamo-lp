@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
+import { LP_IMAGES } from '@/lp-images';
 
 const DM_URL = 'https://ig.me/m/locamo.ink';
 const IG_URL = 'https://www.instagram.com/locamo.ink/';
@@ -41,6 +42,14 @@ export default function Contact() {
         {/* Main CTA */}
         <section className="mb-12 animate-fade-in-up">
           <div className="lp-soft-band rounded-[1.5rem] border border-sky-100 p-8 text-center shadow-sm shadow-sky-950/5 md:p-12">
+            <div className="mx-auto mb-7 max-w-2xl overflow-hidden rounded-xl border border-sky-100/80">
+              <img
+                src={LP_IMAGES.servicesBanner}
+                alt=""
+                loading="lazy"
+                className="aspect-[21/9] max-h-[8.5rem] w-full object-cover"
+              />
+            </div>
             <div className="mx-auto mb-5 flex size-14 items-center justify-center rounded-2xl border border-sky-100 bg-white shadow-sm">
               <Instagram className="w-7 h-7 text-accent" />
             </div>

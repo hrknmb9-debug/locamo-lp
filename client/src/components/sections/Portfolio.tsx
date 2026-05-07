@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { LP_IMAGES } from '@/lp-images';
 
 /**
  * Portfolio Section
@@ -49,14 +50,22 @@ export default function Portfolio() {
         </p>
 
         {/* Coming Soon Banner */}
-        <div className="mb-12 animate-fade-in-up rounded-[1.25rem] border border-sky-100 bg-gradient-to-r from-sky-50 via-cyan-50/70 to-white p-8 text-center shadow-sm shadow-sky-950/5 md:p-12">
-          <h3 className="text-2xl font-bold mb-2">制作実績 Coming Soon</h3>
-          <p className="text-muted-foreground mb-4">
-            現在、初期クライアント様を募集中です。
-          </p>
-          <p className="text-sm text-muted-foreground">
-            ご契約いただいたクライアント様の実績は、ご許可をいただいた上で掲載させていただきます。
-          </p>
+        <div className="animate-fade-in-up mb-12 overflow-hidden rounded-[1.25rem] border border-sky-100 bg-gradient-to-r from-sky-50 via-cyan-50/70 to-white text-center shadow-sm shadow-sky-950/5 md:grid md:grid-cols-[minmax(0,1fr)_260px] md:items-center md:text-left md:gap-10 md:p-0">
+          <div className="p-8 pb-6 md:p-12 md:pb-12">
+            <h3 className="mb-2 text-2xl font-bold">制作実績 Coming Soon</h3>
+            <p className="mb-4 text-muted-foreground">現在、初期クライアント様を募集中です。</p>
+            <p className="text-sm text-muted-foreground">
+              ご契約いただいたクライアント様の実績は、ご許可をいただいた上で掲載させていただきます。
+            </p>
+          </div>
+          <div className="hidden h-full min-h-[180px] border-t border-sky-100/80 md:block md:border-l md:border-t-0 md:border-sky-100/80">
+            <img src={LP_IMAGES.hero} alt="" className="h-full min-h-[200px] w-full object-cover object-left" loading="lazy" />
+          </div>
+          <div className="h-44 border-t border-sky-100/80 px-8 pb-6 md:hidden">
+            <div className="mx-auto overflow-hidden rounded-xl border border-sky-100">
+              <img src={LP_IMAGES.hero} alt="" className="h-44 w-full object-cover" loading="lazy" />
+            </div>
+          </div>
         </div>
 
         {/* Portfolio Cards Grid */}
@@ -67,14 +76,15 @@ export default function Portfolio() {
               className="lp-card group overflow-hidden rounded-[1.25rem] transition-all animate-fade-in-up hover:-translate-y-2 hover:shadow-lg hover:shadow-sky-200/50"
               style={{ animationDelay: `${0.1 * idx}s` }}
             >
-              {/* Placeholder Image */}
-              <div className="flex h-48 w-full items-center justify-center bg-gradient-to-br from-sky-50 to-secondary">
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-muted-foreground/30 mb-2">
-                    {item.id}
-                  </div>
-                  <p className="text-sm text-muted-foreground">Portfolio Image</p>
-                </div>
+              {/* Card visual */}
+              <div className="relative h-48 w-full overflow-hidden bg-gradient-to-br from-sky-50 to-secondary">
+                <img
+                  src={LP_IMAGES.portfolio[idx]}
+                  alt={`カテゴリ「${item.category}」の参考イメージ`}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                />
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/75 via-transparent to-transparent" />
               </div>
 
               {/* Card Content */}

@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Zap, DollarSign, Share2, Search } from 'lucide-react';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { useCountUp } from '@/hooks/useCountUp';
+import { LP_IMAGES } from '@/lp-images';
 
 const DM_URL = 'https://ig.me/m/locamo.ink';
 
@@ -69,6 +70,25 @@ export default function Overview() {
             大阪の個人店向けLP制作は3万円〜。
             Instagramとの連携を前提に設計された、月額不要のWeb制作サービス。
           </p>
+
+          {/* Visual */}
+          <figure
+            className="mx-auto mb-10 max-w-[42rem] w-full animate-fade-in-up"
+            style={{ animationDelay: '0.42s' }}
+          >
+            <div className="overflow-hidden rounded-[1.5rem] border border-sky-100 bg-white shadow-xl shadow-sky-200/40 ring-1 ring-sky-100/80">
+              <img
+                src={LP_IMAGES.hero}
+                alt="店舗の集客とSNS・Webを結ぶコンセプトイラスト"
+                width={1344}
+                height={756}
+                decoding="async"
+                fetchPriority="high"
+                className="aspect-video w-full object-cover"
+              />
+            </div>
+            <figcaption className="sr-only">店舗とWeb・SNSをつなぐコンセプトビジュアル</figcaption>
+          </figure>
 
           {/* CTA Buttons */}
           <div

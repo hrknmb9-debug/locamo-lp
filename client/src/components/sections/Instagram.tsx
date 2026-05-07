@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Instagram, ArrowRight, TrendingUp } from 'lucide-react';
+import { LP_IMAGES } from '@/lp-images';
 
 /**
  * Instagram Section
@@ -17,9 +18,19 @@ export default function InstagramPage() {
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
           InstagramとLocamoの組み合わせ
         </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+        <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
           Instagramだけに頼らない、安定した集客を実現
         </p>
+
+        <figure className="mx-auto mb-12 max-w-4xl overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-lg shadow-sky-200/25">
+          <img
+            src={LP_IMAGES.hero}
+            alt=""
+            loading="lazy"
+            className="aspect-video w-full object-cover"
+          />
+          <figcaption className="sr-only">SNSとランディングページを連携するイメージ</figcaption>
+        </figure>
 
         {/* Problem: Instagram Only */}
         <section className="mb-16 animate-fade-in-up">
