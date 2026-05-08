@@ -5,8 +5,8 @@ export type HearingEntry = { id: string; label: string; value: string };
 
 export type HearingSubmitBody = {
   entries?: HearingEntry[];
-  /** Spam honeypot; must stay empty */
-  website?: string;
+  /** スパム用の空項目（`website` は自動入力されるため禁止） */
+  trap?: string;
 };
 
 function chunkText(body: string, max: number): string[] {
@@ -43,7 +43,7 @@ async function postDiscordWebhook(url: string, text: string): Promise<void> {
 export async function ingestHearingSubmission(
   raw: HearingSubmitBody,
 ): Promise<{ ok: true } | { ok: false; error: string }> {
-  if (typeof raw.website === 'string' && raw.website.trim() !== '') {
+  if (typeof raw.trap === 'string' && raw.trap.trim() !== '') {
     return { ok: true }; // bots: silently accept
   }
 
@@ -61,6 +61,7 @@ export async function ingestHearingSubmission(
     `${JSON.stringify({ at: new Date().toISOString(), entries })}\n`,
     'utf-8',
   );
+  console.log('[hearing] saved entries=%s file=%s', entries.length, ndPath);
 
   const hook = process.env.DISCORD_HEARING_WEBHOOK_URL;
   if (hook) {

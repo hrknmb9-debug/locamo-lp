@@ -33,7 +33,7 @@ const STEPS: { title: string; hint: string; fieldIds: (typeof HEARING_FIELDS)[nu
 
 async function submitHearing(payload: {
   entries: Array<{ id: string; label: string; value: string }>;
-  website: string;
+  trap: string;
 }): Promise<boolean> {
   const res = await fetch('/api/hearing', {
     method: 'POST',
@@ -96,7 +96,7 @@ const Hearing: FC = () => {
       value: values[f.id] ?? '',
     }));
     try {
-      const ok = await submitHearing({ entries, website: honeypot });
+      const ok = await submitHearing({ entries, trap: honeypot });
       if (!ok) {
         toast.error('送信に失敗しました。しばらくしてからお試しいただくか、時間帯を変えてお試しください。');
         return;
@@ -174,13 +174,15 @@ const Hearing: FC = () => {
         <h1 className="mb-1 text-[1.7rem] font-bold leading-snug">{stepMeta.title}</h1>
         <p className="mb-8 text-sm text-muted-foreground leading-relaxed">{stepMeta.hint}</p>
 
-        <div aria-hidden className="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden">
-          <label htmlFor="hearing-website">Website</label>
+        <div className="pointer-events-none absolute -left-[100vw] h-px w-px overflow-hidden opacity-0" aria-hidden="true">
+          <label htmlFor="locamo-hp-trap" className="sr-only">
+            未使用
+          </label>
           <input
-            id="hearing-website"
-            name="website"
+            id="locamo-hp-trap"
             tabIndex={-1}
             autoComplete="off"
+            aria-hidden="true"
             value={honeypot}
             onChange={e => setHoneypot(e.target.value)}
           />
