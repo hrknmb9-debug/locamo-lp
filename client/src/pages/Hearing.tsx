@@ -1,11 +1,15 @@
+import type { HearingEntry } from '@shared/hearingIngest';
+
 import type { FC } from 'react';
 import { useCallback, useMemo, useState } from 'react';
-import { ArrowLeft, ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle2, ClipboardCopy, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Link, useLocation } from 'wouter';
 
 import { Button } from '@/components/ui/button';
+import { DM_URL } from '@/constants/locamo';
 import { HEARING_FIELDS } from '@/data/hearingFields';
+import { formatHearingForClipboard } from '@/lib/hearingFormat';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 const STEPS: { title: string; hint: string; fieldIds: (typeof HEARING_FIELDS)[number]['id'][] }[] = [
@@ -49,6 +53,16 @@ function hasMinimalContent(values: Record<string, string>): boolean {
   return ['shop', 'pain', 'goal'].some(k => ((values[k] ?? '').trim().length ?? 0) > 2);
 }
 
+async function copyAndOpenDm(entries: HearingEntry[]): Promise<boolean> {
+  try {
+    await navigator.clipboard.writeText(formatHearingForClipboard(entries));
+    window.open(DM_URL, '_blank', 'noopener,noreferrer');
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 const Hearing: FC = () => {
   useScrollToTop();
   const [, setLocation] = useLocation();
@@ -60,6 +74,8 @@ const Hearing: FC = () => {
   const [honeypot, setHoneypot] = useState('');
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
+  /** オンライン送信成功後のバックアップDM用・または失敗時にも参照 */
+  const [lastEntries, setLastEntries] = useState<HearingEntry[] | null>(null);
 
   const setField = useCallback((id: string, v: string) => {
     setValues(prev => ({ ...prev, [id]: v }));
@@ -97,15 +113,38 @@ const Hearing: FC = () => {
     }));
     try {
       const ok = await submitHearing({ entries, trap: honeypot });
+      setLastEntries(entries);
+
       if (!ok) {
-        toast.error('送信に失敗しました。しばらくしてからお試しいただくか、時間帯を変えてお試しください。');
+        const copied = await copyAndOpenDm(entries);
+        if (copied) {
+          toast.warning(
+            'オンラインで受け付けられませんでしたが、回答をクリップボードへコピーし、InstagramのDM画面を開きました。入力欄を長押しまたはタップして「貼り付け」後、送信してください。',
+            { duration: 12_000 },
+          );
+        } else {
+          toast.error(
+            'オンライン送信もクリップボード処理もできませんでした。下の「コピーしてDMを開く」から再試行するか、通信環境をご確認ください。',
+          );
+        }
         return;
       }
+
       setSent(true);
       toast.success('お問い合わせを受け付けました。');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch {
-      toast.error('通信エラーです。電波やネットワークをご確認ください。');
+      const copied = await copyAndOpenDm(entries);
+      if (copied) {
+        toast.warning(
+          '通信エラーのため、オンライン送信はできませんでした。回答はコピー済みです。Instagramが開いたら貼り付けて送信してください。',
+          { duration: 12_000 },
+        );
+      } else {
+        toast.error(
+          '通信エラーです。電波やネットワークをご確認ください。',
+        );
+      }
     } finally {
       setBusy(false);
     }
@@ -133,6 +172,27 @@ const Hearing: FC = () => {
             ヒアリング内容はすべてサーバー側で受領しました。続きが必要だと運営が判断した場合のみ、Instagram
             アカウントまたはご記載のご連絡先からご返信いたします。そのまま離脱していただいて構いません。
           </p>
+          {lastEntries && (
+            <div className="mb-8 rounded-[1.25rem] border border-sky-100 bg-sky-50/70 px-5 py-6 text-center">
+              <p className="mb-3 text-xs font-semibold text-sky-900">念のためInstagramでも送りたい場合（任意）</p>
+              <p className="mb-4 text-[11px] leading-relaxed text-muted-foreground">
+                1ボタンで「回答のコピー」と「DM画面の起動」まで行います。あとは貼り付け→送信だけです。
+              </p>
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full rounded-full border-sky-200 bg-white gap-2 text-sm font-semibold"
+                onClick={async () => {
+                  const ok = await copyAndOpenDm(lastEntries);
+                  if (ok) toast.success('コピーしました。DMで貼り付けて送信してください。');
+                  else toast.error('コピーまたは外部起動に失敗しました。ブラウザの許可をご確認ください。');
+                }}
+              >
+                <ClipboardCopy size={16} aria-hidden />
+                回答をコピーしてDMを開く
+              </Button>
+            </div>
+          )}
           <Button className="btn-primary text-primary-foreground" asChild>
             <Link href="/#services" className="inline-flex items-center gap-2 px-8">
               LPサービス詳細へ
@@ -241,8 +301,32 @@ const Hearing: FC = () => {
           )}
         </div>
 
+        {lastEntries && !sent && (
+          <div className="mt-8 rounded-[1.25rem] border border-amber-200/80 bg-amber-50/90 px-4 py-5 text-center">
+            <p className="mb-3 text-xs font-semibold text-amber-950">オンライン送信に失敗した場合</p>
+            <p className="mb-4 text-[11px] leading-relaxed text-amber-900/85">
+              下のボタンでもう一度、回答のコピーとDM画面の起動ができます（貼り付け→送信のみお願いします）。
+            </p>
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full rounded-full border-amber-300/80 bg-white text-amber-950 gap-2 text-sm font-semibold"
+              onClick={async () => {
+                const ok = await copyAndOpenDm(lastEntries);
+                if (ok) toast.success('コピーしました。DMで貼り付けて送信してください。');
+                else toast.error('失敗しました。ブラウザのクリップボード許可をご確認ください。');
+              }}
+            >
+              <ClipboardCopy size={16} aria-hidden />
+              回答をコピーしてDMを開く
+            </Button>
+          </div>
+        )}
+
         <p className="mt-10 text-center text-[11px] leading-relaxed text-muted-foreground">
-          送信後、DMを開く必要はありません。入力内容の取り扱いは{' '}
+          通常はこのままで完了です。
+          <br />
+          万一オンライン送信に失敗した場合は、自動でコピー＋DM起動を試みます。入力内容の取り扱いは{' '}
           <Link href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">
             プライバシーポリシー
           </Link>{' '}
