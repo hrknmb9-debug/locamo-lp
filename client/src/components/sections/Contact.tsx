@@ -4,8 +4,13 @@ import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 
 import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
+import type { PrimaryTabId } from '@/types/homeTabs';
 
-export default function Contact() {
+interface ContactProps {
+  goToTab?: (tab: PrimaryTabId) => void;
+}
+
+export default function Contact({ goToTab }: ContactProps) {
   const faqs = [
     {
       q: 'どのくらいで完成しますか？',

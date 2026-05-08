@@ -92,9 +92,9 @@ export default function Home() {
       case 'portfolio':
         return <Portfolio />;
       case 'instagram':
-        return <InstagramPage />;
+        return <InstagramPage goToTab={goTab} />;
       case 'contact':
-        return <Contact />;
+        return <Contact goToTab={goTab} />;
       default:
         return <Overview goToTab={goTab} />;
     }

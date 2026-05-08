@@ -4,6 +4,7 @@ import { Link } from 'wouter';
 
 import { IG_URL } from '@/constants/locamo';
 import { LP_IMAGES } from '@/lp-images';
+import type { PrimaryTabId } from '@/types/homeTabs';
 
 /**
  * Instagram Section
@@ -13,7 +14,11 @@ import { LP_IMAGES } from '@/lp-images';
  * - Instagram account link
  */
 
-export default function InstagramPage() {
+interface InstagramPageProps {
+  goToTab?: (tab: PrimaryTabId) => void;
+}
+
+export default function InstagramPage({ goToTab }: InstagramPageProps) {
   return (
     <div className="space-y-16 md:space-y-24 py-16 md:py-24 px-4">
       <div className="container mx-auto max-w-5xl">
