@@ -75,6 +75,15 @@ export function getSubscriptionOptions() {
 }
 
 /**
+ * Convenience exports for common prices
+ */
+export const STRIPE_PRICES = {
+  lpCreation: STRIPE_PRODUCTS.oneTime.lpBasic,
+  hpCreation: STRIPE_PRODUCTS.oneTime.hpStandard,
+  monthlyHosting: STRIPE_PRODUCTS.subscription.basic,
+};
+
+/**
  * Get product by price ID
  */
 export function getProductByPriceId(priceId: string) {

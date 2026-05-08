@@ -5,6 +5,8 @@ import { Link } from 'wouter';
 import { DM_URL } from '@/constants/locamo';
 import { HEARING_FLOW_SHORT, MONITOR_SLOT_NOTE, PRIMARY_CTA_HEARING, RESPONSE_SLA } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
+import { PaymentButton } from '@/components/PaymentButton';
+import { STRIPE_PRICES } from '@shared/stripeProducts';
 
 export default function Pricing() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
@@ -177,6 +179,54 @@ export default function Pricing() {
                 )}
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Payment Options */}
+        <div className="mb-14 animate-fade-in-up">
+          <h3 className="text-xl font-bold mb-6">今すぐ申し込む</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* LP制作 */}
+            <div className="rounded-[1.25rem] border border-sky-100 p-6 shadow-sm shadow-sky-950/5">
+              <h4 className="text-lg font-bold mb-2">LP制作</h4>
+              <p className="text-muted-foreground text-sm mb-4">シンプルで効果的なLP制作</p>
+              <p className="text-3xl font-bold mb-6">3万円<span className="text-lg text-muted-foreground">〜</span></p>
+              <PaymentButton
+                priceId={STRIPE_PRICES.lpCreation.priceId}
+                planName="LP制作"
+              >
+                LP制作を申し込む
+              </PaymentButton>
+            </div>
+
+            {/* ホームページ制作 */}
+            <div className="rounded-[1.25rem] border border-sky-100 p-6 shadow-sm shadow-sky-950/5">
+              <h4 className="text-lg font-bold mb-2">ホームページ制作</h4>
+              <p className="text-muted-foreground text-sm mb-4">複数ページの本格的なサイト</p>
+              <p className="text-3xl font-bold mb-6">要相談</p>
+              <Button size="lg" variant="outline" className="w-full" asChild>
+                <a href={DM_URL} target="_blank" rel="noopener noreferrer">
+                  お見積り依頼（DM）
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Subscription Plans */}
+        <div className="mb-14 animate-fade-in-up">
+          <h3 className="text-xl font-bold mb-6">サイト公開・ドメイン（月額）</h3>
+          <div className="rounded-[1.25rem] border border-sky-100 p-6 shadow-sm shadow-sky-950/5">
+            <p className="text-muted-foreground text-sm mb-4">制作後のサイト公開・ドメイン管理を継続</p>
+            <p className="text-3xl font-bold mb-6">月3,000円<span className="text-lg text-muted-foreground">〜</span></p>
+            <PaymentButton
+              priceId={STRIPE_PRICES.monthlyHosting.priceId}
+              planName="月額ホスティング"
+              isSubscription
+            >
+              月額プランを申し込む
+            </PaymentButton>
+            <p className="text-xs text-muted-foreground mt-4 text-center">初期設定サポート込み</p>
           </div>
         </div>
 
