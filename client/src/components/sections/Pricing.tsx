@@ -70,7 +70,7 @@ export default function Pricing() {
           料金・プロセス
         </h2>
         <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
-          透明性のある料金体系と、シンプルな制作フロー。{RESPONSE_SLA}
+          透明な料金と制作の流れです。受付手順・初回ご返信は下の「よくある質問」に集約しています。
         </p>
 
         <figure className="mx-auto mb-12 max-w-3xl overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-md shadow-sky-200/25">

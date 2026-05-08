@@ -105,8 +105,8 @@ export default function Contact() {
               },
               {
                 step: '2',
-                title: 'ご返信・ヒアリングの深掘り',
-                desc: RESPONSE_SLA,
+                title: 'ご返信・詳細の確認',
+                desc: '初回ご返信や追加のご質問は、FAQに記載の目安およびDM上で行います。',
               },
               {
                 step: '3',

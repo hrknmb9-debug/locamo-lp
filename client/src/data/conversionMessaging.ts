@@ -31,3 +31,6 @@ export const MONITOR_SLOT_NOTE =
 export const PRIMARY_CTA_HEARING = 'ヒアリングに進む';
 
 export const PRIMARY_CTA_HEARING_FULL = 'LP制作のヒアリングに進む';
+
+/** 返信SLAなどの詳細が別セクションにあるときの短文（フローのくどさ防止用） */
+export const REFER_CONTACT_FOR_SLA = '初回ご返信の目安や受付手順は、ページ内「お問合せ」の記載に準じます。';

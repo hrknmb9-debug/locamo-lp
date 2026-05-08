@@ -192,7 +192,8 @@ export default function InstagramPage() {
               LPのご依頼はサイト内ヒアリングから
             </h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto text-sm leading-relaxed text-pretty">
-              4ステップに回答したあと、コピーしてInstagramのDMに貼り付けて送信してください。フォローと合わせて見てもらうと流れが追いやすいです。
+              送信手順や初回ご返信の確認は、このページ下部の<strong className="text-sky-950">「お問合せ」</strong>
+              で一度ご覧ください。このボタンはヒアリングページのみ開きます。
             </p>
             <Button size="lg" className="btn-primary px-8 py-7 text-base font-semibold text-primary-foreground" asChild>
               <Link href="/hearing">LP制作のヒアリングに進む</Link>

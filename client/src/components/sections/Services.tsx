@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, Check } from 'lucide-react';
 import { Link } from 'wouter';
-import { PRIMARY_CTA_HEARING, RESPONSE_SLA } from '@/data/conversionMessaging';
+import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
 import { DM_URL } from '@/constants/locamo';
 import { SERVICE_PLANS } from '@/data/servicePlans';
 import { LP_IMAGES } from '@/lp-images';
@@ -27,11 +27,8 @@ export default function Services() {
           サービス内容
         </h2>
         <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed">
-          お申し込みはサイト内で4ステップに回答したあと、<span className="font-semibold text-sky-950">コピーをInstagramのDMに貼り付けて送信</span>
-          までがひと続きです。{RESPONSE_SLA}
-          <span className="mt-3 block font-normal">
-            <span className="font-semibold text-sky-950">LP制作</span>で迷ったら、まず下のLPプランが最初の候補になります。
-          </span>
+          LP制作どうするかの第一候補は下記プランです。お申込みから初回ご返信までのルールは<strong className="font-semibold text-sky-950">「料金」「お問合せ」</strong>
+          と同じものを参照してください（細部のくり返しはここでは省いています）。
         </p>
 
         <figure className="mx-auto mb-12 max-w-5xl overflow-hidden rounded-[1.35rem] border border-sky-100 shadow-md shadow-sky-200/30">

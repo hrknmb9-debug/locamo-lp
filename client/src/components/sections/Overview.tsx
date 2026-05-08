@@ -7,6 +7,7 @@ import {
   HEARING_FLOW_SHORT,
   MONITOR_SLOT_NOTE,
   PRIMARY_CTA_HEARING_FULL,
+  REFER_CONTACT_FOR_SLA,
   RESPONSE_SLA,
   SCOPE_EXCLUDED_BULLETS,
   SCOPE_INCLUDED_BULLETS,
@@ -35,9 +36,9 @@ function StatsSection() {
         </div>
       </div>
       <p className="text-xs text-muted-foreground text-center leading-relaxed px-1">
-        ※「納品・公開デモ・社内検証」を含む社内集計です。画面イメージは{' '}
-        <a href="/#samples" className="font-semibold text-sky-950 underline underline-offset-2 hover:text-accent">
-          「サンプル」セクション
+        ※納案件・運用準備におけるサイト制作を含む社内集計です。公開サイトは{' '}
+        <a href="/#works" className="font-semibold text-sky-950 underline underline-offset-2 hover:text-accent">
+          「納品事例」
         </a>
         をご覧ください。
         <span className="mt-1 block text-[11px] text-sky-900/80">
@@ -268,15 +269,11 @@ export default function Overview() {
               {HEARING_FLOW_SHORT}
             </h2>
             <p className="mx-auto mb-6 max-w-lg text-center text-[13px] leading-relaxed text-muted-foreground text-pretty">
-              {RESPONSE_SLA}
+              {REFER_CONTACT_FOR_SLA}
             </p>
-            <ul className="mx-auto mb-8 max-w-lg space-y-3 text-center text-[13px] leading-relaxed text-muted-foreground text-pretty">
-              <li>
-                ● 質問は<span className="font-semibold text-sky-950">少しずつ4ステップ</span>。「次へ」だけで入力が終わります。
-              </li>
-              <li>
-                ● 最後に回答をコピーして<span className="font-semibold text-sky-950">InstagramのDM</span>へ。ログイン中のアカウントから届くので、運営側で送信元が分かります。貼り付けて送信すれば完了です。
-              </li>
+            <ul className="mx-auto mb-8 max-w-lg space-y-2 text-center text-[13px] leading-relaxed text-muted-foreground text-pretty">
+              <li className="text-left sm:text-center">● 質問は4ステップ。「次へ」で進みます。</li>
+              <li className="text-left sm:text-center">● 終了ボタンでコピーのうえInstagramのDMへ貼り付けて送信で完了です。</li>
             </ul>
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Button size="lg" className="btn-primary w-full max-w-sm px-10 py-7 text-[15px] font-bold text-primary-foreground shadow-md shadow-sky-300/35" asChild>

@@ -34,7 +34,8 @@ const LEGACY_HASH_TO_ANCHOR: Record<string, string> = {
   overview: 'top',
   services: 'services',
   pricing: 'pricing',
-  portfolio: 'samples',
+  portfolio: 'works',
+  samples: 'works',
   instagram: 'instagram',
   contact: 'contact',
 };
@@ -163,7 +164,7 @@ export default function Home() {
         <ScrollLandmark id="pricing">
           <Pricing />
         </ScrollLandmark>
-        <ScrollLandmark id="samples">
+        <ScrollLandmark id="works">
           <Portfolio />
         </ScrollLandmark>
         <ScrollLandmark id="instagram">
