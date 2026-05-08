@@ -25,7 +25,7 @@ export default function Pricing() {
 
     try {
       const result = await createOneTimeCheckout.mutateAsync({
-        priceId: 'price_1TUsWo7nv8WWcHmoFWUo31ka',
+        priceId: 'price_1TUqxU7nv8WWcHmouiloVPYx',
         planName: 'LP制作',
       });
 
@@ -45,7 +45,7 @@ export default function Pricing() {
 
     try {
       const result = await createSubscriptionCheckout.mutateAsync({
-        priceId: 'price_1TUsNm7nv8WWcHmoxK6M04Zw',
+        priceId: 'price_1TUqxU7nv8WWcHmoT7AnbBnY',
         planName: 'Locamo月額管理費',
       });
 
