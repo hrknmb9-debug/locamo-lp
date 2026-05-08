@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'wouter';
 import { DM_URL } from '@/constants/locamo';
+import { HEARING_FLOW_SHORT, MONITOR_SLOT_NOTE, PRIMARY_CTA_HEARING, RESPONSE_SLA } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
 
 export default function Pricing() {
@@ -14,29 +15,37 @@ export default function Pricing() {
       a: 'サーバーとドメインは別途実費となります。両方込みで月3,000円〜が目安です。初期設定のサポートは制作費に含まれています。',
     },
     {
+      q: 'お申し込みの流れを教えてください',
+      a: `${HEARING_FLOW_SHORT} ${RESPONSE_SLA}`,
+    },
+    {
+      q: 'Instagramアカウントは必要ですか？',
+      a: 'DMでお申し込み内容をお送りいただく形式のため、アプリからご連絡できるInstagramアカウントをおすすめします。アカウントをお持ちでない場合は、別途Instagramのご用意からご相談ください。',
+    },
+    {
+      q: 'モニター無料枠は誰でも使えますか？',
+      a: MONITOR_SLOT_NOTE,
+    },
+    {
       q: '制作後の修正や更新はできますか？',
-      a: '制作完了後の簡易的な修正は無料で対応いたします。大幅な変更の場合は別途費用をいただく場合がございます。',
+      a: '制作完了後の簡易的な修正は無料で対応いたします。大幅な変更や新規ページ追加は別途お見積りとなります。',
     },
     {
       q: '支払い方法は？',
-      a: '銀行振込またはクレジットカード決済に対応しています。詳細はお問合せ時にご説明いたします。',
-    },
-    {
-      q: 'Instagramアカウントがなくても大丈夫？',
-      a: '大丈夫です。サイト内のヒアリングフォームからいつでもご依頼内容をお送りいただけます。',
+      a: '銀行振込またはクレジットカード決済に対応しています。詳細はご提案時にご説明いたします。',
     },
   ];
 
   const steps = [
     {
       num: '1',
-      title: 'ヒアリング送信',
-      desc: 'サイト上の質問ステップからお店の状況をお書きいただくだけです。入力内容がそのまま運営側に届きます。',
+      title: 'ヒアリング → DMで送信',
+      desc: 'サイトの4ステップに沿って入力し、全文をコピーしてInstagramのDMからお送りください。ここまででお申し込みとして受領します。',
     },
     {
       num: '2',
       title: 'お見立て・ご提案',
-      desc: '送信内容をもとに構成案とラフなお見積りをお返しします。',
+      desc: '内容確認後に、構成案とラフなお見積りをDM等でご返信します。',
     },
     {
       num: '3',
@@ -60,8 +69,8 @@ export default function Pricing() {
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           料金・プロセス
         </h2>
-        <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm">
-          透明性のある料金体系と、シンプルな制作フロー
+        <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
+          透明性のある料金体系と、シンプルな制作フロー。{RESPONSE_SLA}
         </p>
 
         <figure className="mx-auto mb-12 max-w-3xl overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-md shadow-sky-200/25">
@@ -171,10 +180,10 @@ export default function Pricing() {
 
         {/* CTA */}
         <div className="text-center animate-fade-in-up">
-          <p className="text-muted-foreground text-sm mb-4">料金だけ先に確認したい方も、送信後に折り返しでお見立ていたします。</p>
+          <p className="text-muted-foreground text-sm mb-4">料金だけ先に教えてほしい場合も、ヒアリング経由で順にお返しします。</p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground" asChild>
-              <Link href="/hearing">サイト内ヒアリング送信</Link>
+              <Link href="/hearing">{PRIMARY_CTA_HEARING}</Link>
             </Button>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
               <a href={DM_URL} target="_blank" rel="noopener noreferrer">

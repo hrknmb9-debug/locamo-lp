@@ -5,6 +5,7 @@ import type { RouteComponentProps } from 'wouter';
 
 import { Button } from '@/components/ui/button';
 import { DM_URL } from '@/constants/locamo';
+import { PRIMARY_CTA_HEARING_FULL } from '@/data/conversionMessaging';
 import { getPlan } from '@/data/servicePlans';
 import { LP_IMAGES } from '@/lp-images';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
@@ -94,18 +95,18 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
 
           <div className="rounded-[1.25rem] border border-sky-100 bg-secondary/80 p-6 text-center md:p-8">
             <p className="mb-6 text-sm text-muted-foreground text-pretty">
-              プラン内容のご質問・お見立てはサイト内ヒアリングからお送りいただけます。そのまま離脱いただいて大丈夫です。
+              サイトのヒアリングに沿って入力し、InstagramのDMに貼り付けて送信いただくと受付完了です。先に質問だけ送る場合はDMでも構いません。
             </p>
             <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
               <Button size="lg" className="btn-primary text-primary-foreground" asChild>
                 <Link href="/hearing">
-                  ヒアリングを送信して相談
+                  {PRIMARY_CTA_HEARING_FULL}
                   <ArrowRight className="ml-2 inline size-5" aria-hidden />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="rounded-full border-sky-200" asChild>
                 <a href={DM_URL} target="_blank" rel="noopener noreferrer">
-                  DMで短く質問（任意）
+                  DMで質問のみ（任意）
                 </a>
               </Button>
               <Button size="lg" variant="outline" className="rounded-full border-sky-200" asChild>

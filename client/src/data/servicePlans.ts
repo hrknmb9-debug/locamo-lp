@@ -45,7 +45,7 @@ export const SERVICE_PLANS: ServicePlanCopy[] = [
       {
         heading: '進め方',
         items: [
-          'Web上のヒアリング送信（サイト内でフォーム入力）',
+          'サイト内ヒアリング入力 → InstagramのDMに貼り付けて送信',
           '構成・ワイヤーとお見立て・お見積り',
           'デザイン・実装〜公開チェックまで一気通貫',
         ],
@@ -79,7 +79,7 @@ export const SERVICE_PLANS: ServicePlanCopy[] = [
       {
         heading: 'ご相談の流れ',
         items: [
-          'サイト内ヒアリング送信で概要を確認',
+          'サイト内ヒアリング → DM送信で概要を確認',
           'ページ数・更新頻度に合わせたお見立て・お見積り',
           'デザイン・実装〜公開および初期運用ヒントの共有',
         ],

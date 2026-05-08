@@ -1,6 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Link } from 'wouter';
+import {
+  MONITOR_SLOT_NOTE,
+  PRIMARY_CTA_HEARING,
+  RESPONSE_SLA,
+} from '@/data/conversionMessaging';
 
 const PORTFOLIO_SITES = [
   {
@@ -14,7 +19,7 @@ const PORTFOLIO_SITES = [
     testimonial: {
       quote:
         '世界観が一目で伝わる構成にしていただき、スマホからの問い合わせ導線も迷わないよう整理できました。',
-      attribution: '飲食ブランド準備のクライアント様',
+      attribution: '構成レビューコメント（公開デモ・サンプル用）',
     },
   },
   {
@@ -28,7 +33,7 @@ const PORTFOLIO_SITES = [
     testimonial: {
       quote:
         '初見のユーザーにも「何ができるか」がすぐ伝わる見出しとブロック構成でイメージ通りになりました。',
-      attribution: 'コミュニティ・Webサービス関係のクライアント様',
+      attribution: '構成レビューコメント（公開デモ・サンプル用）',
     },
   },
 ];
@@ -45,10 +50,11 @@ export default function Portfolio() {
       <div className="container mx-auto max-w-5xl">
         {/* Header */}
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          制作実績
+          公開サンプル・構成例
         </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto text-sm leading-relaxed md:text-[15px]">
-          ご依頼品質の一例として、公開中のモックアップサイトを載せています。LPの構成イメージの参考にご覧ください。
+        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto text-sm leading-relaxed md:text-[15px] text-pretty">
+          構成や見せ方の<strong className="font-semibold text-sky-900">参考用</strong>
+          として、公開中のデモサイトを掲載しています。実店舗の納品例は案件の公開許諾が取れた順に追加していきます。
         </p>
         {/* Portfolio Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
@@ -100,10 +106,11 @@ export default function Portfolio() {
           <div className="mb-10 text-center">
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-accent">Voice</p>
             <h3 id="portfolio-voices" className="text-2xl font-bold md:text-3xl mb-3">
-              お客様の声
+              サンプルへのフィードバック例
             </h3>
             <p className="mx-auto max-w-xl text-[13px] text-muted-foreground leading-relaxed text-pretty md:text-sm">
-              「LPでまず伝えるべきことから順番に読ませていく」を意識したブロック並びになっています。（イメージ要約であり、証言とは限りません）
+              以下は<strong className="font-semibold text-sky-950">デモ案件向けに想定した構成コメント</strong>
+              であり、特定の実在店舗からの証言ではありません。
             </p>
           </div>
 
@@ -129,19 +136,20 @@ export default function Portfolio() {
         {/* Early Client Recruitment */}
         <div className="lp-card animate-fade-in-up overflow-hidden rounded-[1.25rem] border-2 border-accent px-6 py-10 text-center shadow-md shadow-sky-200/40 sm:px-8 md:p-12">
           <h3 className="mb-4 text-xl font-bold sm:text-2xl">
-            ご依頼・モニター枠について
+            モニター枠・ご依頼について
           </h3>
-          <div className="mx-auto mb-6 max-w-2xl text-pretty px-1 text-muted-foreground sm:px-0">
-            <p>
-              LP制作の構成・読みごこちへのフィードバックは、サイト内ヒアリング送信で運営に直接届きます。DMを挟まなくてもお申し込みからお見立てまで進められます。
+          <div className="mx-auto mb-6 max-w-2xl text-pretty px-1 text-muted-foreground text-sm leading-relaxed sm:px-0">
+            <p className="mb-3">
+              {RESPONSE_SLA} お申し込みは公開ページのヒアリングに沿って入力し、コピーした内容をInstagramのDMからお送りください。
             </p>
+            <p className="text-[13px] leading-relaxed">{MONITOR_SLOT_NOTE}</p>
           </div>
 
           <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
             {[
-              { title: 'オンライン受付', desc: 'サイト内送信' },
-              { title: 'モニター枠', desc: '制作無料（条件あり）' },
-              { title: '制作の核', desc: 'LP構成とCTA設計' },
+              { title: '受付まで', desc: 'Web → DM送信' },
+              { title: 'モニター', desc: '審査つき・先着' },
+              { title: '制作の核', desc: '構成とCTA設計' },
             ].map((benefit, idx) => (
               <div key={idx} className="rounded-[1rem] bg-secondary p-4">
                 <p className="text-sm text-muted-foreground mb-1">{benefit.title}</p>
@@ -153,7 +161,7 @@ export default function Portfolio() {
           <div className="flex w-full justify-center px-1 sm:px-3">
             <Button size="lg" className="btn-primary mx-auto inline-flex max-w-[min(100%,22rem)] min-w-0 flex-nowrap px-6 py-7 text-[15px] font-semibold text-primary-foreground sm:py-8" asChild>
               <Link href="/hearing" className="w-full justify-center gap-2">
-                LPご依頼を送る（ヒアリング）
+                {PRIMARY_CTA_HEARING}
                 <ArrowRight className="size-5 shrink-0" aria-hidden />
               </Link>
             </Button>

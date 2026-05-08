@@ -4,7 +4,6 @@ import { Link } from 'wouter';
 
 import { IG_URL } from '@/constants/locamo';
 import { LP_IMAGES } from '@/lp-images';
-import type { PrimaryTabId } from '@/types/homeTabs';
 
 /**
  * Instagram Section
@@ -14,11 +13,7 @@ import type { PrimaryTabId } from '@/types/homeTabs';
  * - Instagram account link
  */
 
-interface InstagramPageProps {
-  goToTab?: (tab: PrimaryTabId) => void;
-}
-
-export default function InstagramPage({ goToTab }: InstagramPageProps) {
+export default function InstagramPage() {
   return (
     <div className="space-y-16 md:space-y-24 py-16 md:py-24 px-4">
       <div className="container mx-auto max-w-5xl">
@@ -194,13 +189,13 @@ export default function InstagramPage({ goToTab }: InstagramPageProps) {
         <section className="mt-16 text-center animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
           <div className="rounded-[1.25rem] bg-secondary p-8 md:p-12">
             <h3 className="text-2xl font-bold mb-4">
-              LPご依頼はそのままサイト内から
+              LPのご依頼はサイト内ヒアリングから
             </h3>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              流入元を問わず、読まれたあとに問い合わせ・来店へつなぐLP制作のご相談は、ヒアリングフォームからお送りください。
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto text-sm leading-relaxed text-pretty">
+              4ステップに回答したあと、コピーしてInstagramのDMに貼り付けて送信してください。フォローと合わせて見てもらうと流れが追いやすいです。
             </p>
             <Button size="lg" className="btn-primary px-8 py-7 text-base font-semibold text-primary-foreground" asChild>
-              <Link href="/hearing">LPヒアリング送信へ</Link>
+              <Link href="/hearing">LP制作のヒアリングに進む</Link>
             </Button>
           </div>
         </section>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, Check } from 'lucide-react';
 import { Link } from 'wouter';
+import { PRIMARY_CTA_HEARING, RESPONSE_SLA } from '@/data/conversionMessaging';
 import { DM_URL } from '@/constants/locamo';
 import { SERVICE_PLANS } from '@/data/servicePlans';
 import { LP_IMAGES } from '@/lp-images';
@@ -25,9 +26,12 @@ export default function Services() {
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           サービス内容
         </h2>
-        <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm">
-          ご注文の起点は「サイト内ヒアリング」だけで足ります。<span className="font-semibold text-sky-950">LP制作</span>
-          に迷ったら、まず下のLPプランが最初の候補になります。
+        <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed">
+          お申し込みはサイト内で4ステップに回答したあと、<span className="font-semibold text-sky-950">コピーをInstagramのDMに貼り付けて送信</span>
+          までがひと続きです。{RESPONSE_SLA}
+          <span className="mt-3 block font-normal">
+            <span className="font-semibold text-sky-950">LP制作</span>で迷ったら、まず下のLPプランが最初の候補になります。
+          </span>
         </p>
 
         <figure className="mx-auto mb-12 max-w-5xl overflow-hidden rounded-[1.35rem] border border-sky-100 shadow-md shadow-sky-200/30">
@@ -172,12 +176,12 @@ export default function Services() {
 
         {/* CTA */}
         <div className="text-center mt-12 animate-fade-in-up">
-          <p className="text-muted-foreground text-sm mb-4">
-            「まずLPで足りるか」迷う段階でも、ヒアリングだけ送っていただければ制作方針までお返しします。
+          <p className="text-muted-foreground text-sm mb-4 max-w-lg mx-auto text-pretty">
+            「まずLPで足りるか」迷う段階でも、ヒアリング内容をいただければ構成の方向性までお返しします。
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
             <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground" asChild>
-              <Link href="/hearing">LPのヒアリングを送信</Link>
+              <Link href="/hearing">{PRIMARY_CTA_HEARING}</Link>
             </Button>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
               <a href={DM_URL} target="_blank" rel="noopener noreferrer">

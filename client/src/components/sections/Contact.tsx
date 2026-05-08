@@ -4,13 +4,9 @@ import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 
 import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
-import type { PrimaryTabId } from '@/types/homeTabs';
+import { HEARING_FLOW_LINES, PRIMARY_CTA_HEARING_FULL, RESPONSE_SLA } from '@/data/conversionMessaging';
 
-interface ContactProps {
-  goToTab?: (tab: PrimaryTabId) => void;
-}
-
-export default function Contact({ goToTab }: ContactProps) {
+export default function Contact() {
   const faqs = [
     {
       q: 'どのくらいで完成しますか？',
@@ -25,8 +21,12 @@ export default function Contact({ goToTab }: ContactProps) {
       a: 'もちろんです。既存のInstagramアカウントをそのまま活用できます。',
     },
     {
+      q: '申し込み後、どれくらいで返信が来ますか？',
+      a: RESPONSE_SLA,
+    },
+    {
       q: 'どんな店舗でも対応できますか？',
-      a: '飲食店・小売店・専門店など、大阪の個人店であればほぼ対応可能です。',
+      a: '飲食店・小売店・専門店など、大阪エリアの個人店・小規模店を主な対象にしています。業種によりお断りすることがあります。',
     },
   ];
 
@@ -41,7 +41,7 @@ export default function Contact({ goToTab }: ContactProps) {
           お問合せ
         </h2>
         <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
-          サイト内フォームのみで送信完了します。送信後、そのまま画面を閉じていただいて構いません。
+          お問い合わせの<strong className="font-semibold text-sky-950">正式なお申し込み</strong>は、ヒアリング→InstagramのDMへ貼り付け送信までです。{RESPONSE_SLA}
         </p>
 
         {/* Main CTA */}
@@ -55,10 +55,12 @@ export default function Contact({ goToTab }: ContactProps) {
                 className="aspect-[21/9] max-h-[8.5rem] w-full object-cover"
               />
             </div>
-            <h3 className="text-xl md:text-2xl font-bold mb-3">ヒアリングでLPご依頼を始める（推奨）</h3>
-            <p className="mb-8 max-w-md self-center text-sm leading-relaxed text-muted-foreground">
-              DMを挟まなくて大丈夫です。4ステップの質問にお答えのうえ「送信」を押していただくと運営に届きます。
-            </p>
+            <h3 className="text-xl md:text-2xl font-bold mb-3">{PRIMARY_CTA_HEARING_FULL}</h3>
+            <ol className="mb-8 max-w-lg mx-auto space-y-2 text-left text-sm leading-relaxed text-muted-foreground list-decimal list-inside">
+              {HEARING_FLOW_LINES.map(line => (
+                <li key={line}>{line}</li>
+              ))}
+            </ol>
             <div className="flex w-full justify-center px-2">
               <Button
                 size="lg"
@@ -66,7 +68,7 @@ export default function Contact({ goToTab }: ContactProps) {
                 asChild
               >
                 <Link href="/hearing">
-                  LPヒアリングへ進む
+                  {PRIMARY_CTA_HEARING_FULL}
                   <ArrowRight size={16} className="shrink-0" aria-hidden />
                 </Link>
               </Button>
@@ -78,7 +80,8 @@ export default function Contact({ goToTab }: ContactProps) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 font-medium text-muted-foreground underline-offset-4 hover:text-accent hover:underline"
               >
-                <MessageCircle size={16} aria-hidden /> Instagram DMは任意です
+                <MessageCircle size={16} aria-hidden />
+                先に質問だけ送りたい方はDMへ
               </a>
               <Link href="/services/lp" className="font-medium text-accent underline-offset-4 hover:underline">
                 LPプラン詳細のみ見る
@@ -97,13 +100,13 @@ export default function Contact({ goToTab }: ContactProps) {
             {[
               {
                 step: '1',
-                title: 'ヒアリング送信',
-                desc: 'サイトの4ステップに沿って入力し「送信」を押してください。離脱していただいてもデータは運営に届きます。',
+                title: 'Webでヒアリング → DMで送信',
+                desc: '4ステップの入力後、全文をコピーしてInstagramのDMから送信してください。ここで正式なお申し込みが完了です。',
               },
               {
                 step: '2',
-                title: '構成・ご提案',
-                desc: '必要に応じてInstagram DMなどで短文のご質問のみ差し込むことがあります。',
+                title: 'ご返信・ヒアリングの深掘り',
+                desc: RESPONSE_SLA,
               },
               {
                 step: '3',
@@ -139,11 +142,9 @@ export default function Contact({ goToTab }: ContactProps) {
         {/* Highlight Banner */}
         <section className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <div className="rounded-[1.5rem] bg-accent p-7 text-center text-white shadow-lg shadow-sky-400/35 md:p-10">
-            <h3 className="text-xl font-bold mb-2">
-              無料診断は完全無料。
-            </h3>
-            <p className="text-white/80 text-sm">
-              ご契約まで費用は発生しません。まずはお気軽にお問合せください。
+            <h3 className="text-xl font-bold mb-2">お問い合わせ・ヒアリングへの回答は無料です</h3>
+            <p className="text-white/85 text-sm max-w-lg mx-auto text-pretty">
+              ご契約または制作開始のタイミングまでは追加費用はかかりません。まず内容を書き込み・DM送信まで進めていただければ結構です。
             </p>
           </div>
         </section>
@@ -169,11 +170,11 @@ export default function Contact({ goToTab }: ContactProps) {
           <div className="rounded-[1.5rem] border border-sky-100 bg-secondary p-8 md:p-12">
             <h3 className="text-xl font-bold mb-2">まず一枚のLPから始めませんか</h3>
             <p className="text-muted-foreground text-sm mb-7 text-pretty">
-              サイト内ヒアリングのみで運営に届きます。プランだけ先に知りたい場合も大丈夫です。
+              プランミニマムのみ知りたい場合も、この流れから伺えれば順にご案内します。
             </p>
             <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground" asChild>
               <Link href="/hearing">
-                LPのヒアリングを送信
+                {PRIMARY_CTA_HEARING_FULL}
                 <ArrowRight className="ml-2 inline" size={16} aria-hidden />
               </Link>
             </Button>
