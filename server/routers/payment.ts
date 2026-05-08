@@ -1,12 +1,49 @@
 import { z } from "zod";
 import { eq, desc } from "drizzle-orm";
-import { protectedProcedure, router } from "../_core/trpc";
+import { TRPCError } from "@trpc/server";
+import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
 import { createCheckoutSession, createSubscriptionCheckoutSession } from "../stripe";
 import { ENV } from "../_core/env";
+import { getEffectiveLpOneTimePriceId, getEffectiveMonthlyHostingPriceId } from "../_core/stripePriceIds";
 import { getDb } from "../db";
 import { stripePayments, stripeSubscriptions } from "../../drizzle/schema";
+import { STRIPE_PRICES } from "@shared/stripeProducts";
+
+function mapStripeCheckoutError(error: unknown): never {
+  if (
+    typeof error === "object" &&
+    error !== null &&
+    "type" in error &&
+    (error as { type?: string }).type === "StripeInvalidRequestError"
+  ) {
+    const msg = String((error as { message?: string }).message ?? "");
+    if (msg.includes("No such price")) {
+      throw new TRPCError({
+        code: "BAD_REQUEST",
+        message:
+          "Stripe の Price ID が、この Secret Key に紐づくアカウント（またはテスト/本番モード）に存在しません。「Products」から API Price ID をコピーし、Manus Secrets または .env の STRIPE_PRICE_LP_CREATION / STRIPE_PRICE_MONTHLY_HOSTING に、そのキーと同じモードで設定してください。",
+      });
+    }
+  }
+  throw error;
+}
 
 export const paymentRouter = router({
+  /** サーバーが Checkout で実際に使う Price ID（フロントはこれを参照） */
+  getCheckoutPrices: publicProcedure.query(() => ({
+    lp: {
+      priceId: getEffectiveLpOneTimePriceId(),
+      planName: STRIPE_PRICES.lpCreation.name,
+    },
+    monthly: {
+      priceId: getEffectiveMonthlyHostingPriceId(),
+      planName: STRIPE_PRICES.monthlyHosting.name,
+    },
+    usingEnvOverrides: {
+      lp: Boolean(ENV.stripePriceLpCreation.trim()),
+      monthly: Boolean(ENV.stripePriceMonthlyHosting.trim()),
+    },
+  })),
   /**
    * Create a one-time payment checkout session for LP制作
    */
@@ -17,23 +54,28 @@ export const paymentRouter = router({
         planName: z.string(),
       })
     )
-    .mutation(async ({ ctx, input }) => {
+    .mutation(async ({ ctx, input: _ignored }) => {
+      const effectivePriceId = getEffectiveLpOneTimePriceId();
       const successUrl = `${ctx.req.headers.origin}/payment-success`;
       const cancelUrl = `${ctx.req.headers.origin}/pricing`;
 
-      const session = await createCheckoutSession(
-        ctx.user.id,
-        input.priceId,
-        successUrl,
-        cancelUrl,
-        ctx.user.email || "",
-        ctx.user.name || ""
-      );
+      try {
+        const session = await createCheckoutSession(
+          ctx.user.id,
+          effectivePriceId,
+          successUrl,
+          cancelUrl,
+          ctx.user.email || "",
+          ctx.user.name || ""
+        );
 
-      return {
-        sessionId: session.id,
-        url: session.url,
-      };
+        return {
+          sessionId: session.id,
+          url: session.url,
+        };
+      } catch (e) {
+        mapStripeCheckoutError(e);
+      }
     }),
 
   /**
@@ -46,23 +88,28 @@ export const paymentRouter = router({
         planName: z.string(),
       })
     )
-    .mutation(async ({ ctx, input }) => {
+    .mutation(async ({ ctx }) => {
+      const effectivePriceId = getEffectiveMonthlyHostingPriceId();
       const successUrl = `${ctx.req.headers.origin}/subscription-success`;
       const cancelUrl = `${ctx.req.headers.origin}/pricing`;
 
-      const session = await createSubscriptionCheckoutSession(
-        ctx.user.id,
-        input.priceId,
-        successUrl,
-        cancelUrl,
-        ctx.user.email || "",
-        ctx.user.name || ""
-      );
+      try {
+        const session = await createSubscriptionCheckoutSession(
+          ctx.user.id,
+          effectivePriceId,
+          successUrl,
+          cancelUrl,
+          ctx.user.email || "",
+          ctx.user.name || ""
+        );
 
-      return {
-        sessionId: session.id,
-        url: session.url,
-      };
+        return {
+          sessionId: session.id,
+          url: session.url,
+        };
+      } catch (e) {
+        mapStripeCheckoutError(e);
+      }
     }),
 
   /**

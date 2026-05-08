@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { PaymentButton } from '@/components/PaymentButton';
 import { Button } from '@/components/ui/button';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Loader2 } from 'lucide-react';
 import { Link } from 'wouter';
 import { DM_URL } from '@/constants/locamo';
 import { HEARING_FLOW_SHORT, MONITOR_SLOT_NOTE, PRIMARY_CTA_HEARING, RESPONSE_SLA } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
-import { STRIPE_PRICES } from '@shared/stripeProducts';
+import { trpc } from '@/lib/trpc';
 
 export default function Pricing() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const { data: checkoutPrices } = trpc.payment.getCheckoutPrices.useQuery();
 
   const faqs = [
     {
@@ -191,12 +192,19 @@ export default function Pricing() {
               <h4 className="text-lg font-bold mb-2">LP制作</h4>
               <p className="text-muted-foreground text-sm mb-4">シンプルで効果的なLP制作</p>
               <p className="text-3xl font-bold mb-6">3万円<span className="text-lg text-muted-foreground">〜</span></p>
-              <PaymentButton
-                priceId={STRIPE_PRICES.lpCreation.priceId}
-                planName={STRIPE_PRICES.lpCreation.name}
-              >
-                LP制作を申し込む
-              </PaymentButton>
+              {checkoutPrices ? (
+                <PaymentButton
+                  priceId={checkoutPrices.lp.priceId}
+                  planName={checkoutPrices.lp.planName}
+                >
+                  LP制作を申し込む
+                </PaymentButton>
+              ) : (
+                <Button size="lg" className="w-full" disabled>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  準備中…
+                </Button>
+              )}
               <p className="text-xs text-muted-foreground mt-3 text-center">
                 クレジットカード決済の前にアカウントログインが必要です。
               </p>
@@ -222,13 +230,20 @@ export default function Pricing() {
           <div className="rounded-[1.25rem] border border-sky-100 p-6 shadow-sm shadow-sky-950/5">
             <p className="text-muted-foreground text-sm mb-4">制作後のサイト公開・ドメイン管理を継続</p>
             <p className="text-3xl font-bold mb-6">月3,000円<span className="text-lg text-muted-foreground">〜</span></p>
-            <PaymentButton
-              priceId={STRIPE_PRICES.monthlyHosting.priceId}
-              planName={STRIPE_PRICES.monthlyHosting.name}
-              isSubscription
-            >
-              月額プランを申し込む
-            </PaymentButton>
+            {checkoutPrices ? (
+              <PaymentButton
+                priceId={checkoutPrices.monthly.priceId}
+                planName={checkoutPrices.monthly.planName}
+                isSubscription
+              >
+                月額プランを申し込む
+              </PaymentButton>
+            ) : (
+              <Button size="lg" className="w-full" disabled>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                準備中…
+              </Button>
+            )}
             <p className="text-xs text-muted-foreground mt-3 text-center">
               ログイン後に Stripe Checkout が新しいタブで開きます。
             </p>
