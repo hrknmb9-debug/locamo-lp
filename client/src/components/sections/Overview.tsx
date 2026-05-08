@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ClipboardList, Sparkles, Zap, DollarSign, Share2, Search } from 'lucide-react';
+import { Link } from 'wouter';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { useCountUp } from '@/hooks/useCountUp';
-import { DM_URL, HEARING_SHEET_URL } from '@/constants/locamo';
+import { DM_URL } from '@/constants/locamo';
 import { LP_IMAGES } from '@/lp-images';
 
 function StatsSection() {
@@ -148,19 +149,19 @@ export default function Overview() {
           <div className="rounded-[1.5rem] border border-sky-100 bg-white p-8 shadow-md shadow-sky-200/30 md:p-10">
             <p className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.22em] text-accent">Hearing</p>
             <h2 className="mb-4 text-center text-2xl font-bold md:text-[1.65rem]">
-              要件の整理は、公開ヒアリングシートから
+              要件の整理は、このサイトのヒアリングページで
             </h2>
             <p className="mx-auto mb-8 max-w-xl text-center text-sm leading-relaxed text-muted-foreground text-pretty">
-              下記のシートで項目に沿って入力いただき、完了した内容をコピーまたはスクリーンショットとして
+              ヒアリングページで項目に沿ってご記入のうえ、内容をコピーまたはスクリーンショットとして
               <strong className="font-semibold text-sky-950"> Instagram DM にお送り</strong>
               ください。フォーム送信は行いません。
             </p>
             <div className="flex max-w-lg flex-col gap-3 sm:mx-auto sm:flex-row sm:justify-center">
               <Button variant="outline" className="rounded-full border-sky-300 bg-sky-50/50" asChild>
-                <a href={HEARING_SHEET_URL} target="_blank" rel="noopener noreferrer" className="gap-2">
+                <Link href="/hearing" className="inline-flex items-center justify-center gap-2">
                   <ClipboardList className="size-4" aria-hidden />
-                  ヒアリングシートを開く
-                </a>
+                  ヒアリングページへ
+                </Link>
               </Button>
               <Button className="btn-primary text-primary-foreground" asChild>
                 <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="gap-2">
@@ -170,10 +171,10 @@ export default function Overview() {
               </Button>
             </div>
             <p className="mt-6 text-center text-[11px] leading-relaxed text-muted-foreground">
-              シートは外部の公開ページ（Claude）で開きます。入力内容の取り扱いは{' '}
-              <a href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">
+              入力内容の取り扱いは{' '}
+              <Link href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">
                 プライバシーポリシー
-              </a>{' '}
+              </Link>{' '}
               に従います。
             </p>
           </div>

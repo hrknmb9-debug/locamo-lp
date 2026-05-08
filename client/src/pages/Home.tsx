@@ -20,8 +20,14 @@ const TABS: { id: TabType; label: string }[] = [
   { id: 'contact', label: 'お問合せ' },
 ];
 
+function tabFromLocationHash(): TabType {
+  if (typeof window === 'undefined') return 'overview';
+  const raw = window.location.hash.slice(1) as TabType;
+  return raw && TABS.some(t => t.id === raw) ? raw : 'overview';
+}
+
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<TabType>('overview');
+  const [activeTab, setActiveTab] = useState<TabType>(tabFromLocationHash);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -30,6 +36,10 @@ export default function Home() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [activeTab]);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -161,6 +171,14 @@ export default function Home() {
                     </button>
                   </li>
                 ))}
+                <li>
+                  <Link
+                    href="/hearing"
+                    className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors"
+                  >
+                    ヒアリングシート
+                  </Link>
+                </li>
                 <li>
                   <Link
                     href="/privacy"

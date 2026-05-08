@@ -74,6 +74,9 @@ export default function Contact() {
               </Button>
             </div>
             <div className="mt-6 flex flex-col items-center gap-3 text-center text-sm">
+              <Link href="/hearing" className="font-medium text-accent underline-offset-4 hover:underline">
+                ヒアリングページを開く
+              </Link>
               <Link href="/services/lp" className="font-medium text-accent underline-offset-4 hover:underline">
                 サービスの詳細を見る
               </Link>
@@ -96,8 +99,8 @@ export default function Contact() {
               },
               {
                 step: '2',
-                title: '現状のお悩みをお聞かせ',
-                desc: 'Instagramの運用状況や、集客の課題などをお教えください。',
+                title: 'ヒアリング内容を整理',
+                desc: 'ヒアリングページでご記入のうえ、DMで共有してください。',
               },
               {
                 step: '3',

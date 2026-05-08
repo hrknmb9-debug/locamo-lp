@@ -7,9 +7,11 @@ import { Button } from '@/components/ui/button';
 import { DM_URL } from '@/constants/locamo';
 import { getPlan } from '@/data/servicePlans';
 import { LP_IMAGES } from '@/lp-images';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 import NotFound from '@/pages/NotFound';
 
 const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) => {
+  useScrollToTop();
   const plan = params?.planId ? getPlan(params.planId) : undefined;
 
   if (!plan) {

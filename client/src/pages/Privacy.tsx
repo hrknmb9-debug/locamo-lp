@@ -4,8 +4,10 @@ import { Link } from 'wouter';
 
 import { Button } from '@/components/ui/button';
 import { IG_HANDLE, IG_URL } from '@/constants/locamo';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 const Privacy: FC = () => {
+  useScrollToTop();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 backdrop-blur">
