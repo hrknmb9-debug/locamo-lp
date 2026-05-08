@@ -95,7 +95,7 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
 
           <div className="rounded-[1.25rem] border border-sky-100 bg-secondary/80 p-6 text-center md:p-8">
             <p className="mb-6 text-sm text-muted-foreground text-pretty">
-              サイトのヒアリング送信でお申し込みを受け付けます。先に質問だけ送りたい場合はDMのみでも構いません。
+              ヒアリング入力をコピーしInstagramのDMに貼り付けて送信いただいた時点で、お申し込みとして受け付けます。先に質問だけ送りたい場合はDMのみでも構いません。
             </p>
             <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
               <Button size="lg" className="btn-primary text-primary-foreground" asChild>

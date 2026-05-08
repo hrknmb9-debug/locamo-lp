@@ -1,6 +1,6 @@
 import type { HearingEntry } from '@shared/hearingIngest';
 
-/** 控え・手動送信用に整形したテキスト（主経路はサーバー `/api/hearing`） */
+/** Instagram DM に貼り付けるためのテキストに整形します */
 export function formatHearingForClipboard(entries: HearingEntry[]): string {
   const lines = entries.map((e, i) => {
     const v = (e.value ?? '').trim() || '（未記入）';

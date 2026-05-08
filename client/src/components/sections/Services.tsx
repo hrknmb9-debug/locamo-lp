@@ -168,7 +168,7 @@ export default function Services() {
 
         {/* Monthly cost note */}
         <p className="text-xs text-muted-foreground text-center mt-4">
-          ※別途 サーバー・ドメイン費用 月3,000円〜（込み）
+          ※別途 サイト公開・ドメイン費用 月3,000円〜（込み）
         </p>
 
         {/* CTA */}

@@ -41,8 +41,8 @@ export default function Contact() {
           お問合せ
         </h2>
         <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
-          お問い合わせの<strong className="font-semibold text-sky-950">正式なお申し込み</strong>は、ヒアリングフォームの送信で完了です。
-          （任意でInstagramのDMにも一言いただけます。）{RESPONSE_SLA}
+          お問い合わせの<strong className="font-semibold text-sky-950">正式なお申し込み</strong>
+          は、ヒアリング入力をコピーし、InstagramのDMに貼り付けて送信した時点で完了です。{RESPONSE_SLA}
         </p>
 
         {/* Main CTA */}
@@ -100,8 +100,8 @@ export default function Contact() {
             {[
               {
                 step: '1',
-                title: 'Webでヒアリング → 送信',
-                desc: '4ステップの入力後、「ヒアリングを送信する」で送信完了です（内容はサーバーに保存されます）。必要に応じてInstagramのDMを開いて一言お送りいただくこともできます。',
+                title: 'Webでヒアリング → DMで送信',
+                desc: '4ステップの入力後、「コピーしてInstagramのDMへ」で全文をコピーのうえ、開いたDMに貼り付けて送信してください。これでお申し込みは受け付けられます。',
               },
               {
                 step: '2',
@@ -111,7 +111,7 @@ export default function Contact() {
               {
                 step: '3',
                 title: 'お見積り〜ご確認',
-                desc: 'LPの方向性・納期感・サーバー込みランニングを整理してお伝えします。',
+                desc: 'LPの方向性・納期感・サイト公開込みの月額目安まで整理してお伝えします。',
               },
               {
                 step: '4',
@@ -135,7 +135,7 @@ export default function Contact() {
             ))}
           </div>
           <p className="text-xs text-muted-foreground text-center mt-4">
-            ※別途 サーバー・ドメイン費用 月3,000円〜（込み）
+            ※別途 サイト公開・ドメイン費用 月3,000円〜（込み）
           </p>
         </section>
 

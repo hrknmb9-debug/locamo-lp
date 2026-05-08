@@ -3,7 +3,7 @@ import { Instagram, ArrowRight, TrendingUp, ClipboardList } from 'lucide-react';
 import { Link } from 'wouter';
 
 import { IG_URL, DM_URL } from '@/constants/locamo';
-import { PRIMARY_CTA_DM_CONTACT, PRIMARY_CTA_HEARING_FULL } from '@/data/conversionMessaging';
+import { PRIMARY_CTA_DM_CONTACT, PRIMARY_CTA_DM_SUBLINE, PRIMARY_CTA_HEARING_FULL } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
 
 /**
@@ -193,21 +193,24 @@ export default function InstagramPage() {
               LPのご依頼・ご相談はこちらから
             </h3>
             <p className="text-muted-foreground mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-pretty">
-              Instagramアプリ側のDMに直接つなげるので、インナーブラウザに閉じ込められにくくなっています。詳細はフォーム送信後にそのままDMへ進みます。
+              DMへのリンクからアプリ側に切り替わりやすくなっています。細かく書きたい方は続けてフォームのヒアリングへどうぞ。
             </p>
             <div className="mx-auto flex max-w-xl flex-col gap-3 sm:flex-row sm:justify-center">
-              <Button size="lg" className="btn-primary px-8 py-7 text-base font-semibold text-primary-foreground shadow-md shadow-orange-300/35" asChild>
-                <a href={DM_URL} rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2">
-                  <Instagram size={22} aria-hidden />
-                  {PRIMARY_CTA_DM_CONTACT}
-                  <ArrowRight size={18} aria-hidden />
+              <Button size="lg" className="btn-primary h-auto min-h-12 w-full rounded-full px-4 py-3 text-primary-foreground shadow-md shadow-orange-300/35 sm:max-w-[13.5rem] sm:px-5 sm:py-4" asChild>
+                <a href={DM_URL} rel="noopener noreferrer" className="inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-0.5 text-balance sm:gap-1">
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold leading-none tracking-wide opacity-95 sm:text-xs">
+                    <Instagram size={16} aria-hidden className="shrink-0 sm:h-[1.125rem] sm:w-[1.125rem]" />
+                    {PRIMARY_CTA_DM_SUBLINE}
+                  </span>
+                  <span className="text-center text-sm font-bold leading-tight sm:text-[15px]">{PRIMARY_CTA_DM_CONTACT}</span>
+                  <ArrowRight className="mt-0.5 size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
                 </a>
               </Button>
-              <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-7 text-base font-semibold" asChild>
-                <Link href="/hearing" className="inline-flex items-center justify-center gap-2">
-                  <ClipboardList size={22} aria-hidden />
-                  {PRIMARY_CTA_HEARING_FULL}
-                  <ArrowRight size={18} aria-hidden />
+              <Button size="lg" variant="outline" className="h-auto min-h-12 w-full rounded-full border-sky-200 px-4 py-3 sm:max-w-[13.5rem] sm:px-5 sm:py-4" asChild>
+                <Link href="/hearing" className="inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-1 text-balance">
+                  <ClipboardList size={18} aria-hidden className="shrink-0 text-accent sm:h-5 sm:w-5" />
+                  <span className="text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]">{PRIMARY_CTA_HEARING_FULL}</span>
+                  <ArrowRight className="size-4 shrink-0 text-muted-foreground sm:hidden" aria-hidden />
                 </Link>
               </Button>
             </div>

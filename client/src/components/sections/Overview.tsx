@@ -7,6 +7,7 @@ import {
   HEARING_FLOW_SHORT,
   MONITOR_SLOT_NOTE,
   PRIMARY_CTA_DM_CONTACT,
+  PRIMARY_CTA_DM_SUBLINE,
   PRIMARY_CTA_HEARING_FULL,
   REFER_CONTACT_FOR_SLA,
   RESPONSE_SLA,
@@ -44,7 +45,7 @@ function StatsSection() {
         </a>
         をご覧ください。
         <span className="mt-2 block text-xs leading-relaxed text-sky-900/85 sm:text-sm">
-          別途 サーバー・ドメイン費用 月3,000円〜（込み）。{MONITOR_SLOT_NOTE}
+          別途 サイト公開・ドメイン費用 月3,000円〜（込み）。{MONITOR_SLOT_NOTE}
         </span>
       </p>
     </div>
@@ -219,7 +220,7 @@ export default function Overview() {
               },
               {
                 title: '買い切り型',
-                desc: 'LP制作費3万円〜の買い切り。サーバー・ドメイン込み月3,000円〜のランニングコストのみ。',
+                desc: 'LP制作費3万円〜の買い切り。サイト公開・ドメイン込みで月3,000円〜のランニングのみ。',
               },
               {
                 title: 'LPで注文までの設計',
@@ -282,22 +283,37 @@ export default function Overview() {
             <ul className="mx-auto mb-8 max-w-lg space-y-2 text-center text-sm leading-relaxed text-muted-foreground text-pretty">
               <li className="text-left sm:text-center">● 質問は4ステップ。「次へ」で進みます。</li>
               <li className="text-left sm:text-center">
-                ● 送信完了後、そのままInstagramのDMページへ自動で進みます。ブラウザ内からアプリ側へ繋げるために同一タブで開きます。
+                ● 最後のボタンでコピーされ、InstagramのDMへ進みます。開いた画面で貼り付けて送信してください。
               </li>
             </ul>
             <div className="mx-auto flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
-              <Button size="lg" className="btn-primary w-full px-10 py-7 text-[15px] font-bold text-primary-foreground shadow-md shadow-sky-300/35 sm:max-w-sm" asChild>
-                <a href={DM_URL} rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2">
-                  <Instagram className="size-5 shrink-0" aria-hidden />
-                  {PRIMARY_CTA_DM_CONTACT}
-                  <ArrowRight className="size-5 shrink-0" aria-hidden />
+              <Button
+                size="lg"
+                className="btn-primary h-auto min-h-12 w-full rounded-full px-4 py-3 shadow-md shadow-sky-300/35 sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4"
+                asChild
+              >
+                <a href={DM_URL} rel="noopener noreferrer" className="inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-0.5 text-balance sm:gap-1">
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold leading-none tracking-wide opacity-95 sm:text-xs">
+                    <Instagram className="size-4 shrink-0 sm:size-5" aria-hidden />
+                    {PRIMARY_CTA_DM_SUBLINE}
+                  </span>
+                  <span className="text-center text-sm font-bold leading-tight sm:text-[15px]">{PRIMARY_CTA_DM_CONTACT}</span>
+                  <ArrowRight className="mt-0.5 size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
                 </a>
               </Button>
-              <Button size="lg" variant="outline" className="w-full rounded-full border-sky-200 px-10 py-7 text-[15px] font-bold sm:max-w-sm" asChild>
-                <Link href="/hearing" className="inline-flex items-center justify-center gap-2">
-                  <ClipboardList className="size-5 shrink-0" aria-hidden />
-                  {PRIMARY_CTA_HEARING_FULL}
-                  <ArrowRight className="size-5 shrink-0" aria-hidden />
+              <Button
+                size="lg"
+                variant="outline"
+                className="h-auto min-h-12 w-full rounded-full border-sky-200 px-4 py-3 sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4"
+                asChild
+              >
+                <Link
+                  href="/hearing"
+                  className="inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-1 text-balance"
+                >
+                  <ClipboardList className="size-4 shrink-0 text-accent sm:size-5" aria-hidden />
+                  <span className="text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]">{PRIMARY_CTA_HEARING_FULL}</span>
+                  <ArrowRight className="size-4 shrink-0 text-muted-foreground sm:hidden" aria-hidden />
                 </Link>
               </Button>
             </div>

@@ -3,12 +3,12 @@
  */
 
 export const HEARING_FLOW_SHORT =
-  '4ステップで入力・送信。内容はサーバーに届き、そのままInstagramのDMへ進みます。';
+  '4ステップで回答し、ボタン一つでコピー。そのままInstagramのDMへ進みます。';
 
 export const HEARING_FLOW_LINES = [
   'サイト内の4ステップに沿ってお店の状況を入力します。',
-  '最後の「ヒアリングを送信する」で、回答はLocamo側のサーバーへ届きます。',
-  '送信直後、そのままInstagramのDMページへ自動で移動します（アプリがあればInstagramアプリに切り替わりやすくなっています）。任意でひとことお声がけください。',
+  '最後のボタンで回答全文がクリップボードにコピーされ、そのままInstagramのDMページへ進みます。',
+  'DMの入力欄に長押しで貼り付け、送信するとお申し込みとして受け付けます（送信はログイン中のInstagramから届きます）。',
 ] as const;
 
 export const RESPONSE_SLA =
@@ -26,14 +26,17 @@ export const SCOPE_EXCLUDED_BULLETS = [
 ] as const;
 
 export const MONITOR_SLOT_NOTE =
-  'モニター枠は先着・審査あり。枠外・通常依頼は制作費3万円〜。無料枠でもランニング（サーバー・ドメイン等）は別途実費の旨をご案内します。';
+  'モニター枠は先着・審査あり。枠外・通常依頼は制作費3万円〜。無料枠でもサイト公開に伴う月額費（ドメインなど）は別途実費の旨をご案内します。';
 
 export const PRIMARY_CTA_HEARING = 'ヒアリングに進む';
 
 export const PRIMARY_CTA_HEARING_FULL = 'LP制作のヒアリングに進む';
 
-/** LP外のセクションでも使う／インスタ内ブラウザでアプリへの切り替えを優先するDM導線 */
-export const PRIMARY_CTA_DM_CONTACT = 'InstagramのDMで相談する';
+/** 短め（オレンジ pill のはみ出し防止）— 長いラベルはボタン内で別表示可 */
+export const PRIMARY_CTA_DM_CONTACT = 'DMで相談';
+
+/** 「DMで相談」ボタンの補足（視覚的に短く） */
+export const PRIMARY_CTA_DM_SUBLINE = 'Instagram';
 
 /** 返信SLAなどの詳細が別セクションにあるときの短文（フローのくどさ防止用） */
 export const REFER_CONTACT_FOR_SLA = '初回ご返信の目安や受付手順は、ページ内「お問合せ」の記載に準じます。';

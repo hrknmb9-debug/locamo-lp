@@ -11,8 +11,8 @@ export default function Pricing() {
 
   const faqs = [
     {
-      q: 'サーバーやドメインは別途必要ですか？',
-      a: 'サーバーとドメインは別途実費となります。両方込みで月3,000円〜が目安です。初期設定のサポートは制作費に含まれています。',
+      q: 'サイトを公開する環境やドメインは別途必要ですか？',
+      a: 'ドメインとサイト公開先（レンタル等）は別途実費となります。両方込みで月3,000円〜が目安です。初期設定のサポートは制作費に含まれています。',
     },
     {
       q: 'お申し込みの流れを教えてください',
@@ -39,8 +39,8 @@ export default function Pricing() {
   const steps = [
     {
       num: '1',
-      title: 'ヒアリング → サーバー送信',
-      desc: 'サイトの4ステップに入力し、「ヒアリングを送信する」で送信してください。応答はLocamo側のサーバーに保存され、これでお申し込みを受領します。続けてDMを開き、ひとことお声がけいただくこともできます（任意）。',
+      title: 'ヒアリング → コピー → DM送信',
+      desc: 'サイトの4ステップに入力し「コピーしてInstagramのDMへ」で全文がコピーされ、DMページが開きます。開いたDMに貼り付けて送信すると、お申し込みとして受け付けます。',
     },
     {
       num: '2',
@@ -89,10 +89,10 @@ export default function Pricing() {
             LP制作費<span className="text-accent">3万円〜</span>の買い切り。月額不要。
           </h3>
           <p className="text-muted-foreground text-sm mb-6">
-            制作費は一括払い。毎月かかるのはサーバー・ドメインのみです。
+            制作費は一括払い。毎月かかるのはサイト公開・ドメインのランニングのみです。
           </p>
           <div className="inline-block rounded-[1.25rem] border border-sky-100 bg-white p-5 shadow-sm">
-            <p className="text-xs text-muted-foreground mb-1">サーバー・ドメイン費用（込み）</p>
+            <p className="text-xs text-muted-foreground mb-1">公開環境・ドメイン（込み）</p>
             <p className="text-2xl font-bold text-foreground">月3,000円〜</p>
             <p className="text-xs text-muted-foreground mt-1">初期設定サポート込み</p>
           </div>
@@ -115,7 +115,7 @@ export default function Pricing() {
                 {[
                   { item: '制作費', lp: '3万円〜', hp: '要相談' },
                   { item: '月額費用', lp: '0円', hp: '0円' },
-                  { item: 'サーバー・ドメイン', lp: '月3,000円〜', hp: '月3,000円〜' },
+                  { item: '公開環境・ドメイン', lp: '月3,000円〜', hp: '月3,000円〜' },
                   { item: '納期', lp: '2週間', hp: '3〜4週間' },
                   { item: '修正対応', lp: '簡易修正無料', hp: '簡易修正無料' },
                 ].map((row, idx) => (
