@@ -8,26 +8,18 @@ import Pricing from '@/components/sections/Pricing';
 import Portfolio from '@/components/sections/Portfolio';
 import InstagramPage from '@/components/sections/Instagram';
 import Contact from '@/components/sections/Contact';
+import type { PrimaryTabId } from '@/types/homeTabs';
+import { PRIMARY_TAB_LABELS } from '@/types/homeTabs';
 
-type TabType = 'overview' | 'services' | 'pricing' | 'portfolio' | 'instagram' | 'contact';
-
-const TABS: { id: TabType; label: string }[] = [
-  { id: 'overview', label: '概要' },
-  { id: 'services', label: 'サービス' },
-  { id: 'pricing', label: '料金' },
-  { id: 'portfolio', label: '実績' },
-  { id: 'instagram', label: 'Instagram' },
-  { id: 'contact', label: 'お問合せ' },
-];
-
-function tabFromLocationHash(): TabType {
+function tabFromLocationHash(): PrimaryTabId {
   if (typeof window === 'undefined') return 'overview';
-  const raw = window.location.hash.slice(1) as TabType;
-  return raw && TABS.some(t => t.id === raw) ? raw : 'overview';
+  const raw = window.location.hash.slice(1) as PrimaryTabId;
+  return raw && PRIMARY_TAB_LABELS.some(t => t.id === raw) ? raw : 'overview';
 }
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<TabType>(tabFromLocationHash);
+  const [activeTab, setActiveTab] = useState<PrimaryTabId>(tabFromLocationHash);
+  const [tabStack, setTabStack] = useState<PrimaryTabId[]>([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -42,32 +34,69 @@ export default function Home() {
   }, [activeTab]);
 
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.slice(1) as TabType;
-      if (hash && TABS.some(t => t.id === hash)) {
-        setActiveTab(hash);
-      }
+    const onHash = () => {
+      const t = tabFromLocationHash();
+      setActiveTab(t);
+      setTabStack([]);
     };
-    window.addEventListener('hashchange', handleHashChange);
-    handleHashChange();
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
-  const handleTabClick = (tabId: TabType) => {
+  const goTab = (tabId: PrimaryTabId) => {
+    if (tabId === activeTab) {
+      setMobileMenuOpen(false);
+      return;
+    }
+    setTabStack(s => [...s, activeTab]);
     setActiveTab(tabId);
     window.location.hash = tabId;
     setMobileMenuOpen(false);
   };
 
+  /** タブ「戻る」またはブラウザ風に一つ手前のページ（タブ）へ */
+  const goBackNav = () => {
+    setTabStack(s => {
+      if (s.length === 0) {
+        if (activeTab !== 'overview') {
+          setActiveTab('overview');
+          window.location.hash = 'overview';
+        }
+        return s;
+      }
+      const cp = [...s];
+      const prev = cp.pop()!;
+      setActiveTab(prev);
+      window.location.hash = prev;
+      return cp;
+    });
+  };
+
+  const resetHomeTabs = () => {
+    setTabStack([]);
+    setActiveTab('overview');
+    window.location.hash = 'overview';
+    setMobileMenuOpen(false);
+  };
+
+  const backDisabled = tabStack.length === 0 && activeTab === 'overview';
+
   const renderContent = () => {
     switch (activeTab) {
-      case 'overview':   return <Overview />;
-      case 'services':   return <Services />;
-      case 'pricing':    return <Pricing />;
-      case 'portfolio':  return <Portfolio />;
-      case 'instagram':  return <InstagramPage />;
-      case 'contact':    return <Contact />;
-      default:           return <Overview />;
+      case 'overview':
+        return <Overview goToTab={goTab} />;
+      case 'services':
+        return <Services />;
+      case 'pricing':
+        return <Pricing />;
+      case 'portfolio':
+        return <Portfolio />;
+      case 'instagram':
+        return <InstagramPage />;
+      case 'contact':
+        return <Contact />;
+      default:
+        return <Overview goToTab={goTab} />;
     }
   };
 
@@ -79,21 +108,30 @@ export default function Home() {
           scrolled ? 'shadow-sm shadow-sky-200/40' : 'border-transparent'
         }`}
       >
-        <div className="container mx-auto px-4 h-14 flex items-center justify-between">
+        <div className="container mx-auto px-4 h-14 flex items-center justify-between gap-3">
           {/* Logo */}
-          <button
-            onClick={() => handleTabClick('overview')}
-            className="text-xl font-bold tracking-tight text-sky-950"
-          >
+          <button type="button" onClick={resetHomeTabs} className="text-xl font-bold tracking-tight text-sky-950 shrink-0">
             Loca<span className="text-accent">mo</span>
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-0.5">
-            {TABS.map(tab => (
+          <nav className="hidden md:flex items-center gap-0.5 flex-wrap justify-end">
+            <button
+              type="button"
+              aria-label="一つ前のページに戻る"
+              onClick={goBackNav}
+              disabled={backDisabled}
+              className={`rounded-full px-3 py-2 text-xs font-semibold transition-all ${
+                backDisabled ? 'cursor-not-allowed text-sky-300' : 'text-sky-800 hover:bg-sky-100'
+              }`}
+            >
+              戻る
+            </button>
+            {PRIMARY_TAB_LABELS.map(tab => (
               <button
                 key={tab.id}
-                onClick={() => handleTabClick(tab.id)}
+                type="button"
+                onClick={() => goTab(tab.id)}
                 className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
                   activeTab === tab.id
                     ? 'bg-accent text-white shadow-sm shadow-sky-300/40'
@@ -107,8 +145,9 @@ export default function Home() {
 
           {/* Mobile Menu Toggle */}
           <button
+            type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden rounded-xl border border-sky-200 p-2 text-sky-950 transition-colors hover:bg-sky-50"
+            className="md:hidden rounded-xl border border-sky-200 p-2 text-sky-950 transition-colors hover:bg-sky-50 shrink-0"
             aria-label="メニュー"
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -119,14 +158,26 @@ export default function Home() {
         {mobileMenuOpen && (
           <nav className="md:hidden border-t border-sky-100 bg-[#f8fcff]">
             <div className="container mx-auto px-4 py-3 flex flex-col gap-1">
-              {TABS.map(tab => (
+              <button
+                type="button"
+                onClick={() => {
+                  goBackNav();
+                  setMobileMenuOpen(false);
+                }}
+                disabled={backDisabled}
+                className={`w-full rounded-full px-4 py-3 text-left text-sm font-semibold transition-all ${
+                  backDisabled ? 'text-sky-300' : 'text-sky-950 hover:bg-sky-50'
+                }`}
+              >
+                戻る
+              </button>
+              {PRIMARY_TAB_LABELS.map(tab => (
                 <button
                   key={tab.id}
-                  onClick={() => handleTabClick(tab.id)}
+                  type="button"
+                  onClick={() => goTab(tab.id)}
                   className={`w-full rounded-full px-4 py-3 text-left text-sm font-semibold transition-all ${
-                    activeTab === tab.id
-                      ? 'bg-accent text-white'
-                      : 'text-sky-900 hover:bg-sky-50'
+                    activeTab === tab.id ? 'bg-accent text-white' : 'text-sky-900 hover:bg-sky-50'
                   }`}
                 >
                   {tab.label}
@@ -138,9 +189,7 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1">
-        {renderContent()}
-      </main>
+      <main className="flex-1">{renderContent()}</main>
 
       {/* Footer */}
       <footer className="mt-8 border-t border-sky-100 bg-sky-50/60">
@@ -151,20 +200,23 @@ export default function Home() {
               <div className="text-lg font-bold mb-2">
                 Loca<span className="text-accent">mo</span>
               </div>
-              <p className="text-muted-foreground text-xs leading-relaxed">
-                大阪の個人店向けLP・ホームページ制作サービス
-              </p>
+              <p className="text-muted-foreground text-xs leading-relaxed">大阪の個人店向けLP・ホームページ制作サービス</p>
             </div>
 
             {/* Links */}
             <div>
               <h4 className="font-semibold text-sm mb-3">ページ</h4>
               <ul className="space-y-1.5">
-                {TABS.map(tab => (
+                <li>
+                  <Link href="/hearing" className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors">
+                    LPヒアリング送信
+                  </Link>
+                </li>
+                {PRIMARY_TAB_LABELS.map(tab => (
                   <li key={tab.id}>
                     <button
                       type="button"
-                      onClick={() => handleTabClick(tab.id)}
+                      onClick={() => goTab(tab.id)}
                       className="text-muted-foreground hover:text-accent text-xs transition-colors"
                     >
                       {tab.label}
@@ -172,18 +224,7 @@ export default function Home() {
                   </li>
                 ))}
                 <li>
-                  <Link
-                    href="/hearing"
-                    className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors"
-                  >
-                    ヒアリングシート
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/privacy"
-                    className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors"
-                  >
+                  <Link href="/privacy" className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors">
                     プライバシーポリシー
                   </Link>
                 </li>
@@ -194,13 +235,16 @@ export default function Home() {
             <div>
               <h4 className="font-semibold text-sm mb-3">お問合せ</h4>
               <p className="text-muted-foreground text-xs mb-3 leading-relaxed">
-                Instagram DMからお気軽にご連絡ください（無料診断はDMから）。
+                まずはヒアリングフォーム送信で結構です。必要に応じて Instagram でもご連絡ください。
               </p>
+              <Link href="/hearing" className="inline-block text-xs text-accent underline-offset-2 hover:underline">
+                LPご依頼フォームへ
+              </Link>
               <a
                 href={DM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-accent hover:underline transition-colors"
+                className="mt-2 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent hover:underline transition-colors"
               >
                 <Instagram size={14} />
                 {IG_HANDLE}
@@ -216,9 +260,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="border-t border-border pt-6 text-center text-muted-foreground text-xs">
-            &copy; 2026 NANBA企画. All rights reserved.
-          </div>
+          <div className="border-t border-border pt-6 text-center text-muted-foreground text-xs">&copy; 2026 NANBA企画. All rights reserved.</div>
         </div>
       </footer>
     </div>

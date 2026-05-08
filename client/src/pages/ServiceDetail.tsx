@@ -93,14 +93,19 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
           ))}
 
           <div className="rounded-[1.25rem] border border-sky-100 bg-secondary/80 p-6 text-center md:p-8">
-            <p className="mb-6 text-sm text-muted-foreground">
-              内容のご質問やお見積もりは、Instagram DMよりお問い合わせください。
+            <p className="mb-6 text-sm text-muted-foreground text-pretty">
+              プラン内容のご質問・お見立てはサイト内ヒアリングからお送りいただけます。そのまま離脱いただいて大丈夫です。
             </p>
             <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
               <Button size="lg" className="btn-primary text-primary-foreground" asChild>
+                <Link href="/hearing">
+                  ヒアリングを送信して相談
+                  <ArrowRight className="ml-2 inline size-5" aria-hidden />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="rounded-full border-sky-200" asChild>
                 <a href={DM_URL} target="_blank" rel="noopener noreferrer">
-                  無料診断を受ける
-                  <ArrowRight className="size-5" />
+                  DMで短く質問（任意）
                 </a>
               </Button>
               <Button size="lg" variant="outline" className="rounded-full border-sky-200" asChild>

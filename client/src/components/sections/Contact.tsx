@@ -35,8 +35,8 @@ export default function Contact() {
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           お問合せ
         </h2>
-        <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm">
-          ご質問・ご相談は、Instagram DMからお気軽にご連絡ください
+        <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
+          サイト内フォームのみで送信完了します。送信後、そのまま画面を閉じていただいて構いません。
         </p>
 
         {/* Main CTA */}
@@ -50,15 +50,9 @@ export default function Contact() {
                 className="aspect-[21/9] max-h-[8.5rem] w-full object-cover"
               />
             </div>
-            <div className="mx-auto mb-5 flex size-14 items-center justify-center rounded-2xl border border-sky-100 bg-white shadow-sm">
-              <Instagram className="w-7 h-7 text-accent" />
-            </div>
-            <h3 className="text-xl md:text-2xl font-bold mb-3">
-              Instagram DMでお問合せ
-            </h3>
+            <h3 className="text-xl md:text-2xl font-bold mb-3">ヒアリングでLPご依頼を始める（推奨）</h3>
             <p className="mb-8 max-w-md self-center text-sm leading-relaxed text-muted-foreground">
-              フォームは使用していません。Locamoの公式Instagramアカウントに
-              ダイレクトメッセージをお送りください。
+              DMを挟まなくて大丈夫です。4ステップの質問にお答えのうえ「送信」を押していただくと運営に届きます。
             </p>
             <div className="flex w-full justify-center px-2">
               <Button
@@ -66,19 +60,23 @@ export default function Contact() {
                 className="btn-primary inline-flex max-w-[min(100%,22rem)] w-full justify-center px-6 py-6 text-sm font-semibold text-primary-foreground"
                 asChild
               >
-                <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="gap-2">
-                  <MessageCircle size={18} className="shrink-0" aria-hidden />
-                  Instagram DMで連絡する
+                <Link href="/hearing">
+                  LPヒアリングへ進む
                   <ArrowRight size={16} className="shrink-0" aria-hidden />
-                </a>
+                </Link>
               </Button>
             </div>
             <div className="mt-6 flex flex-col items-center gap-3 text-center text-sm">
-              <Link href="/hearing" className="font-medium text-accent underline-offset-4 hover:underline">
-                ヒアリングページを開く
-              </Link>
+              <a
+                href={DM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-medium text-muted-foreground underline-offset-4 hover:text-accent hover:underline"
+              >
+                <MessageCircle size={16} aria-hidden /> Instagram DMは任意です
+              </a>
               <Link href="/services/lp" className="font-medium text-accent underline-offset-4 hover:underline">
-                サービスの詳細を見る
+                LPプラン詳細のみ見る
               </Link>
               <Link href="/privacy" className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
                 プライバシーポリシー
@@ -89,28 +87,28 @@ export default function Contact() {
 
         {/* Free Diagnosis Flow */}
         <section className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-          <h3 className="text-xl font-bold mb-6 text-center">無料診断の流れ</h3>
+          <h3 className="text-xl font-bold mb-6 text-center">ご依頼〜制作までのイメージ</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               {
                 step: '1',
-                title: 'Instagram DMでお問合せ',
-                desc: '「無料診断を希望します」とお送りください。',
+                title: 'ヒアリング送信',
+                desc: 'サイトの4ステップに沿って入力し「送信」を押してください。離脱していただいてもデータは運営に届きます。',
               },
               {
                 step: '2',
-                title: 'ヒアリング内容を整理',
-                desc: 'ヒアリングページでご記入のうえ、DMで共有してください。',
+                title: '構成・ご提案',
+                desc: '必要に応じてInstagram DMなどで短文のご質問のみ差し込むことがあります。',
               },
               {
                 step: '3',
-                title: '診断結果をご報告',
-                desc: 'あなたの店舗に最適なプランと料金をご提案いたします。',
+                title: 'お見積り〜ご確認',
+                desc: 'LPの方向性・納期感・サーバー込みランニングを整理してお伝えします。',
               },
               {
                 step: '4',
-                title: 'ご契約・制作開始',
-                desc: 'ご納得いただければ、制作を開始いたします。',
+                title: '制作〜公開',
+                desc: 'ご納得いただければ制作〜公開チェックまで伴走します。',
               },
             ].map((item, idx) => (
               <div
@@ -164,21 +162,16 @@ export default function Contact() {
         {/* Final CTA */}
         <section className="text-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
           <div className="rounded-[1.5rem] border border-sky-100 bg-secondary p-8 md:p-12">
-            <h3 className="text-xl font-bold mb-2">
-              フォロワーを来店客に、3万円〜で。
-            </h3>
-            <p className="text-muted-foreground text-sm mb-7">
-              Locamoで、あなたの店舗の集客を次のレベルへ。
+            <h3 className="text-xl font-bold mb-2">まず一枚のLPから始めませんか</h3>
+            <p className="text-muted-foreground text-sm mb-7 text-pretty">
+              サイト内ヒアリングのみで運営に届きます。プランだけ先に知りたい場合も大丈夫です。
             </p>
-            <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="inline-block">
-              <Button
-                size="lg"
-                className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground"
-              >
-                今すぐ無料診断を受ける
-                <ArrowRight className="ml-2" size={16} />
-              </Button>
-            </a>
+            <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground" asChild>
+              <Link href="/hearing">
+                LPのヒアリングを送信
+                <ArrowRight className="ml-2 inline" size={16} aria-hidden />
+              </Link>
+            </Button>
           </div>
         </section>
 

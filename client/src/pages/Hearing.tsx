@@ -1,110 +1,246 @@
 import type { FC } from 'react';
-import { useCallback, useState } from 'react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useCallback, useMemo, useState } from 'react';
+import { ArrowLeft, ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
-
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 
 import { Button } from '@/components/ui/button';
-import { DM_URL } from '@/constants/locamo';
+import { HEARING_FIELDS } from '@/data/hearingFields';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 
-const FIELDS = [
-  { id: 'shop', label: '店舗名・屋号', placeholder: '例：カフェ ○○', rows: 2 },
-  { id: 'industry', label: '業種・取り扱いの概要', placeholder: '例：飲食（カフェ）／美容室 など', rows: 3 },
-  { id: 'name', label: 'ご担当のお名前（任意）', placeholder: 'お呼びいただける名前', rows: 2 },
-  { id: 'instagram', label: 'Instagramアカウント（@またはURL）', placeholder: '@locamo.inc またはプロフィールURL', rows: 2 },
-  { id: 'web', label: '現在のWebサイト・予約ページ等（あればURL）', placeholder: 'なければ「なし」と記載 OK', rows: 2 },
-  { id: 'pain', label: 'いま困っていること・課題', placeholder: '集客、更新の手間、情報の散在 など', rows: 4 },
-  { id: 'goal', label: 'Webで実現したいこと', placeholder: '例：メニュー掲載、予約導線、Googleからの流入 など', rows: 3 },
-  { id: 'deadline', label: '希望の納期・公開時期の目安', placeholder: '例：◯月中 / 急ぎではない など', rows: 2 },
-  { id: 'budget', label: 'ご予算の目安（任意）', placeholder: '例：制作費◯万円前後 など', rows: 2 },
-  { id: 'other', label: 'その他・ご質問', placeholder: '追加で伝えたいことがあれば', rows: 3 },
-] as const;
+const STEPS: { title: string; hint: string; fieldIds: (typeof HEARING_FIELDS)[number]['id'][] }[] = [
+  {
+    title: 'まずはお店について',
+    hint: '正確であるほど、お見立てが早くなります。',
+    fieldIds: ['shop', 'industry', 'name'],
+  },
+  {
+    title: 'いま見えている状態',
+    hint: '既存サイトやSNSは分かれば十分です。',
+    fieldIds: ['instagram', 'web'],
+  },
+  {
+    title: '課題とゴール',
+    hint: 'LPで「何が起きれば成功か」を教えてください。',
+    fieldIds: ['pain', 'goal'],
+  },
+  {
+    title: '条件と補足',
+    hint: '最後まで来ていただいた方から優先しています。',
+    fieldIds: ['deadline', 'budget', 'other'],
+  },
+];
+
+async function submitHearing(payload: {
+  entries: Array<{ id: string; label: string; value: string }>;
+  website: string;
+}): Promise<boolean> {
+  const res = await fetch('/api/hearing', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) return false;
+  const data = (await res.json()) as { ok?: boolean };
+  return data.ok === true;
+}
+
+function hasMinimalContent(values: Record<string, string>): boolean {
+  return ['shop', 'pain', 'goal'].some(k => ((values[k] ?? '').trim().length ?? 0) > 2);
+}
 
 const Hearing: FC = () => {
   useScrollToTop();
+  const [, setLocation] = useLocation();
 
+  const [step, setStep] = useState(0);
   const [values, setValues] = useState<Record<string, string>>(() =>
-    Object.fromEntries(FIELDS.map(f => [f.id, ''])),
+    Object.fromEntries(HEARING_FIELDS.map(f => [f.id, ''])),
   );
+  const [honeypot, setHoneypot] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [sent, setSent] = useState(false);
 
   const setField = useCallback((id: string, v: string) => {
     setValues(prev => ({ ...prev, [id]: v }));
   }, []);
 
-  const copyAll = useCallback(async () => {
-    const lines = FIELDS.map((f, i) => {
-      const body = (values[f.id] ?? '').trim() || '（未記入）';
-      return `【${i + 1}. ${f.label}】\n${body}`;
-    });
-    const text = `【Locamo ヒアリング内容】\n\n${lines.join('\n\n')}\n\n---\n上記をDMで送信します`;
+  const stepMeta = STEPS[step]!;
+  const progress = useMemo(() => ((step + 1) / STEPS.length) * 100, [step]);
 
-    try {
-      await navigator.clipboard.writeText(text);
-      toast.success('クリップボードにコピーしました。Instagram DMに貼り付けて送信してください。');
-    } catch {
-      toast.error('コピーに失敗しました。ブラウザの権限をご確認ください。');
+  const goBackHeader = useCallback(() => {
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      setLocation('/');
     }
-  }, [values]);
+  }, [setLocation]);
+
+  const next = useCallback(() => {
+    if (step < STEPS.length - 1) setStep(s => s + 1);
+  }, [step]);
+
+  const prev = useCallback(() => {
+    if (step > 0) setStep(s => s - 1);
+  }, [step]);
+
+  const onSubmit = useCallback(async () => {
+    if (!hasMinimalContent(values)) {
+      toast.error('店舗名・課題・ゴールのいずれかを、もう少しだけお書きください。');
+      return;
+    }
+    setBusy(true);
+    const entries = HEARING_FIELDS.map(f => ({
+      id: f.id,
+      label: f.label,
+      value: values[f.id] ?? '',
+    }));
+    try {
+      const ok = await submitHearing({ entries, website: honeypot });
+      if (!ok) {
+        toast.error('送信に失敗しました。しばらくしてからお試しいただくか、時間帯を変えてお試しください。');
+        return;
+      }
+      setSent(true);
+      toast.success('お問い合わせを受け付けました。');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch {
+      toast.error('通信エラーです。電波やネットワークをご確認ください。');
+    } finally {
+      setBusy(false);
+    }
+  }, [honeypot, values]);
+
+  if (sent) {
+    return (
+      <div className="min-h-screen bg-background text-foreground">
+        <header className="sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 backdrop-blur">
+          <div className="container mx-auto flex h-14 items-center justify-between px-4">
+            <Link href="/" className="text-lg font-bold tracking-tight text-sky-950">
+              Loca<span className="text-accent">mo</span>
+            </Link>
+            <Button variant="outline" size="sm" className="rounded-full border-sky-200" asChild>
+              <Link href="/">TOPへ</Link>
+            </Button>
+          </div>
+        </header>
+        <div className="container mx-auto max-w-lg px-4 py-16 text-center">
+          <div className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+            <CheckCircle2 size={40} aria-hidden />
+          </div>
+          <h1 className="mb-4 text-2xl font-bold">送信が完了しました</h1>
+          <p className="mb-8 text-sm leading-relaxed text-muted-foreground text-pretty">
+            ヒアリング内容はすべてサーバー側で受領しました。続きが必要だと運営が判断した場合のみ、Instagram
+            アカウントまたはご記載のご連絡先からご返信いたします。そのまま離脱していただいて構いません。
+          </p>
+          <Button className="btn-primary text-primary-foreground" asChild>
+            <Link href="/#services" className="inline-flex items-center gap-2 px-8">
+              LPサービス詳細へ
+              <ArrowRight size={17} aria-hidden />
+            </Link>
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-[#fafcff] text-foreground">
       <header className="sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 backdrop-blur">
         <div className="container mx-auto flex h-14 items-center justify-between px-4">
           <Link href="/" className="text-lg font-bold tracking-tight text-sky-950">
             Loca<span className="text-accent">mo</span>
           </Link>
-          <Button variant="outline" size="sm" className="rounded-full border-sky-200" asChild>
-            <Link href="/">
-              <ArrowLeft size={16} />
-              TOPへ
-            </Link>
+          <Button type="button" variant="outline" size="sm" className="rounded-full border-sky-200 gap-2" onClick={goBackHeader}>
+            <ArrowLeft size={16} aria-hidden />
+            戻る
           </Button>
         </div>
       </header>
 
-      <article className="container mx-auto max-w-3xl px-4 py-10 pb-16">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Hearing</p>
-        <h1 className="mb-2 text-2xl font-bold md:text-3xl">制作ヒアリング</h1>
-        <p className="mb-8 text-sm leading-relaxed text-muted-foreground">
-          下記にご記入のうえ、「内容をコピー」でまとめてコピーし、
-          <strong className="font-semibold text-sky-950"> Instagram DM</strong>
-          に貼り付けてお送りください。フォーム送信は行いません。
-        </p>
-
-        <div className="mb-8 space-y-6">
-          {FIELDS.map(f => (
-            <div key={f.id} className="space-y-2">
-              <label htmlFor={f.id} className="text-sm font-semibold text-sky-950">
-                {f.label}
-              </label>
-              <textarea
-                id={f.id}
-                value={values[f.id] ?? ''}
-                onChange={e => setField(f.id, e.target.value)}
-                placeholder={f.placeholder}
-                rows={f.rows}
-                className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring w-full rounded-xl border px-3 py-2.5 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-              />
-            </div>
-          ))}
+      <article className="container mx-auto max-w-lg px-4 py-10 pb-20">
+        <div className="mb-8">
+          <div className="mb-2 flex justify-between text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+            <span>Hearing</span>
+            <span>
+              STEP {step + 1} / {STEPS.length}
+            </span>
+          </div>
+          <div className="h-2 overflow-hidden rounded-full bg-sky-100">
+            <div className="h-full rounded-full bg-accent transition-[width] duration-300 ease-out" style={{ width: `${progress}%` }} />
+          </div>
         </div>
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <Button type="button" variant="outline" className="rounded-full border-sky-200" onClick={copyAll}>
-            回答をまとめてコピー
-          </Button>
-          <Button className="btn-primary text-primary-foreground" asChild>
-            <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
-              内容を送信（DM）
-              <ArrowRight size={16} aria-hidden />
-            </a>
-          </Button>
+        <h1 className="mb-1 text-[1.7rem] font-bold leading-snug">{stepMeta.title}</h1>
+        <p className="mb-8 text-sm text-muted-foreground leading-relaxed">{stepMeta.hint}</p>
+
+        <div aria-hidden className="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden">
+          <label htmlFor="hearing-website">Website</label>
+          <input
+            id="hearing-website"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            value={honeypot}
+            onChange={e => setHoneypot(e.target.value)}
+          />
         </div>
 
-        <p className="mt-8 text-center text-[11px] leading-relaxed text-muted-foreground">
-          入力内容の取り扱いは{' '}
+        <div className="space-y-6">
+          {stepMeta.fieldIds.map(id => {
+            const f = HEARING_FIELDS.find(x => x.id === id)!;
+            return (
+              <div key={f.id} className="space-y-2">
+                <label htmlFor={f.id} className="text-sm font-semibold text-sky-950">
+                  {f.label}
+                </label>
+                <textarea
+                  id={f.id}
+                  value={values[f.id] ?? ''}
+                  onChange={e => setField(f.id, e.target.value)}
+                  placeholder={f.placeholder}
+                  rows={f.rows}
+                  className="border-input bg-white ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring w-full rounded-xl border border-sky-100 px-3 py-2.5 text-sm shadow-sm focus-visible:border-sky-200 focus-visible:ring-2 focus-visible:ring-sky-200/60 focus-visible:ring-offset-2 focus-visible:outline-none"
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-between">
+          <Button type="button" variant="outline" className="order-2 rounded-full border-sky-200 sm:order-1" onClick={prev} disabled={step === 0}>
+            <ArrowLeft className="mr-1 inline" size={16} aria-hidden />
+            ひとつ戻る
+          </Button>
+          {step < STEPS.length - 1 ? (
+            <Button type="button" className="btn-primary order-1 rounded-full px-8 text-primary-foreground sm:order-2 sm:ml-auto" onClick={next}>
+              次へ
+              <ArrowRight className="ml-1 inline" size={16} aria-hidden />
+            </Button>
+          ) : (
+            <Button
+              type="button"
+              disabled={busy}
+              className="btn-primary order-1 rounded-full px-8 text-primary-foreground sm:order-2 sm:ml-auto"
+              onClick={onSubmit}
+            >
+              {busy ? (
+                <>
+                  <Loader2 className="mr-2 inline size-4 animate-spin" aria-hidden />
+                  送信中…
+                </>
+              ) : (
+                <>
+                  この内容で送信する
+                  <ArrowRight className="ml-1 inline" size={16} aria-hidden />
+                </>
+              )}
+            </Button>
+          )}
+        </div>
+
+        <p className="mt-10 text-center text-[11px] leading-relaxed text-muted-foreground">
+          送信後、DMを開く必要はありません。入力内容の取り扱いは{' '}
           <Link href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">
             プライバシーポリシー
           </Link>{' '}

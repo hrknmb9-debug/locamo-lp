@@ -3,8 +3,8 @@ import { ArrowRight, ClipboardList, Sparkles, Zap, DollarSign, Share2, Search } 
 import { Link } from 'wouter';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { useCountUp } from '@/hooks/useCountUp';
-import { DM_URL } from '@/constants/locamo';
 import { LP_IMAGES } from '@/lp-images';
+import type { PrimaryTabId } from '@/types/homeTabs';
 
 function StatsSection() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.5 });
@@ -36,7 +36,7 @@ function StatsSection() {
   );
 }
 
-export default function Overview() {
+export default function Overview({ goToTab }: { goToTab: (tab: PrimaryTabId) => void }) {
   return (
     <div className="space-y-16 md:space-y-24">
       {/* Hero Section */}
@@ -84,7 +84,7 @@ export default function Overview() {
             style={{ animationDelay: '0.35s' }}
           >
             大阪の個人店向けLP制作は3万円〜（モニター枠は無料）。
-            Instagramとの連携を前提に設計された、月額不要のWeb制作です。構成・文案のたたきはAIを活用しつつ、マーケティングの観点で導線・訴求を整えます。
+            月額不要の構成で、「見られる場所」を持つだけで伝わっていなかった価値を、訪問〜問い合わせまでの導線に落とし込みます。構成・文案のたたきはAIを活用しつつ、マーケ視点で訴求の順番とCTAまで整えます。
           </p>
 
           {/* Visual */}
@@ -111,25 +111,23 @@ export default function Overview() {
             className="flex flex-col sm:flex-row gap-3 justify-center mb-12 animate-fade-in-up"
             style={{ animationDelay: '0.5s' }}
           >
-            <a href={DM_URL} target="_blank" rel="noopener noreferrer">
+            <Link href="/hearing">
               <Button
                 size="lg"
                 className="btn-primary w-full px-8 py-6 text-sm font-semibold text-primary-foreground sm:w-auto"
               >
-                無料診断を受ける
+                LPご依頼 · ヒアリング送信
                 <ArrowRight className="ml-1.5" size={17} />
               </Button>
-            </a>
+            </Link>
             <Button
               size="lg"
               variant="outline"
               type="button"
               className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold text-foreground hover:bg-sky-50"
-              onClick={() => {
-                window.location.hash = 'services';
-              }}
+              onClick={() => goToTab('services')}
             >
-              サービスを見る
+              サービス内容を確認
             </Button>
           </div>
 
@@ -143,55 +141,15 @@ export default function Overview() {
         </div>
       </section>
 
-      {/* ヒアリング */}
-      <section className="px-4 py-14 md:py-20">
-        <div className="container mx-auto max-w-4xl">
-          <div className="rounded-[1.5rem] border border-sky-100 bg-white p-8 shadow-md shadow-sky-200/30 md:p-10">
-            <p className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.22em] text-accent">Hearing</p>
-            <h2 className="mb-4 text-center text-2xl font-bold md:text-[1.65rem]">
-              要件の整理は、このサイトのヒアリングページで
-            </h2>
-            <p className="mx-auto mb-8 max-w-xl text-center text-sm leading-relaxed text-muted-foreground text-pretty">
-              ヒアリングページで項目に沿ってご記入のうえ、内容をコピーまたはスクリーンショットとして
-              <strong className="font-semibold text-sky-950"> Instagram DM にお送り</strong>
-              ください。フォーム送信は行いません。
-            </p>
-            <div className="flex max-w-lg flex-col gap-3 sm:mx-auto sm:flex-row sm:justify-center">
-              <Button variant="outline" className="rounded-full border-sky-300 bg-sky-50/50" asChild>
-                <Link href="/hearing" className="inline-flex items-center justify-center gap-2">
-                  <ClipboardList className="size-4" aria-hidden />
-                  ヒアリングページへ
-                </Link>
-              </Button>
-              <Button className="btn-primary text-primary-foreground" asChild>
-                <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="gap-2">
-                  内容を送信（DM）
-                  <ArrowRight className="size-4" aria-hidden />
-                </a>
-              </Button>
-            </div>
-            <p className="mt-6 text-center text-[11px] leading-relaxed text-muted-foreground">
-              入力内容の取り扱いは{' '}
-              <Link href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">
-                プライバシーポリシー
-              </Link>{' '}
-              に従います。
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Problem Section */}
       <section className="py-16 md:py-24 px-4">
         <div className="container mx-auto max-w-4xl">
           <p className="text-xs font-semibold tracking-widest text-accent uppercase text-center mb-3">
             Problem
           </p>
-          <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
-            Instagramのみ運用の課題
-          </h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">「集客はSNS」のみになりがちな課題</h2>
           <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm">
-            個人店がInstagramだけに頼ると、こんな問題が生じます
+            まとまったサイトがない状態だと次のような偏りやすさがあります
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -233,35 +191,78 @@ export default function Overview() {
             Locamoとは
           </h2>
           <p className="mx-auto mb-10 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
-            Instagramと組み合わせることで集客力を高めるLP・ホームページ制作。AIで素早く骨子を作り、現場での訴求と導線をマーケティング視点で磨き込みます。
+            単発広告だけに頼らず、自分のお店として資産になるLPを用意。構成はAIとテンプレの型で素早く起こし、その上から担当が訴求の順番とCTAを磨いて「LPを見て動く状態」まで整えます。
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             {[
               {
                 title: '地域密着',
-                desc: '大阪の個人店を専門に対応。地元の事情を理解した提案が可能。',
+                desc: '大阪の個人店を専門に対応。現場で響く言い回しと料金・導線のバランスを一緒に詰めます。',
               },
               {
                 title: '買い切り型',
                 desc: 'LP制作費3万円〜の買い切り。サーバー・ドメイン込み月3,000円〜のランニングコストのみ。',
               },
               {
-                title: 'Instagram連携設計',
-                desc: 'Instagramからの流入導線を最初から組み込んだ設計。',
+                title: 'LPで注文までの設計',
+                desc: '誰が・何を読めば・次に何をすべきかを迷わせない並びへ。ヒアリングでゴールから逆算します。',
               },
             ].map((feature, idx) => (
               <FeatureCard key={idx} feature={feature} delay={idx} />
             ))}
           </div>
 
-          <div className="text-center">
-            <a href={DM_URL} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground">
-                まずは無料診断
-                <ArrowRight className="ml-1.5" size={17} />
+          <div className="flex flex-wrap justify-center gap-3">
+            <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground" asChild>
+              <Link href="/hearing">
+                LPのご依頼はこちら（ヒアリング）
+                <ArrowRight className="ml-1.5 inline" size={17} />
+              </Link>
+            </Button>
+            <Button type="button" variant="outline" size="lg" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" onClick={() => goToTab('services')}>
+              プラン比較を見る
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* ヒアリング・クロージング（下部） */}
+      <section className="border-t border-sky-100/90 bg-gradient-to-b from-orange-50/80 via-[#fffaf5] to-white px-4 py-16 md:py-20">
+        <div className="container mx-auto max-w-4xl">
+          <div className="rounded-[1.65rem] border-2 border-primary/35 bg-white/95 px-7 py-10 shadow-lg shadow-orange-100/60 md:p-14">
+            <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.24em] text-primary">Apply</p>
+            <h2 className="mb-4 text-center text-2xl font-bold leading-snug md:text-[1.7rem]">
+              ご依頼は「送信」だけで終わり。<br />
+              DMを開かずに済みます。
+            </h2>
+            <ul className="mx-auto mb-8 max-w-lg space-y-3 text-center text-[13px] leading-relaxed text-muted-foreground text-pretty">
+              <li>
+                ● 質問は<span className="font-semibold text-sky-950">少しずつ4ステップ</span>。「次へ」だけで入力が終わります。
+              </li>
+              <li>
+                ● 送信後すぐ運営側にデータが届きます（コピー操作は<span className="font-semibold text-sky-950">不要</span>）。
+              </li>
+              <li className="text-[12px] text-sky-800/85">
+                ※InstagramのDM機能は運営側が必要に応じてご連絡するまで使いません。その間は離脱していただいてOKです。
+              </li>
+            </ul>
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+              <Button size="lg" className="btn-primary w-full max-w-sm px-10 py-7 text-[15px] font-bold text-primary-foreground shadow-md shadow-sky-300/35" asChild>
+                <Link href="/hearing" className="gap-2">
+                  <ClipboardList className="size-5" aria-hidden />
+                  LP制作のヒアリングへ進む（無料）
+                  <ArrowRight className="size-5 shrink-0" aria-hidden />
+                </Link>
               </Button>
-            </a>
+            </div>
+            <p className="mt-6 text-center text-[11px] text-muted-foreground">
+              <Link href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">
+                プライバシーポリシー
+              </Link>
+              {' · '}
+              いただいた内容は制作・お見立てのみに利用します。
+            </p>
           </div>
         </div>
       </section>

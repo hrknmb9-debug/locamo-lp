@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ExternalLink } from 'lucide-react';
-import { DM_URL } from '@/constants/locamo';
-import { LP_IMAGES } from '@/lp-images';
+import { Link } from 'wouter';
 
 const PORTFOLIO_SITES = [
   {
@@ -10,7 +9,7 @@ const PORTFOLIO_SITES = [
     url: 'https://kingscodeburger.manus.space/',
     summary:
       'ビジュアルを活かしたメニュー訴求と、来店への導線を意識したワンページ構成のサンプルです。',
-    image: LP_IMAGES.portfolio[0],
+    image: '/portfolio/kings-code-burger.png',
     imageAlt: 'King\'s Code Burger のランディングページの参考画面',
     testimonial: {
       quote:
@@ -24,7 +23,7 @@ const PORTFOLIO_SITES = [
     url: 'https://chessenger.manus.space/',
     summary:
       'サービスの価値（マッチング体験）を短いセクションで整理し、アクションへの流れを作った例です。',
-    image: LP_IMAGES.portfolio[2],
+    image: '/portfolio/chessenger.png',
     imageAlt: 'Chessenger のランディングページの参考画面',
     testimonial: {
       quote:
@@ -49,11 +48,8 @@ export default function Portfolio() {
           制作実績
         </h2>
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto text-sm leading-relaxed md:text-[15px]">
-          Manus で公開されているサンプルサイトをご紹介しています。
-          <br />
-          実サイトを開いて雰囲気・構成をご確認ください。
+          ご依頼品質の一例として、公開中のモックアップサイトを載せています。LPの構成イメージの参考にご覧ください。
         </p>
-
         {/* Portfolio Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {PORTFOLIO_SITES.map((item, idx) => (
@@ -68,7 +64,7 @@ export default function Portfolio() {
                   src={item.image}
                   alt={item.imageAlt}
                   loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  className="h-full w-full object-contain bg-white transition-transform duration-500 group-hover:scale-[1.04]"
                 />
                 <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/75 via-transparent to-transparent" />
               </div>
@@ -106,8 +102,8 @@ export default function Portfolio() {
             <h3 id="portfolio-voices" className="text-2xl font-bold md:text-3xl mb-3">
               お客様の声
             </h3>
-            <p className="mx-auto max-w-xl text-sm text-muted-foreground leading-relaxed">
-              各サンプルを前提に、「こういうご評価をいただける構成」をテーマ別に一文でまとめた例です。（実際の証言とは異なる場合があります）
+            <p className="mx-auto max-w-xl text-[13px] text-muted-foreground leading-relaxed text-pretty md:text-sm">
+              「LPでまず伝えるべきことから順番に読ませていく」を意識したブロック並びになっています。（イメージ要約であり、証言とは限りません）
             </p>
           </div>
 
@@ -137,15 +133,15 @@ export default function Portfolio() {
           </h3>
           <div className="mx-auto mb-6 max-w-2xl text-pretty px-1 text-muted-foreground sm:px-0">
             <p>
-              一覧以外にも、Instagram 連動を見据えた LP のご提案が可能です。まずは無料診断からご相談ください。
+              LP制作の構成・読みごこちへのフィードバックは、サイト内ヒアリング送信で運営に直接届きます。DMを挟まなくてもお申し込みからお見立てまで進められます。
             </p>
           </div>
 
           <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
             {[
-              { title: '無料診断', desc: 'DM でご相談' },
+              { title: 'オンライン受付', desc: 'サイト内送信' },
               { title: 'モニター枠', desc: '制作無料（条件あり）' },
-              { title: 'Instagram', desc: '導線を前提に設計' },
+              { title: '制作の核', desc: 'LP構成とCTA設計' },
             ].map((benefit, idx) => (
               <div key={idx} className="rounded-[1rem] bg-secondary p-4">
                 <p className="text-sm text-muted-foreground mb-1">{benefit.title}</p>
@@ -156,10 +152,10 @@ export default function Portfolio() {
 
           <div className="flex w-full justify-center px-1 sm:px-3">
             <Button size="lg" className="btn-primary mx-auto inline-flex max-w-[min(100%,22rem)] min-w-0 flex-nowrap px-6 py-7 text-[15px] font-semibold text-primary-foreground sm:py-8" asChild>
-              <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="w-full justify-center gap-2">
-                無料診断を受ける（DM）
+              <Link href="/hearing" className="w-full justify-center gap-2">
+                LPご依頼を送る（ヒアリング）
                 <ArrowRight className="size-5 shrink-0" aria-hidden />
-              </a>
+              </Link>
             </Button>
           </div>
         </div>

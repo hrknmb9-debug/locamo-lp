@@ -26,7 +26,8 @@ export default function Services() {
           サービス内容
         </h2>
         <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm">
-          大阪の個人店向けに、3つのプランをご用意しています
+          ご注文の起点は「サイト内ヒアリング」だけで足ります。<span className="font-semibold text-sky-950">LP制作</span>
+          に迷ったら、まず下のLPプランが最初の候補になります。
         </p>
 
         <figure className="mx-auto mb-12 max-w-5xl overflow-hidden rounded-[1.35rem] border border-sky-100 shadow-md shadow-sky-200/30">
@@ -43,7 +44,7 @@ export default function Services() {
         </figure>
 
         {/* Service Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
+        <div className="mx-auto mb-14 grid max-w-4xl grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
           {plans.map((plan, idx) => (
             <div
               key={plan.id}
@@ -149,7 +150,7 @@ export default function Services() {
                   { feature: 'SEO対応', lp: '基本', hp: '詳細' },
                   { feature: 'ブログ機能', lp: '—', hp: '○' },
                   { feature: 'ギャラリー', lp: '基本', hp: '充実' },
-                  { feature: 'Instagram連携', lp: '○', hp: '○' },
+                  { feature: 'CTA・問い合わせ導線の設計', lp: '○', hp: '○' },
                   { feature: 'Google Analytics', lp: '○', hp: '○' },
                   { feature: '納期', lp: '2週間', hp: '3〜4週間' },
                 ].map((row, idx) => (
@@ -172,13 +173,18 @@ export default function Services() {
         {/* CTA */}
         <div className="text-center mt-12 animate-fade-in-up">
           <p className="text-muted-foreground text-sm mb-4">
-            ご質問やご不明な点がございましたら、お気軽にお問合せください
+            「まずLPで足りるか」迷う段階でも、ヒアリングだけ送っていただければ制作方針までお返しします。
           </p>
-          <a href={DM_URL} target="_blank" rel="noopener noreferrer">
-            <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground">
-              無料診断を受ける
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
+            <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground" asChild>
+              <Link href="/hearing">LPのヒアリングを送信</Link>
             </Button>
-          </a>
+            <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
+              <a href={DM_URL} target="_blank" rel="noopener noreferrer">
+                追ってDMで話したい（任意）
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

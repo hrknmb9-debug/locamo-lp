@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
+import { Link } from 'wouter';
 import { DM_URL } from '@/constants/locamo';
 import { LP_IMAGES } from '@/lp-images';
 
@@ -21,21 +22,21 @@ export default function Pricing() {
       a: '銀行振込またはクレジットカード決済に対応しています。詳細はお問合せ時にご説明いたします。',
     },
     {
-      q: 'InstagramがなくてもLP制作できますか？',
-      a: 'もちろんです。ただし、LocamoはInstagram連携を強みとしているため、Instagramとの組み合わせをお勧めしています。',
+      q: 'Instagramアカウントがなくても大丈夫？',
+      a: '大丈夫です。サイト内のヒアリングフォームからいつでもご依頼内容をお送りいただけます。',
     },
   ];
 
   const steps = [
     {
       num: '1',
-      title: 'お問合せ・無料診断',
-      desc: 'Instagram DMからお問合せいただき、現状のお悩みをお聞かせください。無料診断を行います。',
+      title: 'ヒアリング送信',
+      desc: 'サイト上の質問ステップからお店の状況をお書きいただくだけです。入力内容がそのまま運営側に届きます。',
     },
     {
       num: '2',
-      title: 'ご提案・お見積もり',
-      desc: '診断結果に基づいて、最適なプランをご提案し、お見積もりをお出しします。',
+      title: 'お見立て・ご提案',
+      desc: '送信内容をもとに構成案とラフなお見積りをお返しします。',
     },
     {
       num: '3',
@@ -170,14 +171,17 @@ export default function Pricing() {
 
         {/* CTA */}
         <div className="text-center animate-fade-in-up">
-          <p className="text-muted-foreground text-sm mb-4">
-            ご不明な点やご質問がございましたら、お気軽にお問合せください
-          </p>
-          <a href={DM_URL} target="_blank" rel="noopener noreferrer">
-            <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground">
-              無料診断を受ける
+          <p className="text-muted-foreground text-sm mb-4">料金だけ先に確認したい方も、送信後に折り返しでお見立ていたします。</p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground" asChild>
+              <Link href="/hearing">サイト内ヒアリング送信</Link>
             </Button>
-          </a>
+            <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
+              <a href={DM_URL} target="_blank" rel="noopener noreferrer">
+                口頭での相談（DM任意）
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

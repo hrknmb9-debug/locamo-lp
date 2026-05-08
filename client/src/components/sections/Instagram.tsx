@@ -1,6 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { Instagram, ArrowRight, TrendingUp } from 'lucide-react';
-import { DM_URL, IG_URL } from '@/constants/locamo';
+import { Link } from 'wouter';
+
+import { IG_URL } from '@/constants/locamo';
 import { LP_IMAGES } from '@/lp-images';
 
 /**
@@ -187,16 +189,14 @@ export default function InstagramPage() {
         <section className="mt-16 text-center animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
           <div className="rounded-[1.25rem] bg-secondary p-8 md:p-12">
             <h3 className="text-2xl font-bold mb-4">
-              Instagramとの連携を前提にしたLP制作
+              LPご依頼はそのままサイト内から
             </h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Locamoなら、Instagramからの流入を最大化するLP設計が標準装備です
+              流入元を問わず、読まれたあとに問い合わせ・来店へつなぐLP制作のご相談は、ヒアリングフォームからお送りください。
             </p>
-            <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="inline-block">
-              <Button size="lg" className="btn-primary px-8 py-7 text-base font-semibold text-primary-foreground">
-                無料診断を受ける
-              </Button>
-            </a>
+            <Button size="lg" className="btn-primary px-8 py-7 text-base font-semibold text-primary-foreground" asChild>
+              <Link href="/hearing">LPヒアリング送信へ</Link>
+            </Button>
           </div>
         </section>
       </div>

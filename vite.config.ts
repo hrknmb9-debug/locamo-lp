@@ -5,6 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { defineConfig, type Plugin, type ViteDevServer } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
+import { ingestHearingSubmission } from "./shared/hearingIngest.ts";
 
 // =============================================================================
 // Manus Debug Collector - Vite Plugin
@@ -150,6 +151,44 @@ function vitePluginManusDebugCollector(): Plugin {
   };
 }
 
+/** Dev のみ: POST /api/hearing（本番は Express と同処理） */
+function vitePluginHearingIngestDev(): Plugin {
+  return {
+    name: "hearing-ingest-dev",
+    configureServer(server: ViteDevServer) {
+      server.middlewares.use(async (req, res, next) => {
+        const url = (req.url ?? "").split("?")[0];
+        if (url !== "/api/hearing") {
+          return next();
+        }
+        if (req.method !== "POST") {
+          return next();
+        }
+        try {
+          const chunks: Buffer[] = [];
+          for await (const ch of req) {
+            chunks.push(Buffer.from(ch as Buffer));
+          }
+          const raw = Buffer.concat(chunks).toString("utf8");
+          const parsed = JSON.parse(raw) as Parameters<typeof ingestHearingSubmission>[0];
+          const result = await ingestHearingSubmission(parsed);
+          if (!result.ok) {
+            res.writeHead(400, { "Content-Type": "application/json" });
+            res.end(JSON.stringify(result));
+            return;
+          }
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ ok: true }));
+        } catch (e) {
+          console.error("[hearing-ingest-dev]", e);
+          res.writeHead(500, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ ok: false }));
+        }
+      });
+    },
+  };
+}
+
 function vitePluginStorageProxy(): Plugin {
   return {
     name: "manus-storage-proxy",
@@ -203,7 +242,15 @@ function vitePluginStorageProxy(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
+const plugins = [
+  react(),
+  tailwindcss(),
+  jsxLocPlugin(),
+  vitePluginManusRuntime(),
+  vitePluginManusDebugCollector(),
+  vitePluginHearingIngestDev(),
+  vitePluginStorageProxy(),
+];
 
 export default defineConfig({
   plugins,

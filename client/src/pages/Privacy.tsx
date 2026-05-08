@@ -57,7 +57,8 @@ const Privacy: FC = () => {
               <li>お名前、店舗名、屋号</li>
               <li>所在地、エリア情報</li>
               <li>電話番号、メールアドレス、SNSアカウント情報</li>
-              <li>ヒアリングシートおよびお問い合わせでの回答・やりとりの内容（Instagram DM を含む）</li>
+              <li>当サイト内ヒアリングフォームから送信された回答（当社サーバーにSSL経由で記録されます）</li>
+              <li>Instagram DM などその他チャネルでのお問い合わせ内容</li>
               <li>その他、お見積もりや制作業務遂行に必要な情報</li>
             </ul>
           </PolicySection>
@@ -76,6 +77,9 @@ const Privacy: FC = () => {
           <PolicySection title="第3条（第三者提供）">
             <p className="text-muted-foreground">
               当社は、法令に基づく場合、またはご本人の同意がある場合を除き、取得した個人情報を第三者に提供・開示しません。
+            </p>
+            <p className="text-muted-foreground">
+              当社が別途設定した通知用URL（例：チーム用チャットのWebhook）がある場合、ヒアリング本文の通知目的に限り、そのシステムへ暗号化された通信で転送することがあります。このURLを設定しない運用では転送は行いません。
             </p>
             <p className="text-muted-foreground">
               決済サービス等の協力会社に業務を委託する際は、必要な範囲でのみ情報を預託し、適切な管理・監督を行います。
