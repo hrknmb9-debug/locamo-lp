@@ -9,7 +9,7 @@ import { Link, useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { DM_URL } from '@/constants/locamo';
 import { HEARING_FIELDS } from '@/data/hearingFields';
-import { formatHearingForClipboard } from '@/lib/hearingFormat';
+import { copyHearingToClipboard, navigateToInstagramDm, submitHearingOnline } from '@/lib/submitHearing';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 const STEPS: { title: string; hint: string; fieldIds: (typeof HEARING_FIELDS)[number]['id'][] }[] = [
@@ -58,16 +58,6 @@ function stepAllowsNext(stepIndex: number, values: Record<string, string>): bool
   }
 }
 
-async function copyAndOpenDm(entries: HearingEntry[]): Promise<boolean> {
-  try {
-    await navigator.clipboard.writeText(formatHearingForClipboard(entries));
-    window.open(DM_URL, '_blank', 'noopener,noreferrer');
-    return true;
-  } catch {
-    return false;
-  }
-}
-
 const Hearing: FC = () => {
   useScrollToTop();
   const [, setLocation] = useLocation();
@@ -77,10 +67,13 @@ const Hearing: FC = () => {
     Object.fromEntries(HEARING_FIELDS.map(f => [f.id, ''])),
   );
   const [busy, setBusy] = useState(false);
-  /** コピー・再オープン用 */
+  /** サーバー受領済み */
+  const [submissionOk, setSubmissionOk] = useState(false);
+  const [submitHadError, setSubmitHadError] = useState(false);
+  /** ボット向けハニーポット（ブラウザのみ触る想定） */
+  const [botTrap, setBotTrap] = useState('');
+  /** 控え用 */
   const [lastEntries, setLastEntries] = useState<HearingEntry[] | null>(null);
-  /** メイン経路として DM 起動済みか */
-  const [dmFlowStarted, setDmFlowStarted] = useState(false);
 
   const buildEntries = useCallback((): HearingEntry[] => {
     return HEARING_FIELDS.map(f => ({
@@ -123,26 +116,54 @@ const Hearing: FC = () => {
     if (step > 0) setStep(s => s - 1);
   }, [step]);
 
-  const handleCopyAndDmPrimary = useCallback(async () => {
+  const handleSubmitPrimary = useCallback(async () => {
     if (!hasMinimalContent(values)) {
       toast.error('店舗名・課題・ゴールのいずれかを、もう少しだけお書きください。');
       return;
     }
     const entries = buildEntries();
     setBusy(true);
+    setSubmitHadError(false);
     try {
-      const ok = await copyAndOpenDm(entries);
-      setLastEntries(entries);
-      setDmFlowStarted(true);
-      if (ok) {
-        toast.success('回答をコピーしました。InstagramのDMが開いたら貼り付けて送信してください。');
+      const result = await submitHearingOnline({ entries, trap: botTrap });
+      if (result.ok) {
+        setLastEntries(entries);
+        setSubmissionOk(true);
+        toast.success('送信を受け付けました。InstagramのDMを開きます。');
+        // 以前と同様に送信完了後は DM へ遷移（同一タブ＝インナーブラウザからアプリへの切り替えが効きやすい）
+        window.setTimeout(() => {
+          navigateToInstagramDm(DM_URL);
+        }, 400);
       } else {
-        toast.error('コピーまたはDMの起動に失敗しました。ブラウザの許可やポップアップをご確認ください。');
+        const human =
+          result.error === 'network'
+            ? '通信に失敗しました。電波やWi‑Fiをご確認ください。'
+            : '送信を処理できませんでした。時間をおいて再度お試しください。';
+        toast.error(human);
+        setSubmitHadError(true);
       }
     } finally {
       setBusy(false);
     }
+  }, [buildEntries, values, botTrap]);
+
+  /** 送信APIが届かない環境向けの退避経路（同一タブでDMへ） */
+  const handleFallbackCopyThenOpenDm = useCallback(async () => {
+    if (!hasMinimalContent(values)) return;
+    const entries = buildEntries();
+    const copied = await copyHearingToClipboard(entries);
+    if (copied) toast.success('内容をコピーしました。続けてInstagramへ進みます。');
+    else toast.error('コピーできませんでした。お手元で入力内容をコピーのうえ、DMからお送りください。');
+    navigateToInstagramDm(DM_URL);
   }, [buildEntries, values]);
+
+  const handleCopyHoldOnly = useCallback(async (entries: HearingEntry[]) => {
+    const copied = await copyHearingToClipboard(entries);
+    if (copied) toast.success('控えをコピーしました。');
+    else toast.error('コピーに失敗しました。');
+  }, []);
+
+  const onLastStep = step === STEPS.length - 1;
 
   return (
     <div className="min-h-screen bg-[#fafcff] text-foreground">
@@ -159,6 +180,16 @@ const Hearing: FC = () => {
       </header>
 
       <article className="container mx-auto max-w-lg px-4 py-10 pb-[calc(5rem+env(safe-area-inset-bottom,0px))]">
+        {/* スパム対策：入力しない想定 */}
+        <input
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          value={botTrap}
+          onChange={e => setBotTrap(e.target.value)}
+          className="pointer-events-none fixed left-[100vw] top-0 h-px w-px opacity-0"
+        />
+
         <div className="mb-8">
           <div className="mb-2 flex justify-between text-xs font-semibold uppercase tracking-[0.18em] text-accent">
             <span>Hearing</span>
@@ -195,75 +226,81 @@ const Hearing: FC = () => {
           })}
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-between">
-          <Button type="button" variant="outline" className="order-2 min-h-11 rounded-full border-sky-200 px-5 sm:order-1" onClick={prev} disabled={step === 0}>
-            <ArrowLeft className="mr-1 inline" size={16} aria-hidden />
-            ひとつ戻る
-          </Button>
-          {step < STEPS.length - 1 ? (
-            <Button type="button" className="btn-primary order-1 min-h-11 rounded-full px-8 text-primary-foreground sm:order-2 sm:ml-auto" onClick={next}>
-              次へ
-              <ArrowRight className="ml-1 inline" size={16} aria-hidden />
+        {!(onLastStep && submissionOk) ? (
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-between">
+            <Button
+              type="button"
+              variant="outline"
+              className="order-2 min-h-11 rounded-full border-sky-200 px-5 sm:order-1"
+              onClick={prev}
+              disabled={step === 0}
+            >
+              <ArrowLeft className="mr-1 inline" size={16} aria-hidden />
+              ひとつ戻る
             </Button>
-          ) : (
-            <div className="order-1 flex w-full flex-col gap-3 sm:order-2 sm:ml-auto sm:max-w-md">
-              <Button
-                type="button"
-                disabled={busy}
-                className="btn-primary min-h-11 rounded-full px-8 text-primary-foreground"
-                onClick={handleCopyAndDmPrimary}
-              >
-                {busy ? (
-                  <>
-                    <Loader2 className="mr-2 inline size-4 animate-spin" aria-hidden />
-                    準備中…
-                  </>
-                ) : (
-                  <>
-                    コピーしてInstagramのDMで送る
-                    <ArrowRight className="ml-1 inline" size={16} aria-hidden />
-                  </>
+            {!onLastStep ? (
+              <Button type="button" className="btn-primary order-1 min-h-11 rounded-full px-8 text-primary-foreground sm:order-2 sm:ml-auto" onClick={next}>
+                次へ
+                <ArrowRight className="ml-1 inline" size={16} aria-hidden />
+              </Button>
+            ) : (
+              <div className="order-1 flex w-full flex-col gap-3 sm:order-2 sm:ml-auto sm:max-w-md">
+                <Button
+                  type="button"
+                  disabled={busy}
+                  className="btn-primary min-h-11 rounded-full px-8 text-primary-foreground"
+                  onClick={handleSubmitPrimary}
+                >
+                  {busy ? (
+                    <>
+                      <Loader2 className="mr-2 inline size-4 animate-spin" aria-hidden />
+                      送信中…
+                    </>
+                  ) : (
+                    <>
+                      ヒアリングを送信する
+                      <ArrowRight className="ml-1 inline" size={16} aria-hidden />
+                    </>
+                  )}
+                </Button>
+                {submitHadError && (
+                  <Button type="button" variant="outline" className="min-h-11 rounded-full border-dashed border-amber-300 bg-amber-50/90 text-sm font-semibold text-amber-950" onClick={handleFallbackCopyThenOpenDm}>
+                    通信できないとき：コピーしてInstagramのDMへ
+                  </Button>
                 )}
-              </Button>
-              <p className="text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                DMはログイン中のInstagramアカウントから届きます。運営側では「どのアカウントから来たか」がそのまま分かります。
-              </p>
-            </div>
-          )}
-        </div>
-
-        {dmFlowStarted && (
-          <div className="mt-8 rounded-[1.25rem] border border-emerald-200/90 bg-emerald-50/80 px-5 py-6">
-            <p className="mb-3 text-center text-xs font-semibold text-emerald-950">あと2ステップ（1分ほど）</p>
-            <ol className="mb-4 space-y-2 text-left text-sm leading-relaxed text-emerald-950/90">
-              <li>
-                <span className="font-semibold">①</span> 開いたInstagramの入力欄を長押し／タップし、「貼り付け」
-              </li>
-              <li>
-                <span className="font-semibold">②</span> 送信ボタンを押す
-              </li>
-            </ol>
-            {lastEntries && (
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full min-h-11 rounded-full border-emerald-300/80 bg-white text-emerald-950 gap-2 text-sm font-semibold"
-                disabled={busy}
-                onClick={async () => {
-                  const ok = await copyAndOpenDm(lastEntries);
-                  if (ok) toast.success('コピーしました。DMで貼り付けて送信してください。');
-                  else toast.error('コピーまたは外部起動に失敗しました。ブラウザの許可をご確認ください。');
-                }}
-              >
-                <ClipboardCopy size={16} aria-hidden />
-                もう一度コピーしてDMを開く
-              </Button>
+                <p className="text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                  送信内容はサイトのサーバーへ届きます（クリップボードのみに頼りません）。
+                  DMはログイン中のInstagramアカウントから開けます。任意で一言いただけるとやりとりが早くなります。
+                </p>
+              </div>
             )}
+          </div>
+        ) : (
+          <div className="mt-10 rounded-[1.25rem] border border-emerald-200/90 bg-emerald-50/80 px-5 py-8">
+            <p className="mb-2 text-center text-sm font-semibold text-emerald-950">送信が完了しました</p>
+            <p className="mb-6 text-center text-sm leading-relaxed text-emerald-950/90">
+              入力内容はこちらで受領済みです。続けてDMを開き、ひとことお声がけいただけるとスムーズです（任意）。
+              アプリが入っている場合は、この先はInstagramアプリが開きやすくなっています。
+            </p>
+            <div className="flex flex-col gap-3">
+              <Button size="lg" className="btn-primary min-h-11 w-full text-primary-foreground" asChild>
+                <a href={DM_URL} rel="noopener noreferrer">
+                  InstagramのDMを開く
+                  <ArrowRight className="ml-2 inline size-4" aria-hidden />
+                </a>
+              </Button>
+              {lastEntries && (
+                <Button type="button" variant="outline" className="min-h-11 w-full rounded-full border-emerald-300/80 bg-white text-sm font-semibold text-emerald-950 gap-2" onClick={() => void handleCopyHoldOnly(lastEntries)}>
+                  <ClipboardCopy size={16} aria-hidden />
+                  送信内容をコピー（控え）
+                </Button>
+              )}
+            </div>
           </div>
         )}
 
         <p className="mt-10 text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
-          貼り付けて送信すると完了です。
+          入力の送信により、お問い合わせの受付として扱います。
           <br />
           入力内容の取り扱いは{' '}
           <Link href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">

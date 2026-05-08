@@ -41,7 +41,8 @@ export default function Contact() {
           お問合せ
         </h2>
         <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
-          お問い合わせの<strong className="font-semibold text-sky-950">正式なお申し込み</strong>は、ヒアリング→InstagramのDMへ貼り付け送信までです。{RESPONSE_SLA}
+          お問い合わせの<strong className="font-semibold text-sky-950">正式なお申し込み</strong>は、ヒアリングフォームの送信で完了です。
+          （任意でInstagramのDMにも一言いただけます。）{RESPONSE_SLA}
         </p>
 
         {/* Main CTA */}
@@ -76,7 +77,6 @@ export default function Contact() {
             <div className="mt-6 flex flex-col items-center gap-3 text-center text-sm">
               <a
                 href={DM_URL}
-                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 font-medium text-muted-foreground underline-offset-4 hover:text-accent hover:underline"
               >
@@ -100,8 +100,8 @@ export default function Contact() {
             {[
               {
                 step: '1',
-                title: 'Webでヒアリング → DMで送信',
-                desc: '4ステップの入力後、全文をコピーしてInstagramのDMから送信してください。ここで正式なお申し込みが完了です。',
+                title: 'Webでヒアリング → 送信',
+                desc: '4ステップの入力後、「ヒアリングを送信する」で送信完了です（内容はサーバーに保存されます）。必要に応じてInstagramのDMを開いて一言お送りいただくこともできます。',
               },
               {
                 step: '2',

@@ -3,12 +3,12 @@
  */
 
 export const HEARING_FLOW_SHORT =
-  '4ステップで回答 → コピー → InstagramのDMに貼り付けて送信で完了です。';
+  '4ステップで入力・送信。内容はサーバーに届き、そのままInstagramのDMへ進みます。';
 
 export const HEARING_FLOW_LINES = [
   'サイト内の4ステップに沿ってお店の状況を入力します。',
-  '最後のボタンで全文をコピーし、InstagramのDM画面を開きます。',
-  'DMの入力欄に貼り付けて送信するとお申し込み完了です（送信元はログイン中のInstagramアカウントとして表示されます）。',
+  '最後の「ヒアリングを送信する」で、回答はLocamo側のサーバーへ届きます。',
+  '送信直後、そのままInstagramのDMページへ自動で移動します（アプリがあればInstagramアプリに切り替わりやすくなっています）。任意でひとことお声がけください。',
 ] as const;
 
 export const RESPONSE_SLA =
@@ -31,6 +31,9 @@ export const MONITOR_SLOT_NOTE =
 export const PRIMARY_CTA_HEARING = 'ヒアリングに進む';
 
 export const PRIMARY_CTA_HEARING_FULL = 'LP制作のヒアリングに進む';
+
+/** LP外のセクションでも使う／インスタ内ブラウザでアプリへの切り替えを優先するDM導線 */
+export const PRIMARY_CTA_DM_CONTACT = 'InstagramのDMで相談する';
 
 /** 返信SLAなどの詳細が別セクションにあるときの短文（フローのくどさ防止用） */
 export const REFER_CONTACT_FOR_SLA = '初回ご返信の目安や受付手順は、ページ内「お問合せ」の記載に準じます。';

@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/button';
-import { Instagram, ArrowRight, TrendingUp } from 'lucide-react';
+import { Instagram, ArrowRight, TrendingUp, ClipboardList } from 'lucide-react';
 import { Link } from 'wouter';
 
-import { IG_URL } from '@/constants/locamo';
+import { IG_URL, DM_URL } from '@/constants/locamo';
+import { PRIMARY_CTA_DM_CONTACT, PRIMARY_CTA_HEARING_FULL } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
 
 /**
@@ -189,15 +190,27 @@ export default function InstagramPage() {
         <section className="mt-16 text-center animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
           <div className="rounded-[1.25rem] bg-secondary p-8 md:p-12">
             <h3 className="text-2xl font-bold mb-4">
-              LPのご依頼はサイト内ヒアリングから
+              LPのご依頼・ご相談はこちらから
             </h3>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto text-sm leading-relaxed text-pretty">
-              送信手順や初回ご返信の確認は、このページ下部の<strong className="text-sky-950">「お問合せ」</strong>
-              で一度ご覧ください。このボタンはヒアリングページのみ開きます。
+            <p className="text-muted-foreground mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-pretty">
+              Instagramアプリ側のDMに直接つなげるので、インナーブラウザに閉じ込められにくくなっています。詳細はフォーム送信後にそのままDMへ進みます。
             </p>
-            <Button size="lg" className="btn-primary px-8 py-7 text-base font-semibold text-primary-foreground" asChild>
-              <Link href="/hearing">LP制作のヒアリングに進む</Link>
-            </Button>
+            <div className="mx-auto flex max-w-xl flex-col gap-3 sm:flex-row sm:justify-center">
+              <Button size="lg" className="btn-primary px-8 py-7 text-base font-semibold text-primary-foreground shadow-md shadow-orange-300/35" asChild>
+                <a href={DM_URL} rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2">
+                  <Instagram size={22} aria-hidden />
+                  {PRIMARY_CTA_DM_CONTACT}
+                  <ArrowRight size={18} aria-hidden />
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-7 text-base font-semibold" asChild>
+                <Link href="/hearing" className="inline-flex items-center justify-center gap-2">
+                  <ClipboardList size={22} aria-hidden />
+                  {PRIMARY_CTA_HEARING_FULL}
+                  <ArrowRight size={18} aria-hidden />
+                </Link>
+              </Button>
+            </div>
           </div>
         </section>
       </div>

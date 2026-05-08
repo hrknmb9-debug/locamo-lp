@@ -220,7 +220,7 @@ export default function Home() {
             <div>
               <h4 className="font-semibold text-sm mb-3">お問合せ</h4>
               <p className="text-muted-foreground text-xs mb-3 leading-relaxed">
-                まずヒアリングページで入力し、InstagramのDMに貼り付けて送信ください。質問のみはDMでも可能です。
+                まずヒアリングページで入力し、送信してください。質問のみはDMでも可能です。
               </p>
               <Link href="/hearing" className="inline-block text-xs text-accent underline-offset-2 hover:underline">
                 LP制作のヒアリングページへ

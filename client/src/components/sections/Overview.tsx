@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ClipboardList, Sparkles, Zap, Activity, LayoutList, Waypoints } from 'lucide-react';
+import { ArrowRight, ClipboardList, Instagram, Sparkles, Zap, Activity, LayoutList, Waypoints } from 'lucide-react';
 import { Link } from 'wouter';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { useCountUp } from '@/hooks/useCountUp';
 import {
   HEARING_FLOW_SHORT,
   MONITOR_SLOT_NOTE,
+  PRIMARY_CTA_DM_CONTACT,
   PRIMARY_CTA_HEARING_FULL,
   REFER_CONTACT_FOR_SLA,
   RESPONSE_SLA,
@@ -14,6 +15,7 @@ import {
 } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
 import { SCROLL_MARGIN_CLASS } from '@/data/siteNav';
+import { DM_URL } from '@/constants/locamo';
 
 function StatsSection() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.5 });
@@ -279,12 +281,21 @@ export default function Overview() {
             </p>
             <ul className="mx-auto mb-8 max-w-lg space-y-2 text-center text-sm leading-relaxed text-muted-foreground text-pretty">
               <li className="text-left sm:text-center">● 質問は4ステップ。「次へ」で進みます。</li>
-              <li className="text-left sm:text-center">● 終了ボタンでコピーのうえInstagramのDMへ貼り付けて送信で完了です。</li>
+              <li className="text-left sm:text-center">
+                ● 送信完了後、そのままInstagramのDMページへ自動で進みます。ブラウザ内からアプリ側へ繋げるために同一タブで開きます。
+              </li>
             </ul>
-            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Button size="lg" className="btn-primary w-full max-w-sm px-10 py-7 text-[15px] font-bold text-primary-foreground shadow-md shadow-sky-300/35" asChild>
-                <Link href="/hearing" className="gap-2">
-                  <ClipboardList className="size-5" aria-hidden />
+            <div className="mx-auto flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
+              <Button size="lg" className="btn-primary w-full px-10 py-7 text-[15px] font-bold text-primary-foreground shadow-md shadow-sky-300/35 sm:max-w-sm" asChild>
+                <a href={DM_URL} rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2">
+                  <Instagram className="size-5 shrink-0" aria-hidden />
+                  {PRIMARY_CTA_DM_CONTACT}
+                  <ArrowRight className="size-5 shrink-0" aria-hidden />
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" className="w-full rounded-full border-sky-200 px-10 py-7 text-[15px] font-bold sm:max-w-sm" asChild>
+                <Link href="/hearing" className="inline-flex items-center justify-center gap-2">
+                  <ClipboardList className="size-5 shrink-0" aria-hidden />
                   {PRIMARY_CTA_HEARING_FULL}
                   <ArrowRight className="size-5 shrink-0" aria-hidden />
                 </Link>
