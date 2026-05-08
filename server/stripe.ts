@@ -10,9 +10,19 @@ import { getDb } from "./db";
 import { stripeCustomers, stripePayments, stripeSubscriptions } from "../drizzle/schema";
 import { eq } from "drizzle-orm";
 
-const stripe = new Stripe(ENV.stripeSecretKey, {
-  apiVersion: "2026-04-22.dahlia",
-});
+let stripeClient: Stripe | null = null;
+
+/** Shared Stripe client (lazy; requires STRIPE_SECRET_KEY when first used). */
+export function getStripe(): Stripe {
+  const key = ENV.stripeSecretKey;
+  if (!key) throw new Error("STRIPE_SECRET_KEY is required");
+  if (!stripeClient) {
+    stripeClient = new Stripe(key, {
+      apiVersion: "2026-04-22.dahlia",
+    });
+  }
+  return stripeClient;
+}
 
 /**
  * Get or create a Stripe customer for a user
@@ -33,7 +43,7 @@ export async function getOrCreateStripeCustomer(userId: number, email?: string, 
   }
 
   // Create new Stripe customer
-  const customer = await stripe.customers.create({
+  const customer = await getStripe().customers.create({
     email,
     name,
     metadata: {
@@ -63,7 +73,7 @@ export async function createCheckoutSession(
 ) {
   const stripeCustomerId = await getOrCreateStripeCustomer(userId, email, name);
 
-  const session = await stripe.checkout.sessions.create({
+  const session = await getStripe().checkout.sessions.create({
     customer: stripeCustomerId,
     payment_method_types: ["card"],
     line_items: [
@@ -100,7 +110,7 @@ export async function createSubscriptionCheckoutSession(
 ) {
   const stripeCustomerId = await getOrCreateStripeCustomer(userId, email, name);
 
-  const session = await stripe.checkout.sessions.create({
+  const session = await getStripe().checkout.sessions.create({
     customer: stripeCustomerId,
     payment_method_types: ["card"],
     line_items: [
@@ -139,7 +149,7 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
 
   // Handle subscription mode
   if (session.mode === "subscription") {
-    const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
+    const subscription = await getStripe().subscriptions.retrieve(session.subscription as string);
 
     const priceId = (subscription.items.data[0]?.price.id || "") as string;
 
@@ -155,12 +165,27 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
     console.log("[Stripe] Subscription created:", subscription.id);
   }
 
-  // Handle payment mode
+  // Handle payment mode (line_items は Webhook の session に展開されていないことが多い)
   if (session.mode === "payment") {
-    const paymentIntent = await stripe.paymentIntents.retrieve(session.payment_intent as string);
+    const piId =
+      typeof session.payment_intent === "string"
+        ? session.payment_intent
+        : session.payment_intent?.id || "";
+    if (!piId) {
+      console.error("[Stripe] checkout.session.completed missing payment_intent:", session.id);
+      return;
+    }
+
+    const fullSession = await getStripe().checkout.sessions.retrieve(session.id, {
+      expand: ["line_items.data.price"],
+    });
+
+    const paymentIntent = await getStripe().paymentIntents.retrieve(piId);
 
     if (paymentIntent.status === "succeeded") {
-      const priceId = session.line_items?.data[0]?.price?.id || "";
+      const linePrice = fullSession.line_items?.data[0]?.price;
+      const priceId =
+        linePrice && typeof linePrice !== "string" && !linePrice.deleted ? linePrice.id : "";
       const currency = paymentIntent.currency?.toUpperCase() || "JPY";
 
       if (priceId) {
@@ -172,6 +197,8 @@ export async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Se
           currency: currency,
           status: "succeeded",
         });
+      } else {
+        console.error("[Stripe] Could not resolve price id for session:", session.id);
       }
 
       console.log("[Stripe] Payment succeeded:", paymentIntent.id);
@@ -265,7 +292,7 @@ export async function cancelUserSubscription(userId: number) {
     throw new Error("No active subscription found");
   }
 
-  await stripe.subscriptions.cancel(subscription.stripeSubscriptionId);
+  await getStripe().subscriptions.cancel(subscription.stripeSubscriptionId);
 
   await db
     .update(stripeSubscriptions)
@@ -277,4 +304,3 @@ export async function cancelUserSubscription(userId: number) {
   console.log("[Stripe] Subscription canceled by user:", subscription.stripeSubscriptionId);
 }
 
-export { stripe };

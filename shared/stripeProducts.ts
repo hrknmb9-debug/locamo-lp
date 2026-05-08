@@ -1,8 +1,7 @@
 /**
- * Stripe Products & Prices for Locamo LP
- * 
- * Define all product and price information here for centralized access.
- * Price IDs are used to create checkout sessions.
+ * Stripe Products & Prices for Locamo LP — **single source of truth** for Price IDs.
+ *
+ * 「LP制作」「月額管理費」は Stripe ダッシュボードと必ず同期すること。
  */
 
 export const STRIPE_PRODUCTS = {
@@ -10,7 +9,7 @@ export const STRIPE_PRODUCTS = {
   oneTime: {
     lpBasic: {
       name: "LP制作",
-      priceId: "price_1TUqxU7nv8WWcHmouiloVPYx", // Stripe Price ID for LP制作 ¥30,000
+      priceId: "price_1TUqxU7nv8WWcHmouiloVPYx", // LP制作 ¥30,000
       amount: 30000, // ¥30,000
       description: "シングルページLP制作",
     },
@@ -31,8 +30,8 @@ export const STRIPE_PRODUCTS = {
   // Subscriptions (monthly hosting & domain)
   subscription: {
     basic: {
-      name: "基本プラン",
-      priceId: "price_1TUqxU7nv8WWcHmoT7AnbBnY", // Stripe Price ID for 月額管理費 ¥3,000/month
+      name: "Locamo月額管理費",
+      priceId: "price_1TUqxU7nv8WWcHmoT7AnbBnY", // 月額管理費 ¥3,000/月
       amount: 3000, // ¥3,000/month
       interval: "month" as const,
       description: "月額サイト公開・ドメイン費用（基本）",

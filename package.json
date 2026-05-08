@@ -10,7 +10,8 @@
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "vitest run",
-    "db:push": "drizzle-kit generate && drizzle-kit migrate"
+    "db:push": "drizzle-kit generate && drizzle-kit migrate",
+    "stripe:listen": "stripe listen --forward-to http://127.0.0.1:3000/api/stripe/webhook"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",

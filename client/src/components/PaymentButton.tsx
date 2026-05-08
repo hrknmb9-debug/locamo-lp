@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { getLoginUrl } from "@/const";
 import { trpc } from "@/lib/trpc";
+import { TRPCClientError } from "@trpc/client";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
@@ -44,6 +46,11 @@ export function PaymentButton({
         toast.success(`${planName} の決済ページを開きました`);
       }
     } catch (error) {
+      if (error instanceof TRPCClientError && error.data?.code === "UNAUTHORIZED") {
+        toast.message("ログインが必要です。ログインページへ移動します。");
+        window.location.href = getLoginUrl();
+        return;
+      }
       console.error("Checkout error:", error);
       toast.error("決済ページの作成に失敗しました");
     } finally {
@@ -53,6 +60,7 @@ export function PaymentButton({
 
   return (
     <Button
+      type="button"
       onClick={handleClick}
       disabled={isLoading}
       className="w-full"

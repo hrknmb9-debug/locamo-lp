@@ -1,11 +1,7 @@
 import express from "express";
-import Stripe from "stripe";
+import type Stripe from "stripe";
 import { ENV } from "./_core/env";
-import { handleCheckoutSessionCompleted, handleSubscriptionUpdated } from "./stripe";
-
-const stripe = new Stripe(ENV.stripeSecretKey, {
-  apiVersion: "2026-04-22.dahlia",
-});
+import { getStripe, handleCheckoutSessionCompleted, handleSubscriptionUpdated } from "./stripe";
 
 export function setupStripeWebhook(app: express.Application) {
   // CRITICAL: Register raw body parser BEFORE express.json()
@@ -13,12 +9,21 @@ export function setupStripeWebhook(app: express.Application) {
     "/api/stripe/webhook",
     express.raw({ type: "application/json" }),
     async (req, res) => {
+      if (!ENV.stripeSecretKey?.trim()) {
+        console.warn("[Stripe Webhook] STRIPE_SECRET_KEY not set — ignoring webhook");
+        return res.status(503).send("Stripe is not configured");
+      }
+      if (!ENV.stripeWebhookSecret?.trim()) {
+        console.warn("[Stripe Webhook] STRIPE_WEBHOOK_SECRET not set — ignoring webhook");
+        return res.status(503).send("Stripe webhook signing secret not configured");
+      }
+
       const sig = req.headers["stripe-signature"] as string;
 
       let event: Stripe.Event;
 
       try {
-        event = stripe.webhooks.constructEvent(
+        event = getStripe().webhooks.constructEvent(
           req.body,
           sig,
           ENV.stripeWebhookSecret
