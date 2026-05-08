@@ -146,8 +146,8 @@ const Hearing: FC = () => {
 
   return (
     <div className="min-h-screen bg-[#fafcff] text-foreground">
-      <header className="sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 backdrop-blur">
-        <div className="container mx-auto flex h-14 items-center justify-between px-4">
+      <header className="sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 pt-[env(safe-area-inset-top,0px)] backdrop-blur">
+        <div className="container mx-auto flex h-14 min-h-14 items-center justify-between px-4">
           <Link href="/" className="text-lg font-bold tracking-tight text-sky-950">
             Loca<span className="text-accent">mo</span>
           </Link>
@@ -158,9 +158,9 @@ const Hearing: FC = () => {
         </div>
       </header>
 
-      <article className="container mx-auto max-w-lg px-4 py-10 pb-20">
+      <article className="container mx-auto max-w-lg px-4 py-10 pb-[calc(5rem+env(safe-area-inset-bottom,0px))]">
         <div className="mb-8">
-          <div className="mb-2 flex justify-between text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+          <div className="mb-2 flex justify-between text-xs font-semibold uppercase tracking-[0.18em] text-accent">
             <span>Hearing</span>
             <span>
               STEP {step + 1} / {STEPS.length}
@@ -196,12 +196,12 @@ const Hearing: FC = () => {
         </div>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-between">
-          <Button type="button" variant="outline" className="order-2 rounded-full border-sky-200 sm:order-1" onClick={prev} disabled={step === 0}>
+          <Button type="button" variant="outline" className="order-2 min-h-11 rounded-full border-sky-200 px-5 sm:order-1" onClick={prev} disabled={step === 0}>
             <ArrowLeft className="mr-1 inline" size={16} aria-hidden />
             ひとつ戻る
           </Button>
           {step < STEPS.length - 1 ? (
-            <Button type="button" className="btn-primary order-1 rounded-full px-8 text-primary-foreground sm:order-2 sm:ml-auto" onClick={next}>
+            <Button type="button" className="btn-primary order-1 min-h-11 rounded-full px-8 text-primary-foreground sm:order-2 sm:ml-auto" onClick={next}>
               次へ
               <ArrowRight className="ml-1 inline" size={16} aria-hidden />
             </Button>
@@ -210,7 +210,7 @@ const Hearing: FC = () => {
               <Button
                 type="button"
                 disabled={busy}
-                className="btn-primary rounded-full px-8 text-primary-foreground"
+                className="btn-primary min-h-11 rounded-full px-8 text-primary-foreground"
                 onClick={handleCopyAndDmPrimary}
               >
                 {busy ? (
@@ -225,7 +225,7 @@ const Hearing: FC = () => {
                   </>
                 )}
               </Button>
-              <p className="text-center text-[11px] leading-relaxed text-muted-foreground">
+              <p className="text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
                 DMはログイン中のInstagramアカウントから届きます。運営側では「どのアカウントから来たか」がそのまま分かります。
               </p>
             </div>
@@ -235,7 +235,7 @@ const Hearing: FC = () => {
         {dmFlowStarted && (
           <div className="mt-8 rounded-[1.25rem] border border-emerald-200/90 bg-emerald-50/80 px-5 py-6">
             <p className="mb-3 text-center text-xs font-semibold text-emerald-950">あと2ステップ（1分ほど）</p>
-            <ol className="mb-4 space-y-2 text-left text-[13px] leading-relaxed text-emerald-950/90">
+            <ol className="mb-4 space-y-2 text-left text-sm leading-relaxed text-emerald-950/90">
               <li>
                 <span className="font-semibold">①</span> 開いたInstagramの入力欄を長押し／タップし、「貼り付け」
               </li>
@@ -247,7 +247,7 @@ const Hearing: FC = () => {
               <Button
                 type="button"
                 variant="outline"
-                className="w-full rounded-full border-emerald-300/80 bg-white text-emerald-950 gap-2 text-sm font-semibold"
+                className="w-full min-h-11 rounded-full border-emerald-300/80 bg-white text-emerald-950 gap-2 text-sm font-semibold"
                 disabled={busy}
                 onClick={async () => {
                   const ok = await copyAndOpenDm(lastEntries);
@@ -262,7 +262,7 @@ const Hearing: FC = () => {
           </div>
         )}
 
-        <p className="mt-10 text-center text-[11px] leading-relaxed text-muted-foreground">
+        <p className="mt-10 text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
           貼り付けて送信すると完了です。
           <br />
           入力内容の取り扱いは{' '}

@@ -21,27 +21,27 @@ function StatsSection() {
 
   return (
     <div ref={ref} className="space-y-3 animate-fade-in-up">
-      <div className="grid grid-cols-3 gap-4 md:gap-8 text-center">
+      <div className="grid grid-cols-1 gap-6 text-center sm:grid-cols-3 sm:gap-4 md:gap-8">
         <div>
-          <div className="text-3xl md:text-4xl font-bold text-accent">{count}+</div>
-          <p className="text-xs md:text-sm text-muted-foreground mt-1">累計案件</p>
+          <div className="text-3xl md:text-4xl font-bold text-accent tabular-nums">{count}+</div>
+          <p className="mt-2 text-sm text-muted-foreground">累計案件</p>
         </div>
         <div>
           <div className="text-3xl md:text-4xl font-bold text-accent">3万円〜</div>
-          <p className="text-xs md:text-sm text-muted-foreground mt-1">LP制作費</p>
+          <p className="mt-2 text-sm text-muted-foreground">LP制作費</p>
         </div>
         <div>
           <div className="text-3xl md:text-4xl font-bold text-accent">2週間</div>
-          <p className="text-xs md:text-sm text-muted-foreground mt-1">納期目安</p>
+          <p className="mt-2 text-sm text-muted-foreground">納期目安</p>
         </div>
       </div>
-      <p className="text-xs text-muted-foreground text-center leading-relaxed px-1">
+      <p className="text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
         ※納案件・運用準備におけるサイト制作を含む社内集計です。公開サイトは{' '}
         <a href="/#works" className="font-semibold text-sky-950 underline underline-offset-2 hover:text-accent">
           「納品事例」
         </a>
         をご覧ください。
-        <span className="mt-1 block text-[11px] text-sky-900/80">
+        <span className="mt-2 block text-xs leading-relaxed text-sky-900/85 sm:text-sm">
           別途 サーバー・ドメイン費用 月3,000円〜（込み）。{MONITOR_SLOT_NOTE}
         </span>
       </p>
@@ -65,7 +65,7 @@ export default function Overview() {
             className="animate-fade-in mb-4 flex flex-col items-center gap-3"
             style={{ animationDelay: '0.08s' }}
           >
-            <span className="inline-flex max-w-[min(100%,22rem)] items-center justify-center rounded-full border-2 border-primary/50 bg-gradient-to-b from-orange-50 to-amber-50 px-4 py-2.5 text-center text-[11px] font-bold leading-snug text-primary shadow-sm sm:text-xs">
+            <span className="inline-flex max-w-[min(100%,22rem)] items-center justify-center rounded-full border-2 border-primary/50 bg-gradient-to-b from-orange-50 to-amber-50 px-4 py-2.5 text-center text-xs font-bold leading-snug text-primary shadow-sm sm:text-sm">
               現在モニター3店舗募集中 · 採用店舗は制作無料（先着順）
             </span>
             <span className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white/90 px-4 py-2 text-xs font-semibold text-sky-800 shadow-sm">
@@ -84,22 +84,28 @@ export default function Overview() {
 
           {/* Main Catchphrase */}
           <h1
-            className="text-4xl md:text-6xl font-bold mb-5 leading-tight tracking-tight animate-fade-in-up"
+            className="mb-5 text-[1.75rem] font-bold leading-tight tracking-tight animate-fade-in-up sm:text-4xl md:text-6xl md:leading-tight"
             style={{ animationDelay: '0.2s' }}
           >
-            Instagramを見た人が、<br className="hidden sm:block" />
+            Instagramを見た人が、<br className="sm:hidden" />
+            <span className="hidden sm:inline"> </span>
             次に何をすればいいか明確になるLP。
           </h1>
 
-          {/* Subheading */}
-          <p
-            className="text-base md:text-lg text-muted-foreground mb-6 max-w-xl mx-auto animate-fade-in-up leading-relaxed text-pretty"
+          {/* モバイルは2段落で密度を下げる */}
+          <div
+            className="animate-fade-in-up mx-auto mb-6 max-w-xl space-y-3 text-pretty md:space-y-2"
             style={{ animationDelay: '0.35s' }}
           >
-            大阪の個人店に特化した1枚LP。<strong className="font-semibold text-sky-900">フォロワーだけに依存しない「公式の受け皿」</strong>
-            で、メニュー・料金・アクセス・予約までを迷わせずつなげます。制作費は3万円〜・モニター枠は審査付き無料。
-            AIで構成・文案のたたきを素早く作り、その上から訴求の順番とCTAを人の目で仕上げます。
-          </p>
+            <p className="text-base leading-relaxed text-muted-foreground md:text-lg md:leading-relaxed">
+              大阪の個人店に特化した1枚LP。<strong className="font-semibold text-sky-900">フォロワーだけに依存しない「公式の受け皿」</strong>
+              で、メニュー・料金・アクセス・予約までを迷わせずつなげます。
+            </p>
+            <p className="text-sm leading-relaxed text-muted-foreground md:text-lg md:leading-relaxed">
+              制作費は3万円〜・モニター枠は審査付き無料。
+              AIで構成・文案のたたきを素早く作り、その上から訴求の順番とCTAを人の目で仕上げます。
+            </p>
+          </div>
 
           {/* Visual */}
           <figure
@@ -268,10 +274,10 @@ export default function Overview() {
             <h2 className="mb-3 text-center text-2xl font-bold leading-snug md:text-[1.7rem]">
               {HEARING_FLOW_SHORT}
             </h2>
-            <p className="mx-auto mb-6 max-w-lg text-center text-[13px] leading-relaxed text-muted-foreground text-pretty">
+            <p className="mx-auto mb-6 max-w-lg text-center text-sm leading-relaxed text-muted-foreground text-pretty">
               {REFER_CONTACT_FOR_SLA}
             </p>
-            <ul className="mx-auto mb-8 max-w-lg space-y-2 text-center text-[13px] leading-relaxed text-muted-foreground text-pretty">
+            <ul className="mx-auto mb-8 max-w-lg space-y-2 text-center text-sm leading-relaxed text-muted-foreground text-pretty">
               <li className="text-left sm:text-center">● 質問は4ステップ。「次へ」で進みます。</li>
               <li className="text-left sm:text-center">● 終了ボタンでコピーのうえInstagramのDMへ貼り付けて送信で完了です。</li>
             </ul>
@@ -284,7 +290,7 @@ export default function Overview() {
                 </Link>
               </Button>
             </div>
-            <p className="mt-6 text-center text-[11px] text-muted-foreground">
+            <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
               <Link href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">
                 プライバシーポリシー
               </Link>

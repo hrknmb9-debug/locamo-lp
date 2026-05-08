@@ -101,8 +101,9 @@ export default function Pricing() {
         {/* Pricing Table */}
         <div className="mb-14 animate-fade-in-up">
           <h3 className="text-xl font-bold mb-5">料金比較</h3>
-          <div className="mb-14 animate-fade-in-up overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-sm shadow-sky-950/5">
-            <table className="w-full text-sm">
+          <div className="overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-sm shadow-sky-950/5">
+            <div className="overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch]">
+              <table className="min-w-[19rem] w-full text-sm sm:min-w-full">
               <thead>
                 <tr className="bg-secondary/50 border-b border-border">
                   <th className="text-left py-3.5 px-4 font-semibold">項目</th>
@@ -125,7 +126,8 @@ export default function Pricing() {
                   </tr>
                 ))}
               </tbody>
-            </table>
+              </table>
+            </div>
           </div>
         </div>
 

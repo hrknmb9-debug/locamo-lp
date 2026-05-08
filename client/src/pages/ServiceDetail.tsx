@@ -21,8 +21,8 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <header className="sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 backdrop-blur">
-        <div className="container mx-auto flex h-14 items-center gap-4 px-4">
+      <header className="sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 pt-[env(safe-area-inset-top,0px)] backdrop-blur">
+        <div className="container mx-auto flex h-14 min-h-14 items-center gap-4 px-4">
           <Button variant="outline" size="sm" className="shrink-0 rounded-full border-sky-200" asChild>
             <Link href="/" className="inline-flex items-center gap-1.5 px-4">
               <ArrowLeft size={18} aria-hidden />
@@ -35,7 +35,7 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
         </div>
       </header>
 
-      <main className="flex-1 px-4 py-10 pb-14">
+      <main className="flex-1 px-4 py-10 pb-[calc(3.5rem+env(safe-area-inset-bottom,0px))]">
         <div className="container mx-auto max-w-3xl">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Service detail</p>
           <h1 className="mb-4 text-3xl font-bold">{plan.title}</h1>

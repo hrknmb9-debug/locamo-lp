@@ -10,8 +10,8 @@ const Privacy: FC = () => {
   useScrollToTop();
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 backdrop-blur">
-        <div className="container mx-auto flex h-14 items-center justify-between px-4">
+      <header className="sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 pt-[env(safe-area-inset-top,0px)] backdrop-blur">
+        <div className="container mx-auto flex h-14 min-h-14 items-center justify-between px-4">
           <Link href="/" className="text-lg font-bold tracking-tight text-sky-950">
             Loca<span className="text-accent">mo</span>
           </Link>
@@ -24,7 +24,7 @@ const Privacy: FC = () => {
         </div>
       </header>
 
-      <article className="container mx-auto max-w-3xl px-4 py-10 pb-16">
+      <article className="container mx-auto max-w-3xl px-4 py-10 pb-[calc(4rem+env(safe-area-inset-bottom,0px))]">
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Legal</p>
         <h1 className="mb-2 text-2xl font-bold md:text-3xl">プライバシーポリシー</h1>
         <p className="mb-10 text-xs text-muted-foreground">制定日：2026年5月7日 · 運営：NANBA企画</p>

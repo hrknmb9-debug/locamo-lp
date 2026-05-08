@@ -84,25 +84,29 @@ export default function Home() {
   const navLinkBase =
     'rounded-full px-3.5 py-2 text-xs font-semibold text-sky-900/85 transition-colors hover:bg-sky-100 sm:text-sm sm:px-4';
 
+  /** モバイルドロワー：44px級のタッチ領域 */
+  const navLinkDrawer =
+    'flex min-h-11 w-full items-center rounded-full px-3.5 py-3 text-left text-sm font-semibold text-sky-900/85 transition-colors hover:bg-sky-100 active:bg-sky-100 sm:px-4';
+
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-[4.5rem] focus:z-[100] focus:rounded-xl focus:border focus:border-sky-200 focus:bg-white focus:px-4 focus:py-3 focus:text-sm focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-sky-300"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-[max(1rem,env(safe-area-inset-left,0px))] focus:top-[calc(3.75rem+env(safe-area-inset-top,0px))] focus:z-[100] focus:rounded-xl focus:border focus:border-sky-200 focus:bg-white focus:px-4 focus:py-3 focus:text-sm focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-sky-300"
       >
         メインコンテンツへスキップ
       </a>
 
       <header
-        className={`sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 backdrop-blur transition-shadow ${
+        className={`sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 pt-[env(safe-area-inset-top,0px)] backdrop-blur transition-shadow ${
           scrolled ? 'shadow-sm shadow-sky-200/40' : 'border-transparent'
         }`}
       >
-        <div className="container mx-auto flex h-14 items-center justify-between gap-2 px-4">
+        <div className="container mx-auto flex h-14 min-h-14 items-center justify-between gap-2 px-4">
           <button
             type="button"
             onClick={goDocumentTop}
-            className="shrink-0 text-left text-xl font-bold tracking-tight text-sky-950 hover:opacity-90"
+            className="-ml-1 inline-flex min-h-11 shrink-0 items-center rounded-xl px-1 text-left text-xl font-bold tracking-tight text-sky-950 hover:opacity-90"
           >
             Loca<span className="text-accent">mo</span>
           </button>
@@ -125,27 +129,27 @@ export default function Home() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(open => !open)}
-            className="rounded-xl border border-sky-200 p-2 text-sky-950 transition-colors hover:bg-sky-50 md:hidden shrink-0"
+            className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl border border-sky-200 text-sky-950 transition-colors hover:bg-sky-50 md:hidden"
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-lp-nav"
             aria-label={mobileMenuOpen ? 'ページ内ナビを閉じる' : 'ページ内ナビを開く'}
           >
-            {mobileMenuOpen ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}
+            {mobileMenuOpen ? <X size={22} aria-hidden /> : <Menu size={22} aria-hidden />}
           </button>
         </div>
 
         {mobileMenuOpen && (
           <nav id="mobile-lp-nav" className="border-t border-sky-100 bg-[#f8fcff] md:hidden" aria-label="ページ内リンク（モバイル）">
-            <div className="container mx-auto flex flex-col gap-1 px-4 py-3">
-              <button type="button" onClick={() => goDocumentTop()} className={`w-full text-left ${navLinkBase}`}>
+            <div className="container mx-auto flex flex-col gap-1 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]">
+              <button type="button" onClick={() => goDocumentTop()} className={navLinkDrawer}>
                 ページ先頭へ
               </button>
               {SITE_SCROLL_NAV.map(({ anchor, label }) => (
-                <a key={anchor} href={`/#${anchor}`} className={`w-full ${navLinkBase}`} onClick={closeMobile}>
+                <a key={anchor} href={`/#${anchor}`} className={navLinkDrawer} onClick={closeMobile}>
                   {label}
                 </a>
               ))}
-              <Button className="mt-3 w-full justify-center btn-primary text-primary-foreground" asChild>
+              <Button className="mt-3 min-h-11 w-full justify-center btn-primary px-6 text-base font-semibold text-primary-foreground" asChild>
                 <Link href="/hearing" onClick={closeMobile}>
                   {PRIMARY_CTA_HEARING}
                 </Link>
@@ -175,7 +179,7 @@ export default function Home() {
         </ScrollLandmark>
       </main>
 
-      <footer className="mt-8 border-t border-sky-100 bg-sky-50/60">
+      <footer className="mt-8 border-t border-sky-100 bg-sky-50/60 pb-[env(safe-area-inset-bottom,0px)]">
         <div className="container mx-auto px-4 py-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>

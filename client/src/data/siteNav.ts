@@ -3,8 +3,9 @@
  */
 export type SiteAnchor = 'top' | 'workflow' | 'services' | 'pricing' | 'works' | 'instagram' | 'contact';
 
-/** sticky ヘッダー分のオフセット（tailwind: scroll-mt-20） */
-export const SCROLL_MARGIN_CLASS = 'scroll-mt-20';
+/** sticky ヘッダー＋ノッチ／Dynamic Island 分のスクロールオフセット */
+export const SCROLL_MARGIN_CLASS =
+  'scroll-mt-[calc(3.5rem+env(safe-area-inset-top,0px)+0.75rem)]';
 
 export const SITE_SCROLL_NAV: { anchor: Exclude<SiteAnchor, 'top'>; label: string }[] = [
   { anchor: 'workflow', label: '課題とご案内' },

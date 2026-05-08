@@ -75,8 +75,8 @@ export default function Portfolio() {
                 <p className="mb-5 flex-1 text-sm leading-relaxed text-muted-foreground">{item.summary}</p>
 
                 <blockquote className="mb-6 border-l-2 border-accent/50 pl-3.5">
-                  <p className="text-[13px] leading-relaxed text-foreground/95 text-pretty">「{item.testimonial.quote}」</p>
-                  <footer className="mt-2 text-[11px] text-muted-foreground md:text-xs">― {item.testimonial.role}</footer>
+                  <p className="text-sm leading-relaxed text-foreground/95 text-pretty">「{item.testimonial.quote}」</p>
+                  <footer className="mt-2 text-xs text-muted-foreground sm:text-sm">― {item.testimonial.role}</footer>
                 </blockquote>
 
                 <Button variant="outline" size="lg" className="mt-auto w-full rounded-full border-sky-200" asChild>
@@ -97,10 +97,10 @@ export default function Portfolio() {
 
         <div className="lp-card animate-fade-in-up overflow-hidden rounded-[1.25rem] border-2 border-accent px-6 py-10 text-center shadow-md shadow-sky-200/40 sm:px-8 md:p-12">
           <h3 className="mb-4 text-xl font-bold sm:text-2xl">モニター枠・新規ご依頼について</h3>
-          <p className="mx-auto mb-5 max-w-lg text-[13px] leading-relaxed text-muted-foreground sm:text-sm">
+          <p className="mx-auto mb-5 max-w-lg text-sm leading-relaxed text-muted-foreground sm:text-base">
             受付の進め方は<strong className="text-sky-950">サービス／料金／お問合せ</strong>に一本化しています。ここのくり返しは省きます。
           </p>
-          <p className="mx-auto mb-8 max-w-2xl text-[13px] leading-relaxed text-muted-foreground sm:text-sm">{MONITOR_SLOT_NOTE}</p>
+          <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">{MONITOR_SLOT_NOTE}</p>
 
           <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
             {[
