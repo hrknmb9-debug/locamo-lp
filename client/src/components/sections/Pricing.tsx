@@ -1,19 +1,61 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Loader2 } from 'lucide-react';
 import { Link } from 'wouter';
 import { DM_URL } from '@/constants/locamo';
 import { HEARING_FLOW_SHORT, MONITOR_SLOT_NOTE, PRIMARY_CTA_HEARING, RESPONSE_SLA } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
-
-// Stripe Payment Link URLs
-const PAYMENT_LINKS = {
-  lpCreation: 'https://buy.stripe.com/test/1TUsWo7nv8WWcHmoFWUo31ka',
-  monthlyHosting: 'https://buy.stripe.com/test/1TUsNm7nv8WWcHmoxK6M04Zw',
-};
+import { useAuth } from '@/_core/hooks/useAuth';
+import { trpc } from '@/lib/trpc';
+import { getLoginUrl } from '@/const';;
 
 export default function Pricing() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const { isAuthenticated } = useAuth();
+  
+  // Checkout mutations
+  const createOneTimeCheckout = trpc.payment.createOneTimeCheckout.useMutation();
+  const createSubscriptionCheckout = trpc.payment.createSubscriptionCheckout.useMutation();
+
+  const handleLPCheckout = async () => {
+    if (!isAuthenticated) {
+      window.location.href = getLoginUrl();
+      return;
+    }
+
+    try {
+      const result = await createOneTimeCheckout.mutateAsync({
+        priceId: 'price_1TUsWo7nv8WWcHmoFWUo31ka',
+        planName: 'LP制作',
+      });
+
+      if (result.url) {
+        window.location.href = result.url;
+      }
+    } catch (error) {
+      console.error('Checkout failed:', error);
+    }
+  };
+
+  const handleMonthlyCheckout = async () => {
+    if (!isAuthenticated) {
+      window.location.href = getLoginUrl();
+      return;
+    }
+
+    try {
+      const result = await createSubscriptionCheckout.mutateAsync({
+        priceId: 'price_1TUsNm7nv8WWcHmoxK6M04Zw',
+        planName: 'Locamo月額管理費',
+      });
+
+      if (result.url) {
+        window.location.href = result.url;
+      }
+    } catch (error) {
+      console.error('Checkout failed:', error);
+    }
+  };
 
   const faqs = [
     {
@@ -195,10 +237,20 @@ export default function Pricing() {
               <h4 className="text-lg font-bold mb-2">LP制作</h4>
               <p className="text-muted-foreground text-sm mb-4">シンプルで効果的なLP制作</p>
               <p className="text-3xl font-bold mb-6">3万円<span className="text-lg text-muted-foreground">〜</span></p>
-              <Button size="lg" className="w-full" asChild>
-                <a href={PAYMENT_LINKS.lpCreation} target="_blank" rel="noopener noreferrer">
-                  LP制作を申し込む
-                </a>
+              <Button 
+                size="lg" 
+                className="w-full" 
+                onClick={handleLPCheckout}
+                disabled={createOneTimeCheckout.isPending}
+              >
+                {createOneTimeCheckout.isPending ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    処理中...
+                  </>
+                ) : (
+                  'LP制作を申し込む'
+                )}
               </Button>
             </div>
 
@@ -222,10 +274,20 @@ export default function Pricing() {
           <div className="rounded-[1.25rem] border border-sky-100 p-6 shadow-sm shadow-sky-950/5">
             <p className="text-muted-foreground text-sm mb-4">制作後のサイト公開・ドメイン管理を継続</p>
             <p className="text-3xl font-bold mb-6">月3,000円<span className="text-lg text-muted-foreground">〜</span></p>
-            <Button size="lg" className="w-full" asChild>
-              <a href={PAYMENT_LINKS.monthlyHosting} target="_blank" rel="noopener noreferrer">
-                月額プランを申し込む
-              </a>
+            <Button 
+              size="lg" 
+              className="w-full"
+              onClick={handleMonthlyCheckout}
+              disabled={createSubscriptionCheckout.isPending}
+            >
+              {createSubscriptionCheckout.isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  処理中...
+                </>
+              ) : (
+                '月額プランを申し込む'
+              )}
             </Button>
             <p className="text-xs text-muted-foreground mt-4 text-center">初期設定サポート込み</p>
           </div>

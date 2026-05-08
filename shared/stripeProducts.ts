@@ -10,7 +10,7 @@ export const STRIPE_PRODUCTS = {
   oneTime: {
     lpBasic: {
       name: "LP制作",
-      priceId: "plink_1TUsWo7nv8WWcHmoFWUo31ka", // Payment Link for LP制作 ¥30,000
+      priceId: "price_1TUsWo7nv8WWcHmoFWUo31ka", // Stripe Price ID for LP制作 ¥30,000
       amount: 30000, // ¥30,000
       description: "シングルページLP制作",
     },
@@ -32,7 +32,7 @@ export const STRIPE_PRODUCTS = {
   subscription: {
     basic: {
       name: "基本プラン",
-      priceId: "plink_1TUsNm7nv8WWcHmoxK6M04Zw", // Payment Link for 月額管理費 ¥3,000/month
+      priceId: "price_1TUsNm7nv8WWcHmoxK6M04Zw", // Stripe Price ID for 月額管理費 ¥3,000/month
       amount: 3000, // ¥3,000/month
       interval: "month" as const,
       description: "月額サイト公開・ドメイン費用（基本）",
