@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Instagram, ArrowRight, TrendingUp } from 'lucide-react';
+import { DM_URL, IG_URL } from '@/constants/locamo';
 import { LP_IMAGES } from '@/lp-images';
 
 /**
@@ -165,7 +166,7 @@ export default function InstagramPage() {
             </p>
 
             <a
-              href="https://instagram.com"
+              href={IG_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block"
@@ -191,9 +192,11 @@ export default function InstagramPage() {
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
               Locamoなら、Instagramからの流入を最大化するLP設計が標準装備です
             </p>
-            <Button size="lg" className="btn-primary px-8 py-7 text-base font-semibold text-primary-foreground">
-              無料診断を受ける
-            </Button>
+            <a href={DM_URL} target="_blank" rel="noopener noreferrer" className="inline-block">
+              <Button size="lg" className="btn-primary px-8 py-7 text-base font-semibold text-primary-foreground">
+                無料診断を受ける
+              </Button>
+            </a>
           </div>
         </section>
       </div>

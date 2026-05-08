@@ -3,7 +3,7 @@ import { LP_IMAGES } from '@/lp-images';
 import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 
-import { DM_URL, IG_URL } from '@/constants/locamo';
+import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
 
 export default function Contact() {
   const faqs = [
@@ -73,11 +73,14 @@ export default function Contact() {
                 </a>
               </Button>
             </div>
-            <p className="mt-5 text-center text-sm">
+            <div className="mt-6 flex flex-col items-center gap-3 text-center text-sm">
               <Link href="/services/lp" className="font-medium text-accent underline-offset-4 hover:underline">
                 サービスの詳細を見る
               </Link>
-            </p>
+              <Link href="/privacy" className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+                プライバシーポリシー
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -178,7 +181,7 @@ export default function Contact() {
 
         {/* Contact Info */}
         <section className="mt-12 text-center">
-          <p className="text-muted-foreground text-xs mb-1">NANBA企画（個人事業主）· 大阪府</p>
+          <p className="text-muted-foreground text-xs mb-1">NANBA企画 · 大阪府</p>
           <a
             href={IG_URL}
             target="_blank"
@@ -186,7 +189,7 @@ export default function Contact() {
             className="inline-flex items-center gap-1.5 text-sm text-accent hover:underline transition-colors"
           >
             <Instagram size={15} />
-            @locamo.ink
+            {IG_HANDLE}
           </a>
         </section>
       </div>

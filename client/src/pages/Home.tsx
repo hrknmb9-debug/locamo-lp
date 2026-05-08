@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Instagram } from 'lucide-react';
+import { Link } from 'wouter';
+import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
 import Overview from '@/components/sections/Overview';
 import Services from '@/components/sections/Services';
 import Pricing from '@/components/sections/Pricing';
@@ -151,6 +153,7 @@ export default function Home() {
                 {TABS.map(tab => (
                   <li key={tab.id}>
                     <button
+                      type="button"
                       onClick={() => handleTabClick(tab.id)}
                       className="text-muted-foreground hover:text-accent text-xs transition-colors"
                     >
@@ -158,6 +161,14 @@ export default function Home() {
                     </button>
                   </li>
                 ))}
+                <li>
+                  <Link
+                    href="/privacy"
+                    className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors"
+                  >
+                    プライバシーポリシー
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -165,22 +176,30 @@ export default function Home() {
             <div>
               <h4 className="font-semibold text-sm mb-3">お問合せ</h4>
               <p className="text-muted-foreground text-xs mb-3 leading-relaxed">
-                Instagram DMからお気軽にご連絡ください
+                Instagram DMからお気軽にご連絡ください（無料診断はDMから）。
               </p>
               <a
-                href="https://www.instagram.com/locamo.ink/"
+                href={DM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs text-accent hover:underline transition-colors"
               >
                 <Instagram size={14} />
-                @locamo.ink
+                {IG_HANDLE}
+              </a>
+              <a
+                href={IG_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 block text-xs text-muted-foreground hover:text-accent hover:underline"
+              >
+                プロフィールを見る →
               </a>
             </div>
           </div>
 
           <div className="border-t border-border pt-6 text-center text-muted-foreground text-xs">
-            &copy; 2025 NANBA企画. All rights reserved.
+            &copy; 2026 NANBA企画. All rights reserved.
           </div>
         </div>
       </footer>

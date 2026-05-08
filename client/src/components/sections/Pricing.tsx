@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
+import { DM_URL } from '@/constants/locamo';
 import { LP_IMAGES } from '@/lp-images';
-
-const DM_URL = 'https://ig.me/m/locamo.ink';
 
 export default function Pricing() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
