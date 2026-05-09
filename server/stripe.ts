@@ -17,9 +17,7 @@ export function getStripe(): Stripe {
   const key = ENV.stripeSecretKey;
   if (!key) throw new Error("STRIPE_SECRET_KEY is required");
   if (!stripeClient) {
-    stripeClient = new Stripe(key, {
-      apiVersion: "2026-04-22.dahlia",
-    });
+    stripeClient = new Stripe(key);
   }
   return stripeClient;
 }

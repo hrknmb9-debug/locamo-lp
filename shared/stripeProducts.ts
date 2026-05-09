@@ -9,8 +9,8 @@ export const STRIPE_PRODUCTS = {
   oneTime: {
     lpBasic: {
       name: "LP制作",
-      priceId: "price_1TV9LR7nv8WWcHmoIiJKYRM0", // LP制作 ¥33,000
-      amount: 33000, // ¥33,000
+      priceId: "price_1TVDbG7nv8WWcHmoWEH8fZVa", // LP制作 ¥36,300（税込み）
+      amount: 36300, // ¥36,300（税込み）
       description: "シングルページLP制作",
     },
     hpStandard: {
@@ -31,8 +31,8 @@ export const STRIPE_PRODUCTS = {
   subscription: {
     basic: {
       name: "Locamo月額管理費",
-      priceId: "price_1TUqxU7nv8WWcHmoT7AnbBnY", // 月額管理費 ¥3,000/月
-      amount: 3000, // ¥3,000/month
+      priceId: "price_1TVDcE7nv8WWcHmoD3J8QvUU", // 月額管理費 ¥3,300/月（税込み）
+      amount: 3300, // ¥3,300/month（税込み）
       interval: "month" as const,
       description: "月額サイト公開・ドメイン費用（基本）",
     },
