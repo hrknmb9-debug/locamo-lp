@@ -47,14 +47,18 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
           <LpSectionEyebrow className="mb-4 text-left sm:text-center">プラン詳細</LpSectionEyebrow>
           <h1 className="mb-4 text-3xl font-bold">{plan.title}</h1>
 
-          <div className="mb-10 overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-md shadow-sky-200/25">
+          <figure className="mb-10 overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-md shadow-sky-200/25">
             <img
               src={LP_IMAGES.servicesBanner}
-              alt=""
+              alt={`${plan.title}に含まれる制作範囲のイメージを示す共通ヘッダー画像`}
+              width={1728}
+              height={576}
               className="aspect-[21/9] max-h-[10rem] w-full object-cover"
               loading="eager"
+              decoding="async"
             />
-          </div>
+            <figcaption className="sr-only">プランに共通するサービス概要のイメージ</figcaption>
+          </figure>
 
           <div className="mb-10 rounded-[1.25rem] border border-sky-100 bg-secondary/60 p-6">
             <div className="grid gap-4 text-sm sm:grid-cols-3">

@@ -10,6 +10,7 @@ import Payment from "@/pages/Payment";
 import PaymentSuccess from "@/pages/PaymentSuccess";
 import SubscriptionSuccess from "@/pages/SubscriptionSuccess";
 import { HEARING_PATH, getWouterRouterBase } from "@/constants/spaRoutes";
+import { RouterMeta } from "@/components/seo/RouterMeta";
 import { Router as WouterRouter, Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -41,6 +42,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <WouterRouter {...(wouterBase !== undefined ? { base: wouterBase } : {})}>
+            <RouterMeta />
             <AppRoutes />
           </WouterRouter>
         </TooltipProvider>

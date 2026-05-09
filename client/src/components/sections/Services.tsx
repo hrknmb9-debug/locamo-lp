@@ -35,7 +35,7 @@ export default function Services() {
         <figure className="mx-auto mb-12 max-w-5xl overflow-hidden rounded-[1.35rem] border border-sky-100 shadow-md shadow-sky-200/30">
           <img
             src={LP_IMAGES.servicesBanner}
-            alt=""
+            alt="LP制作とホームページ制作など、Locamoのサービスラインアップを端的にまとめたヘッダー画像"
             width={1728}
             height={576}
             loading="lazy"

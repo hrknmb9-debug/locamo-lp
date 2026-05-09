@@ -54,14 +54,18 @@ export default function Contact() {
         {/* Main CTA */}
         <section className="mb-12 animate-fade-in-up">
           <div className="lp-soft-band flex flex-col items-stretch rounded-[1.5rem] border border-sky-100 px-5 py-10 text-center shadow-sm shadow-sky-950/5 sm:px-8 md:p-12">
-            <div className="mx-auto mb-7 max-w-2xl overflow-hidden rounded-xl border border-sky-100/80">
+            <figure className="mx-auto mb-7 max-w-2xl overflow-hidden rounded-xl border border-sky-100/80">
               <img
                 src={LP_IMAGES.servicesBanner}
-                alt=""
+                alt="ヒアリングからお問い合わせまで進むときのサービス概要を示すヘッダー画像"
+                width={1728}
+                height={576}
                 loading="lazy"
+                decoding="async"
                 className="aspect-[21/9] max-h-[8.5rem] w-full object-cover"
               />
-            </div>
+              <figcaption className="sr-only">サービス概要のイメージ</figcaption>
+            </figure>
             <h3 className="text-xl md:text-2xl font-bold mb-3">{PRIMARY_CTA_HEARING_FULL}</h3>
             <ol className="mb-8 max-w-lg mx-auto space-y-2 text-left text-sm leading-relaxed text-muted-foreground list-decimal list-inside">
               {HEARING_FLOW_LINES.map(line => (
