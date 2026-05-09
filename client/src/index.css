@@ -90,11 +90,17 @@
     }
   }
 
+  html {
+    overflow-x: clip;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Noto Sans JP', sans-serif;
     padding-left: env(safe-area-inset-left, 0px);
     padding-right: env(safe-area-inset-right, 0px);
+    overflow-x: clip;
+    min-width: 0;
   }
 
   h1,
@@ -258,5 +264,14 @@
   .jp-keep-all {
     word-break: keep-all;
     overflow-wrap: break-word;
+  }
+
+  /* 狭い幅では keep-all の最小幅だけビューポートを押し広げることがあるため緩める */
+  @media (max-width: 639.98px) {
+    .jp-keep-all {
+      word-break: normal;
+      overflow-wrap: break-word;
+      line-break: strict;
+    }
   }
 }

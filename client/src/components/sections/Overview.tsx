@@ -37,7 +37,7 @@ function StatsSection() {
   const count = useCountUp(50, 2000, isVisible);
 
   return (
-    <div ref={ref} className="space-y-3 animate-fade-in-up">
+    <div ref={ref} className="min-w-0 space-y-3 animate-fade-in-up">
       <div className="grid grid-cols-1 gap-6 text-center sm:grid-cols-3 sm:gap-4 md:gap-8">
         <div>
           <div className="text-3xl md:text-4xl font-bold text-accent tabular-nums">{count}+</div>
@@ -52,7 +52,7 @@ function StatsSection() {
           <p className="mt-2 text-sm text-muted-foreground">納期目安</p>
         </div>
       </div>
-      <p className="text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
+      <p className="mx-auto max-w-full px-0.5 text-center text-xs leading-relaxed text-muted-foreground text-pretty sm:text-sm">
         ※納案件・運用準備におけるサイト制作を含む社内集計です。公開サイトは{' '}
         <a
           href="#works"
@@ -76,26 +76,26 @@ function StatsSection() {
 
 export default function Overview() {
   return (
-    <div className="space-y-16 md:space-y-24">
+    <div className="w-full min-w-0 space-y-16 md:space-y-24">
       {/* Hero Section */}
-      <section className="min-h-[90vh] flex flex-col justify-center items-center px-4 py-20 relative overflow-hidden">
+      <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-x-clip px-4 py-20">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute -top-32 -right-32 size-96 rounded-full bg-sky-100 blur-3xl opacity-55" />
           <div className="absolute top-1/2 -left-24 size-72 rounded-full bg-cyan-100 blur-3xl opacity-45" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-3xl px-3 text-center sm:px-2">
+        <div className="relative z-10 mx-auto w-full min-w-0 max-w-3xl px-3 text-center sm:px-2">
           {/* キャンペーン & メイン約束 — モバイル順序統一 */}
           <div className="animate-fade-in mb-6 flex flex-col items-center gap-2.5 sm:mb-7 sm:gap-3" style={{ animationDelay: '0.08s' }}>
-            <div className="w-full max-w-[21rem] rounded-2xl border border-sky-200 bg-white/95 px-4 py-3 shadow-sm jp-keep-all sm:max-w-xl sm:py-3.5">
-              <span className="flex items-start gap-2">
+            <div className="jp-keep-all w-full max-w-[min(21rem,calc(100vw-2rem))] rounded-2xl border border-sky-200 bg-white/95 px-4 py-3 shadow-sm sm:max-w-xl sm:py-3.5">
+              <span className="flex min-w-0 items-start gap-2">
                 <Sparkles className="size-4 shrink-0 pt-0.5 text-accent" aria-hidden />
-                <span className="text-left text-[13px] font-semibold leading-relaxed text-sky-950 sm:text-sm md:text-[0.9375rem]">{HERO_VALUE_HOOK}</span>
+                <span className="min-w-0 text-left text-[13px] font-semibold leading-relaxed text-sky-950 sm:text-sm md:text-[0.9375rem]">{HERO_VALUE_HOOK}</span>
               </span>
             </div>
             <div
               className={cn(
-                'jp-keep-all w-full max-w-[21rem] rounded-[1.125rem] border-2 border-primary/55 bg-gradient-to-b from-orange-50 to-amber-50 px-4 py-3 text-primary shadow-md shadow-orange-400/18 sm:max-w-md',
+                'jp-keep-all w-full max-w-[min(21rem,calc(100vw-2rem))] rounded-[1.125rem] border-2 border-primary/55 bg-gradient-to-b from-orange-50 to-amber-50 px-4 py-3 text-primary shadow-md shadow-orange-400/18 sm:max-w-md',
               )}
               role="status"
               aria-live="polite"
@@ -116,27 +116,37 @@ export default function Overview() {
           </div>
 
           <h1
-            className="jp-keep-all mb-6 animate-fade-in-up text-[1.875rem] font-bold leading-snug tracking-tight text-balance sm:mb-5 sm:text-[2rem] md:mb-5 md:text-5xl md:leading-tight lg:text-6xl"
+            className="jp-keep-all mx-auto mb-6 max-w-full animate-fade-in-up text-[1.875rem] font-bold leading-snug tracking-tight text-balance sm:mb-5 sm:text-[2rem] md:mb-5 md:text-5xl md:leading-tight lg:text-6xl"
             style={{ animationDelay: '0.2s' }}
           >
             Instagramを見たお客様が、<br className="block sm:hidden" aria-hidden />
             メニューやご予約まで迷わなくなるLPへ。
           </h1>
 
-          <div className="animate-fade-in-up mx-auto mb-8 max-w-xl space-y-3 text-pretty md:space-y-2" style={{ animationDelay: '0.35s' }}>
-            <div className="jp-keep-all rounded-2xl border border-sky-100 bg-sky-50/85 px-3 py-3 text-[13px] leading-relaxed text-sky-900 sm:px-4 sm:text-[0.9375rem] md:leading-relaxed">
+          <div
+            className="animate-fade-in-up mx-auto mb-8 max-w-xl min-w-0 space-y-3 text-pretty md:space-y-2"
+            style={{ animationDelay: '0.35s' }}
+          >
+            <div className="jp-keep-all mx-auto w-full max-w-full rounded-2xl border border-sky-100 bg-sky-50/85 px-3 py-3 text-[13px] leading-relaxed text-sky-900 sm:px-4 sm:text-[0.9375rem] md:leading-relaxed">
               <p>
                 <strong className="font-semibold text-sky-950">AIで構成・文案のたたき台を素早く作成</strong>し、人が読み順とCTAまで整えます。
               </p>
-              <p className="mt-2 leading-relaxed">
-                LP制作<strong className="inline whitespace-nowrap font-semibold text-sky-800">3万円〜</strong>
-                {' · '}
-                公開<strong className="inline whitespace-nowrap font-semibold text-sky-800">・ドメイン月3,000円〜</strong>
-                （別途）。
+              <p className="mt-2 flex flex-col gap-2 leading-relaxed sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-center sm:gap-x-2 sm:gap-y-1">
+                <span>
+                  LP制作<strong className="font-semibold text-sky-800 sm:whitespace-nowrap">3万円〜</strong>
+                </span>
+                <span aria-hidden className="hidden shrink-0 text-sky-300 sm:inline">
+                  ·
+                </span>
+                <span>
+                  公開
+                  <strong className="font-semibold text-sky-800 sm:whitespace-nowrap">・ドメイン月3,000円〜</strong>
+                  （別途）。
+                </span>
               </p>
               <p className="mt-2 text-[12px] leading-relaxed text-muted-foreground sm:text-[13px]">
                 モニター枠の細部は下の脚注と
-                <ProductionFlowJumpLink className="mx-1 inline align-baseline whitespace-nowrap">料金｜制作の流れ</ProductionFlowJumpLink>
+                <ProductionFlowJumpLink className="mx-1 inline align-baseline">料金｜制作の流れ</ProductionFlowJumpLink>
                 をご確認ください。
               </p>
             </div>

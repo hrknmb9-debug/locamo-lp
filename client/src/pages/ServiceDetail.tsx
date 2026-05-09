@@ -23,7 +23,7 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
+    <div className="flex min-h-screen min-w-0 w-full overflow-x-clip flex-col bg-background text-foreground">
       <header className="sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 pt-[env(safe-area-inset-top,0px)] backdrop-blur">
         <div className="container mx-auto flex h-14 min-h-14 items-center gap-4 px-4">
           <a

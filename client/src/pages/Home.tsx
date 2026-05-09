@@ -94,7 +94,7 @@ export default function Home() {
     'flex min-h-11 w-full items-center rounded-full px-3.5 py-3 text-left text-sm font-semibold text-sky-900/85 transition-colors hover:bg-sky-100 active:bg-sky-100 sm:px-4';
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="flex min-h-screen min-w-0 flex-col overflow-x-clip bg-background text-foreground">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:left-[max(1rem,env(safe-area-inset-left,0px))] focus:top-[calc(3.75rem+env(safe-area-inset-top,0px))] focus:z-[100] focus:rounded-xl focus:border focus:border-sky-200 focus:bg-white focus:px-4 focus:py-3 focus:text-sm focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-sky-300"
@@ -210,7 +210,7 @@ export default function Home() {
         )}
       </header>
 
-      <main id="main-content" className="flex-1 outline-none">
+      <main id="main-content" className="w-full min-w-0 flex-1 overflow-x-clip outline-none">
         <Overview />
 
         <ScrollLandmark id="services">
