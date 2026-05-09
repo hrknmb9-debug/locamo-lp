@@ -78,6 +78,7 @@ export default function Contact() {
             <div className="mt-6 flex flex-col items-center gap-3 text-center text-sm">
               <a
                 href={DM_URL}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 font-medium text-muted-foreground underline-offset-4 hover:text-accent hover:underline"
               >
