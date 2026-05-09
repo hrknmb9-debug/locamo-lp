@@ -7,14 +7,28 @@ export const ENV = {
   isProduction: process.env.NODE_ENV === "production",
   forgeApiUrl: process.env.BUILT_IN_FORGE_API_URL ?? "",
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
-  // Stripe keys - MUST come from environment variables (Manus Secrets)
-  stripeSecretKey: process.env.STRIPE_SECRET_KEY ?? "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",
-  stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET || (() => {
-    throw new Error("STRIPE_WEBHOOK_SECRET environment variable is required");
+  // Stripe keys - MUST come from environment variables ONLY (no hardcoded fallbacks)
+  stripeSecretKey: (() => {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) throw new Error("STRIPE_SECRET_KEY environment variable is required");
+    return key;
+  })(),
+  stripeWebhookSecret: (() => {
+    const secret = process.env.STRIPE_WEBHOOK_SECRET;
+    if (!secret) throw new Error("STRIPE_WEBHOOK_SECRET environment variable is required");
+    return secret;
   })(),
   // Stripe Checkout の success_url 用など。未設定時は Host / X-Forwarded-* から推測する
   publicAppUrl: process.env.PUBLIC_APP_URL ?? "https://locamolp-tlkk59sz.manus.space",
-  // Stripe Price IDs - MUST come from environment variables (Manus Secrets)
-  stripePriceLpCreation: process.env.STRIPE_PRICE_LP_CREATION ?? "price_1TVDbG7nv8WWcHmoWEH8fZVa",
-  stripePriceMonthlyHosting: process.env.STRIPE_PRICE_MONTHLY_HOSTING ?? "price_1TVDcE7nv8WWcHmoD3J8QvUU",
+  // Stripe Price IDs - MUST come from environment variables ONLY (no hardcoded fallbacks)
+  stripePriceLpCreation: (() => {
+    const priceId = process.env.STRIPE_PRICE_LP_CREATION;
+    if (!priceId) throw new Error("STRIPE_PRICE_LP_CREATION environment variable is required");
+    return priceId;
+  })(),
+  stripePriceMonthlyHosting: (() => {
+    const priceId = process.env.STRIPE_PRICE_MONTHLY_HOSTING;
+    if (!priceId) throw new Error("STRIPE_PRICE_MONTHLY_HOSTING environment variable is required");
+    return priceId;
+  })(),
 };
