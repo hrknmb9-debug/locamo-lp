@@ -7,12 +7,13 @@ import Privacy from "@/pages/Privacy";
 import ServiceDetail from "@/pages/ServiceDetail";
 import Orders from "@/pages/Orders";
 import Payment from "@/pages/Payment";
+import PaymentSuccess from "@/pages/PaymentSuccess";
+import SubscriptionSuccess from "@/pages/SubscriptionSuccess";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
@@ -21,17 +22,13 @@ function Router() {
       <Route path={"/services/:planId"} component={ServiceDetail} />
       <Route path={"/orders"} component={Orders} />
       <Route path={"/payment"} component={Payment} />
+      <Route path={"/payment-success"} component={PaymentSuccess} />
+      <Route path={"/subscription-success"} component={SubscriptionSuccess} />
       <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
   );
 }
-
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
 function App() {
   return (

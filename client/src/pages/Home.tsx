@@ -214,6 +214,16 @@ export default function Home() {
                     プライバシーポリシー
                   </Link>
                 </li>
+                <li>
+                  <Link href="/payment" className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors">
+                    お支払いページ
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/orders" className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors">
+                    支払い履歴
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -225,7 +235,10 @@ export default function Home() {
               <Link href="/hearing" className="inline-block text-xs text-accent underline-offset-2 hover:underline">
                 LP制作のヒアリングページへ
               </Link>
-              <Link href="/payment" className="mt-2 inline-block text-xs text-accent underline-offset-2 hover:underline">
+              <Link
+                href="/payment"
+                className="mt-2 inline-block text-xs font-medium text-accent underline-offset-2 hover:underline"
+              >
                 お支払いページ
               </Link>
               <a
