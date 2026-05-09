@@ -4,7 +4,7 @@ import { Instagram, ArrowRight, TrendingUp, ClipboardList } from 'lucide-react';
 import { Link } from 'wouter';
 
 import { IG_URL, DM_URL } from '@/constants/locamo';
-import { interceptExternalAnchorInIframe } from '@/lib/openExternalUrl';
+import { activateExternalHref } from '@/lib/openExternalUrl';
 import { PRIMARY_CTA_DM_CONTACT, PRIMARY_CTA_DM_SUBLINE, PRIMARY_CTA_HEARING_FULL } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
 
@@ -175,7 +175,7 @@ export default function InstagramPage() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block"
-              onClick={(e) => interceptExternalAnchorInIframe(e, IG_URL)}
+              onClick={(e) => activateExternalHref(e, IG_URL)}
             >
               <Button
                 size="lg"
@@ -207,7 +207,7 @@ export default function InstagramPage() {
                   buttonVariants({ size: 'lg' }),
                   'btn-primary h-auto min-h-12 w-full rounded-full px-4 py-3 text-primary-foreground shadow-md shadow-orange-300/35 sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-0.5 text-balance sm:gap-1'
                 )}
-                onClick={(e) => interceptExternalAnchorInIframe(e, DM_URL)}
+                onClick={(e) => activateExternalHref(e, DM_URL)}
               >
                 <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold leading-none tracking-wide opacity-95 sm:text-xs">
                   <Instagram size={16} aria-hidden className="shrink-0 sm:h-[1.125rem] sm:w-[1.125rem]" />

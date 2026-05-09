@@ -14,7 +14,7 @@ import { ScrollLandmark } from '@/components/lp/ScrollLandmark';
 import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
 import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
 import { SITE_SCROLL_NAV } from '@/data/siteNav';
-import { interceptExternalAnchorInIframe } from '@/lib/openExternalUrl';
+import { activateExternalHref } from '@/lib/openExternalUrl';
 import { prefersReducedMotion, replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
 
 /** 共通のコンテンツ到達スクロール */
@@ -127,6 +127,20 @@ export default function Home() {
                 {label}
               </a>
             ))}
+            <a
+              href={IG_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${IG_HANDLE}のInstagramプロフィールを開く`}
+              className={cn(
+                navLinkBase,
+                '-mr-1 inline-flex shrink-0 items-center justify-center gap-1 lg:gap-1.5 lg:px-4'
+              )}
+              onClick={(e) => activateExternalHref(e, IG_URL)}
+            >
+              <Instagram size={17} aria-hidden />
+              <span className="max-w-[4.75rem] truncate sm:max-w-none">{IG_HANDLE}</span>
+            </a>
             <Link
               href="/hearing"
               className={cn(
@@ -166,6 +180,18 @@ export default function Home() {
                   {label}
                 </a>
               ))}
+              <a
+                href={IG_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={navLinkDrawer}
+                onClick={(e) => {
+                  if (activateExternalHref(e, IG_URL)) closeMobile();
+                }}
+              >
+                <Instagram size={18} aria-hidden className="shrink-0 text-sky-900/85" />
+                Instagram（プロフィール）
+              </a>
               <Link
                 href="/hearing"
                 onClick={closeMobile}
@@ -269,7 +295,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent hover:underline transition-colors"
-                onClick={(e) => interceptExternalAnchorInIframe(e, DM_URL)}
+                onClick={(e) => activateExternalHref(e, DM_URL)}
               >
                 <Instagram size={14} aria-hidden />
                 {IG_HANDLE}
@@ -279,7 +305,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 block text-xs text-muted-foreground hover:text-accent hover:underline"
-                onClick={(e) => interceptExternalAnchorInIframe(e, IG_URL)}
+                onClick={(e) => activateExternalHref(e, IG_URL)}
               >
                 プロフィールを見る →
               </a>

@@ -17,7 +17,7 @@ import {
 } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
 import { SCROLL_MARGIN_CLASS } from '@/data/siteNav';
-import { interceptExternalAnchorInIframe } from '@/lib/openExternalUrl';
+import { activateExternalHref } from '@/lib/openExternalUrl';
 import { replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
 import { DM_URL } from '@/constants/locamo';
 
@@ -311,7 +311,7 @@ export default function Overview() {
                   buttonVariants({ size: 'lg' }),
                   'btn-primary h-auto min-h-12 w-full rounded-full px-4 py-3 shadow-md shadow-sky-300/35 text-primary-foreground sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-0.5 text-balance sm:gap-1'
                 )}
-                onClick={(e) => interceptExternalAnchorInIframe(e, DM_URL)}
+                onClick={(e) => activateExternalHref(e, DM_URL)}
               >
                 <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold leading-none tracking-wide opacity-95 sm:text-xs">
                   <Instagram className="size-4 shrink-0 sm:size-5" aria-hidden />

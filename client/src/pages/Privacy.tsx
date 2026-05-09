@@ -4,7 +4,7 @@ import { Link } from 'wouter';
 
 import { Button } from '@/components/ui/button';
 import { IG_HANDLE, IG_URL } from '@/constants/locamo';
-import { interceptExternalAnchorInIframe } from '@/lib/openExternalUrl';
+import { activateExternalHref } from '@/lib/openExternalUrl';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 const Privacy: FC = () => {
@@ -46,7 +46,7 @@ const Privacy: FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-medium text-accent underline-offset-2 hover:underline"
-                onClick={(e) => interceptExternalAnchorInIframe(e, IG_URL)}
+                onClick={(e) => activateExternalHref(e, IG_URL)}
               >
                 {IG_HANDLE}
               </a>{' '}
@@ -122,7 +122,7 @@ const Privacy: FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-medium text-accent underline-offset-2 hover:underline"
-                onClick={(e) => interceptExternalAnchorInIframe(e, IG_URL)}
+                onClick={(e) => activateExternalHref(e, IG_URL)}
               >
                 {IG_HANDLE}
               </a>

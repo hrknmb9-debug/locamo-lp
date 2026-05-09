@@ -6,7 +6,7 @@ import type { RouteComponentProps } from 'wouter';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { DM_URL } from '@/constants/locamo';
-import { interceptExternalAnchorInIframe } from '@/lib/openExternalUrl';
+import { activateExternalHref } from '@/lib/openExternalUrl';
 import { PRIMARY_CTA_HEARING_FULL } from '@/data/conversionMessaging';
 import { getPlan } from '@/data/servicePlans';
 import { LP_IMAGES } from '@/lp-images';
@@ -119,7 +119,7 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
                   href={DM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={(e) => interceptExternalAnchorInIframe(e, DM_URL)}
+                  onClick={(e) => activateExternalHref(e, DM_URL)}
                 >
                   DMで質問のみ（任意）
                 </a>
