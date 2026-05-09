@@ -3,9 +3,9 @@ export const LP_IMAGES = {
   hero: '/manus-storage/locamo-hero_769daceb.png',
   servicesBanner: '/manus-storage/locamo-services-banner_3d057aad.png',
   /** Instagram 見出し下 — SNS→LP 連携（生成イラスト） */
-  instagramSectionFigure: '/marketing/locamo-instagram-lp-link.png',
+  instagramSectionFigure: '/manus-storage/locamo-instagram-lp-link_0577a6f8.png',
   /** 料金見出し下 — 制作フロー概要（生成イラスト） */
-  pricingHeaderFigure: '/marketing/locamo-pricing-process-flow.png',
+  pricingHeaderFigure: '/manus-storage/locamo-pricing-process-flow_b55cb76c.png',
   portfolio: [
     '/manus-storage/locamo-thumb-cafe_ef397939.png',
     '/manus-storage/locamo-thumb-retail_1812c96c.png',
