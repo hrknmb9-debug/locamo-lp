@@ -5,6 +5,7 @@ import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 
 import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
+import { interceptExternalAnchorInIframe } from '@/lib/openExternalUrl';
 import { HEARING_FLOW_LINES, PRIMARY_CTA_HEARING_FULL, RESPONSE_SLA } from '@/data/conversionMessaging';
 
 export default function Contact() {
@@ -81,6 +82,7 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 font-medium text-muted-foreground underline-offset-4 hover:text-accent hover:underline"
+                onClick={(e) => interceptExternalAnchorInIframe(e, DM_URL)}
               >
                 <MessageCircle size={16} aria-hidden />
                 先に質問だけ送りたい方はDMへ
@@ -195,6 +197,7 @@ export default function Contact() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-sm text-accent hover:underline transition-colors"
+            onClick={(e) => interceptExternalAnchorInIframe(e, IG_URL)}
           >
             <Instagram size={15} />
             {IG_HANDLE}

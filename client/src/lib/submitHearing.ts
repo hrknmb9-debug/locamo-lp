@@ -1,6 +1,7 @@
 import type { HearingEntry } from '@shared/hearingIngest';
 
 import { formatHearingForClipboard } from '@/lib/hearingFormat';
+import { openExternalUrl } from '@/lib/openExternalUrl';
 
 export async function copyHearingToClipboard(entries: HearingEntry[]): Promise<boolean> {
   try {
@@ -23,13 +24,8 @@ export function navigateToInstagramDm(dmUrl: string): void {
       return;
     }
   } catch {
-    // sandbox / cross-origin で top を変更できない場合は新規タブ（遅延コールでも assign は試す）
-    try {
-      window.open(dmUrl, '_blank', 'noopener,noreferrer');
-      return;
-    } catch {
-      /* noop */
-    }
+    openExternalUrl(dmUrl);
+    return;
   }
 
   window.location.assign(dmUrl);

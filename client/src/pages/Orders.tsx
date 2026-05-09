@@ -2,10 +2,12 @@ import { useAuth } from '@/_core/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Loader2, AlertCircle, ShoppingBag } from 'lucide-react';
-import { Link } from 'wouter';
+import { navigateToHomeAnchor } from '@/lib/siteNavScroll';
+import { Link, useLocation } from 'wouter';
 import { trpc } from '@/lib/trpc';
 
 export default function Orders() {
+  const [, navigate] = useLocation();
   const { user, isAuthenticated } = useAuth();
   const { data: payments, isLoading: paymentsLoading, error: paymentsError } = trpc.payment.getPaymentHistory.useQuery(
     undefined,
@@ -149,8 +151,8 @@ export default function Orders() {
                   <ShoppingBag className="mx-auto mb-4 text-muted-foreground" size={48} />
                   <h3 className="text-xl font-semibold mb-2">支払い履歴がありません</h3>
                   <p className="text-muted-foreground mb-6">まだ支払いが行われていません。</p>
-                  <Button asChild>
-                    <Link href="/#pricing">料金プランを見る</Link>
+                  <Button type="button" onClick={() => navigateToHomeAnchor(navigate, 'pricing')}>
+                    料金プランを見る
                   </Button>
                 </Card>
               ) : null

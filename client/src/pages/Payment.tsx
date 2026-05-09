@@ -3,13 +3,15 @@ import { PaymentButton } from '@/components/PaymentButton';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
-import { Link } from 'wouter';
+import { navigateToHomeAnchor } from '@/lib/siteNavScroll';
+import { Link, useLocation } from 'wouter';
 import { trpc } from '@/lib/trpc';
 
 /**
  * Stripe Checkout はサーバーが解決した Price ID（getCheckoutPrices / create*Checkout）で完結。
  */
 export default function Payment() {
+  const [, navigate] = useLocation();
   const { isAuthenticated, loading: authLoading } = useAuth();
   const { data: checkoutPrices, isLoading: pricesLoading } = trpc.payment.getCheckoutPrices.useQuery();
   const cp = checkoutPrices;
@@ -82,9 +84,13 @@ export default function Payment() {
 
         <p className="mt-10 text-center text-xs text-muted-foreground">
           料金や流れは{' '}
-          <Link href="/#pricing" className="text-accent underline-offset-2 hover:underline">
+          <button
+            type="button"
+            className="text-accent underline-offset-2 hover:underline"
+            onClick={() => navigateToHomeAnchor(navigate, 'pricing')}
+          >
             ホームの料金セクション
-          </Link>
+          </button>
           もご覧ください。
         </p>
       </main>

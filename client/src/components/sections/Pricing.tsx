@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { ChevronDown, Loader2 } from 'lucide-react';
 import { Link } from 'wouter';
 import { DM_URL } from '@/constants/locamo';
+import { interceptExternalAnchorInIframe } from '@/lib/openExternalUrl';
 import { HEARING_FLOW_SHORT, MONITOR_SLOT_NOTE, PRIMARY_CTA_HEARING, RESPONSE_SLA } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
 import { trpc } from '@/lib/trpc';
@@ -217,7 +218,12 @@ export default function Pricing() {
               <p className="text-muted-foreground text-sm mb-4">複数ページの本格的なサイト</p>
               <p className="text-3xl font-bold mb-6">要相談</p>
               <Button size="lg" variant="outline" className="w-full" asChild>
-                <a href={DM_URL} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={DM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => interceptExternalAnchorInIframe(e, DM_URL)}
+                >
                   お見積り依頼（DM）
                 </a>
               </Button>
@@ -266,7 +272,12 @@ export default function Pricing() {
               {PRIMARY_CTA_HEARING}
             </Link>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
-              <a href={DM_URL} target="_blank" rel="noopener noreferrer">
+              <a
+                href={DM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => interceptExternalAnchorInIframe(e, DM_URL)}
+              >
                 口頭での相談（DM任意）
               </a>
             </Button>

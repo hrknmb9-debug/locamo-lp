@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type MouseEvent } from 'react';
 import { Menu, X, Instagram } from 'lucide-react';
 import { Link } from 'wouter';
 
@@ -14,20 +14,17 @@ import { ScrollLandmark } from '@/components/lp/ScrollLandmark';
 import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
 import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
 import { SITE_SCROLL_NAV } from '@/data/siteNav';
-
-function prefersReducedMotion(): boolean {
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
+import { interceptExternalAnchorInIframe } from '@/lib/openExternalUrl';
+import { prefersReducedMotion, replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
 
 /** 共通のコンテンツ到達スクロール */
 function scrollToAnchor(anchorId: string) {
-  const el = document.getElementById(anchorId);
-  if (!el) return;
-  el.scrollIntoView({
-    behavior: prefersReducedMotion() ? 'auto' : 'smooth',
-    block: 'start',
-  });
+  scrollToSiteAnchor(anchorId);
+}
+
+function stripUrlHashPreservePath(): void {
+  if (typeof window.history?.replaceState !== 'function') return;
+  window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
 }
 
 /** 旧タブ型URLのブックマーク互換 */
@@ -61,7 +58,7 @@ export default function Home() {
           top: 0,
           behavior: prefersReducedMotion() ? 'auto' : 'smooth',
         });
-        window.history.replaceState(null, '', '/');
+        stripUrlHashPreservePath();
         return;
       }
       scrollToAnchor(mapped);
@@ -78,8 +75,15 @@ export default function Home() {
       top: 0,
       behavior: prefersReducedMotion() ? 'auto' : 'smooth',
     });
-    window.history.replaceState(null, '', '/');
+    stripUrlHashPreservePath();
     closeMobile();
+  };
+
+  const onSiteAnchorNavClick = (e: MouseEvent<HTMLAnchorElement>, anchor: string, closeDrawer?: boolean) => {
+    e.preventDefault();
+    scrollToSiteAnchor(anchor);
+    replaceUrlHash(anchor);
+    if (closeDrawer) closeMobile();
   };
 
   const navLinkBase =
@@ -114,7 +118,12 @@ export default function Home() {
 
           <nav className="hidden items-center gap-0.5 md:flex lg:gap-1" aria-label="ページ内リンク">
             {SITE_SCROLL_NAV.map(({ anchor, label }) => (
-              <a key={anchor} href={`/#${anchor}`} className={navLinkBase}>
+              <a
+                key={anchor}
+                href={`#${anchor}`}
+                className={navLinkBase}
+                onClick={(e) => onSiteAnchorNavClick(e, anchor)}
+              >
                 {label}
               </a>
             ))}
@@ -148,7 +157,12 @@ export default function Home() {
                 ページ先頭へ
               </button>
               {SITE_SCROLL_NAV.map(({ anchor, label }) => (
-                <a key={anchor} href={`/#${anchor}`} className={navLinkDrawer} onClick={closeMobile}>
+                <a
+                  key={anchor}
+                  href={`#${anchor}`}
+                  className={navLinkDrawer}
+                  onClick={(e) => onSiteAnchorNavClick(e, anchor, true)}
+                >
                   {label}
                 </a>
               ))}
@@ -207,7 +221,11 @@ export default function Home() {
                 </li>
                 {SITE_SCROLL_NAV.map(({ anchor, label }) => (
                   <li key={anchor}>
-                    <a href={`/#${anchor}`} className="text-muted-foreground hover:text-accent text-xs transition-colors">
+                    <a
+                      href={`#${anchor}`}
+                      className="text-muted-foreground hover:text-accent text-xs transition-colors"
+                      onClick={(e) => onSiteAnchorNavClick(e, anchor)}
+                    >
                       {label}
                     </a>
                   </li>
@@ -251,6 +269,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent hover:underline transition-colors"
+                onClick={(e) => interceptExternalAnchorInIframe(e, DM_URL)}
               >
                 <Instagram size={14} aria-hidden />
                 {IG_HANDLE}
@@ -260,6 +279,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 block text-xs text-muted-foreground hover:text-accent hover:underline"
+                onClick={(e) => interceptExternalAnchorInIframe(e, IG_URL)}
               >
                 プロフィールを見る →
               </a>

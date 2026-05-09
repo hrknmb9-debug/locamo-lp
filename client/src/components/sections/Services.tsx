@@ -3,8 +3,9 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ChevronDown, Check } from 'lucide-react';
 import { Link } from 'wouter';
-import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
 import { DM_URL } from '@/constants/locamo';
+import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
+import { interceptExternalAnchorInIframe } from '@/lib/openExternalUrl';
 import { SERVICE_PLANS } from '@/data/servicePlans';
 import { LP_IMAGES } from '@/lp-images';
 
@@ -188,7 +189,7 @@ export default function Services() {
               {PRIMARY_CTA_HEARING}
             </Link>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
-              <a href={DM_URL} target="_blank" rel="noopener noreferrer">
+              <a href={DM_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => interceptExternalAnchorInIframe(e, DM_URL)}>
                 追ってDMで話したい（任意）
               </a>
             </Button>

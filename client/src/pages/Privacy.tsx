@@ -4,6 +4,7 @@ import { Link } from 'wouter';
 
 import { Button } from '@/components/ui/button';
 import { IG_HANDLE, IG_URL } from '@/constants/locamo';
+import { interceptExternalAnchorInIframe } from '@/lib/openExternalUrl';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 const Privacy: FC = () => {
@@ -40,7 +41,13 @@ const Privacy: FC = () => {
             <dt className="font-semibold text-sky-950">連絡先</dt>
             <dd>
               Instagram{' '}
-              <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="font-medium text-accent underline-offset-2 hover:underline">
+              <a
+                href={IG_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-accent underline-offset-2 hover:underline"
+                onClick={(e) => interceptExternalAnchorInIframe(e, IG_URL)}
+              >
                 {IG_HANDLE}
               </a>{' '}
               （ダイレクトメッセージ）
@@ -110,7 +117,13 @@ const Privacy: FC = () => {
           <PolicySection title="第8条（お問い合わせ）">
             <p className="text-muted-foreground">
               本ポリシーに関するお問い合わせは、
-              <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="font-medium text-accent underline-offset-2 hover:underline">
+              <a
+                href={IG_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-accent underline-offset-2 hover:underline"
+                onClick={(e) => interceptExternalAnchorInIframe(e, IG_URL)}
+              >
                 {IG_HANDLE}
               </a>
               （NANBA企画 / Locamo）までダイレクトメッセージにてご連絡ください。
