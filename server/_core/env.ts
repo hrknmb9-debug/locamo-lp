@@ -8,7 +8,7 @@ export const ENV = {
   forgeApiUrl: process.env.BUILT_IN_FORGE_API_URL ?? "",
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
   // Stripe live mode keys (hardcoded for production - always use live keys)
-  stripeSecretKey: "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",
+  stripeSecretKey: "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",
   stripeWebhookSecret: "whsec_SJTTC0OhsOP2Eu4lQJk1NuFtMXJ2vNwJ",
   // Stripe Checkout の success_url 用など。未設定時は Host / X-Forwarded-* から推測する
   publicAppUrl: process.env.PUBLIC_APP_URL ?? "https://locamolp-tlkk59sz.manus.space",
