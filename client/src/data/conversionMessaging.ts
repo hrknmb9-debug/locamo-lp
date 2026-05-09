@@ -28,6 +28,13 @@ export const SCOPE_EXCLUDED_BULLETS = [
 export const MONITOR_SLOT_NOTE =
   'モニター枠は先着・審査あり。枠外・通常依頼は制作費3万円〜。無料枠でもサイト公開に伴う月額費（ドメインなど）は別途実費の旨をご案内します。';
 
+/** ヒーロー用モニター帯（複数行でレイアウトし、単語中途改行を避ける） */
+export const MONITOR_BADGE_LINES = [
+  'モニター先行・最大3店まで',
+  'ご採用いただいた店は制作費無料',
+  '（審査付き／先着）',
+] as const;
+
 export const PRIMARY_CTA_HEARING = 'ヒアリングに進む';
 
 export const PRIMARY_CTA_HEARING_FULL = 'LP制作のヒアリングに進む';
@@ -67,6 +74,14 @@ export const ABOUT_SECTION_EYEBROW = 'このサービスの考え方';
 
 /** サイト全体で共有するお申込み〜公開までの概要（一覧は `APPLICATION_FLOW_STEPS`）。 */
 export const APPLICATION_FLOW_HEADING = 'お申込み〜公開まで（ざっくりの流れ）';
+
+/** ヒーロー等の短文ラベル（改行しない）—詳細タイムラインは料金の「制作の流れ」へ集約 */
+export const APPLICATION_FLOW_VISUAL_LABELS = [
+  'サイトで入力',
+  'DM送信',
+  'ご返答',
+  '契約〜公開',
+] as const;
 
 export type ApplicationFlowStep = {
   readonly num: string;

@@ -1,5 +1,6 @@
 import { buttonVariants } from '@/components/ui/button';
 import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
+import { ProductionFlowJumpLink } from '@/components/lp/ProductionFlowJumpLink';
 import { cn } from '@/lib/utils';
 import { LP_IMAGES } from '@/lp-images';
 import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
@@ -8,8 +9,6 @@ import { Link } from 'wouter';
 import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import {
-  APPLICATION_FLOW_HEADING,
-  APPLICATION_FLOW_STEPS,
   HEARING_FLOW_LINES,
   PRIMARY_CTA_HEARING_FULL,
   RESPONSE_SLA,
@@ -102,30 +101,14 @@ export default function Contact() {
           </div>
         </section>
 
-        {/* Free Diagnosis Flow */}
-        <section className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-          <h3 className="mb-3 text-xl font-bold text-center">{APPLICATION_FLOW_HEADING}</h3>
-          <p className="mx-auto mb-8 max-w-lg text-center text-xs leading-relaxed text-muted-foreground text-pretty sm:text-sm">
-            InstagramのDMを中心に、この順でご案内します。お支払いはサイト内のお支払いページ（ログイン後）から可能なタイミングでご連絡します。
+        <section className="mb-12 animate-fade-in-up jp-keep-all px-1" style={{ animationDelay: '0.1s' }}>
+          <h3 className="mb-4 text-xl font-bold text-center">順序だけをまとめたページ</h3>
+          <p className="mx-auto max-w-xl text-center text-sm leading-relaxed text-muted-foreground text-pretty">
+            サイト内でのお申込みから公開までの<strong className="font-semibold text-sky-950">時系列だけ</strong>は料金ページの
+            <ProductionFlowJumpLink className="mx-0.5">「制作の流れ」タイムライン</ProductionFlowJumpLink>
+            だけにおいています。トップにあるのは名前の付いた視覚的な並びのみです。
           </p>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-            {APPLICATION_FLOW_STEPS.map((item, idx) => (
-              <div
-                key={item.num}
-                className="animate-fade-in-up flex gap-4 rounded-[1.25rem] border border-sky-100 bg-card p-[1.125rem] transition-all hover:border-sky-200 hover:shadow-md sm:p-5"
-                style={{ animationDelay: `${0.06 * idx}s` }}
-              >
-                <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground shadow-sm shadow-sky-300/50 sm:size-10">
-                  {item.num}
-                </div>
-                <div className="min-w-0">
-                  <h4 className="mb-1.5 font-semibold text-sm leading-snug text-sky-950 sm:text-[0.9375rem]">{item.title}</h4>
-                  <p className="text-[12px] leading-relaxed text-muted-foreground text-pretty sm:text-xs">{item.detail}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="text-xs text-muted-foreground text-center mt-4">
+          <p className="mx-auto mt-4 max-w-md text-center text-xs leading-relaxed text-muted-foreground sm:text-[13px]">
             ※別途 サイト公開・ドメイン費用 月3,000円〜（込み）
           </p>
         </section>

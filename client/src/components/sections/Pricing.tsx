@@ -8,7 +8,6 @@ import { Link } from 'wouter';
 import { DM_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import {
-  APPLICATION_FLOW_HEADING,
   APPLICATION_FLOW_STEPS,
   HEARING_FLOW_SHORT,
   MONITOR_SLOT_NOTE,
@@ -16,6 +15,7 @@ import {
   RESPONSE_SLA,
 } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
+import { SCROLL_MARGIN_CLASS } from '@/data/siteNav';
 import { trpc } from '@/lib/trpc';
 
 export default function Pricing() {
@@ -29,7 +29,7 @@ export default function Pricing() {
     },
     {
       q: 'お申し込みの流れを教えてください',
-      a: `トップにも同じ一覧があります（${APPLICATION_FLOW_HEADING}）。${HEARING_FLOW_SHORT} ${RESPONSE_SLA}`,
+      a: `時系列ごとの細かい順序は、このページだけにまとめてあります。「制作の流れ」のタイムラインをご覧ください。入力〜DM送信の体感はヒアリング画面で案内されています。${HEARING_FLOW_SHORT} ${RESPONSE_SLA}`,
     },
     {
       q: 'Instagramアカウントは必要ですか？',
@@ -59,8 +59,9 @@ export default function Pricing() {
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           料金・プロセス
         </h2>
-        <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
-          透明な料金と制作の流れです。受付手順・初回ご返信は下の「よくある質問」に集約しています。
+        <p className="text-center text-muted-foreground jp-keep-all mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
+          時系列だけは<strong className="font-semibold text-sky-950">「制作の流れ」をこのページだけ</strong>
+          でまとめ、重複を避けています。FAQもここへ集約しています。
         </p>
 
         <figure className="mx-auto mb-12 max-w-3xl overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-md shadow-sky-200/25">
@@ -122,8 +123,8 @@ export default function Pricing() {
         </div>
 
         {/* Process Timeline */}
-        <div className="mb-14 animate-fade-in-up">
-          <h3 className="text-xl font-bold mb-7">制作の流れ</h3>
+        <div id="production-flow" className={cn(SCROLL_MARGIN_CLASS, 'mb-14 animate-fade-in-up')}>
+          <h3 className="text-xl font-bold mb-7 jp-keep-all">制作の流れ</h3>
           <div className="space-y-0">
             {APPLICATION_FLOW_STEPS.map((step, idx) => (
               <div key={step.num} className="flex gap-4 relative">

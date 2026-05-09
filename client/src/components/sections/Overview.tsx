@@ -1,6 +1,7 @@
 import { Button, buttonVariants } from '@/components/ui/button';
-import { ConversionFlowRibbon } from '@/components/lp/ConversionFlowRibbon';
+import { HeroFlowStrip } from '@/components/lp/HeroFlowStrip';
 import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
+import { ProductionFlowJumpLink } from '@/components/lp/ProductionFlowJumpLink';
 import { cn } from '@/lib/utils';
 import { ArrowRight, ClipboardList, Instagram, Sparkles, Zap, Activity, LayoutList, Waypoints } from 'lucide-react';
 import { Link } from 'wouter';
@@ -11,6 +12,7 @@ import {
   APPLY_SECTION_EYEBROW,
   HEARING_FLOW_SHORT,
   HERO_VALUE_HOOK,
+  MONITOR_BADGE_LINES,
   MONITOR_SLOT_NOTE,
   PRIMARY_CTA_DM_CONTACT,
   PRIMARY_CTA_DM_SUBLINE,
@@ -85,36 +87,62 @@ export default function Overview() {
         <div className="relative z-10 mx-auto max-w-3xl px-3 text-center sm:px-2">
           {/* キャンペーン & メイン約束 — モバイル順序統一 */}
           <div className="animate-fade-in mb-6 flex flex-col items-center gap-2.5 sm:mb-7 sm:gap-3" style={{ animationDelay: '0.08s' }}>
-            <span className="inline-flex max-w-[min(100%,22rem)] items-center gap-2 rounded-2xl border border-sky-200 bg-white/95 px-3.5 py-2 shadow-sm sm:max-w-none sm:py-2.5">
-              <Sparkles className="size-[0.9375rem] shrink-0 text-accent sm:size-4" aria-hidden />
-              <span className="text-left text-[12px] font-semibold leading-snug text-sky-900 sm:text-center sm:text-sm md:text-[0.9375rem]">
-                {HERO_VALUE_HOOK}
+            <div className="w-full max-w-[21rem] rounded-2xl border border-sky-200 bg-white/95 px-4 py-3 shadow-sm jp-keep-all sm:max-w-xl sm:py-3.5">
+              <span className="flex items-start gap-2">
+                <Sparkles className="size-4 shrink-0 pt-0.5 text-accent" aria-hidden />
+                <span className="text-left text-[13px] font-semibold leading-relaxed text-sky-950 sm:text-sm md:text-[0.9375rem]">{HERO_VALUE_HOOK}</span>
               </span>
-            </span>
-            <span className="inline-flex max-w-[min(100%,21rem)] items-center justify-center rounded-full border-2 border-primary/45 bg-gradient-to-b from-orange-50 to-amber-50 px-3 py-2 text-[11px] font-bold leading-snug text-primary sm:max-w-none sm:text-[0.8125rem] md:text-sm">
-              モニター先行<strong className="mx-1">最大3店</strong>まで · ご採用品は<strong className="mx-1">制作費無料</strong>
-              （審査付き／先着）
-            </span>
+            </div>
+            <div
+              className={cn(
+                'jp-keep-all w-full max-w-[21rem] rounded-[1.125rem] border-2 border-primary/55 bg-gradient-to-b from-orange-50 to-amber-50 px-4 py-3 text-primary shadow-md shadow-orange-400/18 sm:max-w-md',
+              )}
+              role="status"
+              aria-live="polite"
+            >
+              {MONITOR_BADGE_LINES.map((line, idx) => (
+                <p
+                  key={line}
+                  className={cn(
+                    'text-[13px] font-bold leading-normal tracking-tight sm:text-sm md:text-[0.9375rem]',
+                    idx > 0 && 'mt-2 border-t border-primary/35 pt-2',
+                    idx === MONITOR_BADGE_LINES.length - 1 && 'text-[11.5px] font-semibold opacity-95 sm:text-xs md:text-[0.8125rem]',
+                  )}
+                >
+                  {line}
+                </p>
+              ))}
+            </div>
           </div>
 
           <h1
-            className="mb-6 animate-fade-in-up text-[1.9rem] font-bold leading-tight tracking-tight sm:mb-5 sm:text-[2rem] md:mb-5 md:text-5xl md:leading-tight lg:text-6xl"
+            className="jp-keep-all mb-6 animate-fade-in-up text-[1.875rem] font-bold leading-snug tracking-tight text-balance sm:mb-5 sm:text-[2rem] md:mb-5 md:text-5xl md:leading-tight lg:text-6xl"
             style={{ animationDelay: '0.2s' }}
           >
-            Instagramを見たお客様が、<br className="sm:hidden" />
-            <span className="hidden sm:inline"> </span>
-            メニューや予約まで迷わなくなるLPへ。
+            Instagramを見たお客様が、<br className="block sm:hidden" aria-hidden />
+            メニューやご予約まで迷わなくなるLPへ。
           </h1>
 
           <div className="animate-fade-in-up mx-auto mb-8 max-w-xl space-y-3 text-pretty md:space-y-2" style={{ animationDelay: '0.35s' }}>
-            <p className="rounded-2xl border border-sky-100 bg-sky-50/85 px-3 py-3 text-[13px] leading-relaxed text-sky-900 sm:px-4 sm:text-[0.9375rem] md:leading-relaxed">
-              <strong className="font-semibold text-sky-950">AIで構成・文案のたたき台を素早く作成</strong>し、人が読み順とCTAまで整えます。
-              LP制作<strong className="font-semibold text-sky-800">3万円〜</strong>／公開<strong className="font-semibold text-sky-800">・ドメインは月3,000円〜</strong>
-              （別途）。モニター枠など条件の細部は、下の脚注と「料金」セクションでもご確認ください。
-            </p>
-            <p className="text-base leading-relaxed text-muted-foreground md:text-[1.05rem] md:leading-relaxed">
+            <div className="jp-keep-all rounded-2xl border border-sky-100 bg-sky-50/85 px-3 py-3 text-[13px] leading-relaxed text-sky-900 sm:px-4 sm:text-[0.9375rem] md:leading-relaxed">
+              <p>
+                <strong className="font-semibold text-sky-950">AIで構成・文案のたたき台を素早く作成</strong>し、人が読み順とCTAまで整えます。
+              </p>
+              <p className="mt-2 leading-relaxed">
+                LP制作<strong className="inline whitespace-nowrap font-semibold text-sky-800">3万円〜</strong>
+                {' · '}
+                公開<strong className="inline whitespace-nowrap font-semibold text-sky-800">・ドメイン月3,000円〜</strong>
+                （別途）。
+              </p>
+              <p className="mt-2 text-[12px] leading-relaxed text-muted-foreground sm:text-[13px]">
+                モニター枠の細部は下の脚注と
+                <ProductionFlowJumpLink className="mx-1 inline align-baseline whitespace-nowrap">料金｜制作の流れ</ProductionFlowJumpLink>
+                をご確認ください。
+              </p>
+            </div>
+            <p className="jp-keep-all text-base leading-relaxed text-muted-foreground md:text-[1.05rem] md:leading-relaxed">
               SNSに散らばりがちな情報を<strong className="font-semibold text-sky-950">公式の一枚</strong>
-              に集約し、「次はここまで進めば大丈夫」をはっきりさせます。
+              にまとめ、次に何をすればよいかを読み順で示します。
             </p>
           </div>
 
@@ -157,7 +185,7 @@ export default function Overview() {
             </Button>
           </div>
 
-          <ConversionFlowRibbon />
+          <HeroFlowStrip />
 
           <div className="mx-auto mb-10 h-px w-14 bg-border sm:mb-12" />
 
@@ -286,15 +314,14 @@ export default function Overview() {
             <h2 className="mb-3 text-center text-2xl font-bold leading-snug md:text-[1.7rem]">
               {HEARING_FLOW_SHORT}
             </h2>
-            <p className="mx-auto mb-6 max-w-lg text-center text-sm leading-relaxed text-muted-foreground text-pretty">
+            <p className="mx-auto mb-5 max-w-lg text-center text-sm leading-relaxed text-muted-foreground jp-keep-all">
+              <strong className="font-semibold text-sky-950">時系列だけは</strong>
+              <ProductionFlowJumpLink className="mx-0.5">料金ページの制作の流れ</ProductionFlowJumpLink>
+              に一本化しました。ここでは操作の体感にだけ絞ります。
+            </p>
+            <p className="mx-auto mb-8 max-w-lg text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
               {REFER_CONTACT_FOR_SLA}
             </p>
-            <ul className="mx-auto mb-8 max-w-lg space-y-2 text-center text-sm leading-relaxed text-muted-foreground text-pretty">
-              <li className="text-left sm:text-center">● 質問は4ステップ。「次へ」で進みます。</li>
-              <li className="text-left sm:text-center">
-                ● 最後のボタンでコピーされ、InstagramのDMへ進みます。開いた画面で貼り付けて送信してください。
-              </li>
-            </ul>
             <div className="relative z-[1] mx-auto flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
               <a
                 href={DM_URL}
