@@ -1,4 +1,5 @@
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { Instagram, ArrowRight, TrendingUp, ClipboardList } from 'lucide-react';
 import { Link } from 'wouter';
 
@@ -206,13 +207,17 @@ export default function InstagramPage() {
                   <ArrowRight className="mt-0.5 size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
                 </a>
               </Button>
-              <Button size="lg" variant="outline" className="h-auto min-h-12 w-full rounded-full border-sky-200 px-4 py-3 sm:max-w-[13.5rem] sm:px-5 sm:py-4" asChild>
-                <Link href="/hearing" className="inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-1 text-balance">
-                  <ClipboardList size={18} aria-hidden className="shrink-0 text-accent sm:h-5 sm:w-5" />
-                  <span className="text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]">{PRIMARY_CTA_HEARING_FULL}</span>
-                  <ArrowRight className="size-4 shrink-0 text-muted-foreground sm:hidden" aria-hidden />
-                </Link>
-              </Button>
+              <Link
+                href="/hearing"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'h-auto min-h-12 w-full rounded-full border-sky-200 px-4 py-3 sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-1 text-balance'
+                )}
+              >
+                <ClipboardList size={18} aria-hidden className="shrink-0 text-accent sm:h-5 sm:w-5" />
+                <span className="text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]">{PRIMARY_CTA_HEARING_FULL}</span>
+                <ArrowRight className="size-4 shrink-0 text-muted-foreground sm:hidden" aria-hidden />
+              </Link>
             </div>
           </div>
         </section>

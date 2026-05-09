@@ -1,4 +1,5 @@
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { ArrowRight, ClipboardList, Instagram, Sparkles, Zap, Activity, LayoutList, Waypoints } from 'lucide-react';
 import { Link } from 'wouter';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
@@ -256,12 +257,16 @@ export default function Overview() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground" asChild>
-              <Link href="/hearing">
-                {PRIMARY_CTA_HEARING_FULL}
-                <ArrowRight className="ml-1.5 inline" size={17} />
-              </Link>
-            </Button>
+            <Link
+              href="/hearing"
+              className={cn(
+                buttonVariants({ size: 'lg' }),
+                'btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground'
+              )}
+            >
+              {PRIMARY_CTA_HEARING_FULL}
+              <ArrowRight className="ml-1.5 inline" size={17} />
+            </Link>
             <Button variant="outline" size="lg" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
               <a href="#pricing">料金・フローを見る</a>
             </Button>
@@ -301,21 +306,17 @@ export default function Overview() {
                   <ArrowRight className="mt-0.5 size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
                 </a>
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="h-auto min-h-12 w-full rounded-full border-sky-200 px-4 py-3 sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4"
-                asChild
+              <Link
+                href="/hearing"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'h-auto min-h-12 w-full rounded-full border-sky-200 px-4 py-3 sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-1 text-balance'
+                )}
               >
-                <Link
-                  href="/hearing"
-                  className="inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-1 text-balance"
-                >
-                  <ClipboardList className="size-4 shrink-0 text-accent sm:size-5" aria-hidden />
-                  <span className="text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]">{PRIMARY_CTA_HEARING_FULL}</span>
-                  <ArrowRight className="size-4 shrink-0 text-muted-foreground sm:hidden" aria-hidden />
-                </Link>
-              </Button>
+                <ClipboardList className="size-4 shrink-0 text-accent sm:size-5" aria-hidden />
+                <span className="text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]">{PRIMARY_CTA_HEARING_FULL}</span>
+                <ArrowRight className="size-4 shrink-0 text-muted-foreground sm:hidden" aria-hidden />
+              </Link>
             </div>
             <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
               <Link href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">
