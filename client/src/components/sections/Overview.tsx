@@ -116,11 +116,13 @@ export default function Overview() {
           </div>
 
           <h1
-            className="jp-keep-all mx-auto mb-6 max-w-full animate-fade-in-up text-[1.875rem] font-bold leading-snug tracking-tight text-balance sm:mb-5 sm:text-[2rem] md:mb-5 md:text-5xl md:leading-tight lg:text-6xl"
+            className="mx-auto mb-6 max-w-full animate-fade-in-up text-center text-[1.875rem] font-bold leading-snug tracking-tight sm:mb-5 sm:text-[2rem] md:mb-5 md:text-5xl md:leading-tight lg:text-6xl"
             style={{ animationDelay: '0.2s' }}
           >
-            Instagramを見たお客様が、<br className="block sm:hidden" aria-hidden />
-            メニューやご予約まで迷わなくなるLPへ。
+            <span className="block md:inline">
+              Instagramを<span className="whitespace-nowrap">見た</span>お客様が
+            </span>
+            <span className="block md:inline">メニューやご予約まで迷わなくなるLPへ</span>
           </h1>
 
           <div
