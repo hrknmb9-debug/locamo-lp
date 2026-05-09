@@ -8,7 +8,7 @@ export const ENV = {
   forgeApiUrl: process.env.BUILT_IN_FORGE_API_URL ?? "",
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
   // Stripe keys - MUST come from environment variables (Manus Secrets)
-  stripeSecretKey: process.env.STRIPE_SECRET_KEY ?? "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",
+  stripeSecretKey: process.env.STRIPE_SECRET_KEY ?? "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",
   stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET || (() => {
     throw new Error("STRIPE_WEBHOOK_SECRET environment variable is required");
   })(),
