@@ -235,12 +235,16 @@ export default function Home() {
               <Link href="/hearing" className="inline-block text-xs text-accent underline-offset-2 hover:underline">
                 LP制作のヒアリングページへ
               </Link>
+<<<<<<< Updated upstream
               <Link
                 href="/payment"
                 className="mt-2 inline-block text-xs font-medium text-accent underline-offset-2 hover:underline"
               >
+=======
+              <a href="/payment" className="mt-2 inline-block text-xs text-accent underline-offset-2 hover:underline">
+>>>>>>> Stashed changes
                 お支払いページ
-              </Link>
+              </a>
               <a
                 href={DM_URL}
                 target="_blank"
