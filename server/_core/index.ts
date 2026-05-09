@@ -32,6 +32,8 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 async function startServer() {
   const app = express();
   const server = createServer(app);
+  // リバースプロキシ（Manus 等）越しでも X-Forwarded-* / req.protocol が正しく効くように
+  app.set("trust proxy", 1);
   // Setup Stripe webhook BEFORE express.json()
   setupStripeWebhook(app);
   // Configure body parser with larger size limit for file uploads

@@ -9,4 +9,9 @@ export const ENV = {
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
   stripeSecretKey: process.env.STRIPE_SECRET_KEY ?? "",
   stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET ?? "",
+  /** Stripe Checkout の success_url 用など。未設定時は Host / X-Forwarded-* から推測する */
+  publicAppUrl: process.env.PUBLIC_APP_URL ?? "",
+  /** Secret Key と同じアカウント・同じモードの Price API ID */
+  stripePriceLpCreation: process.env.STRIPE_PRICE_LP_CREATION ?? "",
+  stripePriceMonthlyHosting: process.env.STRIPE_PRICE_MONTHLY_HOSTING ?? "",
 };
