@@ -64,7 +64,7 @@ export default function Contact() {
               ))}
             </ol>
             <div className="flex w-full justify-center px-2">
-              <a
+              <Link
                 href="/hearing"
                 className={cn(
                   buttonVariants({ size: 'lg' }),
@@ -73,7 +73,7 @@ export default function Contact() {
               >
                 {PRIMARY_CTA_HEARING_FULL}
                 <ArrowRight size={16} className="shrink-0" aria-hidden />
-              </a>
+              </Link>
             </div>
             <div className="mt-6 flex flex-col items-center gap-3 text-center text-sm">
               <a
@@ -173,7 +173,7 @@ export default function Contact() {
             <p className="text-muted-foreground text-sm mb-7 text-pretty">
               プランミニマムのみ知りたい場合も、この流れから伺えれば順にご案内します。
             </p>
-            <a
+            <Link
               href="/hearing"
               className={cn(
                 buttonVariants({ size: 'lg' }),
@@ -182,7 +182,7 @@ export default function Contact() {
             >
               {PRIMARY_CTA_HEARING_FULL}
               <ArrowRight className="ml-2 inline" size={16} aria-hidden />
-            </a>
+            </Link>
           </div>
         </section>
 

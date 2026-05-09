@@ -1,6 +1,7 @@
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Instagram, ArrowRight, TrendingUp, ClipboardList } from 'lucide-react';
+import { Link } from 'wouter';
 
 import { IG_URL, DM_URL } from '@/constants/locamo';
 import { PRIMARY_CTA_DM_CONTACT, PRIMARY_CTA_DM_SUBLINE, PRIMARY_CTA_HEARING_FULL } from '@/data/conversionMessaging';
@@ -212,7 +213,7 @@ export default function InstagramPage() {
                 <span className="text-center text-sm font-bold leading-tight sm:text-[15px]">{PRIMARY_CTA_DM_CONTACT}</span>
                 <ArrowRight className="mt-0.5 size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
               </a>
-              <a
+              <Link
                 href="/hearing"
                 className={cn(
                   buttonVariants({ variant: 'outline', size: 'lg' }),
@@ -222,7 +223,7 @@ export default function InstagramPage() {
                 <ClipboardList size={18} aria-hidden className="shrink-0 text-accent sm:h-5 sm:w-5" />
                 <span className="text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]">{PRIMARY_CTA_HEARING_FULL}</span>
                 <ArrowRight className="size-4 shrink-0 text-muted-foreground sm:hidden" aria-hidden />
-              </a>
+              </Link>
             </div>
           </div>
         </section>

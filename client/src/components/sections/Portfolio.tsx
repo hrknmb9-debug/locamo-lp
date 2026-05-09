@@ -1,6 +1,7 @@
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ArrowRight, ExternalLink } from 'lucide-react';
+import { Link } from 'wouter';
 import { MONITOR_SLOT_NOTE, PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
 
 const PORTFOLIO_SITES = [
@@ -116,7 +117,7 @@ export default function Portfolio() {
           </div>
 
           <div className="flex w-full justify-center px-1 sm:px-3">
-            <a
+            <Link
               href="/hearing"
               className={cn(
                 buttonVariants({ size: 'lg' }),
@@ -125,7 +126,7 @@ export default function Portfolio() {
             >
               {PRIMARY_CTA_HEARING}
               <ArrowRight className="size-5 shrink-0" aria-hidden />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

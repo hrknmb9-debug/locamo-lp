@@ -135,7 +135,7 @@ export default function Overview() {
             className="flex flex-col sm:flex-row gap-3 justify-center mb-12 animate-fade-in-up"
             style={{ animationDelay: '0.5s' }}
           >
-            <a
+            <Link
               href="/hearing"
               className={cn(
                 buttonVariants({ size: 'lg' }),
@@ -144,7 +144,7 @@ export default function Overview() {
             >
               {PRIMARY_CTA_HEARING_FULL}
               <ArrowRight className="ml-1.5 shrink-0" size={17} aria-hidden />
-            </a>
+            </Link>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold text-foreground hover:bg-sky-50" asChild>
               <a href="#services">サービス内容を確認</a>
             </Button>
@@ -258,7 +258,7 @@ export default function Overview() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <a
+            <Link
               href="/hearing"
               className={cn(
                 buttonVariants({ size: 'lg' }),
@@ -267,7 +267,7 @@ export default function Overview() {
             >
               {PRIMARY_CTA_HEARING_FULL}
               <ArrowRight className="ml-1.5 shrink-0" size={17} aria-hidden />
-            </a>
+            </Link>
             <Button variant="outline" size="lg" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
               <a href="#pricing">料金・フローを見る</a>
             </Button>
@@ -309,7 +309,7 @@ export default function Overview() {
                 <span className="text-center text-sm font-bold leading-tight sm:text-[15px]">{PRIMARY_CTA_DM_CONTACT}</span>
                 <ArrowRight className="mt-0.5 size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
               </a>
-              <a
+              <Link
                 href="/hearing"
                 className={cn(
                   buttonVariants({ variant: 'outline', size: 'lg' }),
@@ -319,7 +319,7 @@ export default function Overview() {
                 <ClipboardList className="size-4 shrink-0 text-accent sm:size-5" aria-hidden />
                 <span className="text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]">{PRIMARY_CTA_HEARING_FULL}</span>
                 <ArrowRight className="size-4 shrink-0 text-muted-foreground sm:hidden" aria-hidden />
-              </a>
+              </Link>
             </div>
             <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
               <Link href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">

@@ -118,7 +118,7 @@ export default function Home() {
                 {label}
               </a>
             ))}
-            <a
+            <Link
               href="/hearing"
               className={cn(
                 buttonVariants({ size: 'sm' }),
@@ -126,7 +126,7 @@ export default function Home() {
               )}
             >
               {PRIMARY_CTA_HEARING}
-            </a>
+            </Link>
           </nav>
 
           <button
@@ -152,7 +152,7 @@ export default function Home() {
                   {label}
                 </a>
               ))}
-              <a
+              <Link
                 href="/hearing"
                 onClick={closeMobile}
                 className={cn(
@@ -161,7 +161,7 @@ export default function Home() {
                 )}
               >
                 {PRIMARY_CTA_HEARING}
-              </a>
+              </Link>
             </div>
           </nav>
         )}

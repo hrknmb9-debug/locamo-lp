@@ -103,7 +103,7 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
               ヒアリング入力をコピーしInstagramのDMに貼り付けて送信いただいた時点で、お申し込みとして受け付けます。先に質問だけ送りたい場合はDMのみでも構いません。
             </p>
             <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
-              <a
+              <Link
                 href="/hearing"
                 className={cn(
                   buttonVariants({ size: 'lg' }),
@@ -112,7 +112,7 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
               >
                 {PRIMARY_CTA_HEARING_FULL}
                 <ArrowRight className="ml-2 inline size-5" aria-hidden />
-              </a>
+              </Link>
               <Button size="lg" variant="outline" className="rounded-full border-sky-200" asChild>
                 <a href={DM_URL} target="_blank" rel="noopener noreferrer">
                   DMで質問のみ（任意）

@@ -178,7 +178,7 @@ export default function Services() {
             「まずLPで足りるか」迷う段階でも、ヒアリング内容をいただければ構成の方向性までお返しします。
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
-            <a
+            <Link
               href="/hearing"
               className={cn(
                 buttonVariants({ size: 'lg' }),
@@ -186,7 +186,7 @@ export default function Services() {
               )}
             >
               {PRIMARY_CTA_HEARING}
-            </a>
+            </Link>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
               <a href={DM_URL} target="_blank" rel="noopener noreferrer">
                 追ってDMで話したい（任意）
