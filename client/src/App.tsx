@@ -9,15 +9,17 @@ import Orders from "@/pages/Orders";
 import Payment from "@/pages/Payment";
 import PaymentSuccess from "@/pages/PaymentSuccess";
 import SubscriptionSuccess from "@/pages/SubscriptionSuccess";
-import { Route, Switch } from "wouter";
+import { HEARING_PATH, getWouterRouterBase } from "@/constants/spaRoutes";
+import { Router as WouterRouter, Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
-function Router() {
+function AppRoutes() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/hearing"} component={Hearing} />
+      <Route path={HEARING_PATH} component={Hearing} />
+      <Route path={`${HEARING_PATH}/`} component={Hearing} />
       <Route path={"/privacy"} component={Privacy} />
       <Route path={"/services/:planId"} component={ServiceDetail} />
       <Route path={"/orders"} component={Orders} />
@@ -31,12 +33,16 @@ function Router() {
 }
 
 function App() {
+  const wouterBase = getWouterRouterBase();
+
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <WouterRouter {...(wouterBase !== undefined ? { base: wouterBase } : {})}>
+            <AppRoutes />
+          </WouterRouter>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
