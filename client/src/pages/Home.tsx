@@ -218,12 +218,15 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="font-semibold text-sm mb-3">お問合せ</h4>
+              <h4 className="font-semibold text-sm mb-3">お問合せ・お支払い</h4>
               <p className="text-muted-foreground text-xs mb-3 leading-relaxed">
                 まずヒアリングページで入力し、コピーのうえDMにお送りください。質問のみはDMでも可能です。
               </p>
               <Link href="/hearing" className="inline-block text-xs text-accent underline-offset-2 hover:underline">
                 LP制作のヒアリングページへ
+              </Link>
+              <Link href="/payment" className="mt-2 inline-block text-xs text-accent underline-offset-2 hover:underline">
+                お支払いページ
               </Link>
               <a
                 href={DM_URL}

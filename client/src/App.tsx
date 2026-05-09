@@ -6,6 +6,7 @@ import Hearing from "@/pages/Hearing";
 import Privacy from "@/pages/Privacy";
 import ServiceDetail from "@/pages/ServiceDetail";
 import Orders from "@/pages/Orders";
+import Payment from "@/pages/Payment";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -19,6 +20,7 @@ function Router() {
       <Route path={"/privacy"} component={Privacy} />
       <Route path={"/services/:planId"} component={ServiceDetail} />
       <Route path={"/orders"} component={Orders} />
+      <Route path={"/payment"} component={Payment} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

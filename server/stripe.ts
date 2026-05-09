@@ -75,7 +75,7 @@ export async function createCheckoutSession(
 
   const session = await getStripe().checkout.sessions.create({
     customer: stripeCustomerId,
-    payment_method_types: ["card"],
+    payment_method_types: ["card", "link"] as any,
     line_items: [
       {
         price: priceId,
@@ -92,6 +92,12 @@ export async function createCheckoutSession(
       customer_name: name || "",
     },
     allow_promotion_codes: true,
+    automatic_tax: {
+      enabled: true,
+    },
+    customer_update: {
+      address: "auto",
+    },
   });
 
   return session;
@@ -112,7 +118,7 @@ export async function createSubscriptionCheckoutSession(
 
   const session = await getStripe().checkout.sessions.create({
     customer: stripeCustomerId,
-    payment_method_types: ["card"],
+    payment_method_types: ["card", "link"] as any,
     line_items: [
       {
         price: priceId,
@@ -129,6 +135,12 @@ export async function createSubscriptionCheckoutSession(
       customer_name: name || "",
     },
     allow_promotion_codes: true,
+    automatic_tax: {
+      enabled: true,
+    },
+    customer_update: {
+      address: "auto",
+    },
   });
 
   return session;
