@@ -46,16 +46,10 @@ export function PaymentButton({
         toast.success(`${planName} の決済ページを開きました`);
       }
     } catch (error) {
-      if (error instanceof TRPCClientError) {
-        if (error.data?.code === "UNAUTHORIZED") {
-          toast.message("ログインが必要です。ログインページへ移動します。");
-          window.location.href = getLoginUrl();
-          return;
-        }
-        if (error.data?.code === "BAD_REQUEST") {
-          toast.error(error.message);
-          return;
-        }
+      if (error instanceof TRPCClientError && error.data?.code === "UNAUTHORIZED") {
+        toast.message("ログインが必要です。ログインページへ移動します。");
+        window.location.href = getLoginUrl();
+        return;
       }
       console.error("Checkout error:", error);
       toast.error("決済ページの作成に失敗しました");

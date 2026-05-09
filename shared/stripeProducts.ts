@@ -1,8 +1,7 @@
 /**
- * Stripe Products & Prices — プラン表示名・既定の Price ID。
+ * Stripe Products & Prices for Locamo LP — **single source of truth** for Price IDs.
  *
- * 「No such price」になる場合は Stripe の Secret と別アカウント/別モードの ID になっている。
- * Manus Secrets / .env の STRIPE_PRICE_LP_CREATION / STRIPE_PRICE_MONTHLY_HOSTING で必ず上書きすること。
+ * 「LP制作」「月額管理費」は Stripe ダッシュボードと必ず同期すること。
  */
 
 export const STRIPE_PRODUCTS = {
@@ -10,7 +9,7 @@ export const STRIPE_PRODUCTS = {
   oneTime: {
     lpBasic: {
       name: "LP制作",
-      priceId: "price_1TUqxU7nv8WWcHmouiloVPYx",
+      priceId: "price_1TUqxU7nv8WWcHmouiloVPYx", // LP制作 ¥30,000
       amount: 30000, // ¥30,000
       description: "シングルページLP制作",
     },
@@ -32,7 +31,7 @@ export const STRIPE_PRODUCTS = {
   subscription: {
     basic: {
       name: "Locamo月額管理費",
-      priceId: "price_1TUqxU7nv8WWcHmoT7AnbBnY",
+      priceId: "price_1TUqxU7nv8WWcHmoT7AnbBnY", // 月額管理費 ¥3,000/月
       amount: 3000, // ¥3,000/month
       interval: "month" as const,
       description: "月額サイト公開・ドメイン費用（基本）",

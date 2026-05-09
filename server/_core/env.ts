@@ -9,7 +9,4 @@ export const ENV = {
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
   stripeSecretKey: process.env.STRIPE_SECRET_KEY ?? "",
   stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET ?? "",
-  /** 同一 Stripe アカウントかつ Secret Key と同じモードの Price ID（例: Dashboard → Products → Price → API ID） */
-  stripePriceLpCreation: process.env.STRIPE_PRICE_LP_CREATION ?? "",
-  stripePriceMonthlyHosting: process.env.STRIPE_PRICE_MONTHLY_HOSTING ?? "",
 };
