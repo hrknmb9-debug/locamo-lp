@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { ArrowRight, ExternalLink } from 'lucide-react';
-import { Link } from 'wouter';
 import { MONITOR_SLOT_NOTE, PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
 
 const PORTFOLIO_SITES = [
@@ -116,16 +116,16 @@ export default function Portfolio() {
           </div>
 
           <div className="flex w-full justify-center px-1 sm:px-3">
-            <Button
-              size="lg"
-              className="btn-primary mx-auto inline-flex max-w-[min(100%,22rem)] min-w-0 flex-nowrap px-6 py-7 text-[15px] font-semibold text-primary-foreground sm:py-8"
-              asChild
+            <a
+              href="/hearing"
+              className={cn(
+                buttonVariants({ size: 'lg' }),
+                'btn-primary mx-auto inline-flex max-w-[min(100%,22rem)] min-w-0 w-full flex-nowrap justify-center gap-2 px-6 py-7 text-[15px] font-semibold text-primary-foreground sm:py-8'
+              )}
             >
-              <Link href="/hearing" className="w-full justify-center gap-2">
-                {PRIMARY_CTA_HEARING}
-                <ArrowRight className="size-5 shrink-0" aria-hidden />
-              </Link>
-            </Button>
+              {PRIMARY_CTA_HEARING}
+              <ArrowRight className="size-5 shrink-0" aria-hidden />
+            </a>
           </div>
         </div>
       </div>

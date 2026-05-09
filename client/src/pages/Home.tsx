@@ -8,7 +8,8 @@ import Pricing from '@/components/sections/Pricing';
 import Portfolio from '@/components/sections/Portfolio';
 import InstagramPage from '@/components/sections/Instagram';
 import Contact from '@/components/sections/Contact';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { ScrollLandmark } from '@/components/lp/ScrollLandmark';
 import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
 import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
@@ -117,13 +118,15 @@ export default function Home() {
                 {label}
               </a>
             ))}
-            <Button
-              size="sm"
-              className="ml-2 shrink-0 whitespace-nowrap btn-primary px-4 text-xs font-semibold text-primary-foreground sm:text-sm"
-              asChild
+            <a
+              href="/hearing"
+              className={cn(
+                buttonVariants({ size: 'sm' }),
+                'btn-primary ml-2 inline-flex shrink-0 justify-center whitespace-nowrap px-4 text-xs font-semibold text-primary-foreground sm:text-sm'
+              )}
             >
-              <Link href="/hearing">{PRIMARY_CTA_HEARING}</Link>
-            </Button>
+              {PRIMARY_CTA_HEARING}
+            </a>
           </nav>
 
           <button
@@ -149,11 +152,16 @@ export default function Home() {
                   {label}
                 </a>
               ))}
-              <Button className="mt-3 min-h-11 w-full justify-center btn-primary px-6 text-base font-semibold text-primary-foreground" asChild>
-                <Link href="/hearing" onClick={closeMobile}>
-                  {PRIMARY_CTA_HEARING}
-                </Link>
-              </Button>
+              <a
+                href="/hearing"
+                onClick={closeMobile}
+                className={cn(
+                  buttonVariants({ size: 'default' }),
+                  'btn-primary mt-3 inline-flex min-h-11 w-full justify-center px-6 text-base font-semibold text-primary-foreground'
+                )}
+              >
+                {PRIMARY_CTA_HEARING}
+              </a>
             </div>
           </nav>
         )}

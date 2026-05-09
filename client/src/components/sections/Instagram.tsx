@@ -1,7 +1,6 @@
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Instagram, ArrowRight, TrendingUp, ClipboardList } from 'lucide-react';
-import { Link } from 'wouter';
 
 import { IG_URL, DM_URL } from '@/constants/locamo';
 import { PRIMARY_CTA_DM_CONTACT, PRIMARY_CTA_DM_SUBLINE, PRIMARY_CTA_HEARING_FULL } from '@/data/conversionMessaging';
@@ -189,25 +188,31 @@ export default function InstagramPage() {
 
         {/* CTA */}
         <section className="mt-16 text-center animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-          <div className="rounded-[1.25rem] bg-secondary p-8 md:p-12">
+          <div className="relative z-10 rounded-[1.25rem] bg-secondary p-8 md:p-12">
             <h3 className="text-2xl font-bold mb-4">
               LPのご依頼・ご相談はこちらから
             </h3>
             <p className="text-muted-foreground mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-pretty">
               DMへのリンクからアプリ側に切り替わりやすくなっています。細かく書きたい方は続けてフォームのヒアリングへどうぞ。
             </p>
-            <div className="mx-auto flex max-w-xl flex-col gap-3 sm:flex-row sm:justify-center">
-              <Button size="lg" className="btn-primary h-auto min-h-12 w-full rounded-full px-4 py-3 text-primary-foreground shadow-md shadow-orange-300/35 sm:max-w-[13.5rem] sm:px-5 sm:py-4" asChild>
-                <a href={DM_URL} rel="noopener noreferrer" className="inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-0.5 text-balance sm:gap-1">
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold leading-none tracking-wide opacity-95 sm:text-xs">
-                    <Instagram size={16} aria-hidden className="shrink-0 sm:h-[1.125rem] sm:w-[1.125rem]" />
-                    {PRIMARY_CTA_DM_SUBLINE}
-                  </span>
-                  <span className="text-center text-sm font-bold leading-tight sm:text-[15px]">{PRIMARY_CTA_DM_CONTACT}</span>
-                  <ArrowRight className="mt-0.5 size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
-                </a>
-              </Button>
-              <Link
+            <div className="relative z-[1] mx-auto flex max-w-xl flex-col gap-3 sm:flex-row sm:justify-center">
+              <a
+                href={DM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ size: 'lg' }),
+                  'btn-primary h-auto min-h-12 w-full rounded-full px-4 py-3 text-primary-foreground shadow-md shadow-orange-300/35 sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-0.5 text-balance sm:gap-1'
+                )}
+              >
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold leading-none tracking-wide opacity-95 sm:text-xs">
+                  <Instagram size={16} aria-hidden className="shrink-0 sm:h-[1.125rem] sm:w-[1.125rem]" />
+                  {PRIMARY_CTA_DM_SUBLINE}
+                </span>
+                <span className="text-center text-sm font-bold leading-tight sm:text-[15px]">{PRIMARY_CTA_DM_CONTACT}</span>
+                <ArrowRight className="mt-0.5 size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
+              </a>
+              <a
                 href="/hearing"
                 className={cn(
                   buttonVariants({ variant: 'outline', size: 'lg' }),
@@ -217,7 +222,7 @@ export default function InstagramPage() {
                 <ClipboardList size={18} aria-hidden className="shrink-0 text-accent sm:h-5 sm:w-5" />
                 <span className="text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]">{PRIMARY_CTA_HEARING_FULL}</span>
                 <ArrowRight className="size-4 shrink-0 text-muted-foreground sm:hidden" aria-hidden />
-              </Link>
+              </a>
             </div>
           </div>
         </section>

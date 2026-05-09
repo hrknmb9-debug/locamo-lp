@@ -135,15 +135,16 @@ export default function Overview() {
             className="flex flex-col sm:flex-row gap-3 justify-center mb-12 animate-fade-in-up"
             style={{ animationDelay: '0.5s' }}
           >
-            <Link href="/hearing">
-              <Button
-                size="lg"
-                className="btn-primary w-full px-8 py-6 text-sm font-semibold text-primary-foreground sm:w-auto"
-              >
-                {PRIMARY_CTA_HEARING_FULL}
-                <ArrowRight className="ml-1.5" size={17} />
-              </Button>
-            </Link>
+            <a
+              href="/hearing"
+              className={cn(
+                buttonVariants({ size: 'lg' }),
+                'btn-primary inline-flex w-full px-8 py-6 text-sm font-semibold text-primary-foreground sm:w-auto'
+              )}
+            >
+              {PRIMARY_CTA_HEARING_FULL}
+              <ArrowRight className="ml-1.5 shrink-0" size={17} aria-hidden />
+            </a>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold text-foreground hover:bg-sky-50" asChild>
               <a href="#services">サービス内容を確認</a>
             </Button>
@@ -257,16 +258,16 @@ export default function Overview() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Link
+            <a
               href="/hearing"
               className={cn(
                 buttonVariants({ size: 'lg' }),
-                'btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground'
+                'btn-primary inline-flex px-8 py-6 text-sm font-semibold text-primary-foreground'
               )}
             >
               {PRIMARY_CTA_HEARING_FULL}
-              <ArrowRight className="ml-1.5 inline" size={17} />
-            </Link>
+              <ArrowRight className="ml-1.5 shrink-0" size={17} aria-hidden />
+            </a>
             <Button variant="outline" size="lg" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
               <a href="#pricing">料金・フローを見る</a>
             </Button>
@@ -277,7 +278,7 @@ export default function Overview() {
       {/* ヒアリング・クロージング（下部） */}
       <section className="border-t border-sky-100/90 bg-gradient-to-b from-orange-50/80 via-[#fffaf5] to-white px-4 py-16 md:py-20">
         <div className="container mx-auto max-w-4xl">
-          <div className="rounded-[1.65rem] border-2 border-primary/35 bg-white/95 px-7 py-10 shadow-lg shadow-orange-100/60 md:p-14">
+          <div className="relative z-10 rounded-[1.65rem] border-2 border-primary/35 bg-white/95 px-7 py-10 shadow-lg shadow-orange-100/60 md:p-14">
             <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.24em] text-primary">Apply</p>
             <h2 className="mb-3 text-center text-2xl font-bold leading-snug md:text-[1.7rem]">
               {HEARING_FLOW_SHORT}
@@ -291,22 +292,24 @@ export default function Overview() {
                 ● 最後のボタンでコピーされ、InstagramのDMへ進みます。開いた画面で貼り付けて送信してください。
               </li>
             </ul>
-            <div className="mx-auto flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
-              <Button
-                size="lg"
-                className="btn-primary h-auto min-h-12 w-full rounded-full px-4 py-3 shadow-md shadow-sky-300/35 sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4"
-                asChild
+            <div className="relative z-[1] mx-auto flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
+              <a
+                href={DM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ size: 'lg' }),
+                  'btn-primary h-auto min-h-12 w-full rounded-full px-4 py-3 shadow-md shadow-sky-300/35 text-primary-foreground sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-0.5 text-balance sm:gap-1'
+                )}
               >
-                <a href={DM_URL} rel="noopener noreferrer" className="inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-0.5 text-balance sm:gap-1">
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold leading-none tracking-wide opacity-95 sm:text-xs">
-                    <Instagram className="size-4 shrink-0 sm:size-5" aria-hidden />
-                    {PRIMARY_CTA_DM_SUBLINE}
-                  </span>
-                  <span className="text-center text-sm font-bold leading-tight sm:text-[15px]">{PRIMARY_CTA_DM_CONTACT}</span>
-                  <ArrowRight className="mt-0.5 size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
-                </a>
-              </Button>
-              <Link
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold leading-none tracking-wide opacity-95 sm:text-xs">
+                  <Instagram className="size-4 shrink-0 sm:size-5" aria-hidden />
+                  {PRIMARY_CTA_DM_SUBLINE}
+                </span>
+                <span className="text-center text-sm font-bold leading-tight sm:text-[15px]">{PRIMARY_CTA_DM_CONTACT}</span>
+                <ArrowRight className="mt-0.5 size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
+              </a>
+              <a
                 href="/hearing"
                 className={cn(
                   buttonVariants({ variant: 'outline', size: 'lg' }),
@@ -316,7 +319,7 @@ export default function Overview() {
                 <ClipboardList className="size-4 shrink-0 text-accent sm:size-5" aria-hidden />
                 <span className="text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]">{PRIMARY_CTA_HEARING_FULL}</span>
                 <ArrowRight className="size-4 shrink-0 text-muted-foreground sm:hidden" aria-hidden />
-              </Link>
+              </a>
             </div>
             <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
               <Link href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">

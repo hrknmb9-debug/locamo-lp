@@ -1,4 +1,5 @@
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { LP_IMAGES } from '@/lp-images';
 import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
@@ -63,16 +64,16 @@ export default function Contact() {
               ))}
             </ol>
             <div className="flex w-full justify-center px-2">
-              <Button
-                size="lg"
-                className="btn-primary inline-flex max-w-[min(100%,22rem)] w-full justify-center px-6 py-6 text-sm font-semibold text-primary-foreground"
-                asChild
+              <a
+                href="/hearing"
+                className={cn(
+                  buttonVariants({ size: 'lg' }),
+                  'btn-primary inline-flex max-w-[min(100%,22rem)] w-full justify-center px-6 py-6 text-sm font-semibold text-primary-foreground'
+                )}
               >
-                <Link href="/hearing">
-                  {PRIMARY_CTA_HEARING_FULL}
-                  <ArrowRight size={16} className="shrink-0" aria-hidden />
-                </Link>
-              </Button>
+                {PRIMARY_CTA_HEARING_FULL}
+                <ArrowRight size={16} className="shrink-0" aria-hidden />
+              </a>
             </div>
             <div className="mt-6 flex flex-col items-center gap-3 text-center text-sm">
               <a
@@ -172,12 +173,16 @@ export default function Contact() {
             <p className="text-muted-foreground text-sm mb-7 text-pretty">
               プランミニマムのみ知りたい場合も、この流れから伺えれば順にご案内します。
             </p>
-            <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground" asChild>
-              <Link href="/hearing">
-                {PRIMARY_CTA_HEARING_FULL}
-                <ArrowRight className="ml-2 inline" size={16} aria-hidden />
-              </Link>
-            </Button>
+            <a
+              href="/hearing"
+              className={cn(
+                buttonVariants({ size: 'lg' }),
+                'btn-primary inline-flex px-8 py-6 text-sm font-semibold text-primary-foreground'
+              )}
+            >
+              {PRIMARY_CTA_HEARING_FULL}
+              <ArrowRight className="ml-2 inline" size={16} aria-hidden />
+            </a>
           </div>
         </section>
 

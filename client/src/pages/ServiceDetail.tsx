@@ -3,7 +3,8 @@ import type { FC } from 'react';
 import { Link } from 'wouter';
 import type { RouteComponentProps } from 'wouter';
 
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { DM_URL } from '@/constants/locamo';
 import { PRIMARY_CTA_HEARING_FULL } from '@/data/conversionMessaging';
 import { getPlan } from '@/data/servicePlans';
@@ -23,12 +24,16 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <header className="sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 pt-[env(safe-area-inset-top,0px)] backdrop-blur">
         <div className="container mx-auto flex h-14 min-h-14 items-center gap-4 px-4">
-          <Button variant="outline" size="sm" className="shrink-0 rounded-full border-sky-200" asChild>
-            <Link href="/" className="inline-flex items-center gap-1.5 px-4">
-              <ArrowLeft size={18} aria-hidden />
-              <span className="text-sm font-medium">戻る</span>
-            </Link>
-          </Button>
+          <a
+            href="/"
+            className={cn(
+              buttonVariants({ variant: 'outline', size: 'sm' }),
+              'inline-flex shrink-0 items-center gap-1.5 rounded-full border-sky-200 px-4'
+            )}
+          >
+            <ArrowLeft size={18} aria-hidden />
+            <span className="text-sm font-medium">戻る</span>
+          </a>
           <Link href="/" className="text-lg font-bold tracking-tight text-sky-950">
             Loca<span className="text-accent">mo</span>
           </Link>
@@ -98,20 +103,30 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
               ヒアリング入力をコピーしInstagramのDMに貼り付けて送信いただいた時点で、お申し込みとして受け付けます。先に質問だけ送りたい場合はDMのみでも構いません。
             </p>
             <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
-              <Button size="lg" className="btn-primary text-primary-foreground" asChild>
-                <Link href="/hearing">
-                  {PRIMARY_CTA_HEARING_FULL}
-                  <ArrowRight className="ml-2 inline size-5" aria-hidden />
-                </Link>
-              </Button>
+              <a
+                href="/hearing"
+                className={cn(
+                  buttonVariants({ size: 'lg' }),
+                  'btn-primary inline-flex justify-center px-6 text-primary-foreground'
+                )}
+              >
+                {PRIMARY_CTA_HEARING_FULL}
+                <ArrowRight className="ml-2 inline size-5" aria-hidden />
+              </a>
               <Button size="lg" variant="outline" className="rounded-full border-sky-200" asChild>
                 <a href={DM_URL} target="_blank" rel="noopener noreferrer">
                   DMで質問のみ（任意）
                 </a>
               </Button>
-              <Button size="lg" variant="outline" className="rounded-full border-sky-200" asChild>
-                <Link href="/">サービス一覧に戻る</Link>
-              </Button>
+              <a
+                href="/"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'inline-flex justify-center rounded-full border-sky-200'
+                )}
+              >
+                サービス一覧に戻る
+              </a>
             </div>
           </div>
         </div>

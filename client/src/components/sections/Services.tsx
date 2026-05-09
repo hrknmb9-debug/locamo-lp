@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { ChevronDown, Check } from 'lucide-react';
 import { Link } from 'wouter';
 import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
@@ -177,9 +178,15 @@ export default function Services() {
             「まずLPで足りるか」迷う段階でも、ヒアリング内容をいただければ構成の方向性までお返しします。
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
-            <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground" asChild>
-              <Link href="/hearing">{PRIMARY_CTA_HEARING}</Link>
-            </Button>
+            <a
+              href="/hearing"
+              className={cn(
+                buttonVariants({ size: 'lg' }),
+                'btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground'
+              )}
+            >
+              {PRIMARY_CTA_HEARING}
+            </a>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
               <a href={DM_URL} target="_blank" rel="noopener noreferrer">
                 追ってDMで話したい（任意）

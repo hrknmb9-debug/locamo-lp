@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { PaymentButton } from '@/components/PaymentButton';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { ChevronDown, Loader2 } from 'lucide-react';
-import { Link } from 'wouter';
 import { DM_URL } from '@/constants/locamo';
 import { HEARING_FLOW_SHORT, MONITOR_SLOT_NOTE, PRIMARY_CTA_HEARING, RESPONSE_SLA } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
@@ -255,9 +255,15 @@ export default function Pricing() {
         <div className="text-center animate-fade-in-up">
           <p className="text-muted-foreground text-sm mb-4">料金だけ先に教えてほしい場合も、ヒアリング経由で順にお返しします。</p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground" asChild>
-              <Link href="/hearing">{PRIMARY_CTA_HEARING}</Link>
-            </Button>
+            <a
+              href="/hearing"
+              className={cn(
+                buttonVariants({ size: 'lg' }),
+                'btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground'
+              )}
+            >
+              {PRIMARY_CTA_HEARING}
+            </a>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
               <a href={DM_URL} target="_blank" rel="noopener noreferrer">
                 口頭での相談（DM任意）
