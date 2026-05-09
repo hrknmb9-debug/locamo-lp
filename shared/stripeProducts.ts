@@ -9,8 +9,8 @@ export const STRIPE_PRODUCTS = {
   oneTime: {
     lpBasic: {
       name: "LP制作",
-      priceId: "price_1TV9LR7nv8WWcHmoIiJKYRM0", // LP制作 ¥30,000
-      amount: 30000, // ¥30,000
+      priceId: "price_1TV9LR7nv8WWcHmoIiJKYRM0", // LP制作 ¥33,000
+      amount: 33000, // ¥33,000
       description: "シングルページLP制作",
     },
     hpStandard: {
