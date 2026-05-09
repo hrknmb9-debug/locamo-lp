@@ -3,6 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Link } from 'wouter';
 
 import { Button } from '@/components/ui/button';
+import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { IG_HANDLE, IG_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
@@ -26,7 +27,7 @@ const Privacy: FC = () => {
       </header>
 
       <article className="container mx-auto max-w-3xl px-4 py-10 pb-[calc(4rem+env(safe-area-inset-bottom,0px))]">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Legal</p>
+        <LpSectionEyebrow className="mb-4">規約</LpSectionEyebrow>
         <h1 className="mb-2 text-2xl font-bold md:text-3xl">プライバシーポリシー</h1>
         <p className="mb-10 text-xs text-muted-foreground">制定日：2026年5月7日 · 運営：NANBA企画</p>
 

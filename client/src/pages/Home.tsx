@@ -116,7 +116,10 @@ export default function Home() {
             Loca<span className="text-accent">mo</span>
           </button>
 
-          <nav className="hidden items-center gap-0.5 md:flex lg:gap-1" aria-label="ページ内リンク">
+          <nav
+            className="hidden items-center gap-0.5 md:flex lg:gap-1"
+            aria-label="ページ内のセクションへ移動できるナビゲーションほかInstagram公式プロフィール"
+          >
             {SITE_SCROLL_NAV.map(({ anchor, label }) => (
               <a
                 key={anchor}

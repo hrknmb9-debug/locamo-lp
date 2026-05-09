@@ -1,3 +1,4 @@
+import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Instagram, ArrowRight, TrendingUp, ClipboardList } from 'lucide-react';
@@ -21,6 +22,7 @@ export default function InstagramPage() {
     <div className="space-y-16 md:space-y-24 py-16 md:py-24 px-4">
       <div className="container mx-auto max-w-5xl">
         {/* Header */}
+        <LpSectionEyebrow>SNSとWebの組み立て</LpSectionEyebrow>
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
           InstagramとLocamoの組み合わせ
         </h2>

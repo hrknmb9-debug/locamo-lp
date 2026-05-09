@@ -4,6 +4,7 @@ import { Link } from 'wouter';
 import type { RouteComponentProps } from 'wouter';
 
 import { Button, buttonVariants } from '@/components/ui/button';
+import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { cn } from '@/lib/utils';
 import { DM_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
@@ -43,7 +44,7 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
 
       <main className="flex-1 px-4 py-10 pb-[calc(3.5rem+env(safe-area-inset-bottom,0px))]">
         <div className="container mx-auto max-w-3xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Service detail</p>
+          <LpSectionEyebrow className="mb-4 text-left sm:text-center">プラン詳細</LpSectionEyebrow>
           <h1 className="mb-4 text-3xl font-bold">{plan.title}</h1>
 
           <div className="mb-10 overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-md shadow-sky-200/25">

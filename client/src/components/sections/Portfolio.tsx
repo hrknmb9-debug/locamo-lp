@@ -1,3 +1,4 @@
+import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ArrowRight, ExternalLink } from 'lucide-react';
@@ -39,7 +40,8 @@ export default function Portfolio() {
   return (
     <div className="space-y-16 md:space-y-24 py-16 md:py-24 px-4">
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">納品事例（公開サイト）</h2>
+        <LpSectionEyebrow className="mb-4 md:mb-3">公開事例の一例</LpSectionEyebrow>
+        <h2 className="text-center text-[1.625rem] font-bold mb-4 sm:text-3xl md:text-4xl">納品事例（公開サイト）</h2>
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto text-sm leading-relaxed md:text-[15px] text-pretty">
           ヒアリングを経て<strong className="font-semibold text-sky-950">制作・公開までを完了したLP</strong>
           の一例です（クライアントの公開許諾のもと、URLおよび画面を掲載）。

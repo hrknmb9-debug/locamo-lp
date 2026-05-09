@@ -1,12 +1,20 @@
 import { useState } from 'react';
 import { PaymentButton } from '@/components/PaymentButton';
+import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ChevronDown, Loader2 } from 'lucide-react';
 import { Link } from 'wouter';
 import { DM_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
-import { HEARING_FLOW_SHORT, MONITOR_SLOT_NOTE, PRIMARY_CTA_HEARING, RESPONSE_SLA } from '@/data/conversionMessaging';
+import {
+  APPLICATION_FLOW_HEADING,
+  APPLICATION_FLOW_STEPS,
+  HEARING_FLOW_SHORT,
+  MONITOR_SLOT_NOTE,
+  PRIMARY_CTA_HEARING,
+  RESPONSE_SLA,
+} from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
 import { trpc } from '@/lib/trpc';
 
@@ -21,7 +29,7 @@ export default function Pricing() {
     },
     {
       q: 'お申し込みの流れを教えてください',
-      a: `${HEARING_FLOW_SHORT} ${RESPONSE_SLA}`,
+      a: `トップにも同じ一覧があります（${APPLICATION_FLOW_HEADING}）。${HEARING_FLOW_SHORT} ${RESPONSE_SLA}`,
     },
     {
       q: 'Instagramアカウントは必要ですか？',
@@ -41,36 +49,13 @@ export default function Pricing() {
     },
   ];
 
-  const steps = [
-    {
-      num: '1',
-      title: 'ヒアリング → コピー → DM送信',
-      desc: 'サイトの4ステップに入力し「コピーしてInstagramのDMへ」で全文がコピーされ、DMページが開きます。開いたDMに貼り付けて送信すると、お申し込みとして受け付けます。',
-    },
-    {
-      num: '2',
-      title: 'お見立て・ご提案',
-      desc: '内容確認後に、構成案とラフなお見積りをDM等でご返信します。',
-    },
-    {
-      num: '3',
-      title: '制作開始',
-      desc: 'ご契約後、制作を開始します。進捗状況を随時ご報告いたします。',
-    },
-    {
-      num: '4',
-      title: '納品・公開',
-      desc: 'LPまたはホームページが完成したら、ご確認いただき、公開いたします。',
-    },
-  ];
+
 
   return (
     <div className="py-16 md:py-24 px-4">
       <div className="container mx-auto max-w-4xl">
         {/* Header */}
-        <p className="text-xs font-semibold tracking-widest text-accent uppercase text-center mb-3">
-          Pricing
-        </p>
+        <LpSectionEyebrow>料金</LpSectionEyebrow>
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           料金・プロセス
         </h2>
@@ -140,9 +125,9 @@ export default function Pricing() {
         <div className="mb-14 animate-fade-in-up">
           <h3 className="text-xl font-bold mb-7">制作の流れ</h3>
           <div className="space-y-0">
-            {steps.map((step, idx) => (
-              <div key={idx} className="flex gap-4 relative">
-                {idx !== steps.length - 1 && (
+            {APPLICATION_FLOW_STEPS.map((step, idx) => (
+              <div key={step.num} className="flex gap-4 relative">
+                {idx !== APPLICATION_FLOW_STEPS.length - 1 && (
                   <div className="absolute bottom-0 left-4 top-10 w-px bg-sky-200" />
                 )}
                 <div className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground shadow-sm shadow-sky-300/50">
@@ -150,7 +135,7 @@ export default function Pricing() {
                 </div>
                 <div className="pb-8">
                   <h4 className="text-sm font-semibold mb-1 mt-1">{step.title}</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed text-pretty">{step.detail}</p>
                 </div>
               </div>
             ))}

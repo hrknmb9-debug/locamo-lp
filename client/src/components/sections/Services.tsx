@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button, buttonVariants } from '@/components/ui/button';
+import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { cn } from '@/lib/utils';
 import { ChevronDown, Check } from 'lucide-react';
 import { Link } from 'wouter';
@@ -22,9 +23,7 @@ export default function Services() {
     <div className="py-16 md:py-24 px-4">
       <div className="container mx-auto max-w-5xl">
         {/* Header */}
-        <p className="text-xs font-semibold tracking-widest text-accent uppercase text-center mb-3">
-          Services
-        </p>
+        <LpSectionEyebrow>サービス</LpSectionEyebrow>
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           サービス内容
         </h2>

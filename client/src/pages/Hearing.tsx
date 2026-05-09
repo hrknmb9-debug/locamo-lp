@@ -8,6 +8,7 @@ import { Link, useLocation } from 'wouter';
 
 import { Button } from '@/components/ui/button';
 import { DM_URL } from '@/constants/locamo';
+import { HEARING_DM_PREREQUISITE } from '@/data/conversionMessaging';
 import { HEARING_FIELDS } from '@/data/hearingFields';
 import { copyHearingToClipboard, navigateToInstagramDm } from '@/lib/submitHearing';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
@@ -165,10 +166,18 @@ const Hearing: FC = () => {
       </header>
 
       <article className="container mx-auto max-w-lg px-4 py-10 pb-[calc(5rem+env(safe-area-inset-bottom,0px))]">
+        <aside className="mb-8 rounded-[1rem] border border-sky-200/90 bg-white px-4 py-3 shadow-sm shadow-sky-950/5 sm:px-5 sm:py-4">
+          <p className="text-xs font-semibold tracking-wide text-sky-950 sm:text-[0.8125rem]">
+            <span className="text-accent">● </span>
+            送信先はInstagramのDMです
+          </p>
+          <p className="mt-2 text-[12px] leading-relaxed text-muted-foreground text-pretty sm:text-sm">{HEARING_DM_PREREQUISITE}</p>
+        </aside>
+
         <div className="mb-8">
-          <div className="mb-2 flex justify-between text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-            <span>Hearing</span>
-            <span>
+          <div className="mb-2 flex justify-between gap-3 text-xs font-semibold tracking-wide text-accent sm:text-[0.8125rem]">
+            <span>ヒアリング入力</span>
+            <span className="shrink-0">
               STEP {step + 1} / {STEPS.length}
             </span>
           </div>

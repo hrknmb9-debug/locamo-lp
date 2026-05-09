@@ -1,19 +1,28 @@
 import { Button, buttonVariants } from '@/components/ui/button';
+import { ConversionFlowRibbon } from '@/components/lp/ConversionFlowRibbon';
+import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { cn } from '@/lib/utils';
 import { ArrowRight, ClipboardList, Instagram, Sparkles, Zap, Activity, LayoutList, Waypoints } from 'lucide-react';
 import { Link } from 'wouter';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { useCountUp } from '@/hooks/useCountUp';
 import {
+  ABOUT_SECTION_EYEBROW,
+  APPLY_SECTION_EYEBROW,
   HEARING_FLOW_SHORT,
+  HERO_VALUE_HOOK,
   MONITOR_SLOT_NOTE,
   PRIMARY_CTA_DM_CONTACT,
   PRIMARY_CTA_DM_SUBLINE,
   PRIMARY_CTA_HEARING_FULL,
+  PROMISE_SECTION_EYEBROW,
   REFER_CONTACT_FOR_SLA,
   RESPONSE_SLA,
   SCOPE_EXCLUDED_BULLETS,
+  SCOPE_EXCLUDED_HEADING,
   SCOPE_INCLUDED_BULLETS,
+  SCOPE_INCLUDED_HEADING,
+  WORKFLOW_SECTION_EYEBROW,
 } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
 import { SCROLL_MARGIN_CLASS } from '@/data/siteNav';
@@ -73,59 +82,43 @@ export default function Overview() {
           <div className="absolute top-1/2 -left-24 size-72 rounded-full bg-cyan-100 blur-3xl opacity-45" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-3xl px-2 text-center">
-          {/* キャンペーン & 肩書き */}
-          <div
-            className="animate-fade-in mb-4 flex flex-col items-center gap-3"
-            style={{ animationDelay: '0.08s' }}
-          >
-            <span className="inline-flex max-w-[min(100%,22rem)] items-center justify-center rounded-full border-2 border-primary/50 bg-gradient-to-b from-orange-50 to-amber-50 px-4 py-2.5 text-center text-xs font-bold leading-snug text-primary shadow-sm sm:text-sm">
-              現在モニター3店舗募集中 · 採用店舗は制作無料（先着順）
+        <div className="relative z-10 mx-auto max-w-3xl px-3 text-center sm:px-2">
+          {/* キャンペーン & メイン約束 — モバイル順序統一 */}
+          <div className="animate-fade-in mb-6 flex flex-col items-center gap-2.5 sm:mb-7 sm:gap-3" style={{ animationDelay: '0.08s' }}>
+            <span className="inline-flex max-w-[min(100%,22rem)] items-center gap-2 rounded-2xl border border-sky-200 bg-white/95 px-3.5 py-2 shadow-sm sm:max-w-none sm:py-2.5">
+              <Sparkles className="size-[0.9375rem] shrink-0 text-accent sm:size-4" aria-hidden />
+              <span className="text-left text-[12px] font-semibold leading-snug text-sky-900 sm:text-center sm:text-sm md:text-[0.9375rem]">
+                {HERO_VALUE_HOOK}
+              </span>
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white/90 px-4 py-2 text-xs font-semibold text-sky-800 shadow-sm">
-              <Sparkles className="size-3.5 shrink-0 text-accent" aria-hidden />
-              AIで素早く起こすたたき台を、読み順とCTAで「動くLP」に整える
+            <span className="inline-flex max-w-[min(100%,21rem)] items-center justify-center rounded-full border-2 border-primary/45 bg-gradient-to-b from-orange-50 to-amber-50 px-3 py-2 text-[11px] font-bold leading-snug text-primary sm:max-w-none sm:text-[0.8125rem] md:text-sm">
+              モニター先行<strong className="mx-1">最大3店</strong>まで · ご採用品は<strong className="mx-1">制作費無料</strong>
+              （審査付き／先着）
             </span>
           </div>
 
-          <div
-            className="animate-fade-in mb-6 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-xs font-semibold text-sky-800"
-            style={{ animationDelay: '0.1s' }}
-          >
-            <span className="size-1.5 shrink-0 rounded-full bg-accent" />
-            大阪の個人店専門 · Web制作サービス
-          </div>
-
-          {/* Main Catchphrase */}
           <h1
-            className="mb-5 text-[1.75rem] font-bold leading-tight tracking-tight animate-fade-in-up sm:text-4xl md:text-6xl md:leading-tight"
+            className="mb-6 animate-fade-in-up text-[1.9rem] font-bold leading-tight tracking-tight sm:mb-5 sm:text-[2rem] md:mb-5 md:text-5xl md:leading-tight lg:text-6xl"
             style={{ animationDelay: '0.2s' }}
           >
-            Instagramを見た人が、<br className="sm:hidden" />
+            Instagramを見たお客様が、<br className="sm:hidden" />
             <span className="hidden sm:inline"> </span>
-            次に何をすればいいか明確になるLP。
+            メニューや予約まで迷わなくなるLPへ。
           </h1>
 
-          {/* モバイルは2段落で密度を下げる */}
-          <div
-            className="animate-fade-in-up mx-auto mb-6 max-w-xl space-y-3 text-pretty md:space-y-2"
-            style={{ animationDelay: '0.35s' }}
-          >
-            <p className="text-base leading-relaxed text-muted-foreground md:text-lg md:leading-relaxed">
-              大阪の個人店に特化した1枚LP。<strong className="font-semibold text-sky-900">フォロワーだけに依存しない「公式の受け皿」</strong>
-              で、メニュー・料金・アクセス・予約までを迷わせずつなげます。
+          <div className="animate-fade-in-up mx-auto mb-8 max-w-xl space-y-3 text-pretty md:space-y-2" style={{ animationDelay: '0.35s' }}>
+            <p className="rounded-2xl border border-sky-100 bg-sky-50/85 px-3 py-3 text-[13px] leading-relaxed text-sky-900 sm:px-4 sm:text-[0.9375rem] md:leading-relaxed">
+              <strong className="font-semibold text-sky-950">AIで構成・文案のたたき台を素早く作成</strong>し、人が読み順とCTAまで整えます。
+              LP制作<strong className="font-semibold text-sky-800">3万円〜</strong>／公開<strong className="font-semibold text-sky-800">・ドメインは月3,000円〜</strong>
+              （別途）。モニター枠など条件の細部は、下の脚注と「料金」セクションでもご確認ください。
             </p>
-            <p className="text-sm leading-relaxed text-muted-foreground md:text-lg md:leading-relaxed">
-              制作費は3万円〜・モニター枠は審査付き無料。
-              AIで構成・文案のたたきを素早く作り、その上から訴求の順番とCTAを人の目で仕上げます。
+            <p className="text-base leading-relaxed text-muted-foreground md:text-[1.05rem] md:leading-relaxed">
+              SNSに散らばりがちな情報を<strong className="font-semibold text-sky-950">公式の一枚</strong>
+              に集約し、「次はここまで進めば大丈夫」をはっきりさせます。
             </p>
           </div>
 
-          {/* Visual */}
-          <figure
-            className="mx-auto mb-10 max-w-[42rem] w-full animate-fade-in-up"
-            style={{ animationDelay: '0.42s' }}
-          >
+          <figure className="mx-auto mb-8 max-w-[42rem] w-full animate-fade-in-up sm:mb-10" style={{ animationDelay: '0.42s' }}>
             <div className="overflow-hidden rounded-[1.5rem] border border-sky-100 bg-white shadow-xl shadow-sky-200/40 ring-1 ring-sky-100/80">
               <img
                 src={LP_IMAGES.hero}
@@ -140,31 +133,35 @@ export default function Overview() {
             <figcaption className="sr-only">店舗とWeb・SNSをつなぐコンセプトビジュアル</figcaption>
           </figure>
 
-          {/* CTA Buttons */}
           <div
-            className="flex flex-col sm:flex-row gap-3 justify-center mb-12 animate-fade-in-up"
+            className="mb-8 flex animate-fade-in-up flex-col justify-center gap-3 sm:mb-10 sm:flex-row sm:gap-4"
             style={{ animationDelay: '0.5s' }}
           >
             <Link
               href="/hearing"
               className={cn(
                 buttonVariants({ size: 'lg' }),
-                'btn-primary inline-flex w-full px-8 py-6 text-sm font-semibold text-primary-foreground sm:w-auto'
+                'btn-primary inline-flex min-h-12 w-full shrink-0 items-center justify-center px-8 py-[1.375rem] text-sm font-semibold text-primary-foreground sm:w-auto sm:min-h-11 sm:py-6',
               )}
             >
               {PRIMARY_CTA_HEARING_FULL}
               <ArrowRight className="ml-1.5 shrink-0" size={17} aria-hidden />
             </Link>
-            <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold text-foreground hover:bg-sky-50" asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="min-h-12 rounded-full border-sky-200 px-8 py-[1.375rem] text-sm font-semibold text-foreground hover:bg-sky-50 sm:min-h-11 sm:py-6"
+              asChild
+            >
               <a href="#services">サービス内容を確認</a>
             </Button>
           </div>
 
-          {/* Divider */}
-          <div className="w-16 h-px bg-border mx-auto mb-12"></div>
+          <ConversionFlowRibbon />
 
-          {/* Stats */}
-          <div className="animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+          <div className="mx-auto mb-10 h-px w-14 bg-border sm:mb-12" />
+
+          <div className="animate-fade-in-up" style={{ animationDelay: '0.62s' }}>
             <StatsSection />
           </div>
         </div>
@@ -174,9 +171,7 @@ export default function Overview() {
       {/* Problem Section */}
       <section className="py-16 md:py-24 px-4">
         <div className="container mx-auto max-w-4xl">
-          <p className="text-xs font-semibold tracking-widest text-accent uppercase text-center mb-3">
-            Problem
-          </p>
+          <LpSectionEyebrow>{WORKFLOW_SECTION_EYEBROW}</LpSectionEyebrow>
           <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">「集客はSNS」のみになりがちな課題</h2>
           <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm">
             まとまったサイトがない状態だと次のような偏りやすさがあります
@@ -214,9 +209,7 @@ export default function Overview() {
       {/* About Locamo Section */}
       <section className="lp-soft-band py-16 md:py-24 px-4">
         <div className="container mx-auto max-w-4xl">
-          <p className="text-xs font-semibold tracking-widest text-accent uppercase text-center mb-3">
-            About
-          </p>
+          <LpSectionEyebrow>{ABOUT_SECTION_EYEBROW}</LpSectionEyebrow>
           <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
             Locamoとは
           </h2>
@@ -244,12 +237,12 @@ export default function Overview() {
           </div>
 
           <div className="mx-auto mb-10 max-w-3xl rounded-[1.35rem] border border-sky-100 bg-white/85 px-6 py-8 shadow-sm md:px-10">
-            <p className="mb-2 text-center text-xs font-semibold uppercase tracking-widest text-accent">Promise</p>
+            <LpSectionEyebrow className="mb-3">{PROMISE_SECTION_EYEBROW}</LpSectionEyebrow>
             <h3 className="mb-3 text-center text-lg font-bold text-sky-950">ご返信までの目安・スコープ</h3>
             <p className="mx-auto mb-8 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">{RESPONSE_SLA}</p>
             <div className="grid gap-8 md:grid-cols-2 md:gap-10">
               <div>
-                <p className="mb-3 text-sm font-semibold text-sky-950">標準で含めるイメージ</p>
+                <p className="mb-3 text-sm font-semibold text-sky-950">{SCOPE_INCLUDED_HEADING}</p>
                 <ul className="list-disc space-y-2 pl-4 text-sm leading-relaxed text-muted-foreground marker:text-accent">
                   {SCOPE_INCLUDED_BULLETS.map(line => (
                     <li key={line}>{line}</li>
@@ -257,7 +250,7 @@ export default function Overview() {
                 </ul>
               </div>
               <div>
-                <p className="mb-3 text-sm font-semibold text-sky-950">お受けしない・別途となることが多いもの</p>
+                <p className="mb-3 text-sm font-semibold text-sky-950">{SCOPE_EXCLUDED_HEADING}</p>
                 <ul className="list-disc space-y-2 pl-4 text-sm leading-relaxed text-muted-foreground marker:text-sky-400">
                   {SCOPE_EXCLUDED_BULLETS.map(line => (
                     <li key={line}>{line}</li>
@@ -289,7 +282,7 @@ export default function Overview() {
       <section className="border-t border-sky-100/90 bg-gradient-to-b from-orange-50/80 via-[#fffaf5] to-white px-4 py-16 md:py-20">
         <div className="container mx-auto max-w-4xl">
           <div className="relative z-10 rounded-[1.65rem] border-2 border-primary/35 bg-white/95 px-7 py-10 shadow-lg shadow-orange-100/60 md:p-14">
-            <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.24em] text-primary">Apply</p>
+            <LpSectionEyebrow className="mb-4 text-primary">{APPLY_SECTION_EYEBROW}</LpSectionEyebrow>
             <h2 className="mb-3 text-center text-2xl font-bold leading-snug md:text-[1.7rem]">
               {HEARING_FLOW_SHORT}
             </h2>

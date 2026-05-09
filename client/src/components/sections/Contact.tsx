@@ -1,4 +1,5 @@
 import { buttonVariants } from '@/components/ui/button';
+import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { cn } from '@/lib/utils';
 import { LP_IMAGES } from '@/lp-images';
 import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
@@ -6,7 +7,13 @@ import { Link } from 'wouter';
 
 import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
-import { HEARING_FLOW_LINES, PRIMARY_CTA_HEARING_FULL, RESPONSE_SLA } from '@/data/conversionMessaging';
+import {
+  APPLICATION_FLOW_HEADING,
+  APPLICATION_FLOW_STEPS,
+  HEARING_FLOW_LINES,
+  PRIMARY_CTA_HEARING_FULL,
+  RESPONSE_SLA,
+} from '@/data/conversionMessaging';
 
 export default function Contact() {
   const faqs = [
@@ -36,9 +43,7 @@ export default function Contact() {
     <div className="py-16 md:py-24 px-4">
       <div className="container mx-auto max-w-4xl">
         {/* Header */}
-        <p className="text-xs font-semibold tracking-widest text-accent uppercase text-center mb-3">
-          Contact
-        </p>
+        <LpSectionEyebrow>連絡と受付の窓口</LpSectionEyebrow>
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           お問合せ
         </h2>
@@ -69,7 +74,7 @@ export default function Contact() {
                 href="/hearing"
                 className={cn(
                   buttonVariants({ size: 'lg' }),
-                  'btn-primary inline-flex max-w-[min(100%,22rem)] w-full justify-center px-6 py-6 text-sm font-semibold text-primary-foreground'
+                  'btn-primary inline-flex max-w-[min(100%,22rem)] w-full min-h-12 items-center justify-center px-6 py-[1.25rem] text-sm font-semibold text-primary-foreground sm:min-h-11 sm:py-6'
                 )}
               >
                 {PRIMARY_CTA_HEARING_FULL}
@@ -99,41 +104,23 @@ export default function Contact() {
 
         {/* Free Diagnosis Flow */}
         <section className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-          <h3 className="text-xl font-bold mb-6 text-center">ご依頼〜制作までのイメージ</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              {
-                step: '1',
-                title: 'Webでヒアリング → DMで送信',
-                desc: '4ステップの入力後、「コピーしてInstagramのDMへ」で全文をコピーのうえ、開いたDMに貼り付けて送信してください。これでお申し込みは受け付けられます。',
-              },
-              {
-                step: '2',
-                title: 'ご返信・詳細の確認',
-                desc: '初回ご返信や追加のご質問は、FAQに記載の目安およびDM上で行います。',
-              },
-              {
-                step: '3',
-                title: 'お見積り〜ご確認',
-                desc: 'LPの方向性・納期感・サイト公開込みの月額目安まで整理してお伝えします。',
-              },
-              {
-                step: '4',
-                title: '制作〜公開',
-                desc: 'ご納得いただければ制作〜公開チェックまで伴走します。',
-              },
-            ].map((item, idx) => (
+          <h3 className="mb-3 text-xl font-bold text-center">{APPLICATION_FLOW_HEADING}</h3>
+          <p className="mx-auto mb-8 max-w-lg text-center text-xs leading-relaxed text-muted-foreground text-pretty sm:text-sm">
+            InstagramのDMを中心に、この順でご案内します。お支払いはサイト内のお支払いページ（ログイン後）から可能なタイミングでご連絡します。
+          </p>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+            {APPLICATION_FLOW_STEPS.map((item, idx) => (
               <div
-                key={idx}
-                className="animate-fade-in-up flex gap-4 rounded-[1.25rem] border border-sky-100 bg-card p-5 transition-all hover:border-sky-200 hover:shadow-md"
-                style={{ animationDelay: `${0.08 * idx}s` }}
+                key={item.num}
+                className="animate-fade-in-up flex gap-4 rounded-[1.25rem] border border-sky-100 bg-card p-[1.125rem] transition-all hover:border-sky-200 hover:shadow-md sm:p-5"
+                style={{ animationDelay: `${0.06 * idx}s` }}
               >
-                <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground shadow-sm shadow-sky-300/50">
-                  {item.step}
+                <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground shadow-sm shadow-sky-300/50 sm:size-10">
+                  {item.num}
                 </div>
-                <div>
-                  <h4 className="font-semibold text-sm mb-1">{item.title}</h4>
-                  <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
+                <div className="min-w-0">
+                  <h4 className="mb-1.5 font-semibold text-sm leading-snug text-sky-950 sm:text-[0.9375rem]">{item.title}</h4>
+                  <p className="text-[12px] leading-relaxed text-muted-foreground text-pretty sm:text-xs">{item.detail}</p>
                 </div>
               </div>
             ))}

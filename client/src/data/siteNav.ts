@@ -12,6 +12,6 @@ export const SITE_SCROLL_NAV: { anchor: Exclude<SiteAnchor, 'top'>; label: strin
   { anchor: 'services', label: 'サービス' },
   { anchor: 'pricing', label: '料金' },
   { anchor: 'works', label: '納品事例' },
-  { anchor: 'instagram', label: 'Instagram' },
+  { anchor: 'instagram', label: 'InstagramとLP' },
   { anchor: 'contact', label: 'お問合せ' },
 ];
