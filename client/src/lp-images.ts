@@ -1,11 +1,11 @@
-/** LP 用の静的画像（S3 CDN および公開事例スクリーンショット） */
+/** LP 用の静的画像（S3 CDN・公開事例・ブランド統一イラスト） */
 export const LP_IMAGES = {
   hero: '/manus-storage/locamo-hero_769daceb.png',
   servicesBanner: '/manus-storage/locamo-services-banner_3d057aad.png',
-  /** 料金ブロック頭の見出し用（コンセプトイラストと差別化、納品イメージ） */
-  pricingHeaderFigure: '/portfolio/kings-code-burger.png',
-  /** Instagram セクション頭（ヒーローと同一イラストにならないよう別ソース） */
-  instagramSectionFigure: '/portfolio/chessenger.png',
+  /** Instagram 見出し下 — SNS→LP 連携（生成イラスト） */
+  instagramSectionFigure: '/marketing/locamo-instagram-lp-link.png',
+  /** 料金見出し下 — 制作フロー概要（生成イラスト） */
+  pricingHeaderFigure: '/marketing/locamo-pricing-process-flow.png',
   portfolio: [
     '/manus-storage/locamo-thumb-cafe_ef397939.png',
     '/manus-storage/locamo-thumb-retail_1812c96c.png',

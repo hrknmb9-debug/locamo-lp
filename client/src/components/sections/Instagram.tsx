@@ -33,11 +33,11 @@ export default function InstagramPage() {
         <figure className="mx-auto mb-12 max-w-4xl overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-lg shadow-sky-200/25">
           <img
             src={LP_IMAGES.instagramSectionFigure}
-            alt="納品LPの一例（Chessenger）の画面キャプチャ。SNSとランディングページを並行して活用するイメージ"
+            alt="SNSでの認知から公式ランディングページへの導線をつなぐイメージイラスト"
             loading="lazy"
             decoding="async"
-            width={1200}
-            height={675}
+            width={1600}
+            height={900}
             className="aspect-video w-full object-cover"
           />
           <figcaption className="sr-only">SNSとランディングページを連携するイメージ</figcaption>

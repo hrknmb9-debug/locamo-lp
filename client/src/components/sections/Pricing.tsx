@@ -67,12 +67,12 @@ export default function Pricing() {
         <figure className="mx-auto mb-12 max-w-3xl overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-md shadow-sky-200/25">
           <img
             src={LP_IMAGES.pricingHeaderFigure}
-            alt="納品LPの一例（King's Code Burger）の画面キャプチャ。料金の補足となるイメージ"
+            alt="ヒアリングから公開までの制作プロセスを示すフラットタイムラインのイメージイラスト"
             loading="lazy"
             decoding="async"
-            width={1200}
-            height={675}
-            className="aspect-[21/9] max-h-[9rem] w-full object-cover object-top md:max-h-[10rem]"
+            width={2100}
+            height={900}
+            className="aspect-[21/9] max-h-[9rem] w-full object-cover object-center md:max-h-[10rem]"
           />
           <figcaption className="sr-only">料金と制作フローを象徴するイメージ</figcaption>
         </figure>
