@@ -4,6 +4,7 @@ import { TRPCError } from "@trpc/server";
 import type { Request } from "express";
 import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
 import { createCheckoutSession, createSubscriptionCheckoutSession } from "../stripe";
+import { createCheckoutSessionViaMcp } from "../stripe-mcp";
 import { ENV } from "../_core/env";
 import type { TrpcContext } from "../_core/context";
 import { getEffectiveLpOneTimePriceId, getEffectiveMonthlyHostingPriceId } from "../_core/stripePriceIds";
@@ -78,7 +79,8 @@ export const paymentRouter = router({
       const cancelUrl = `${baseUrl}/pricing`;
 
       try {
-        const session = await createCheckoutSession(
+        // Use Stripe MCP to bypass local Secret Key injection issues
+        const session = await createCheckoutSessionViaMcp(
           ctx.user.id,
           effectivePriceId,
           successUrl,
@@ -87,7 +89,7 @@ export const paymentRouter = router({
           ctx.user.name || "",
         );
         return {
-          sessionId: session.id,
+          sessionId: session.sessionId || "",
           url: session.url,
         };
       } catch (e) {
@@ -109,6 +111,7 @@ export const paymentRouter = router({
       const cancelUrl = `${baseUrl}/pricing`;
 
       try {
+        // Subscriptions require full Stripe API access, fall back to native client
         const session = await createSubscriptionCheckoutSession(
           ctx.user.id,
           effectivePriceId,
