@@ -80,6 +80,7 @@ export const paymentRouter = router({
 
       try {
         // Use Stripe MCP to bypass local Secret Key injection issues
+        console.log("[Payment Router] Creating checkout with Price ID:", effectivePriceId);
         const session = await createCheckoutSessionViaMcp(
           ctx.user.id,
           effectivePriceId,
@@ -88,11 +89,13 @@ export const paymentRouter = router({
           ctx.user.email || "",
           ctx.user.name || "",
         );
+        console.log("[Payment Router] Checkout created successfully:", session.url);
         return {
           sessionId: session.sessionId || "",
           url: session.url,
         };
       } catch (e) {
+        console.error("[Payment Router] Checkout creation failed:", e);
         mapStripeCheckoutError(e);
       }
     }),

@@ -13,27 +13,37 @@ import { eq } from "drizzle-orm";
 /**
  * Execute a Stripe MCP tool call
  */
-function executeMcpTool(toolName: string, input: Record<string, any>): any {
+async function executeMcpTool(toolName: string, input: Record<string, any>): Promise<any> {
   try {
-    const result = execSync(
-      `manus-mcp-cli tool call ${toolName} --server stripe --input '${JSON.stringify(input)}'`,
-      { encoding: "utf-8" }
-    );
+    const cmd = `manus-mcp-cli tool call ${toolName} --server stripe --input '${JSON.stringify(input)}'`;
+    console.log(`[Stripe MCP] Executing: ${cmd}`);
+    
+    const result = execSync(cmd, { encoding: "utf-8" });
+    console.log(`[Stripe MCP] Raw output:\n${result}`);
     
     // Extract JSON from output - look for lines that start with { or [
     const lines = result.split('\n');
-    for (const line of lines) {
+    console.log(`[Stripe MCP] Output has ${lines.length} lines`);
+    
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
       const trimmed = line.trim();
+      console.log(`[Stripe MCP] Line ${i}: ${JSON.stringify(trimmed.substring(0, 100))}...`);
+      
       // Skip empty lines and info lines
       if (!trimmed || trimmed.includes('Tool execution result') || trimmed.includes('saved to:')) {
+        console.log(`[Stripe MCP] Line ${i} skipped (info line)`);
         continue;
       }
       // Look for JSON
       if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+        console.log(`[Stripe MCP] Line ${i} looks like JSON, attempting parse...`);
         try {
-          return JSON.parse(trimmed);
+          const parsed = JSON.parse(trimmed);
+          console.log(`[Stripe MCP] Successfully parsed JSON:`, parsed);
+          return parsed;
         } catch (e) {
-          console.error("[Stripe MCP] Failed to parse JSON line:", trimmed);
+          console.error("[Stripe MCP] Failed to parse JSON line:", trimmed, e);
           // Continue to next line
         }
       }
@@ -56,7 +66,7 @@ export async function createCustomerViaMcp(email?: string, name?: string): Promi
   if (name) input.name = name;
   if (email) input.email = email;
   
-  const result = executeMcpTool("create_customer", input);
+  const result = await executeMcpTool("create_customer", input);
   return result.id || result.customer_id;
 }
 
@@ -67,7 +77,7 @@ export async function createPaymentLinkViaMcp(
   priceId: string,
   quantity: number = 1
 ): Promise<string> {
-  const result = executeMcpTool("create_payment_link", {
+  const result = await executeMcpTool("create_payment_link", {
     price: priceId,
     quantity,
   });
@@ -160,7 +170,7 @@ export async function createSubscriptionCheckoutSessionViaMcp(
  * Handle payment webhook via MCP (retrieve payment intent details)
  */
 export async function retrievePaymentIntentViaMcp(paymentIntentId: string): Promise<any> {
-  const result = executeMcpTool("fetch_stripe_resources", {
+  const result = await executeMcpTool("fetch_stripe_resources", {
     resource_id: paymentIntentId,
   });
   return result;
@@ -170,7 +180,7 @@ export async function retrievePaymentIntentViaMcp(paymentIntentId: string): Prom
  * List payment intents for a customer via MCP
  */
 export async function listPaymentIntentsViaMcp(customerId: string, limit: number = 10): Promise<any[]> {
-  const result = executeMcpTool("list_payment_intents", {
+  const result = await executeMcpTool("list_payment_intents", {
     customer: customerId,
     limit,
   });
@@ -181,7 +191,7 @@ export async function listPaymentIntentsViaMcp(customerId: string, limit: number
  * List subscriptions for a customer via MCP
  */
 export async function listSubscriptionsViaMcp(customerId: string, limit: number = 10): Promise<any[]> {
-  const result = executeMcpTool("list_subscriptions", {
+  const result = await executeMcpTool("list_subscriptions", {
     customer: customerId,
     limit,
   });

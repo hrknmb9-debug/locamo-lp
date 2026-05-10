@@ -13,18 +13,20 @@ export const STRIPE_PRODUCTS = {
       amount: 36300, // ¥36,300（税込み）
       description: "シングルページLP制作",
     },
-    hpStandard: {
-      name: "ホームページ制作",
-      priceId: "price_1TQ2Yz5NDjqIC6ap0000000b", // Replace with actual Stripe Price ID
-      amount: 50000, // ¥50,000
-      description: "複数ページホームページ制作",
-    },
-    hpPremium: {
-      name: "複数ページ制作",
-      priceId: "price_1TQ2Yz5NDjqIC6ap0000000c", // Replace with actual Stripe Price ID
-      amount: 80000, // ¥80,000
-      description: "カスタムホームページ制作",
-    },
+    // TODO: Add actual Stripe Price ID for HP Standard from Stripe Dashboard
+    // hpStandard: {
+    //   name: "ホームページ制作",
+    //   priceId: "price_XXXXXXXXXXXXX", // Replace with actual Stripe Price ID
+    //   amount: 50000, // ¥50,000
+    //   description: "複数ページホームページ制作",
+    // },
+    // TODO: Add actual Stripe Price ID for HP Premium from Stripe Dashboard
+    // hpPremium: {
+    //   name: "複数ページ制作",
+    //   priceId: "price_XXXXXXXXXXXXX", // Replace with actual Stripe Price ID
+    //   amount: 80000, // ¥80,000
+    //   description: "カスタムホームページ制作",
+    // },
   },
 
   // Subscriptions (monthly hosting & domain)
@@ -36,20 +38,22 @@ export const STRIPE_PRODUCTS = {
       interval: "month" as const,
       description: "月額サイト公開・ドメイン費用（基本）",
     },
-    standard: {
-      name: "スタンダード",
-      priceId: "price_1TQ2Yz5NDjqIC6ap0000000e", // Replace with actual Stripe Price ID
-      amount: 5000, // ¥5,000/month
-      interval: "month" as const,
-      description: "月額サイト公開・ドメイン費用（スタンダード）",
-    },
-    premium: {
-      name: "プレミアム",
-      priceId: "price_1TQ2Yz5NDjqIC6ap0000000f", // Replace with actual Stripe Price ID
-      amount: 10000, // ¥10,000/month
-      interval: "month" as const,
-      description: "月額サイト公開・ドメイン費用（プレミアム）",
-    },
+    // TODO: Add actual Stripe Price ID for Standard subscription from Stripe Dashboard
+    // standard: {
+    //   name: "スタンダード",
+    //   priceId: "price_XXXXXXXXXXXXX", // Replace with actual Stripe Price ID
+    //   amount: 5000, // ¥5,000/month
+    //   interval: "month" as const,
+    //   description: "月額サイト公開・ドメイン費用（スタンダード）",
+    // },
+    // TODO: Add actual Stripe Price ID for Premium subscription from Stripe Dashboard
+    // premium: {
+    //   name: "プレミアム",
+    //   priceId: "price_XXXXXXXXXXXXX", // Replace with actual Stripe Price ID
+    //   amount: 10000, // ¥10,000/month
+    //   interval: "month" as const,
+    //   description: "月額サイト公開・ドメイン費用（プレミアム）",
+    // },
   },
 };
 
@@ -78,7 +82,7 @@ export function getSubscriptionOptions() {
  */
 export const STRIPE_PRICES = {
   lpCreation: STRIPE_PRODUCTS.oneTime.lpBasic,
-  hpCreation: STRIPE_PRODUCTS.oneTime.hpStandard,
+  // hpCreation: STRIPE_PRODUCTS.oneTime.hpStandard, // Commented out - add when HP Standard Price ID is available
   monthlyHosting: STRIPE_PRODUCTS.subscription.basic,
 };
 
