@@ -21,24 +21,24 @@ export default function Pricing() {
 
   const faqs = [
     {
-      q: 'サイトを公開する環境やドメインは別途必要ですか？',
-      a: 'ドメインとサイト公開先（レンタル等）は別途実費となります。両方込みで月3,000円〜が目安です。初期設定のサポートは制作費に含まれています。',
+      q: 'どのくらいで完成しますか？',
+      a: 'LP制作は2週間程度が目安です。ホームページ制作は3〜4週間。ヒアリング〜お見立てまでは原則2営業日以内にご返信します。',
     },
     {
-      q: 'お申し込みの流れを教えてください',
-      a: `時系列ごとの細かい順序は、このページだけにまとめてあります。「制作の流れ」のタイムラインをご覧ください。入力〜DM送信の体感はヒアリング画面で案内されています。${HEARING_FLOW_SHORT} ${RESPONSE_SLA}`,
+      q: '制作後の修正や更新はできますか？',
+      a: '制作完了後の簡易的な修正は無料で対応いたします。大幅な変更や新規ページ追加は別途お見積りとなります。',
     },
     {
       q: 'Instagramアカウントは必要ですか？',
       a: 'DMでお申し込み内容をお送りいただく形式のため、アプリからご連絡できるInstagramアカウントをおすすめします。アカウントをお持ちでない場合は、別途Instagramのご用意からご相談ください。',
     },
     {
-      q: 'モニター無料枠は誰でも使えますか？',
-      a: MONITOR_SLOT_NOTE,
+      q: 'サイト公開・ドメインは別途必要ですか？',
+      a: 'ドメインとサイト公開先は別途実費となります。月3,000円〜が目安で、初期設定のサポートは制作費に含まれています。',
     },
     {
-      q: '制作後の修正や更新はできますか？',
-      a: '制作完了後の簡易的な修正は無料で対応いたします。大幅な変更や新規ページ追加は別途お見積りとなります。',
+      q: 'モニター無料枠は誰でも使えますか？',
+      a: MONITOR_SLOT_NOTE,
     },
     {
       q: '支払い方法は？',
@@ -54,10 +54,7 @@ export default function Pricing() {
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           料金・プロセス
         </h2>
-        <p className="text-center text-muted-foreground jp-keep-all mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
-          時系列だけは<strong className="font-semibold text-sky-950">「制作の流れ」をこのページだけ</strong>
-          でまとめ、重複を避けています。FAQもここへ集約しています。
-        </p>
+
 
         <figure className="mx-auto mb-12 max-w-3xl overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-md shadow-sky-200/25">
           <img
@@ -75,15 +72,12 @@ export default function Pricing() {
         {/* Pricing Highlight */}
         <div className="lp-soft-band mb-14 animate-fade-in-up rounded-[1.5rem] border border-sky-100 p-7 text-center shadow-sm shadow-sky-950/5 md:p-10">
           <h3 className="text-xl md:text-2xl font-bold mb-3">
-            LP制作費<span className="text-accent">3万円〜</span>の買い切り。月額不要。
+            LP制作費<span className="text-accent">3万円〜</span>。月額はサイト公開・ドメイン管理のみ。
           </h3>
-          <p className="text-muted-foreground text-sm mb-6">
-            制作費は一括払い。毎月かかるのはサイト公開・ドメインのランニングのみです。
-          </p>
+
           <div className="inline-block rounded-[1.25rem] border border-sky-100 bg-white p-5 shadow-sm">
-            <p className="text-xs text-muted-foreground mb-1">公開環境・ドメイン（込み）</p>
+            <p className="text-xs text-muted-foreground mb-1">公開環境・ドメイン（別途）</p>
             <p className="text-2xl font-bold text-foreground">月3,000円〜</p>
-            <p className="text-xs text-muted-foreground mt-1">初期設定サポート込み</p>
           </div>
         </div>
 
@@ -171,9 +165,6 @@ export default function Pricing() {
 
         {/* CTA */}
         <div className="text-center animate-fade-in-up">
-          <p className="text-muted-foreground text-sm mb-4">
-            料金だけ先に教えてほしい場合も、ヒアリング経由で順にお返しします。
-          </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/hearing"
