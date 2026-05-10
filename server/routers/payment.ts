@@ -3,8 +3,8 @@ import { eq, desc } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import type { Request } from "express";
 import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
-import { createCheckoutSession, createSubscriptionCheckoutSession } from "../stripe";
-import { createCheckoutSessionViaMcp } from "../stripe-mcp";
+import { createCheckoutSession } from "../stripe";
+import { createCheckoutSessionViaMcp, createPaymentLinkViaMcp, getOrCreateStripeCustomerViaMcp } from "../stripe-mcp";
 import { ENV } from "../_core/env";
 import type { TrpcContext } from "../_core/context";
 import { getEffectiveLpOneTimePriceId, getEffectiveMonthlyHostingPriceId } from "../_core/stripePriceIds";
@@ -110,24 +110,28 @@ export const paymentRouter = router({
     .mutation(async ({ ctx, input: _ignored }) => {
       const effectivePriceId = getEffectiveMonthlyHostingPriceId();
       const baseUrl = requirePublicBase(ctx.req);
-      const successUrl = `${baseUrl}/subscription-success`;
-      const cancelUrl = `${baseUrl}/pricing`;
 
       try {
-        // Subscriptions require full Stripe API access, fall back to native client
-        const session = await createSubscriptionCheckoutSession(
+        // Use Stripe MCP to bypass local Secret Key injection issues
+        console.log("[Payment Router] Creating subscription checkout with Price ID:", effectivePriceId);
+        
+        // Get or create customer via MCP
+        await getOrCreateStripeCustomerViaMcp(
           ctx.user.id,
-          effectivePriceId,
-          successUrl,
-          cancelUrl,
           ctx.user.email || "",
           ctx.user.name || "",
         );
+        
+        // Create payment link via MCP (works for subscriptions too)
+        const url = await createPaymentLinkViaMcp(effectivePriceId);
+        
+        console.log("[Payment Router] Subscription checkout created successfully:", url);
         return {
-          sessionId: session.id,
-          url: session.url,
+          sessionId: url.split("/").pop() || "",
+          url: url,
         };
       } catch (e) {
+        console.error("[Payment Router] Subscription checkout creation failed:", e);
         mapStripeCheckoutError(e);
       }
     }),
