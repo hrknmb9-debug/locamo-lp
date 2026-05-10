@@ -4,7 +4,7 @@ import { useLocation } from 'wouter';
 
 /** クローラー／タブ表示共通。公開URLの title と矛盾しないよう大阪の個人店訴求に統一 */
 export const DEFAULT_SITE_TITLE =
-  'Locamo - 大阪の個人店向けLP・ホームページ制作' as const;
+  'Locamo - 大阪の個人店向けLP・ホームページ制作サービス｜3万円から' as const;
 
 const DEFAULT_DESCRIPTION =
   '大阪府の個人店・小規模店向けに、公式LPとホームページを制作。制作費買い切り3万円〜。InstagramのDMからヒアリングし、構成から公開まで伴走します。';
