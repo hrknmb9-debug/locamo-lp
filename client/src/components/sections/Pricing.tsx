@@ -169,69 +169,6 @@ export default function Pricing() {
           </div>
         </div>
 
-        {/* 依頼・決済フロー（サイト内チェックアウトなし） */}
-        <div className="mb-14 animate-fade-in-up">
-          <h3 className="text-xl font-bold mb-2 text-center md:text-left">ご依頼からお支払いまで</h3>
-          <p className="text-muted-foreground text-sm mb-8 mx-auto max-w-2xl text-center leading-relaxed text-pretty md:mx-0 md:text-left">
-            このLP上でカード番号はお預かりしません。ご契約や金額の確定後、DM等で送る
-            <strong className="font-semibold text-sky-950">Stripe Payment Link</strong>
-            のみでお支払いを完結させます（銀行振込は扱いません）。
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="rounded-[1.25rem] border border-sky-100 p-6 shadow-sm shadow-sky-950/5">
-              <h4 className="text-lg font-bold mb-2">LP制作</h4>
-              <p className="text-muted-foreground text-sm mb-4">シンプルで効果的なLP制作</p>
-              <p className="text-3xl font-bold mb-6">
-                3万円<span className="text-lg text-muted-foreground">〜</span>
-              </p>
-              <Link
-                href="/hearing"
-                className={cn(
-                  buttonVariants({ size: 'lg' }),
-                  'btn-primary inline-flex min-h-12 w-full items-center justify-center text-sm font-semibold text-primary-foreground',
-                )}
-              >
-                {PRIMARY_CTA_HEARING}
-              </Link>
-              <p className="text-xs text-muted-foreground mt-3 text-center leading-relaxed">
-                ヒアリング送信後にお見立て。その後お送りするPayment Linkで制作費をお支払いいただけます。
-              </p>
-            </div>
-
-            <div className="rounded-[1.25rem] border border-sky-100 p-6 shadow-sm shadow-sky-950/5">
-              <h4 className="text-lg font-bold mb-2">ホームページ制作</h4>
-              <p className="text-muted-foreground text-sm mb-4">複数ページの本格的なサイト</p>
-              <p className="text-3xl font-bold mb-6">要相談</p>
-              <Button size="lg" variant="outline" className="w-full" asChild>
-                <a href={DM_URL} target="_blank" rel="noopener noreferrer" onClick={e => activateExternalHref(e, DM_URL)}>
-                  お見積り依頼（DM）
-                </a>
-              </Button>
-              <p className="text-xs text-muted-foreground mt-3 text-center leading-relaxed">
-                条件確定後、同様にPayment Linkをお送りします。
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* 月額 */}
-        <div className="mb-14 animate-fade-in-up">
-          <h3 className="text-xl font-bold mb-6">サイト公開・ドメイン（月額）</h3>
-          <div className="rounded-[1.25rem] border border-sky-100 p-6 shadow-sm shadow-sky-950/5">
-            <p className="text-muted-foreground text-sm mb-4">制作後のサイト公開・ドメイン管理を継続</p>
-            <p className="text-3xl font-bold mb-4">
-              月3,000円<span className="text-lg text-muted-foreground">〜</span>
-            </p>
-            <p className="text-sm text-muted-foreground mb-6 leading-relaxed text-pretty">
-              開始タイミングはご契約内容に沿ってご連絡します。月額分も、都度ご案内するPayment Linkからお支払いください。
-            </p>
-            <Button size="lg" variant="outline" className="w-full rounded-full border-sky-200 sm:max-w-xs" asChild>
-              <a href="#contact">お問い合わせで相談する</a>
-            </Button>
-            <p className="text-xs text-muted-foreground mt-3">初期設定サポート込み</p>
-          </div>
-        </div>
-
         {/* CTA */}
         <div className="text-center animate-fade-in-up">
           <p className="text-muted-foreground text-sm mb-4">

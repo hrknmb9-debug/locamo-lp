@@ -20,9 +20,9 @@ export const SCOPE_INCLUDED_BULLETS = [
 ] as const;
 
 export const SCOPE_EXCLUDED_BULLETS = [
-  '検索順位やアクセス数の数値保証。',
-  '広告運用の代行のみ・撮影・動画制作のみを主目的とした単発請負。',
-  '公開後の無制限な機能追加（都度お見積り）。',
+  '検索順位やアクセス数の「数値保証」。',
+  '広告運用の単独代行、撮影や動画制作のみなど、ウェブ公開が主目的でない単発請負。',
+  '公開後の無制限な機能追加や全面リニューアル（規模に応じ都度お見積り）。',
 ] as const;
 
 export const MONITOR_SLOT_NOTE =
@@ -50,7 +50,7 @@ export const REFER_CONTACT_FOR_SLA = '初回ご返信の目安や受付手順は
 
 /** 「スコープ」見出しの親しみやすい日本語（About内の約束ボックスなど） */
 export const SCOPE_INCLUDED_HEADING = 'ご依頼に含まれやすいこと';
-export const SCOPE_EXCLUDED_HEADING = '込みにくいこと・ご相談になりやすいこと';
+export const SCOPE_EXCLUDED_HEADING = '標準には含まれないこと（ご相談・別見積り）';
 
 /** Landing ファーストビューの「約束」を一言にまとめた見出し */
 export const HERO_VALUE_HOOK =
