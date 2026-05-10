@@ -24,6 +24,11 @@ function executeMcpTool(toolName: string, input: Record<string, any>): any {
     const lines = result.split('\n');
     for (const line of lines) {
       const trimmed = line.trim();
+      // Skip empty lines and info lines
+      if (!trimmed || trimmed.includes('Tool execution result') || trimmed.includes('saved to:')) {
+        continue;
+      }
+      // Look for JSON
       if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
         try {
           return JSON.parse(trimmed);
