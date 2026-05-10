@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { PaymentButton } from '@/components/PaymentButton';
 import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { ChevronDown, Loader2 } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { Link } from 'wouter';
 import { DM_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
@@ -16,11 +15,9 @@ import {
 } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
 import { SCROLL_MARGIN_CLASS } from '@/data/siteNav';
-import { trpc } from '@/lib/trpc';
 
 export default function Pricing() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
-  const { data: checkoutPrices } = trpc.payment.getCheckoutPrices.useQuery();
 
   const faqs = [
     {
@@ -45,11 +42,9 @@ export default function Pricing() {
     },
     {
       q: '支払い方法は？',
-      a: '銀行振込またはクレジットカード決済に対応しています。詳細はご提案時にご説明いたします。',
+      a: 'すべて Stripe Payment Link（カード決済）のみです。条件のすり合わせ後、DM等でワンタイムリンクをお送りし、そのページで手続き完了まで行います。銀行振込は受け付けていません。',
     },
   ];
-
-
 
   return (
     <div className="py-16 md:py-24 px-4">
@@ -174,82 +169,74 @@ export default function Pricing() {
           </div>
         </div>
 
-        {/* Payment Options */}
+        {/* 依頼・決済フロー（サイト内チェックアウトなし） */}
         <div className="mb-14 animate-fade-in-up">
-          <h3 className="text-xl font-bold mb-6">今すぐ申し込む</h3>
+          <h3 className="text-xl font-bold mb-2 text-center md:text-left">ご依頼からお支払いまで</h3>
+          <p className="text-muted-foreground text-sm mb-8 mx-auto max-w-2xl text-center leading-relaxed text-pretty md:mx-0 md:text-left">
+            このLP上でカード番号はお預かりしません。ご契約や金額の確定後、DM等で送る
+            <strong className="font-semibold text-sky-950">Stripe Payment Link</strong>
+            のみでお支払いを完結させます（銀行振込は扱いません）。
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* LP制作 */}
             <div className="rounded-[1.25rem] border border-sky-100 p-6 shadow-sm shadow-sky-950/5">
               <h4 className="text-lg font-bold mb-2">LP制作</h4>
               <p className="text-muted-foreground text-sm mb-4">シンプルで効果的なLP制作</p>
-              <p className="text-3xl font-bold mb-6">3万円<span className="text-lg text-muted-foreground">〜</span></p>
-              {checkoutPrices ? (
-                <PaymentButton
-                  priceId={checkoutPrices.lp.priceId}
-                  planName={checkoutPrices.lp.planName}
-                >
-                  LP制作を申し込む
-                </PaymentButton>
-              ) : (
-                <Button size="lg" className="w-full" disabled>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  準備中…
-                </Button>
-              )}
-              <p className="text-xs text-muted-foreground mt-3 text-center">
-                クレジットカード決済の前にアカウントログインが必要です。
+              <p className="text-3xl font-bold mb-6">
+                3万円<span className="text-lg text-muted-foreground">〜</span>
+              </p>
+              <Link
+                href="/hearing"
+                className={cn(
+                  buttonVariants({ size: 'lg' }),
+                  'btn-primary inline-flex min-h-12 w-full items-center justify-center text-sm font-semibold text-primary-foreground',
+                )}
+              >
+                {PRIMARY_CTA_HEARING}
+              </Link>
+              <p className="text-xs text-muted-foreground mt-3 text-center leading-relaxed">
+                ヒアリング送信後にお見立て。その後お送りするPayment Linkで制作費をお支払いいただけます。
               </p>
             </div>
 
-            {/* ホームページ制作 */}
             <div className="rounded-[1.25rem] border border-sky-100 p-6 shadow-sm shadow-sky-950/5">
               <h4 className="text-lg font-bold mb-2">ホームページ制作</h4>
               <p className="text-muted-foreground text-sm mb-4">複数ページの本格的なサイト</p>
               <p className="text-3xl font-bold mb-6">要相談</p>
               <Button size="lg" variant="outline" className="w-full" asChild>
-                <a
-                  href={DM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => activateExternalHref(e, DM_URL)}
-                >
+                <a href={DM_URL} target="_blank" rel="noopener noreferrer" onClick={e => activateExternalHref(e, DM_URL)}>
                   お見積り依頼（DM）
                 </a>
               </Button>
+              <p className="text-xs text-muted-foreground mt-3 text-center leading-relaxed">
+                条件確定後、同様にPayment Linkをお送りします。
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Subscription Plans */}
+        {/* 月額 */}
         <div className="mb-14 animate-fade-in-up">
           <h3 className="text-xl font-bold mb-6">サイト公開・ドメイン（月額）</h3>
           <div className="rounded-[1.25rem] border border-sky-100 p-6 shadow-sm shadow-sky-950/5">
             <p className="text-muted-foreground text-sm mb-4">制作後のサイト公開・ドメイン管理を継続</p>
-            <p className="text-3xl font-bold mb-6">月3,000円<span className="text-lg text-muted-foreground">〜</span></p>
-            {checkoutPrices ? (
-              <PaymentButton
-                priceId={checkoutPrices.monthly.priceId}
-                planName={checkoutPrices.monthly.planName}
-                isSubscription
-              >
-                月額プランを申し込む
-              </PaymentButton>
-            ) : (
-              <Button size="lg" className="w-full" disabled>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                準備中…
-              </Button>
-            )}
-            <p className="text-xs text-muted-foreground mt-3 text-center">
-              ログイン後に Stripe Checkout が新しいタブで開きます。
+            <p className="text-3xl font-bold mb-4">
+              月3,000円<span className="text-lg text-muted-foreground">〜</span>
             </p>
-            <p className="text-xs text-muted-foreground mt-1 text-center">初期設定サポート込み</p>
+            <p className="text-sm text-muted-foreground mb-6 leading-relaxed text-pretty">
+              開始タイミングはご契約内容に沿ってご連絡します。月額分も、都度ご案内するPayment Linkからお支払いください。
+            </p>
+            <Button size="lg" variant="outline" className="w-full rounded-full border-sky-200 sm:max-w-xs" asChild>
+              <a href="#contact">お問い合わせで相談する</a>
+            </Button>
+            <p className="text-xs text-muted-foreground mt-3">初期設定サポート込み</p>
           </div>
         </div>
 
         {/* CTA */}
         <div className="text-center animate-fade-in-up">
-          <p className="text-muted-foreground text-sm mb-4">料金だけ先に教えてほしい場合も、ヒアリング経由で順にお返しします。</p>
+          <p className="text-muted-foreground text-sm mb-4">
+            料金だけ先に教えてほしい場合も、ヒアリング経由で順にお返しします。
+          </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/hearing"
@@ -261,12 +248,7 @@ export default function Pricing() {
               {PRIMARY_CTA_HEARING}
             </Link>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
-              <a
-                href={DM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => activateExternalHref(e, DM_URL)}
-              >
+              <a href={DM_URL} target="_blank" rel="noopener noreferrer" onClick={e => activateExternalHref(e, DM_URL)}>
                 口頭での相談（DM任意）
               </a>
             </Button>

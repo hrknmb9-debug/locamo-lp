@@ -20,7 +20,7 @@ export function replaceUrlHash(anchorId: string): void {
 }
 
 /**
- * `/payment` や `/orders` からホームの料金などへ：`/` に遷移したあとアンカーへスクロール。
+ * 直下がホーム以外のときにホームへ `:anchor` で遷移：`/` に遷移したあとアンカーへスクロール。
  */
 export function navigateToHomeAnchor(
   navigate: (path: string, opts?: { replace?: boolean }) => unknown,

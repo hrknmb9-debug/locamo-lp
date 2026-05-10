@@ -269,30 +269,18 @@ export default function Home() {
                     プライバシーポリシー
                   </Link>
                 </li>
-                <li>
-                  <Link href="/payment" className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors">
-                    お支払いページ
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/orders" className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors">
-                    支払い履歴
-                  </Link>
-                </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-semibold text-sm mb-3">お問合せ・お支払い</h4>
+              <h4 className="font-semibold text-sm mb-3">お問合せ・決済の進め方</h4>
               <p className="text-muted-foreground text-xs mb-3 leading-relaxed">
-                まずヒアリングページで入力し、コピーのうえDMにお送りください。質問のみはDMでも可能です。
+                まずヒアリングページで入力し、コピーのうえDMにお送りください。質問のみはDMでも可能です。ご契約後のお支払いは<strong className="font-semibold text-sky-950">ご案内する決済リンクのみ</strong>
+                で完結します（カード決済・Stripe Payment Links。サイト内チェックアウト・銀行振込は扱いません）。
               </p>
               <Link href="/hearing" className="inline-block text-xs text-accent underline-offset-2 hover:underline">
                 LP制作のヒアリングページへ
               </Link>
-              <a href="/payment" className="mt-2 inline-block text-xs text-accent underline-offset-2 hover:underline">
-                お支払いページ
-              </a>
               <a
                 href={DM_URL}
                 target="_blank"

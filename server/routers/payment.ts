@@ -3,7 +3,6 @@ import { eq, desc } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import type { Request } from "express";
 import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
-import { createCheckoutSession } from "../stripe";
 import { createCheckoutSessionViaMcp, createPaymentLinkViaMcp, getOrCreateStripeCustomerViaMcp } from "../stripe-mcp";
 import { ENV } from "../_core/env";
 import type { TrpcContext } from "../_core/context";
@@ -75,8 +74,8 @@ export const paymentRouter = router({
     .mutation(async ({ ctx, input: _ignored }) => {
       const effectivePriceId = getEffectiveLpOneTimePriceId();
       const baseUrl = requirePublicBase(ctx.req);
-      const successUrl = `${baseUrl}/payment-success`;
-      const cancelUrl = `${baseUrl}/pricing`;
+      const successUrl = `${baseUrl}/#pricing`;
+      const cancelUrl = `${baseUrl}/#pricing`;
 
       try {
         // Use Stripe MCP to bypass local Secret Key injection issues
@@ -109,7 +108,6 @@ export const paymentRouter = router({
     )
     .mutation(async ({ ctx, input: _ignored }) => {
       const effectivePriceId = getEffectiveMonthlyHostingPriceId();
-      const baseUrl = requirePublicBase(ctx.req);
 
       try {
         // Use Stripe MCP to bypass local Secret Key injection issues
