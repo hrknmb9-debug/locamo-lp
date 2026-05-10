@@ -31,7 +31,7 @@ const STEPS: { title: string; hint: string; fieldIds: (typeof HEARING_FIELDS)[nu
   },
   {
     title: '条件と補足',
-    hint: '最後まで来ていただいた方から優先しています。',
+    hint: '納期やご予算が分かると、お見立てがスムーズです。',
     fieldIds: ['deadline', 'budget', 'other'],
   },
 ];
@@ -247,7 +247,7 @@ const Hearing: FC = () => {
                 )}
               </Button>
               <p className="text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                コピー後、開いたDMの入力欄に貼り付けて送信してください。運営側ではどのアカウントから届いたかが分かります。
+                コピー後、開いたDMの入力欄に貼り付けて送信してください。
               </p>
             </div>
           )}

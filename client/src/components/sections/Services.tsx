@@ -28,8 +28,8 @@ export default function Services() {
           サービス内容
         </h2>
         <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed">
-          LP制作どうするかの第一候補は下記プランです。お申込みから初回ご返信までのルールは<strong className="font-semibold text-sky-950">「料金」「お問合せ」</strong>
-          と同じものを参照してください（細部のくり返しはここでは省いています）。
+          メインは下記の2プランです。申し込みから初回返信までのルールは<strong className="font-semibold text-sky-950">料金・お問い合わせ</strong>
+          と同じです（詳細はそちらをご覧ください）。
         </p>
 
         <figure className="mx-auto mb-12 max-w-5xl overflow-hidden rounded-[1.35rem] border border-sky-100 shadow-md shadow-sky-200/30">
@@ -169,7 +169,7 @@ export default function Services() {
 
         {/* Monthly cost note */}
         <p className="text-xs text-muted-foreground text-center mt-4">
-          ※別途 サイト公開・ドメイン費用 月3,000円〜（込み）
+          ※別途、サイト公開・ドメイン費用 月3,000円〜（込み）
         </p>
 
         {/* CTA */}

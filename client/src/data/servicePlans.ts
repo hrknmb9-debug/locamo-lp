@@ -18,7 +18,7 @@ export const SERVICE_PLANS: ServicePlanCopy[] = [
     id: 'lp',
     title: 'LP制作',
     description:
-      '1ページ完結型。店舗情報・メニュー・アクセス・問合せを収め、「見られたら問い合わせ・来店」の流れまで設計。',
+      '1ページ完結型。店舗情報・メニュー・アクセス・問い合わせ先を収め、「見られたら問い合わせ・来店」の流れまで設計。',
     pages: '1ページ',
     features: [
       'ヒアリングから公開までディレクション',
@@ -74,7 +74,7 @@ export const SERVICE_PLANS: ServicePlanCopy[] = [
     detailSections: [
       {
         heading: 'ページ例',
-        items: ['トップ / コンセプト', 'サービス・商品紹介', '店舗・会社概要', 'アクセス／お問合せ／予約への導線'],
+        items: ['トップ / コンセプト', 'サービス・商品紹介', '店舗・会社概要', 'アクセス／お問い合わせ／予約への導線'],
       },
       {
         heading: 'ご相談の流れ',

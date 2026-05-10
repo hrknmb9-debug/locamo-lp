@@ -36,10 +36,10 @@ export function HeroFlowStrip() {
           </li>
         ))}
       </ol>
-      <p className="jp-keep-all mt-6 px-1 text-center text-[11px] leading-relaxed text-muted-foreground sm:text-xs">
-        手順の本文はサイト内では重複させず、{' '}
+      <p className="jp-keep-all mt-5 px-1 text-center text-[11px] leading-relaxed text-muted-foreground sm:text-xs">
+        くわしくは{' '}
         <ProductionFlowJumpLink className="mx-auto inline-block max-sm:mt-1 sm:mx-1 sm:inline">料金ページの制作の流れ</ProductionFlowJumpLink>{' '}
-        だけにおいています。
+        をご覧ください。
       </p>
     </div>
   );

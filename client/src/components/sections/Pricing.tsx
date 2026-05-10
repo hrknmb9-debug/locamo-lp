@@ -25,6 +25,10 @@ export default function Pricing() {
       a: 'LP制作は2週間程度が目安です。ホームページ制作は3〜4週間。ヒアリング〜お見立てまでは原則2営業日以内にご返信します。',
     },
     {
+      q: 'お申し込みの流れを教えてください',
+      a: `このページの「制作の流れ」に全体の順序があります。${HEARING_FLOW_SHORT} ${RESPONSE_SLA}`,
+    },
+    {
       q: '制作後の修正や更新はできますか？',
       a: '制作完了後の簡易的な修正は無料で対応いたします。大幅な変更や新規ページ追加は別途お見積りとなります。',
     },
@@ -54,7 +58,9 @@ export default function Pricing() {
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           料金・プロセス
         </h2>
-
+        <p className="text-center text-muted-foreground jp-keep-all mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
+          料金と<strong className="font-semibold text-sky-950">制作の流れ</strong>、よくある質問をこのページに集約しています。
+        </p>
 
         <figure className="mx-auto mb-12 max-w-3xl overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-md shadow-sky-200/25">
           <img
@@ -74,10 +80,14 @@ export default function Pricing() {
           <h3 className="text-xl md:text-2xl font-bold mb-3">
             LP制作費<span className="text-accent">3万円〜</span>。月額はサイト公開・ドメイン管理のみ。
           </h3>
+          <p className="text-muted-foreground text-sm mb-6">
+            制作費は一括払い。制作費に対する月額課金はありません。
+          </p>
 
           <div className="inline-block rounded-[1.25rem] border border-sky-100 bg-white p-5 shadow-sm">
             <p className="text-xs text-muted-foreground mb-1">公開環境・ドメイン（別途）</p>
             <p className="text-2xl font-bold text-foreground">月3,000円〜</p>
+            <p className="text-xs text-muted-foreground mt-1">初期設定サポート込み</p>
           </div>
         </div>
 
@@ -165,6 +175,9 @@ export default function Pricing() {
 
         {/* CTA */}
         <div className="text-center animate-fade-in-up">
+          <p className="text-muted-foreground text-sm mb-4">
+            料金だけ先に教えてほしい場合も、ヒアリング経由で順にお返しします。
+          </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/hearing"

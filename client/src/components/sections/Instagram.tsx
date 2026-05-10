@@ -27,7 +27,7 @@ export default function InstagramPage() {
           InstagramとLocamoの組み合わせ
         </h2>
         <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Instagramだけに頼らない、安定した集客を実現
+          SNSと公式LPで、来店・問い合わせまでの案内をそろえる
         </p>
 
         <figure className="mx-auto mb-12 max-w-4xl overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-lg shadow-sky-200/25">
@@ -75,14 +75,14 @@ export default function InstagramPage() {
 
               {/* Right: Problems */}
               <div className="space-y-4">
-                <h4 className="font-semibold text-lg mb-4">具体的な課題</h4>
+                <h4 className="font-semibold text-lg mb-4">こうした課題に</h4>
                 {[
-                  'フォロワー数が増えないと集客できない',
-                  'Instagramのアルゴリズム変更に左右される',
-                  '広告費が増加する傾向',
-                  'Google検索からの流入がない',
-                  '店舗情報が散在して管理が大変',
-                  '営業時間やメニューの更新が手間',
+                  'フォロワーが少ないと集客につながりにくい',
+                  'アルゴリズムの変化で表示が読めにくい',
+                  '継続投稿・広告に時間やコストがかかりがち',
+                  '検索や地図からの「公式の入口」が弱い',
+                  '店舗情報がストーリー等に散らばる',
+                  'メニューや営業時間の更新が手間',
                 ].map((problem, idx) => (
                   <div key={idx} className="flex gap-3">
                     <span className="text-red-500 flex-shrink-0">✕</span>
@@ -114,12 +114,12 @@ export default function InstagramPage() {
                     <div className="bg-secondary rounded-lg p-4 text-center">
                       <TrendingUp className="w-8 h-8 mx-auto text-accent mb-2" />
                       <p className="text-xs font-semibold">Locamo LP</p>
-                      <p className="text-xs text-muted-foreground mt-1">集客・成約</p>
+                      <p className="text-xs text-muted-foreground mt-1">次の行動を明確に</p>
                     </div>
                   </div>
                   <div className="text-center text-muted-foreground text-sm mb-4">
                     <p className="mb-2">↓</p>
-                    <p className="text-accent font-semibold">安定した集客フロー</p>
+                    <p className="text-accent font-semibold">複数の入口をもつ導線</p>
                   </div>
                   <div className="bg-accent/10 border border-accent/30 rounded-lg p-4 text-center">
                     <p className="text-sm font-semibold text-accent">
@@ -135,12 +135,12 @@ export default function InstagramPage() {
               <div className="space-y-4">
                 <h4 className="font-semibold text-lg mb-4">得られるメリット</h4>
                 {[
-                  'Instagramはそのまま活用（ファン化・認知）',
-                  'LPで確実な集客・成約を実現',
-                  'Google検索からの流入が増加',
-                  'アルゴリズム変更の影響を最小化',
-                  '店舗情報を一元管理',
-                  'SEO効果で長期的な資産化',
+                  'Instagramは今の運用をそのまま活かせる',
+                  'LPで次の行動（問い合わせ・予約など）をはっきり示せる',
+                  '検索・地図から「公式の1枚」に誘導しやすい',
+                  'SNSだけに頼らない導線を持てる',
+                  '店舗情報を一枚に集約して案内しやすい',
+                  'SEOの土台づくりはプランに応じて',
                 ].map((benefit, idx) => (
                   <div key={idx} className="flex gap-3">
                     <span className="text-accent flex-shrink-0">✓</span>
@@ -161,8 +161,7 @@ export default function InstagramPage() {
               <span className="text-accent">LPを加えるだけ。</span>
             </h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Instagramの運用を続けながら、Locamoで制作したLPを活用することで、
-              より多くのお客様に到達できます。
+              いまのInstagram運用は続けながら、公式LPで「次に何をすればよいか」を伝えられます。
             </p>
           </div>
         </section>
@@ -201,7 +200,7 @@ export default function InstagramPage() {
               LPのご依頼・ご相談はこちらから
             </h3>
             <p className="text-muted-foreground mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-pretty">
-              DMへのリンクからアプリ側に切り替わりやすくなっています。細かく書きたい方は続けてフォームのヒアリングへどうぞ。
+              アプリへ切り替わる場合があります。細かく書きたい方はヒアリングフォームへどうぞ。
             </p>
             <div className="relative z-[1] mx-auto flex max-w-xl flex-col gap-3 sm:flex-row sm:justify-center">
               <a

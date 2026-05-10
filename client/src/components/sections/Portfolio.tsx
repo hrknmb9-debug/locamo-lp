@@ -100,8 +100,8 @@ export default function Portfolio() {
 
         <div className="lp-card animate-fade-in-up overflow-hidden rounded-[1.25rem] border-2 border-accent px-6 py-10 text-center shadow-md shadow-sky-200/40 sm:px-8 md:p-12">
           <h3 className="mb-4 text-xl font-bold sm:text-2xl">モニター枠・新規ご依頼について</h3>
-          <p className="mx-auto mb-5 max-w-lg text-sm leading-relaxed text-muted-foreground sm:text-base">
-            受付の進め方は<strong className="text-sky-950">サービス／料金／お問合せ</strong>に一本化しています。ここのくり返しは省きます。
+          <p className="mx-auto mb-6 max-w-md text-[15px] font-semibold leading-snug text-sky-950 sm:text-base">
+            ご依頼・モニター枠の受付手順は、サービス・料金・お問い合わせにまとめています。
           </p>
           <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">{MONITOR_SLOT_NOTE}</p>
 

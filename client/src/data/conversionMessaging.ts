@@ -8,7 +8,7 @@ export const HEARING_FLOW_SHORT =
 export const HEARING_FLOW_LINES = [
   'サイト内の4ステップに沿ってお店の状況を入力します。',
   '最後のボタンで回答全文がクリップボードにコピーされ、そのままInstagramのDMページへ進みます。',
-  'DMの入力欄に長押しで貼り付け、送信するとお申し込みとして受け付けます（送信はログイン中のInstagramから届きます）。',
+  'DMの入力欄に長押しで貼り付け、送信するとお申し込みとして受け付けます。',
 ] as const;
 
 export const RESPONSE_SLA =
@@ -30,8 +30,8 @@ export const MONITOR_SLOT_NOTE =
 
 /** ヒーロー用モニター帯（複数行でレイアウトし、単語中途改行を避ける） */
 export const MONITOR_BADGE_LINES = [
-  'モニター先行・最大3店まで',
-  'ご採用いただいた店は制作費無料',
+  'モニター先行・最大3店舗まで',
+  'ご採用いただいた店舗は制作費無料',
   '（審査付き／先着）',
 ] as const;
 
@@ -45,20 +45,16 @@ export const PRIMARY_CTA_DM_CONTACT = 'DMで相談';
 /** 「DMで相談」ボタンの補足（視覚的に短く） */
 export const PRIMARY_CTA_DM_SUBLINE = 'Instagram';
 
-/** 返信SLAなどの詳細が別セクションにあるときの短文（フローのくどさ防止用） */
-export const REFER_CONTACT_FOR_SLA = '初回ご返信の目安や受付手順は、ページ内「お問合せ」の記載に準じます。';
-
-/** 「スコープ」見出しの親しみやすい日本語（About内の約束ボックスなど） */
 export const SCOPE_INCLUDED_HEADING = 'ご依頼に含まれやすいこと';
 export const SCOPE_EXCLUDED_HEADING = '標準には含まれないこと（ご相談・別見積り）';
 
 /** Landing ファーストビューの「約束」を一言にまとめた見出し */
 export const HERO_VALUE_HOOK =
-  '大阪の個人店のため・ご来店や予約まで迷わせない「公式の1枚LP」をつくります。';
+  '大阪の個人店向けに、来店や予約まで迷わせない公式の1枚LPをつくります。';
 
 /** ヒアリングフォーム送信直前までの環境インフォメーション（Instagram 依存の開示） */
 export const HEARING_DM_PREREQUISITE =
-  '入力の最後で回答がクリップボードへコピーされ、InstagramのDMが開きます。送信完了まで、アプリまたはWebからInstagramへログインできる環境があると進めやすいです。質問のみのご相談は、このページに進まずDMのみでも大丈夫です（アカウント未作成の場合はまずInstagramの準備などもご相談ください）。';
+  '最後のボタンで回答をコピーし、InstagramのDMが開きます。Instagramにログインできる環境でお進みください。まず質問だけなら、フォームを使わずDMでも構いません。';
 
 /** 「お約束」（返信〜スコープ）の短いキャプション見出し */
 export const PROMISE_SECTION_EYEBROW = 'ご返信までの約束・範囲';
@@ -88,7 +84,7 @@ export type ApplicationFlowStep = {
   readonly title: string;
   /** スクロール量を抑える要約（トップなど） */
   readonly short: string;
-  /** 料金ページ・問合せのカード詳細など */
+  /** 料金ページ・お問い合わせのカード詳細など */
   readonly detail: string;
 };
 
@@ -107,7 +103,7 @@ export const APPLICATION_FLOW_STEPS: ApplicationFlowStep[] = [
     short:
       '原則2営業日以内を目安に、InstagramのDMで構成の方向感や質問にお答えし、見立てまでご案内します。',
     detail:
-      '内容確認のうえ、構成の方向感やご質問にお答えし、お見立てまでをInstagramのDM中心でご案内します。ご返信の目安詳細についてはFAQ・お問い合わせにも記載があります。',
+      '内容を確認のうえ、構成の方向感やご質問にお答えし、お見立てまでInstagramのDMを中心にご案内します。',
   },
   {
     num: '3',

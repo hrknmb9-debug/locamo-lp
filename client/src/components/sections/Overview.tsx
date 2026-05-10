@@ -18,7 +18,6 @@ import {
   PRIMARY_CTA_DM_SUBLINE,
   PRIMARY_CTA_HEARING_FULL,
   PROMISE_SECTION_EYEBROW,
-  REFER_CONTACT_FOR_SLA,
   RESPONSE_SLA,
   SCOPE_EXCLUDED_BULLETS,
   SCOPE_EXCLUDED_HEADING,
@@ -53,7 +52,7 @@ function StatsSection() {
         </div>
       </div>
       <p className="mx-auto max-w-full px-0.5 text-center text-xs leading-relaxed text-muted-foreground text-pretty sm:text-sm">
-        ※納案件・運用準備におけるサイト制作を含む社内集計です。公開サイトは{' '}
+        ※累計案件・運用準備におけるサイト制作を含む社内集計です。公開サイトは{' '}
         <a
           href="#works"
           className="font-semibold text-sky-950 underline underline-offset-2 hover:text-accent"
@@ -67,7 +66,7 @@ function StatsSection() {
         </a>
         をご覧ください。
         <span className="mt-2 block text-xs leading-relaxed text-sky-900/85 sm:text-sm">
-          別途 サイト公開・ドメイン費用 月3,000円〜（込み）。{MONITOR_SLOT_NOTE}
+          別途、サイト公開・ドメイン費用 月3,000円〜（込み）。{MONITOR_SLOT_NOTE}
         </span>
       </p>
     </div>
@@ -147,8 +146,8 @@ export default function Overview() {
                 </span>
               </p>
               <p className="mt-2 text-[12px] leading-relaxed text-muted-foreground sm:text-[13px]">
-                モニター枠の細部は下の脚注と
-                <ProductionFlowJumpLink className="mx-1 inline align-baseline">料金｜制作の流れ</ProductionFlowJumpLink>
+                モニター枠の条件は下の注記と
+                <ProductionFlowJumpLink className="mx-1 inline align-baseline">料金</ProductionFlowJumpLink>
                 をご確認ください。
               </p>
             </div>
@@ -323,16 +322,13 @@ export default function Overview() {
         <div className="container mx-auto max-w-4xl">
           <div className="relative z-10 rounded-[1.65rem] border-2 border-primary/35 bg-white/95 px-7 py-10 shadow-lg shadow-orange-100/60 md:p-14">
             <LpSectionEyebrow className="mb-4 text-primary">{APPLY_SECTION_EYEBROW}</LpSectionEyebrow>
-            <h2 className="mb-3 text-center text-2xl font-bold leading-snug md:text-[1.7rem]">
+            <h2 className="mb-5 text-center text-2xl font-bold leading-snug md:text-[1.7rem]">
               {HEARING_FLOW_SHORT}
             </h2>
-            <p className="mx-auto mb-5 max-w-lg text-center text-sm leading-relaxed text-muted-foreground jp-keep-all">
-              <strong className="font-semibold text-sky-950">時系列だけは</strong>
+            <p className="mx-auto mb-8 max-w-lg text-center text-sm leading-relaxed text-muted-foreground jp-keep-all">
+              公開までの全体像は
               <ProductionFlowJumpLink className="mx-0.5">料金ページの制作の流れ</ProductionFlowJumpLink>
-              に一本化しました。ここでは操作の体感にだけ絞ります。
-            </p>
-            <p className="mx-auto mb-8 max-w-lg text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
-              {REFER_CONTACT_FOR_SLA}
+              。ここでは、コピーしてDMへ進む操作だけを案内しています。
             </p>
             <div className="relative z-[1] mx-auto flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
               <a

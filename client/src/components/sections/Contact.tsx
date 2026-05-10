@@ -44,7 +44,7 @@ export default function Contact() {
         {/* Header */}
         <LpSectionEyebrow>連絡と受付の窓口</LpSectionEyebrow>
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
-          お問合せ
+          お問い合わせ
         </h2>
         <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
           お問い合わせの<strong className="font-semibold text-sky-950">正式なお申し込み</strong>
@@ -105,15 +105,14 @@ export default function Contact() {
           </div>
         </section>
 
-        <section className="mb-12 animate-fade-in-up jp-keep-all px-1" style={{ animationDelay: '0.1s' }}>
-          <h3 className="mb-4 text-xl font-bold text-center">順序だけをまとめたページ</h3>
-          <p className="mx-auto max-w-xl text-center text-sm leading-relaxed text-muted-foreground text-pretty">
-            サイト内でのお申込みから公開までの<strong className="font-semibold text-sky-950">時系列だけ</strong>は料金ページの
-            <ProductionFlowJumpLink className="mx-0.5">「制作の流れ」タイムライン</ProductionFlowJumpLink>
-            だけにおいています。トップにあるのは名前の付いた視覚的な並びのみです。
+        <section className="mb-12 animate-fade-in-up jp-keep-all px-1 text-center" style={{ animationDelay: '0.1s' }}>
+          <p className="mx-auto max-w-xl text-sm leading-relaxed text-muted-foreground text-pretty">
+            公開までの手順の詳細は、料金の
+            <ProductionFlowJumpLink className="mx-0.5">「制作の流れ」</ProductionFlowJumpLink>
+            をご覧ください。
           </p>
-          <p className="mx-auto mt-4 max-w-md text-center text-xs leading-relaxed text-muted-foreground sm:text-[13px]">
-            ※別途 サイト公開・ドメイン費用 月3,000円〜（込み）
+          <p className="mx-auto mt-3 max-w-md text-center text-xs leading-relaxed text-muted-foreground sm:text-[13px]">
+            ※別途、サイト公開・ドメイン費用 月3,000円〜（込み）
           </p>
         </section>
 
@@ -148,7 +147,7 @@ export default function Contact() {
           <div className="rounded-[1.5rem] border border-sky-100 bg-secondary p-8 md:p-12">
             <h3 className="text-xl font-bold mb-2">まず一枚のLPから始めませんか</h3>
             <p className="text-muted-foreground text-sm mb-7 text-pretty">
-              プランミニマムのみ知りたい場合も、この流れから伺えれば順にご案内します。
+              料金の目安だけ知りたい場合も、この流れで伺えれば順にご案内します。
             </p>
             <Link
               href="/hearing"

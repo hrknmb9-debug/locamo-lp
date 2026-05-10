@@ -273,7 +273,7 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="font-semibold text-sm mb-3">お問合せ・決済の進め方</h4>
+              <h4 className="font-semibold text-sm mb-3">お問い合わせ・決済の進め方</h4>
               <p className="text-muted-foreground text-xs mb-3 leading-relaxed">
                 まずヒアリングページで入力し、コピーのうえDMにお送りください。質問のみはDMでも可能です。ご契約後のお支払いは<strong className="font-semibold text-sky-950">ご案内する決済リンクのみ</strong>
                 で完結します（カード決済・Stripe Payment Links。サイト内チェックアウト・銀行振込は扱いません）。
