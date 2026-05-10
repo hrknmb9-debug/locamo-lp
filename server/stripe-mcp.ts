@@ -20,13 +20,24 @@ function executeMcpTool(toolName: string, input: Record<string, any>): any {
       { encoding: "utf-8" }
     );
     
-    // Parse the JSON output from the tool result
-    const match = result.match(/Tool execution result:\s*({[\s\S]*})/);
-    if (match) {
-      return JSON.parse(match[1]);
+    // Extract JSON from "Tool execution result:" line
+    const lines = result.split('\n');
+    for (const line of lines) {
+      if (line.includes('Tool execution result:')) {
+        // Extract JSON after the colon
+        const jsonStr = line.substring(line.indexOf(':') + 1).trim();
+        if (jsonStr) {
+          try {
+            return JSON.parse(jsonStr);
+          } catch (e) {
+            console.error("[Stripe MCP] Failed to parse JSON:", jsonStr);
+            throw e;
+          }
+        }
+      }
     }
     
-    // Try parsing the entire result as JSON
+    // Fallback: try parsing the entire result
     try {
       return JSON.parse(result);
     } catch {
