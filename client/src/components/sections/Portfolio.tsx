@@ -38,7 +38,7 @@ const PORTFOLIO_SITES = [
 
 export default function Portfolio() {
   return (
-    <div className="space-y-16 md:space-y-24 py-16 md:py-24 px-4">
+    <div className="space-y-16 md:space-y-28 lp-section-y px-4">
       <div className="container mx-auto max-w-5xl">
         <LpSectionEyebrow className="mb-4 md:mb-3">公開事例の一例</LpSectionEyebrow>
         <h2 className="text-center text-[1.625rem] font-bold mb-4 sm:text-3xl md:text-4xl">納品事例（公開サイト）</h2>

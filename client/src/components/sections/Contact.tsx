@@ -9,6 +9,8 @@ import { Link } from 'wouter';
 import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import {
+  CONTACT_INTAKE_SUMMARY,
+  DM_CHANNEL_FLEX_NOTE,
   HEARING_FLOW_LINES,
   PRIMARY_CTA_HEARING_FULL,
   RESPONSE_SLA,
@@ -17,38 +19,33 @@ import {
 export default function Contact() {
   const faqs = [
     {
-      q: 'どのくらいで完成しますか？',
-      a: 'LP制作は2週間、ホームページ制作は3〜4週間が目安です。',
+      q: '既存のInstagramをそのまま活かせますか？',
+      a: 'はい。運用しているアカウントに合わせて、プロフィールからLPへつなぐ導線まで一緒に整えます。',
     },
     {
-      q: '修正はできますか？',
-      a: '制作完了後の簡易的な修正は無料で対応いたします。',
+      q: 'どんな業種・店舗規模でも対応していますか？',
+      a: '飲食・小売・サービスなど、大阪エリアの個人店・小規模店を主な対象です。ご相談内容によってはお断りする場合があります。',
     },
     {
-      q: '既存のInstagramを活かせますか？',
-      a: 'もちろんです。既存のInstagramアカウントをそのまま活用できます。',
-    },
-    {
-      q: '申し込み後、どれくらいで返信が来ますか？',
-      a: RESPONSE_SLA,
-    },
-    {
-      q: 'どんな店舗でも対応できますか？',
-      a: '飲食店・小売店・専門店など、大阪エリアの個人店・小規模店を主な対象にしています。業種によりお断りすることがあります。',
+      q: '料金や納期を先に知りたいのですが？',
+      a: `${RESPONSE_SLA} 金額の内訳・納期目安・制作の順序は料金ページの「料金比較」「制作の流れ」「よくある質問」にあります。`,
     },
   ];
 
   return (
-    <div className="py-16 md:py-24 px-4">
+    <div className="lp-section-y px-4">
       <div className="container mx-auto max-w-4xl">
         {/* Header */}
         <LpSectionEyebrow>連絡と受付の窓口</LpSectionEyebrow>
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           お問い合わせ
         </h2>
-        <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
-          お問い合わせの<strong className="font-semibold text-sky-950">正式なお申し込み</strong>
-          は、ヒアリング入力をコピーし、InstagramのDMに貼り付けて送信した時点で完了です。{RESPONSE_SLA}
+        <p className="text-center text-muted-foreground mb-6 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
+          {CONTACT_INTAKE_SUMMARY}
+          <span className="mt-3 block">{RESPONSE_SLA}</span>
+        </p>
+        <p className="text-center text-muted-foreground mb-10 mx-auto max-w-lg text-xs leading-relaxed text-pretty sm:text-sm">
+          {DM_CHANNEL_FLEX_NOTE}
         </p>
 
         {/* Main CTA */}
@@ -110,9 +107,6 @@ export default function Contact() {
             公開までの手順の詳細は、料金の
             <ProductionFlowJumpLink className="mx-0.5">「制作の流れ」</ProductionFlowJumpLink>
             をご覧ください。
-          </p>
-          <p className="mx-auto mt-3 max-w-md text-center text-xs leading-relaxed text-muted-foreground sm:text-[13px]">
-            ※別途、サイト公開・ドメイン費用 月3,000円〜（込み）
           </p>
         </section>
 

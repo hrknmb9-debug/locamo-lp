@@ -51,7 +51,7 @@ export default function Pricing() {
   ];
 
   return (
-    <div className="py-16 md:py-24 px-4">
+    <div className="lp-section-y px-4">
       <div className="container mx-auto max-w-4xl">
         {/* Header */}
         <LpSectionEyebrow>料金</LpSectionEyebrow>

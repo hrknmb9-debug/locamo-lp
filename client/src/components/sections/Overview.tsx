@@ -6,14 +6,14 @@ import { cn } from '@/lib/utils';
 import { ArrowRight, ClipboardList, Instagram, Sparkles, Zap, Activity, LayoutList, Waypoints } from 'lucide-react';
 import { Link } from 'wouter';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { useCountUp } from '@/hooks/useCountUp';
 import {
   ABOUT_SECTION_EYEBROW,
   APPLY_SECTION_EYEBROW,
   HEARING_FLOW_SHORT,
   HERO_VALUE_HOOK,
+  HERO_PRICE_TEASER,
+  HERO_PRIMARY_LEAD,
   MONITOR_BADGE_LINES,
-  MONITOR_SLOT_NOTE,
   PRIMARY_CTA_DM_CONTACT,
   PRIMARY_CTA_DM_SUBLINE,
   PRIMARY_CTA_HEARING_FULL,
@@ -31,16 +31,16 @@ import { activateExternalHref } from '@/lib/openExternalUrl';
 import { replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
 import { DM_URL } from '@/constants/locamo';
 
-function StatsSection() {
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.5 });
-  const count = useCountUp(50, 2000, isVisible);
+/** 累計案件（カウントアップによる一時的な「0+」表示を避けるため静的表記） */
+const STATS_CASE_COUNT_LABEL = '50+' as const;
 
+function StatsSection() {
   return (
-    <div ref={ref} className="min-w-0 space-y-3 animate-fade-in-up">
-      <div className="grid grid-cols-1 gap-6 text-center sm:grid-cols-3 sm:gap-4 md:gap-8">
+    <div className="min-w-0 space-y-3 animate-fade-in-up lp-metrics-surface">
+      <div className="grid grid-cols-1 gap-6 text-center sm:grid-cols-3 sm:gap-4 md:gap-10">
         <div>
-          <div className="text-3xl md:text-4xl font-bold text-accent tabular-nums">{count}+</div>
-          <p className="mt-2 text-sm text-muted-foreground">累計案件</p>
+          <div className="text-3xl md:text-4xl font-bold text-accent tabular-nums">{STATS_CASE_COUNT_LABEL}</div>
+          <p className="mt-2 text-sm text-muted-foreground">累計案件（社内集計）</p>
         </div>
         <div>
           <div className="text-3xl md:text-4xl font-bold text-accent">3万円〜</div>
@@ -52,7 +52,7 @@ function StatsSection() {
         </div>
       </div>
       <p className="mx-auto max-w-full px-0.5 text-center text-xs leading-relaxed text-muted-foreground text-pretty sm:text-sm">
-        ※累計案件・運用準備におけるサイト制作を含む社内集計です。公開サイトは{' '}
+        ※制作・運用準備に関する案件の社内集計です。公開ページは{' '}
         <a
           href="#works"
           className="font-semibold text-sky-950 underline underline-offset-2 hover:text-accent"
@@ -62,12 +62,24 @@ function StatsSection() {
             replaceUrlHash('works');
           }}
         >
-          「納品事例」
+          納品事例
         </a>
         をご覧ください。
-        <span className="mt-2 block text-xs leading-relaxed text-sky-900/85 sm:text-sm">
-          別途、サイト公開・ドメイン費用 月3,000円〜（込み）。{MONITOR_SLOT_NOTE}
-        </span>
+      </p>
+      <p className="mx-auto max-w-full px-0.5 text-center text-xs leading-relaxed text-sky-900/85 text-pretty sm:text-sm">
+        公開・ドメインは別途で月3,000円〜（初期設定サポート込み）。
+        <a
+          href="#pricing"
+          className="font-semibold text-sky-950 underline underline-offset-2 hover:text-accent"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSiteAnchor('pricing');
+            replaceUrlHash('pricing');
+          }}
+        >
+          料金
+        </a>
+        でモニター枠・通常依頼の条件をご確認ください。
       </p>
     </div>
   );
@@ -75,18 +87,18 @@ function StatsSection() {
 
 export default function Overview() {
   return (
-    <div className="w-full min-w-0 space-y-16 md:space-y-24">
+    <div className="w-full min-w-0 space-y-16 md:space-y-28">
       {/* Hero Section */}
-      <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-x-clip px-4 py-20">
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-32 -right-32 size-96 rounded-full bg-sky-100 blur-3xl opacity-55" />
-          <div className="absolute top-1/2 -left-24 size-72 rounded-full bg-cyan-100 blur-3xl opacity-45" />
-        </div>
+      <section className="lp-hero-surface relative flex min-h-[88vh] flex-col items-center justify-center overflow-x-clip px-4 pb-[4.25rem] pt-[clamp(5rem,12vh,8rem)]">
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-300/55 to-transparent"
+          aria-hidden
+        />
 
-        <div className="relative z-10 mx-auto w-full min-w-0 max-w-3xl px-3 text-center sm:px-2">
+        <div className="relative z-10 mx-auto w-full min-w-0 max-w-[40rem] px-3 text-center sm:max-w-[42rem] sm:px-2">
           {/* キャンペーン & メイン約束 — モバイル順序統一 */}
           <div className="animate-fade-in mb-6 flex flex-col items-center gap-2.5 sm:mb-7 sm:gap-3" style={{ animationDelay: '0.08s' }}>
-            <div className="jp-keep-all w-full max-w-[min(21rem,calc(100vw-2rem))] rounded-2xl border border-sky-200 bg-white/95 px-4 py-3 shadow-sm sm:max-w-xl sm:py-3.5">
+            <div className="jp-keep-all lp-glass-panel w-full max-w-[min(21rem,calc(100vw-2rem))] rounded-2xl border border-sky-200/80 px-4 py-3 sm:max-w-xl sm:py-3.5">
               <span className="flex min-w-0 items-start gap-2">
                 <Sparkles className="size-4 shrink-0 pt-0.5 text-accent" aria-hidden />
                 <span className="min-w-0 text-left text-[13px] font-semibold leading-relaxed text-sky-950 sm:text-sm md:text-[0.9375rem]">{HERO_VALUE_HOOK}</span>
@@ -94,7 +106,7 @@ export default function Overview() {
             </div>
             <div
               className={cn(
-                'jp-keep-all w-full max-w-[min(21rem,calc(100vw-2rem))] rounded-[1.125rem] border-2 border-primary/55 bg-gradient-to-b from-orange-50 to-amber-50 px-4 py-3 text-primary shadow-md shadow-orange-400/18 sm:max-w-md',
+                'jp-keep-all w-full max-w-[min(21rem,calc(100vw-2rem))] rounded-[1.125rem] border border-orange-400/45 bg-gradient-to-b from-orange-50/98 to-amber-50/95 px-4 py-3 text-primary shadow-[0_12px_40px_-14px_rgb(251_146_60_/_0.42)] ring-1 ring-orange-950/[0.05] backdrop-blur-[2px] sm:max-w-md',
               )}
               role="status"
               aria-live="polite"
@@ -115,7 +127,7 @@ export default function Overview() {
           </div>
 
           <h1
-            className="mx-auto mb-6 max-w-full animate-fade-in-up text-center text-[1.875rem] font-bold leading-snug tracking-tight sm:mb-5 sm:text-[2rem] md:mb-5 md:text-5xl md:leading-tight lg:text-6xl"
+            className="mx-auto mb-6 max-w-full animate-fade-in-up text-balance text-center text-[1.875rem] font-bold leading-snug tracking-[-0.035em] sm:mb-5 sm:text-[2rem] md:mb-5 md:text-[2.625rem] md:leading-[1.12] lg:text-[2.85rem]"
             style={{ animationDelay: '0.2s' }}
           >
             <span className="block md:inline">
@@ -125,40 +137,32 @@ export default function Overview() {
           </h1>
 
           <div
-            className="animate-fade-in-up mx-auto mb-8 max-w-xl min-w-0 space-y-3 text-pretty md:space-y-2"
+            className="animate-fade-in-up mx-auto mb-8 max-w-xl min-w-0 text-pretty"
             style={{ animationDelay: '0.35s' }}
           >
-            <div className="jp-keep-all mx-auto w-full max-w-full rounded-2xl border border-sky-100 bg-sky-50/85 px-3 py-3 text-[13px] leading-relaxed text-sky-900 sm:px-4 sm:text-[0.9375rem] md:leading-relaxed">
-              <p>
-                <strong className="font-semibold text-sky-950">AIで構成・文案のたたき台を素早く作成</strong>し、人が読み順とCTAまで整えます。
-              </p>
-              <p className="mt-2 flex flex-col gap-2 leading-relaxed sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-center sm:gap-x-2 sm:gap-y-1">
-                <span>
-                  LP制作<strong className="font-semibold text-sky-800 sm:whitespace-nowrap">3万円〜</strong>
-                </span>
-                <span aria-hidden className="hidden shrink-0 text-sky-300 sm:inline">
-                  ·
-                </span>
-                <span>
-                  公開
-                  <strong className="font-semibold text-sky-800 sm:whitespace-nowrap">・ドメイン月3,000円〜</strong>
-                  （別途）。
-                </span>
-              </p>
-              <p className="mt-2 text-[12px] leading-relaxed text-muted-foreground sm:text-[13px]">
-                モニター枠の条件は下の注記と
-                <ProductionFlowJumpLink className="mx-1 inline align-baseline">料金</ProductionFlowJumpLink>
-                をご確認ください。
+            <div className="jp-keep-all lp-glass-panel mx-auto w-full rounded-[1.25rem] border border-sky-200/70 px-4 py-4 text-[13px] leading-relaxed text-sky-950 sm:px-5 sm:text-[0.9375rem]">
+              <p className="text-sky-950">{HERO_PRIMARY_LEAD}</p>
+              <p className="mt-3 font-semibold text-sky-900">{HERO_PRICE_TEASER}</p>
+              <p className="mt-3 text-[12px] leading-relaxed text-muted-foreground sm:text-[13px]">
+                モニター無料枠（審査・先着）の条件も
+                <a
+                  href="#pricing"
+                  className="font-semibold text-sky-950 underline underline-offset-2 hover:text-accent"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSiteAnchor('pricing');
+                    replaceUrlHash('pricing');
+                  }}
+                >
+                  料金
+                </a>
+                にあります。
               </p>
             </div>
-            <p className="jp-keep-all text-base leading-relaxed text-muted-foreground md:text-[1.05rem] md:leading-relaxed">
-              SNSに散らばりがちな情報を<strong className="font-semibold text-sky-950">公式の一枚</strong>
-              にまとめ、次に何をすればよいかを読み順で示します。
-            </p>
           </div>
 
           <figure className="mx-auto mb-8 max-w-[42rem] w-full animate-fade-in-up sm:mb-10" style={{ animationDelay: '0.42s' }}>
-            <div className="overflow-hidden rounded-[1.5rem] border border-sky-100 bg-white shadow-xl shadow-sky-200/40 ring-1 ring-sky-100/80">
+            <div className="overflow-hidden rounded-[1.375rem] border border-sky-200/50 bg-white shadow-[0_20px_50px_-22px_rgb(14_165_233_/_0.25)] ring-1 ring-slate-900/[0.04]">
               <img
                 src={LP_IMAGES.hero}
                 alt="店舗の集客とSNS・Webを結ぶコンセプトイラスト"
@@ -206,9 +210,9 @@ export default function Overview() {
         </div>
       </section>
 
-      <div id="workflow" className={`${SCROLL_MARGIN_CLASS} space-y-16 md:space-y-24`}>
+      <div id="workflow" className={`${SCROLL_MARGIN_CLASS} space-y-16 md:space-y-28`}>
       {/* Problem Section */}
-      <section className="py-16 md:py-24 px-4">
+      <section className="lp-section-y px-4">
         <div className="container mx-auto max-w-4xl">
           <LpSectionEyebrow>{WORKFLOW_SECTION_EYEBROW}</LpSectionEyebrow>
           <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">「集客はSNS」のみになりがちな課題</h2>
@@ -246,7 +250,7 @@ export default function Overview() {
       </section>
 
       {/* About Locamo Section */}
-      <section className="lp-soft-band py-16 md:py-24 px-4">
+      <section className="lp-soft-band lp-section-y px-4">
         <div className="container mx-auto max-w-4xl">
           <LpSectionEyebrow>{ABOUT_SECTION_EYEBROW}</LpSectionEyebrow>
           <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
@@ -264,7 +268,7 @@ export default function Overview() {
               },
               {
                 title: '買い切り型',
-                desc: 'LP制作費3万円〜の買い切り。サイト公開・ドメイン込みで月3,000円〜のランニングのみ。',
+                desc: 'LP制作費3万円〜の買い切り（制作費の月額課金なし）。公開・ドメインは別途、月3,000円〜のランニングのみ。',
               },
               {
                 title: 'LPで注文までの設計',

@@ -12,7 +12,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ScrollLandmark } from '@/components/lp/ScrollLandmark';
 import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
-import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
+import { PRIMARY_CTA_HEARING, DM_CHANNEL_FLEX_NOTE } from '@/data/conversionMessaging';
 import { SITE_SCROLL_NAV } from '@/data/siteNav';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { prefersReducedMotion, replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
@@ -103,8 +103,10 @@ export default function Home() {
       </a>
 
       <header
-        className={`sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 pt-[env(safe-area-inset-top,0px)] backdrop-blur transition-shadow ${
-          scrolled ? 'shadow-sm shadow-sky-200/40' : 'border-transparent'
+        className={`sticky top-0 z-50 pt-[env(safe-area-inset-top,0px)] transition-[box-shadow,border-color] ${
+          scrolled
+            ? 'border-b border-slate-200/85 bg-white/82 shadow-[0_10px_40px_-14px_rgb(15_23_42_/_0.1)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/[0.74]'
+            : 'border-b border-transparent bg-white/76 backdrop-blur-lg supports-[backdrop-filter]:bg-white/[0.58]'
         }`}
       >
         <div className="container mx-auto flex h-14 min-h-14 items-center justify-between gap-2 px-4">
@@ -168,7 +170,7 @@ export default function Home() {
         </div>
 
         {mobileMenuOpen && (
-          <nav id="mobile-lp-nav" className="border-t border-sky-100 bg-[#f8fcff] md:hidden" aria-label="ページ内リンク（モバイル）">
+          <nav id="mobile-lp-nav" className="border-t border-slate-200/70 bg-white/92 backdrop-blur-lg md:hidden" aria-label="ページ内リンク（モバイル）">
             <div className="container mx-auto flex flex-col gap-1 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]">
               <button type="button" onClick={() => goDocumentTop()} className={navLinkDrawer}>
                 ページ先頭へ
@@ -216,13 +218,13 @@ export default function Home() {
         <ScrollLandmark id="services">
           <Services />
         </ScrollLandmark>
-        <ScrollLandmark id="pricing">
+        <ScrollLandmark id="pricing" className="lp-strip-alt">
           <Pricing />
         </ScrollLandmark>
         <ScrollLandmark id="works">
           <Portfolio />
         </ScrollLandmark>
-        <ScrollLandmark id="instagram">
+        <ScrollLandmark id="instagram" className="lp-strip-alt">
           <InstagramPage />
         </ScrollLandmark>
         <ScrollLandmark id="contact">
@@ -230,7 +232,7 @@ export default function Home() {
         </ScrollLandmark>
       </main>
 
-      <footer className="mt-8 border-t border-sky-100 bg-sky-50/60 pb-[env(safe-area-inset-bottom,0px)]">
+      <footer className="mt-10 border-t border-slate-200/80 bg-gradient-to-b from-slate-50/90 to-[rgb(252_253_254_/_0.98)] pb-[env(safe-area-inset-bottom,0px)]">
         <div className="container mx-auto px-4 py-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
@@ -278,6 +280,7 @@ export default function Home() {
                 まずヒアリングページで入力し、コピーのうえDMにお送りください。質問のみはDMでも可能です。ご契約後のお支払いは<strong className="font-semibold text-sky-950">ご案内する決済リンクのみ</strong>
                 で完結します（カード決済・Stripe Payment Links。サイト内チェックアウト・銀行振込は扱いません）。
               </p>
+              <p className="text-muted-foreground text-xs mb-3 leading-relaxed">{DM_CHANNEL_FLEX_NOTE}</p>
               <Link href="/hearing" className="inline-block text-xs text-accent underline-offset-2 hover:underline">
                 LP制作のヒアリングページへ
               </Link>

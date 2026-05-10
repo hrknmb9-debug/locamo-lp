@@ -43,18 +43,18 @@
 }
 
 :root {
-  /* 信頼感のあるライトブルー × オレンジCTA（コーポレートLP寄せ） */
-  --primary: #f97316;
+  /* 信頼感のあるライトブルー × オレンジCTA（大手コーポレートLP寄りの落ち着いた彩度） */
+  --primary: #ea580c;
   --primary-foreground: #ffffff;
-  --sidebar-primary: #f97316;
+  --sidebar-primary: #ea580c;
   --sidebar-primary-foreground: #ffffff;
   --chart-1: #0ea5e9;
-  --chart-2: #f97316;
+  --chart-2: #ea580c;
   --chart-3: #0369a1;
   --chart-4: #22c55e;
   --chart-5: #a855f7;
   --radius: 1rem;
-  --background: #ffffff;
+  --background: #fafbfc;
   --foreground: #0f172a;
   --card: #ffffff;
   --card-foreground: #0f172a;
@@ -62,18 +62,18 @@
   --popover-foreground: #0f172a;
   --secondary: #f0f9ff;
   --secondary-foreground: #0c4a6e;
-  --muted: #f8fafc;
-  --muted-foreground: #64748b;
-  --accent: #0ea5e9;
+  --muted: #f4f7fb;
+  --muted-foreground: #5f6c7b;
+  --accent: #0284c7;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #bae6fd;
-  --input: #e0f2fe;
+  --border: rgb(207 229 246);
+  --input: #e2f2fc;
   --ring: #38bdf8;
   --sidebar: #f0f9ff;
   --sidebar-foreground: #0f172a;
-  --sidebar-accent: #0ea5e9;
+  --sidebar-accent: #0284c7;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #bae6fd;
   --sidebar-ring: #38bdf8;
@@ -117,18 +117,20 @@
 
   h1 {
     font-size: 2.5rem;
-    line-height: 1.2;
-    letter-spacing: -0.8px;
+    line-height: 1.18;
+    letter-spacing: -0.035em;
   }
 
   h2 {
     font-size: 2rem;
-    line-height: 1.3;
+    line-height: 1.28;
+    letter-spacing: -0.03em;
   }
 
   h3 {
     font-size: 1.375rem;
-    line-height: 1.4;
+    line-height: 1.42;
+    letter-spacing: -0.02em;
   }
 
   p {
@@ -217,31 +219,109 @@
     animation: slideInRight 0.5s ease-out both;
   }
 
-  /* メインCTA — オレンジのピル型 */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-fade-in,
+    .animate-slide-in-left,
+    .animate-slide-in-right {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .btn-primary:hover {
+      transform: none !important;
+    }
+
+    .lp-card:hover {
+      transform: none !important;
+    }
+  }
+
+  /* メインCTA — ピル型・ごく軽い奥行き */
   .btn-primary {
-    background: linear-gradient(180deg, #fb923c 0%, #f97316 55%, #ea580c 100%);
+    background: linear-gradient(180deg, #fb923c 0%, #f97316 50%, #ea580c 100%);
     border-radius: 9999px;
-    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.35), 0 1px 2px rgba(15, 23, 42, 0.06);
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.24) inset,
+      0 2px 10px rgb(249 115 22 / 0.32),
+      0 1px 3px rgb(15 23 42 / 0.08);
     transition:
-      box-shadow 0.15s,
-      transform 0.15s;
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
   }
 
   .btn-primary:hover {
-    box-shadow: 0 6px 16px rgba(249, 115, 22, 0.45), 0 2px 4px rgba(15, 23, 42, 0.08);
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.26) inset,
+      0 8px 22px rgb(249 115 22 / 0.42),
+      0 2px 8px rgb(15 23 42 / 0.1);
     transform: translateY(-1px);
   }
 
   .lp-card {
-    @apply rounded-[1.25rem] border border-sky-100 bg-card shadow-sm shadow-sky-950/5 transition-shadow;
+    @apply rounded-[1.25rem] border border-sky-100/90 bg-card transition-all duration-300 ease-out;
+    box-shadow:
+      0 1px 0 0 rgb(15 23 42 / 0.04),
+      0 10px 36px -16px rgb(14 165 233 / 0.12);
   }
 
   .lp-card:hover {
-    @apply border-sky-200 shadow-md;
+    @apply border-sky-300/80;
+    box-shadow:
+      0 1px 0 0 rgb(15 23 42 / 0.06),
+      0 20px 46px -14px rgb(14 165 233 / 0.2);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lp-card:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  /* セクション縦リズム（大手LPのゆとりあるスケール） */
+  .lp-section-y {
+    @apply py-[4.75rem] md:py-[6.25rem];
+  }
+
+  /* ヒーロー背景（フラッシュの単純グラデより、彩度抑制の複層） */
+  .lp-hero-surface {
+    background:
+      radial-gradient(ellipse 110% 75% at 50% -12%, rgb(224 242 254 / 0.72), transparent 54%),
+      radial-gradient(ellipse 48% 40% at 96% 0%, rgb(186 230 253 / 0.32), transparent 48%),
+      linear-gradient(180deg, rgb(248 250 252) 0%, #ffffff 45%, #ffffff 100%);
+  }
+
+  /* 主要指標・数字帯の台座 */
+  .lp-metrics-surface {
+    border-radius: 1.375rem;
+    border: 1px solid rgb(186 230 253 / 0.55);
+    background: rgb(255 255 255 / 0.78);
+    box-shadow:
+      0 1px 0 0 rgb(15 23 42 / 0.04),
+      0 16px 48px -18px rgb(14 165 233 / 0.18);
+    @apply backdrop-blur-sm px-6 py-8 md:px-12 md:py-10;
+  }
+
+  /* ガラス風パネル（FV・強調ボックス） */
+  .lp-glass-panel {
+    background: rgb(255 255 255 / 0.82);
+    box-shadow:
+      0 1px 0 0 rgb(15 23 42 / 0.04),
+      0 8px 32px -12px rgb(14 165 233 / 0.12);
+    @apply backdrop-blur-sm ring-1 ring-slate-900/[0.05];
+  }
+
+  /* インターリーブ帯で縦スクロールの単調さを抑える */
+  .lp-strip-alt {
+    border-top: 1px solid rgb(226 232 240 / 0.72);
+    background: linear-gradient(180deg, rgb(248 250 252 / 0.95) 0%, rgb(255 255 255 / 0.55) 100%);
   }
 
   .lp-soft-band {
-    background: linear-gradient(165deg, #f0f9ff 0%, #ecfeff 42%, #ffffff 100%);
+    border-top: 1px solid rgb(207 229 246 / 0.55);
+    border-bottom: 1px solid rgb(207 229 246 / 0.4);
+    background: linear-gradient(158deg, #f0f9ff 0%, #eefbfd 42%, rgb(248 250 252) 88%, #ffffff 100%);
   }
 
   @media (min-width: 640px) {

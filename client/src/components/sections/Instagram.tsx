@@ -19,7 +19,7 @@ import { LP_IMAGES } from '@/lp-images';
 
 export default function InstagramPage() {
   return (
-    <div className="space-y-16 md:space-y-24 py-16 md:py-24 px-4">
+    <div className="space-y-16 md:space-y-28 lp-section-y px-4">
       <div className="container mx-auto max-w-5xl">
         {/* Header */}
         <LpSectionEyebrow>SNSとWebの組み立て</LpSectionEyebrow>
@@ -61,13 +61,13 @@ export default function InstagramPage() {
                   </div>
                   <div className="text-center text-muted-foreground text-sm mb-4">
                     <p className="mb-2">↓</p>
-                    <p className="text-red-500 font-semibold">不安定な集客</p>
+                    <p className="text-amber-800 font-semibold">届き方が読みにくいことも</p>
                   </div>
-                  <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-center">
-                    <p className="text-sm font-semibold text-red-500">
-                      アルゴリズム変更で
+                  <div className="rounded-lg border border-amber-400/40 bg-amber-500/10 p-4 text-center">
+                    <p className="text-sm font-semibold text-amber-900">
+                      SNSだけに片寄ると
                       <br />
-                      集客が激減
+                      導線が不安定になりがち
                     </p>
                   </div>
                 </div>
@@ -77,7 +77,7 @@ export default function InstagramPage() {
               <div className="space-y-4">
                 <h4 className="font-semibold text-lg mb-4">こうした課題に</h4>
                 {[
-                  'フォロワーが少ないと集客につながりにくい',
+                  '届きにくい時期があっても、公式の受け皿がないと取りこぼしが増えがち',
                   'アルゴリズムの変化で表示が読めにくい',
                   '継続投稿・広告に時間やコストがかかりがち',
                   '検索や地図からの「公式の入口」が弱い',

@@ -18,7 +18,7 @@ export function HeroFlowStrip() {
       >
         {APPLICATION_FLOW_VISUAL_LABELS.map((label, idx) => (
           <li key={label} className="flex w-full max-w-[min(20rem,calc(100vw-2.5rem))] flex-col items-center gap-2 sm:w-auto sm:max-w-none sm:flex-row sm:flex-initial">
-            <span className="inline-flex w-full max-w-full min-w-0 items-center whitespace-nowrap rounded-full border border-sky-200 bg-sky-50/98 px-3 py-2 ps-3 text-[11px] font-semibold tracking-tight text-sky-900 shadow-sm ring-1 ring-sky-100/70 sm:w-auto sm:text-xs sm:leading-none">
+            <span className="inline-flex w-full max-w-full min-w-0 items-center whitespace-nowrap rounded-full border border-sky-200/90 bg-white/95 px-3 py-2 ps-3 text-[11px] font-semibold tracking-tight text-sky-900 shadow-sm ring-1 ring-slate-900/[0.04] backdrop-blur-sm sm:w-auto sm:text-xs sm:leading-none">
               <span className="-ms-1 me-2 flex size-6 shrink-0 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-accent-foreground shadow-inner shadow-sky-900/10">
                 {idx + 1}
               </span>

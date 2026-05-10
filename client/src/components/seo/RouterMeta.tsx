@@ -1,14 +1,36 @@
+import { HEARING_PATH } from '@/constants/spaRoutes';
 import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 
+/** クローラー／タブ表示共通。公開URLの title と矛盾しないよう大阪の個人店訴求に統一 */
+export const DEFAULT_SITE_TITLE =
+  'Locamo - 大阪の個人店向けLP・ホームページ制作' as const;
+
 const DEFAULT_DESCRIPTION =
-  '大阪の個人店向け公式LP・ホームページ制作。買い切り3万円〜。Instagramでのご連絡から構成・公開まで対応します。';
+  '大阪府の個人店・小規模店向けに、公式LPとホームページを制作。制作費買い切り3万円〜。InstagramのDMからヒアリングし、構成から公開まで伴走します。';
+
+function titleForPath(pathname: string): string {
+  const p =
+    pathname === '' || pathname === '/'
+      ? '/'
+      : pathname.endsWith('/') && pathname.length > 1
+        ? pathname.slice(0, -1)
+        : pathname;
+
+  if (p === HEARING_PATH) return `ヒアリング・お申込み｜Locamo`;
+  if (p.startsWith('/services/')) return `プラン詳細｜Locamo`;
+  if (p === '/privacy') return `プライバシーポリシー｜Locamo`;
+  if (p === '/404') return `ページが見つかりません｜Locamo`;
+
+  return DEFAULT_SITE_TITLE;
+}
 
 const OG_IMAGE_PATH = '/manus-storage/locamo-hero_769daceb.png';
 
 function upsertAttrMeta(attrName: 'name' | 'property', key: string, content: string) {
   const escaped = CSS.escape(key);
-  const selector = attrName === 'name' ? `meta[name="${escaped}"]` : `meta[property="${escaped}"]`;
+  const selector =
+    attrName === 'name' ? `meta[name="${escaped}"]` : `meta[property="${escaped}"]`;
   let el = document.querySelector(selector);
   if (!el) {
     el = document.createElement('meta');
@@ -31,7 +53,7 @@ function upsertLink(rel: string, href: string) {
 }
 
 /**
- * SPA 内遷移に合わせて canonical と OGP の URL を揃える（サイトはシングルオリジン前提）。
+ * SPA 内遷移に合わせて canonical と OGP の URL・タイトルを揃える（サイトはシングルオリジン前提）。
  */
 export function RouterMeta() {
   const [path] = useLocation();
@@ -39,19 +61,22 @@ export function RouterMeta() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
+    const docTitle = titleForPath(path);
+    document.title = docTitle;
+
     const u = new URL(window.location.href);
     u.hash = '';
     const canonical = `${u.origin}${u.pathname}${u.search}`;
 
     upsertAttrMeta('name', 'description', DEFAULT_DESCRIPTION);
-    upsertAttrMeta('property', 'og:title', document.title);
+    upsertAttrMeta('property', 'og:title', docTitle);
     upsertAttrMeta('property', 'og:description', DEFAULT_DESCRIPTION);
     upsertAttrMeta('property', 'og:type', 'website');
     upsertAttrMeta('property', 'og:locale', 'ja_JP');
     upsertAttrMeta('property', 'og:url', canonical);
 
     upsertAttrMeta('name', 'twitter:card', 'summary_large_image');
-    upsertAttrMeta('name', 'twitter:title', document.title);
+    upsertAttrMeta('name', 'twitter:title', docTitle);
     upsertAttrMeta('name', 'twitter:description', DEFAULT_DESCRIPTION);
 
     const ogImage = `${u.origin}${OG_IMAGE_PATH}`;

@@ -8,7 +8,7 @@ export const HEARING_FLOW_SHORT =
 export const HEARING_FLOW_LINES = [
   'サイト内の4ステップに沿ってお店の状況を入力します。',
   '最後のボタンで回答全文がクリップボードにコピーされ、そのままInstagramのDMページへ進みます。',
-  'DMの入力欄に長押しで貼り付け、送信するとお申し込みとして受け付けます。',
+  'DMの入力欄に長押しで貼り付け、送信すると制作のご依頼として受け付けます。',
 ] as const;
 
 export const RESPONSE_SLA =
@@ -52,9 +52,24 @@ export const SCOPE_EXCLUDED_HEADING = '標準には含まれないこと（ご�
 export const HERO_VALUE_HOOK =
   '大阪の個人店向けに、来店や予約まで迷わせない公式の1枚LPをつくります。';
 
+/** ヒーロー直下リード（価格・手段を一段に収め、スクロール前の読了負荷を下げる） */
+export const HERO_PRIMARY_LEAD =
+  'SNSとメニューを公式の一枚にそろえ、次の行動（問い合わせや予約）までを読み順で見せます。AIが構成と文案の素案を出し、担当がCTAまで整えます。';
+
+/** ヒーロー用の料金ハイライト（数値のみ短文） */
+export const HERO_PRICE_TEASER = 'LP制作費は買い切り3万円〜／公開・ドメインは別途・月3,000円〜。';
+
+/** お問い合わせ先頭：受付開始を前向きに言い切る（返信SLAは別途続ける） */
+export const CONTACT_INTAKE_SUMMARY =
+  'ヒアリングをコピーしてInstagramのDMに貼り付け、送信いただいた時点で制作のご依頼として受け付けます。';
+
+/** メールのみ希望などInstagram中心で苦手な方向けの一文 */
+export const DM_CHANNEL_FLEX_NOTE =
+  'InstagramのDMだけがご不安なときも、DM上で運び方をご相談できます（ご契約・決済リンクのご案内は主にInstagramのダイレクトメッセージになります）。';
+
 /** ヒアリングフォーム送信直前までの環境インフォメーション（Instagram 依存の開示） */
 export const HEARING_DM_PREREQUISITE =
-  '最後のボタンで回答をコピーし、InstagramのDMが開きます。Instagramにログインできる環境でお進みください。まず質問だけなら、フォームを使わずDMでも構いません。';
+  '最後のボタンで回答をコピーし、InstagramのDMが開きます。Instagramにログインできる環境でお進みください。まず質問だけなら、フォームを使わずDMでも構いません。DMのみがご不安な場合も、送信後にやりとりで調整できます。';
 
 /** 「お約束」（返信〜スコープ）の短いキャプション見出し */
 export const PROMISE_SECTION_EYEBROW = 'ご返信までの約束・範囲';
@@ -93,9 +108,9 @@ export const APPLICATION_FLOW_STEPS: ApplicationFlowStep[] = [
     num: '1',
     title: 'サイトでヒアリング → DMで送信',
     short:
-      '4ステップの入力のあとボタン一つでコピー。そのままInstagramのDMに貼り付けて送信すれば、その時点で正式なお申込みになります。',
+      '4ステップの入力のあとボタン一つでコピー。そのままInstagramのDMに貼り付けて送信すれば、この時点で制作のご依頼として受け付けます。',
     detail:
-      'サイトの4ステップに入力し「コピーしてInstagramのDMへ」で全文がコピーされ、DM画面が開きます。入力欄に長押しで貼り付け、送信するとお申し込みとして受け付けます。',
+      'サイトの4ステップに入力し「コピーしてInstagramのDMへ」で全文がコピーされ、DM画面が開きます。入力欄に長押しで貼り付け、送信すると制作のご依頼として受け付けます。',
   },
   {
     num: '2',

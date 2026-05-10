@@ -9,6 +9,7 @@ import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { SERVICE_PLANS } from '@/data/servicePlans';
 import { LP_IMAGES } from '@/lp-images';
+import { replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
 
 export default function Services() {
   const [expandedPlan, setExpandedPlan] = useState<string | null>(null);
@@ -20,7 +21,7 @@ export default function Services() {
   };
 
   return (
-    <div className="py-16 md:py-24 px-4">
+    <div className="lp-section-y px-4">
       <div className="container mx-auto max-w-5xl">
         {/* Header */}
         <LpSectionEyebrow>サービス</LpSectionEyebrow>
@@ -28,8 +29,19 @@ export default function Services() {
           サービス内容
         </h2>
         <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed">
-          メインは下記の2プランです。申し込みから初回返信までのルールは<strong className="font-semibold text-sky-950">料金・お問い合わせ</strong>
-          と同じです（詳細はそちらをご覧ください）。
+          メインは下記の2プランです。金額・納期・受付ルールは{' '}
+          <a
+            href="#pricing"
+            className="font-semibold text-sky-950 underline underline-offset-2 hover:text-accent"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSiteAnchor('pricing');
+              replaceUrlHash('pricing');
+            }}
+          >
+            料金とお問い合わせ
+          </a>
+          が一次情報です。
         </p>
 
         <figure className="mx-auto mb-12 max-w-5xl overflow-hidden rounded-[1.35rem] border border-sky-100 shadow-md shadow-sky-200/30">
