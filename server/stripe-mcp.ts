@@ -20,30 +20,23 @@ function executeMcpTool(toolName: string, input: Record<string, any>): any {
       { encoding: "utf-8" }
     );
     
-    // Extract JSON from "Tool execution result:" line
+    // Extract JSON from output - look for lines that start with { or [
     const lines = result.split('\n');
     for (const line of lines) {
-      if (line.includes('Tool execution result:')) {
-        // Extract JSON after the colon
-        const jsonStr = line.substring(line.indexOf(':') + 1).trim();
-        if (jsonStr) {
-          try {
-            return JSON.parse(jsonStr);
-          } catch (e) {
-            console.error("[Stripe MCP] Failed to parse JSON:", jsonStr);
-            throw e;
-          }
+      const trimmed = line.trim();
+      if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+        try {
+          return JSON.parse(trimmed);
+        } catch (e) {
+          console.error("[Stripe MCP] Failed to parse JSON line:", trimmed);
+          // Continue to next line
         }
       }
     }
     
-    // Fallback: try parsing the entire result
-    try {
-      return JSON.parse(result);
-    } catch {
-      console.error("[Stripe MCP] Failed to parse tool result:", result);
-      throw new Error(`Failed to parse MCP tool result for ${toolName}`);
-    }
+    // If no JSON line found, throw error
+    console.error("[Stripe MCP] No JSON found in output:", result);
+    throw new Error(`Failed to parse MCP tool result for ${toolName}`);
   } catch (error) {
     console.error(`[Stripe MCP] Tool call failed for ${toolName}:`, error);
     throw error;
