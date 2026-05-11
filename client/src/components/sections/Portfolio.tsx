@@ -42,6 +42,20 @@ const PORTFOLIO_SITES = [
   },
 ] as const;
 
+/** 業種トーン別の1枚LP・縦長構成の参考イメージ（掲載サイトのデザインサンプル） */
+const LP_LAYOUT_SAMPLES = [
+  {
+    src: '/lp-examples/lp-sample-lifestyle-zakka.png',
+    title: 'ライフスタイル・雑貨',
+    desc: 'ヒーロー、カテゴリ、新入荷、ブランド紹介、店舗情報などを縦につなぐタイプの一例です。',
+  },
+  {
+    src: '/lp-examples/lp-sample-bakery.png',
+    title: '飲食（ベーカリー）',
+    desc: 'キャッチ、こだわり（工程）、人気商品、利用シーン、店舗情報とCTAまでの流れの一例です。',
+  },
+] as const;
+
 export default function Portfolio() {
   return (
     <div className="space-y-16 md:space-y-28 lp-section-y px-4">
@@ -63,6 +77,43 @@ export default function Portfolio() {
             </div>
           ))}
         </div>
+
+        <section className="mb-16" aria-labelledby="lp-layout-samples-heading">
+          <h3
+            id="lp-layout-samples-heading"
+            className="mb-2 text-center text-lg font-bold text-sky-950 sm:text-xl md:text-2xl"
+          >
+            LPの構成例（業種・トーン別・参考）
+          </h3>
+          <p className="mx-auto mb-8 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground md:text-[15px] text-pretty">
+            実際の公開事例の前に、<strong className="font-semibold text-sky-950">1枚LPでよく並べるブロックの流れ</strong>
+            をイメージしやすくするサンプルです。お店のジャンルに近い構成をヒアリングの土台にしてください。
+          </p>
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
+            {LP_LAYOUT_SAMPLES.map(item => (
+              <figure
+                key={item.src}
+                className="flex flex-col overflow-hidden rounded-[1.25rem] border border-sky-100 bg-card shadow-sm shadow-sky-950/5"
+              >
+                <figcaption className="border-b border-sky-100 px-4 py-4 sm:px-5">
+                  <p className="text-base font-semibold text-sky-950">{item.title}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
+                </figcaption>
+                <div className="relative max-h-[min(70vh,560px)] overflow-y-auto overscroll-y-contain bg-secondary/40 [-webkit-overflow-scrolling:touch]">
+                  <img
+                    src={item.src}
+                    alt={`${item.title}向けのLP画面構成の参考イメージ（縦長スクロール）`}
+                    width={1200}
+                    height={2400}
+                    loading="lazy"
+                    decoding="async"
+                    className="block h-auto w-full object-top"
+                  />
+                </div>
+              </figure>
+            ))}
+          </div>
+        </section>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {PORTFOLIO_SITES.map((item, idx) => (
