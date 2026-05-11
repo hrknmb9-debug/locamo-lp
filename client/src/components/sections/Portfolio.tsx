@@ -10,7 +10,6 @@ import { cn } from '@/lib/utils';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Link } from 'wouter';
 import { MONITOR_SLOT_NOTE, PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
-import { activateExternalHref } from '@/lib/openExternalUrl';
 
 const BAKERY_SAMPLE_LP_URL = 'https://bakerylp-l8mnzqhc.manus.space/' as const;
 
@@ -82,18 +81,17 @@ export default function Portfolio() {
               target="_blank"
               rel="noopener noreferrer"
               className="font-semibold text-accent underline underline-offset-2 hover:opacity-90"
-              onClick={e => activateExternalHref(e, BAKERY_SAMPLE_LP_URL)}
             >
               公開中のサンプルLP
             </a>
             でもご覧いただけます。
           </p>
-          <figure className="mx-auto flex max-w-3xl flex-col overflow-hidden rounded-[1.25rem] border border-sky-100 bg-card shadow-sm shadow-sky-950/5">
-            <figcaption className="flex flex-col gap-3 border-b border-sky-100 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+            <figure className="mx-auto flex max-w-3xl flex-col rounded-[1.25rem] border border-sky-100 bg-card shadow-sm shadow-sky-950/5">
+            <figcaption className="flex flex-col gap-3 rounded-t-[1.25rem] border-b border-sky-100 bg-card px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
               <div className="min-w-0 text-left">
                 <p className="text-base font-semibold text-sky-950">Bakery Sample LP（構成イメージ）</p>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                  下のスクロール画像は一覧用のキャプチャです。実サイトはリンク先が最新です。
+                  下の枠は参考キャプチャです（枠内を上下スクロール）。実サイトはボタン・リンクからご覧ください。
                 </p>
               </div>
               <Button variant="outline" size="lg" className="w-full shrink-0 rounded-full border-sky-200 sm:w-auto" asChild>
@@ -102,14 +100,22 @@ export default function Portfolio() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2"
-                  onClick={e => activateExternalHref(e, BAKERY_SAMPLE_LP_URL)}
                 >
                   <span className="whitespace-nowrap">サンプルLPを別タブで開く</span>
                   <ExternalLink size={16} aria-hidden />
                 </a>
               </Button>
             </figcaption>
-            <div className="relative max-h-[min(70vh,560px)] overflow-y-auto overscroll-y-contain bg-secondary/40 [-webkit-overflow-scrolling:touch]">
+            <div
+              className={cn(
+                'relative isolate min-h-[12rem] max-h-[min(72vh,600px)]',
+                'touch-pan-y overflow-y-scroll overscroll-y-auto',
+                'rounded-b-[1.25rem] bg-secondary/40',
+              )}
+              tabIndex={0}
+              role="region"
+              aria-label="ベーカリー参考LPの縦スクロールプレビュー"
+            >
               <img
                 src="/lp-examples/lp-sample-bakery.png"
                 alt="ベーカリー向けサンプルLPの画面構成（参考キャプチャ）"
@@ -117,7 +123,8 @@ export default function Portfolio() {
                 height={2400}
                 loading="lazy"
                 decoding="async"
-                className="block h-auto w-full object-top"
+                draggable={false}
+                className="pointer-events-none block h-auto w-full select-none object-top"
               />
             </div>
           </figure>
