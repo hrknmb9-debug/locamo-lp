@@ -19,8 +19,10 @@ import {
   IllustFlowDm,
   IllustFlowLaunch,
   IllustFlowSiteInput,
+  IllustGuideReply,
 } from '@/components/lp/BespokeIllustrations';
 import { LpProcessStepCard } from '@/components/lp/LpProcessStepCard';
+import { LP_IMAGES } from '@/lp-images';
 
 const APPLICATION_FLOW_ILLUSTRATIONS = [
   IllustFlowSiteInput,
@@ -71,9 +73,22 @@ export default function Pricing() {
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           料金・プロセス
         </h2>
-        <p className="text-center text-muted-foreground jp-keep-all mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
+        <p className="text-center text-muted-foreground jp-keep-all mb-6 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
           料金と<strong className="font-semibold text-sky-950">制作の流れ</strong>、よくある質問をこのページに集約しています。
         </p>
+
+        <figure className="mx-auto mb-10 max-w-3xl overflow-hidden rounded-[1.35rem] border border-sky-100 shadow-md shadow-sky-200/30">
+          <img
+            src={LP_IMAGES.pricingHeaderFigure}
+            alt="制作の流れと料金の概要を示すイメージ図"
+            width={1728}
+            height={576}
+            loading="lazy"
+            decoding="async"
+            className="aspect-[21/9] max-h-[10.5rem] w-full object-cover sm:max-h-[11.5rem]"
+          />
+          <figcaption className="sr-only">料金・プロセスのヘッダービジュアル</figcaption>
+        </figure>
 
         {/* Pricing Highlight */}
         <div className="lp-soft-band mb-14 animate-fade-in-up rounded-[1.5rem] border border-sky-100 p-7 text-center shadow-sm shadow-sky-950/5 md:p-10">
@@ -146,7 +161,12 @@ export default function Pricing() {
 
         {/* FAQ */}
         <div className="mb-12 animate-fade-in-up">
-          <h3 className="text-xl font-bold mb-6">よくある質問</h3>
+          <div className="mb-6 flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-8">
+            <h3 className="text-xl font-bold text-center sm:text-left sm:mb-0">よくある質問</h3>
+            <div className="flex shrink-0 justify-center rounded-xl border border-sky-100 bg-muted/40 px-4 py-3">
+              <IllustGuideReply className="h-auto w-[7.5rem] sm:w-[8.25rem]" />
+            </div>
+          </div>
           <div className="space-y-2">
             {faqs.map((faq, idx) => (
               <div key={idx} className="overflow-hidden rounded-[1.25rem] border border-sky-100 bg-card shadow-sm shadow-sky-950/5">

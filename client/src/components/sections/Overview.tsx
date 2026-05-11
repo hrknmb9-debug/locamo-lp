@@ -4,6 +4,7 @@ import {
   IllustFeatureBuyout,
   IllustFeatureCta,
   IllustFeatureLocal,
+  IllustFlowDm,
   IllustGuideExcluded,
   IllustGuideIncluded,
   IllustGuideReply,
@@ -374,11 +375,14 @@ export default function Overview() {
             <h2 className="mb-5 text-center text-2xl font-bold leading-snug md:text-[1.7rem]">
               {HEARING_FLOW_SHORT}
             </h2>
-            <p className="mx-auto mb-8 max-w-lg text-center text-sm leading-relaxed text-muted-foreground jp-keep-all">
+            <p className="mx-auto mb-6 max-w-lg text-center text-sm leading-relaxed text-muted-foreground jp-keep-all">
               公開までの全体像は
               <ProductionFlowJumpLink className="mx-0.5">料金ページの制作の流れ</ProductionFlowJumpLink>
               。ここでは、コピーしてDMへ進む操作だけを案内しています。
             </p>
+            <div className="mx-auto mb-8 flex max-w-xs justify-center rounded-xl border border-sky-100/90 bg-sky-50/50 px-5 py-4">
+              <IllustFlowDm className="h-auto w-full max-w-[200px]" />
+            </div>
             <div className="relative z-[1] mx-auto flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
               <a
                 href={DM_URL}

@@ -9,6 +9,7 @@ import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { SERVICE_PLANS } from '@/data/servicePlans';
 import { IllustPlanHp, IllustPlanLp } from '@/components/lp/BespokeIllustrations';
+import { LP_IMAGES } from '@/lp-images';
 import { replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
 
 export default function Services() {
@@ -28,7 +29,7 @@ export default function Services() {
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
           サービス内容
         </h2>
-        <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm leading-relaxed">
+        <p className="text-center text-muted-foreground mb-6 max-w-xl mx-auto text-sm leading-relaxed">
           メインは下記の2プランです。金額・納期・受付ルールは{' '}
           <a
             href="#pricing"
@@ -43,6 +44,19 @@ export default function Services() {
           </a>
           が一次情報です。
         </p>
+
+        <figure className="mx-auto mb-10 max-w-4xl overflow-hidden rounded-[1.35rem] border border-sky-100 bg-white shadow-sm shadow-sky-200/30">
+          <img
+            src={LP_IMAGES.servicesBanner}
+            alt="Locamoのサービスラインアップ（LP・ホームページ制作）のイメージ"
+            width={1728}
+            height={576}
+            loading="lazy"
+            decoding="async"
+            className="aspect-[21/9] max-h-[11rem] w-full object-cover sm:max-h-[12rem]"
+          />
+          <figcaption className="sr-only">サービス全体のビジュアル補足</figcaption>
+        </figure>
 
         {/* Service Cards */}
         <div className="mx-auto mb-14 grid max-w-4xl grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">

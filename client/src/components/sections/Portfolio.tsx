@@ -1,4 +1,10 @@
 import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
+import {
+  IllustFeatureCta,
+  IllustFlowDm,
+  IllustGuideReply,
+} from '@/components/lp/BespokeIllustrations';
+import { LP_IMAGES } from '@/lp-images';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ArrowRight, ExternalLink } from 'lucide-react';
@@ -42,10 +48,21 @@ export default function Portfolio() {
       <div className="container mx-auto max-w-5xl">
         <LpSectionEyebrow className="mb-4 md:mb-3">公開事例の一例</LpSectionEyebrow>
         <h2 className="text-center text-[1.625rem] font-bold mb-4 sm:text-3xl md:text-4xl">納品事例（公開サイト）</h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto text-sm leading-relaxed md:text-[15px] text-pretty">
+        <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto text-sm leading-relaxed md:text-[15px] text-pretty">
           ヒアリングを経て<strong className="font-semibold text-sky-950">制作・公開までを完了したLP</strong>
           の一例です（クライアントの公開許諾のもと、URLおよび画面を掲載）。
         </p>
+
+        <div className="mb-12 flex flex-wrap items-center justify-center gap-3 sm:gap-4" aria-hidden>
+          {LP_IMAGES.portfolio.map(src => (
+            <div
+              key={src}
+              className="w-[calc(50%-0.375rem)] max-w-[9.25rem] overflow-hidden rounded-[1rem] border border-sky-100 bg-white shadow-sm shadow-sky-950/5 sm:w-[9.25rem]"
+            >
+              <img src={src} alt="" className="aspect-[4/3] h-auto w-full object-cover" loading="lazy" decoding="async" />
+            </div>
+          ))}
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {PORTFOLIO_SITES.map((item, idx) => (
@@ -107,15 +124,21 @@ export default function Portfolio() {
 
           <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
             {[
-              { title: 'お申込みまで', desc: 'Web ⇄ DM の流れで統一' },
-              { title: 'モニター', desc: '審査・先着あり' },
-              { title: '制作の軸', desc: '構成とCTA設計' },
-            ].map((benefit, idx) => (
-              <div key={idx} className="rounded-[1rem] bg-secondary p-4">
+              { title: 'お申込みまで', desc: 'Web ⇄ DM の流れで統一', Ill: IllustFlowDm },
+              { title: 'モニター', desc: '審査・先着あり', Ill: IllustGuideReply },
+              { title: '制作の軸', desc: '構成とCTA設計', Ill: IllustFeatureCta },
+            ].map((benefit, idx) => {
+              const SvgIll = benefit.Ill;
+              return (
+              <div key={idx} className="flex flex-col rounded-[1rem] bg-secondary p-4 text-center md:text-left">
+                <div className="mx-auto mb-3 flex h-[4.75rem] w-full max-w-[9rem] items-center justify-center md:mx-0">
+                  <SvgIll className="h-auto w-full max-h-[4.25rem]" />
+                </div>
                 <p className="mb-1 text-sm text-muted-foreground">{benefit.title}</p>
                 <p className="text-lg font-bold text-accent">{benefit.desc}</p>
               </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="flex w-full justify-center px-1 sm:px-3">
