@@ -10,6 +10,9 @@ import { cn } from '@/lib/utils';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Link } from 'wouter';
 import { MONITOR_SLOT_NOTE, PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
+import { activateExternalHref } from '@/lib/openExternalUrl';
+
+const BAKERY_SAMPLE_LP_URL = 'https://bakerylp-l8mnzqhc.manus.space/' as const;
 
 const PORTFOLIO_SITES = [
   {
@@ -42,20 +45,6 @@ const PORTFOLIO_SITES = [
   },
 ] as const;
 
-/** 業種トーン別の1枚LP・縦長構成の参考イメージ（掲載サイトのデザインサンプル） */
-const LP_LAYOUT_SAMPLES = [
-  {
-    src: '/lp-examples/lp-sample-lifestyle-zakka.png',
-    title: 'ライフスタイル・雑貨',
-    desc: 'ヒーロー、カテゴリ、新入荷、ブランド紹介、店舗情報などを縦につなぐタイプの一例です。',
-  },
-  {
-    src: '/lp-examples/lp-sample-bakery.png',
-    title: '飲食（ベーカリー）',
-    desc: 'キャッチ、こだわり（工程）、人気商品、利用シーン、店舗情報とCTAまでの流れの一例です。',
-  },
-] as const;
-
 export default function Portfolio() {
   return (
     <div className="space-y-16 md:space-y-28 lp-section-y px-4">
@@ -83,36 +72,55 @@ export default function Portfolio() {
             id="lp-layout-samples-heading"
             className="mb-2 text-center text-lg font-bold text-sky-950 sm:text-xl md:text-2xl"
           >
-            LPの構成例（業種・トーン別・参考）
+            LPの構成例（飲食・ベーカリー参考）
           </h3>
           <p className="mx-auto mb-8 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground md:text-[15px] text-pretty">
-            実際の公開事例の前に、<strong className="font-semibold text-sky-950">1枚LPでよく並べるブロックの流れ</strong>
-            をイメージしやすくするサンプルです。お店のジャンルに近い構成をヒアリングの土台にしてください。
+            <strong className="font-semibold text-sky-950">キャッチ／こだわり／商品／シーン／店舗情報</strong>
+            といった並びを想定したデモです。スクショ全体像の確認に加え、
+            <a
+              href={BAKERY_SAMPLE_LP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-accent underline underline-offset-2 hover:opacity-90"
+              onClick={e => activateExternalHref(e, BAKERY_SAMPLE_LP_URL)}
+            >
+              公開中のサンプルLP
+            </a>
+            でもご覧いただけます。
           </p>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
-            {LP_LAYOUT_SAMPLES.map(item => (
-              <figure
-                key={item.src}
-                className="flex flex-col overflow-hidden rounded-[1.25rem] border border-sky-100 bg-card shadow-sm shadow-sky-950/5"
-              >
-                <figcaption className="border-b border-sky-100 px-4 py-4 sm:px-5">
-                  <p className="text-base font-semibold text-sky-950">{item.title}</p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
-                </figcaption>
-                <div className="relative max-h-[min(70vh,560px)] overflow-y-auto overscroll-y-contain bg-secondary/40 [-webkit-overflow-scrolling:touch]">
-                  <img
-                    src={item.src}
-                    alt={`${item.title}向けのLP画面構成の参考イメージ（縦長スクロール）`}
-                    width={1200}
-                    height={2400}
-                    loading="lazy"
-                    decoding="async"
-                    className="block h-auto w-full object-top"
-                  />
-                </div>
-              </figure>
-            ))}
-          </div>
+          <figure className="mx-auto flex max-w-3xl flex-col overflow-hidden rounded-[1.25rem] border border-sky-100 bg-card shadow-sm shadow-sky-950/5">
+            <figcaption className="flex flex-col gap-3 border-b border-sky-100 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+              <div className="min-w-0 text-left">
+                <p className="text-base font-semibold text-sky-950">Bakery Sample LP（構成イメージ）</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                  下のスクロール画像は一覧用のキャプチャです。実サイトはリンク先が最新です。
+                </p>
+              </div>
+              <Button variant="outline" size="lg" className="w-full shrink-0 rounded-full border-sky-200 sm:w-auto" asChild>
+                <a
+                  href={BAKERY_SAMPLE_LP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2"
+                  onClick={e => activateExternalHref(e, BAKERY_SAMPLE_LP_URL)}
+                >
+                  <span className="whitespace-nowrap">サンプルLPを別タブで開く</span>
+                  <ExternalLink size={16} aria-hidden />
+                </a>
+              </Button>
+            </figcaption>
+            <div className="relative max-h-[min(70vh,560px)] overflow-y-auto overscroll-y-contain bg-secondary/40 [-webkit-overflow-scrolling:touch]">
+              <img
+                src="/lp-examples/lp-sample-bakery.png"
+                alt="ベーカリー向けサンプルLPの画面構成（参考キャプチャ）"
+                width={1200}
+                height={2400}
+                loading="lazy"
+                decoding="async"
+                className="block h-auto w-full object-top"
+              />
+            </div>
+          </figure>
         </section>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
