@@ -4,10 +4,14 @@ import {
   IllustFeatureBuyout,
   IllustFeatureCta,
   IllustFeatureLocal,
+  IllustGuideExcluded,
+  IllustGuideIncluded,
+  IllustGuideReply,
   IllustProblemEntry,
   IllustProblemFollower,
   IllustProblemReach,
   IllustProblemScatter,
+  IllustWorkflowProblemStrip,
 } from '@/components/lp/BespokeIllustrations';
 import { HeroFlowStrip } from '@/components/lp/HeroFlowStrip';
 import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
@@ -234,9 +238,12 @@ export default function Overview() {
         <div className="container mx-auto max-w-4xl">
           <LpSectionEyebrow>{WORKFLOW_SECTION_EYEBROW}</LpSectionEyebrow>
           <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">「集客はSNS」のみになりがちな課題</h2>
-          <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto text-sm">
+          <p className="text-center text-muted-foreground mb-6 max-w-xl mx-auto text-sm">
             まとまったサイトがない状態だと次のような偏りやすさがあります
           </p>
+          <div className="mb-10 flex justify-center px-2">
+            <IllustWorkflowProblemStrip className="h-10 w-full max-w-md" />
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
@@ -303,23 +310,40 @@ export default function Overview() {
           <div className="mx-auto mb-10 max-w-3xl rounded-[1.35rem] border border-sky-100 bg-white/85 px-6 py-8 shadow-sm md:px-10">
             <LpSectionEyebrow className="mb-3">{PROMISE_SECTION_EYEBROW}</LpSectionEyebrow>
             <h3 className="mb-3 text-center text-lg font-bold text-sky-950">ご返信までの目安・スコープ</h3>
+            <div className="mb-6 flex justify-center">
+              <IllustGuideReply className="h-auto w-full max-w-[220px]" />
+            </div>
             <p className="mx-auto mb-8 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">{RESPONSE_SLA}</p>
             <div className="grid gap-8 md:grid-cols-2 md:gap-10">
               <div>
-                <p className="mb-3 text-sm font-semibold text-sky-950">{SCOPE_INCLUDED_HEADING}</p>
-                <ul className="list-disc space-y-2 pl-4 text-sm leading-relaxed text-muted-foreground marker:text-accent">
-                  {SCOPE_INCLUDED_BULLETS.map(line => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
+                <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
+                  <div className="mx-auto shrink-0 sm:mx-0 sm:pt-0.5">
+                    <IllustGuideIncluded className="h-auto w-[5.75rem]" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="mb-3 text-center text-sm font-semibold text-sky-950 sm:text-left">{SCOPE_INCLUDED_HEADING}</p>
+                    <ul className="list-disc space-y-2 pl-4 text-sm leading-relaxed text-muted-foreground marker:text-accent">
+                      {SCOPE_INCLUDED_BULLETS.map(line => (
+                        <li key={line}>{line}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
               <div>
-                <p className="mb-3 text-sm font-semibold text-sky-950">{SCOPE_EXCLUDED_HEADING}</p>
-                <ul className="list-disc space-y-2 pl-4 text-sm leading-relaxed text-muted-foreground marker:text-sky-400">
-                  {SCOPE_EXCLUDED_BULLETS.map(line => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
+                <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
+                  <div className="mx-auto shrink-0 sm:mx-0 sm:pt-0.5">
+                    <IllustGuideExcluded className="h-auto w-[5.75rem]" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="mb-3 text-center text-sm font-semibold text-sky-950 sm:text-left">{SCOPE_EXCLUDED_HEADING}</p>
+                    <ul className="list-disc space-y-2 pl-4 text-sm leading-relaxed text-muted-foreground marker:text-sky-400">
+                      {SCOPE_EXCLUDED_BULLETS.map(line => (
+                        <li key={line}>{line}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -419,7 +443,7 @@ function ProblemCard({
       style={{ animationDelay: `${0.08 * delay}s` }}
     >
       <div className="mb-4 flex justify-center rounded-xl bg-muted/70 px-3 py-4">
-        <Ill className="max-h-[108px] w-auto max-w-full" />
+        <Ill className="max-h-[120px] w-auto max-w-full" />
       </div>
       <h3 className="text-base font-semibold mb-1">{item.title}</h3>
       <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
@@ -448,7 +472,7 @@ function FeatureCard({
       <div className="mx-auto mb-4 flex size-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-sm shadow-sky-200/60">
         <span className="text-base font-bold text-accent-foreground">{delay + 1}</span>
       </div>
-      <div className="mx-auto mb-4 flex max-w-[200px] justify-center rounded-xl bg-muted/60 px-2 py-3">
+      <div className="mx-auto mb-4 flex max-w-[220px] justify-center rounded-xl bg-muted/60 px-2 py-4">
         <Ill className="h-auto w-full" />
       </div>
       <h3 className="text-base font-semibold mb-2">{feature.title}</h3>

@@ -1,4 +1,4 @@
-import { HEARING_PATH } from '@/constants/spaRoutes';
+import { HEARING_PATH, LP_ILLUSTRATIONS_PREVIEW_PATH } from '@/constants/spaRoutes';
 import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 
@@ -9,15 +9,19 @@ export const DEFAULT_SITE_TITLE =
 const DEFAULT_DESCRIPTION =
   '大阪府の個人店・小規模店向けに、公式LPとホームページを制作。制作費買い切り3万円〜。InstagramのDMからヒアリングし、構成から公開まで伴走します。';
 
+function normalizePathname(pathname: string): string {
+  return pathname === '' || pathname === '/'
+    ? '/'
+    : pathname.endsWith('/') && pathname.length > 1
+      ? pathname.slice(0, -1)
+      : pathname;
+}
+
 function titleForPath(pathname: string): string {
-  const p =
-    pathname === '' || pathname === '/'
-      ? '/'
-      : pathname.endsWith('/') && pathname.length > 1
-        ? pathname.slice(0, -1)
-        : pathname;
+  const p = normalizePathname(pathname);
 
   if (p === HEARING_PATH) return `ヒアリング・お申込み｜Locamo`;
+  if (p === LP_ILLUSTRATIONS_PREVIEW_PATH) return `インラインSVG一覧（確認用）｜Locamo`;
   if (p.startsWith('/services/')) return `プラン詳細｜Locamo`;
   if (p === '/privacy') return `プライバシーポリシー｜Locamo`;
   if (p === '/404') return `ページが見つかりません｜Locamo`;
@@ -64,11 +68,14 @@ export function RouterMeta() {
     const docTitle = titleForPath(path);
     document.title = docTitle;
 
+    const p = normalizePathname(path);
+
     const u = new URL(window.location.href);
     u.hash = '';
     const canonical = `${u.origin}${u.pathname}${u.search}`;
 
     upsertAttrMeta('name', 'description', DEFAULT_DESCRIPTION);
+    upsertAttrMeta('name', 'robots', p === LP_ILLUSTRATIONS_PREVIEW_PATH ? 'noindex,nofollow' : 'index,follow');
     upsertAttrMeta('property', 'og:title', docTitle);
     upsertAttrMeta('property', 'og:description', DEFAULT_DESCRIPTION);
     upsertAttrMeta('property', 'og:type', 'website');

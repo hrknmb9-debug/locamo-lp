@@ -1,6 +1,9 @@
 /** クライアントルート（App.tsx の `<Route>` と完全一致させること） */
 export const HEARING_PATH = '/hearing' as const;
 
+/** デザイン確認用（検索に載せない想定） */
+export const LP_ILLUSTRATIONS_PREVIEW_PATH = '/lp-illustrations' as const;
+
 /**
  * `vite.config` の `base` と揃える。未定義または `/` のときはサイト直下。
  * そのとき wouter はデフォルト挙動（フル pathname をそのまま相対へ分解しない）。
