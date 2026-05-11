@@ -13,8 +13,21 @@ import {
   PRIMARY_CTA_HEARING,
   RESPONSE_SLA,
 } from '@/data/conversionMessaging';
-import { LP_IMAGES } from '@/lp-images';
 import { SCROLL_MARGIN_CLASS } from '@/data/siteNav';
+import {
+  IllustFlowContract,
+  IllustFlowDm,
+  IllustFlowLaunch,
+  IllustFlowSiteInput,
+} from '@/components/lp/BespokeIllustrations';
+import { LpProcessStepCard } from '@/components/lp/LpProcessStepCard';
+
+const APPLICATION_FLOW_ILLUSTRATIONS = [
+  IllustFlowSiteInput,
+  IllustFlowDm,
+  IllustFlowContract,
+  IllustFlowLaunch,
+] as const;
 
 export default function Pricing() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
@@ -61,19 +74,6 @@ export default function Pricing() {
         <p className="text-center text-muted-foreground jp-keep-all mb-10 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
           料金と<strong className="font-semibold text-sky-950">制作の流れ</strong>、よくある質問をこのページに集約しています。
         </p>
-
-        <figure className="mx-auto mb-12 max-w-3xl overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-md shadow-sky-200/25">
-          <img
-            src={LP_IMAGES.pricingHeaderFigure}
-            alt="ヒアリングから公開までの制作プロセスを示すフラットタイムラインのイメージイラスト"
-            loading="lazy"
-            decoding="async"
-            width={2100}
-            height={900}
-            className="aspect-[21/9] max-h-[9rem] w-full object-cover object-center md:max-h-[10rem]"
-          />
-          <figcaption className="sr-only">料金と制作フローを象徴するイメージ</figcaption>
-        </figure>
 
         {/* Pricing Highlight */}
         <div className="lp-soft-band mb-14 animate-fade-in-up rounded-[1.5rem] border border-sky-100 p-7 text-center shadow-sm shadow-sky-950/5 md:p-10">
@@ -128,20 +128,19 @@ export default function Pricing() {
         <div id="production-flow" className={cn(SCROLL_MARGIN_CLASS, 'mb-14 animate-fade-in-up')}>
           <h3 className="text-xl font-bold mb-7 jp-keep-all">制作の流れ</h3>
           <div className="space-y-0">
-            {APPLICATION_FLOW_STEPS.map((step, idx) => (
-              <div key={step.num} className="flex gap-4 relative">
-                {idx !== APPLICATION_FLOW_STEPS.length - 1 && (
-                  <div className="absolute bottom-0 left-4 top-10 w-px bg-sky-200" />
-                )}
-                <div className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground shadow-sm shadow-sky-300/50">
-                  {step.num}
-                </div>
-                <div className="pb-8">
-                  <h4 className="text-sm font-semibold mb-1 mt-1">{step.title}</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed text-pretty">{step.detail}</p>
-                </div>
-              </div>
-            ))}
+            {APPLICATION_FLOW_STEPS.map((step, idx) => {
+              const Illustration = APPLICATION_FLOW_ILLUSTRATIONS[idx] ?? IllustFlowSiteInput;
+              return (
+                <LpProcessStepCard
+                  key={step.num}
+                  stepNum={step.num}
+                  title={step.title}
+                  detail={step.detail}
+                  Illustration={Illustration}
+                  isLast={idx === APPLICATION_FLOW_STEPS.length - 1}
+                />
+              );
+            })}
           </div>
         </div>
 

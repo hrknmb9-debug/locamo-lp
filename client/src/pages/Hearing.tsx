@@ -10,14 +10,15 @@ import { Button } from '@/components/ui/button';
 import { DM_URL } from '@/constants/locamo';
 import { HEARING_DM_PREREQUISITE } from '@/data/conversionMessaging';
 import { HEARING_FIELDS } from '@/data/hearingFields';
+import { isLikelyPhoneNumber, trimmedFieldLen } from '@/lib/hearingValidation';
 import { copyHearingToClipboard, navigateToInstagramDm } from '@/lib/submitHearing';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 const STEPS: { title: string; hint: string; fieldIds: (typeof HEARING_FIELDS)[number]['id'][] }[] = [
   {
-    title: 'まずはお店について',
-    hint: '正確であるほど、お見立てが早くなります。',
-    fieldIds: ['shop', 'industry', 'name'],
+    title: '店舗名とご連絡先',
+    hint: '店名・氏名・住所・電話は必須です。ご依頼後の確認やお見立てに使います。',
+    fieldIds: ['shop', 'name', 'address', 'phone', 'industry'],
   },
   {
     title: 'いま見えている状態',
@@ -25,9 +26,9 @@ const STEPS: { title: string; hint: string; fieldIds: (typeof HEARING_FIELDS)[nu
     fieldIds: ['instagram', 'web'],
   },
   {
-    title: '課題とゴール',
-    hint: 'LPで「何が起きれば成功か」を教えてください。',
-    fieldIds: ['pain', 'goal'],
+    title: '課題・ゴール・デザイン',
+    hint: 'LPで「何が起きれば成功か」と、見た目の希望を教えてください。',
+    fieldIds: ['pain', 'goal', 'design'],
   },
   {
     title: '条件と補足',
@@ -36,26 +37,46 @@ const STEPS: { title: string; hint: string; fieldIds: (typeof HEARING_FIELDS)[nu
   },
 ];
 
-function hasMinimalContent(values: Record<string, string>): boolean {
-  return ['shop', 'pain', 'goal'].some(k => ((values[k] ?? '').trim().length ?? 0) > 2);
-}
-
-function trimmedLen(values: Record<string, string>, id: string): number {
-  return (values[id] ?? '').trim().length;
+/** DM 送信前に必須項目が揃っているか（全ステップを通さず最後から飛ばした場合の最終ガード） */
+function hasAllRequiredForSubmit(values: Record<string, string>): boolean {
+  return (
+    trimmedFieldLen(values, 'shop') >= 3 &&
+    trimmedFieldLen(values, 'name') >= 2 &&
+    trimmedFieldLen(values, 'address') >= 5 &&
+    isLikelyPhoneNumber(values.phone ?? '') &&
+    trimmedFieldLen(values, 'pain') >= 3 &&
+    trimmedFieldLen(values, 'goal') >= 3
+  );
 }
 
 function stepAllowsNext(stepIndex: number, values: Record<string, string>): boolean {
   switch (stepIndex) {
     case 0:
-      return trimmedLen(values, 'shop') >= 3;
+      return (
+        trimmedFieldLen(values, 'shop') >= 3 &&
+        trimmedFieldLen(values, 'name') >= 2 &&
+        trimmedFieldLen(values, 'address') >= 5 &&
+        isLikelyPhoneNumber(values.phone ?? '')
+      );
     case 1:
       return true;
     case 2:
-      return trimmedLen(values, 'pain') >= 3 && trimmedLen(values, 'goal') >= 3;
+      return trimmedFieldLen(values, 'pain') >= 3 && trimmedFieldLen(values, 'goal') >= 3;
     case 3:
       return true;
     default:
       return true;
+  }
+}
+
+function stepValidationMessage(stepIndex: number): string {
+  switch (stepIndex) {
+    case 0:
+      return '店名（3文字以上）・氏名・住所（5文字以上）・電話番号（半角10〜11桁など）をご入力ください。';
+    case 2:
+      return '課題とゴールを、それぞれ3文字以上で入力してください。';
+    default:
+      return '入力をご確認ください。';
   }
 }
 
@@ -96,13 +117,7 @@ const Hearing: FC = () => {
 
   const next = useCallback(() => {
     if (!stepAllowsNext(step, values)) {
-      const msg =
-        step === 0
-          ? '店舗名を、もう少し具体的に入力してください（3文字以上）。'
-          : step === 2
-            ? '課題とゴールを、それぞれ3文字以上で入力してください。'
-            : '入力をご確認ください。';
-      toast.error(msg);
+      toast.error(stepValidationMessage(step));
       return;
     }
     if (step < STEPS.length - 1) setStep(s => s + 1);
@@ -113,8 +128,10 @@ const Hearing: FC = () => {
   }, [step]);
 
   const handleCopyAndOpenDm = useCallback(async () => {
-    if (!hasMinimalContent(values)) {
-      toast.error('店舗名・課題・ゴールのいずれかを、もう少しだけお書きください。');
+    if (!hasAllRequiredForSubmit(values)) {
+      toast.error(
+        '必須項目（店名・氏名・住所・電話・課題・ゴール）をご確認ください。前のステップに戻り、未入力がないかお確かめください。',
+      );
       return;
     }
     const entries = buildEntries();

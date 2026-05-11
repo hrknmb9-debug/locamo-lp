@@ -1,9 +1,19 @@
+import type { ComponentType } from 'react';
 import { Button, buttonVariants } from '@/components/ui/button';
+import {
+  IllustFeatureBuyout,
+  IllustFeatureCta,
+  IllustFeatureLocal,
+  IllustProblemEntry,
+  IllustProblemFollower,
+  IllustProblemReach,
+  IllustProblemScatter,
+} from '@/components/lp/BespokeIllustrations';
 import { HeroFlowStrip } from '@/components/lp/HeroFlowStrip';
 import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { ProductionFlowJumpLink } from '@/components/lp/ProductionFlowJumpLink';
 import { cn } from '@/lib/utils';
-import { ArrowRight, ClipboardList, Instagram, Sparkles, Zap, Activity, LayoutList, Waypoints } from 'lucide-react';
+import { ArrowRight, ClipboardList, Instagram, Sparkles } from 'lucide-react';
 import { Link } from 'wouter';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import {
@@ -30,6 +40,8 @@ import { SCROLL_MARGIN_CLASS } from '@/data/siteNav';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
 import { DM_URL } from '@/constants/locamo';
+
+type BlockIllustration = ComponentType<{ className?: string }>;
 
 /** 累計案件（カウントアップによる一時的な「0+」表示を避けるため静的表記） */
 const STATS_CASE_COUNT_LABEL = '50+' as const;
@@ -212,7 +224,13 @@ export default function Overview() {
 
       <div id="workflow" className={`${SCROLL_MARGIN_CLASS} space-y-16 md:space-y-28`}>
       {/* Problem Section */}
-      <section className="lp-section-y px-4">
+      <section
+        className="lp-section-y px-4"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgb(14 165 233 / 0.06) 1px, transparent 1px)',
+          backgroundSize: '20px 20px',
+        }}
+      >
         <div className="container mx-auto max-w-4xl">
           <LpSectionEyebrow>{WORKFLOW_SECTION_EYEBROW}</LpSectionEyebrow>
           <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">「集客はSNS」のみになりがちな課題</h2>
@@ -223,27 +241,27 @@ export default function Overview() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               {
-                icon: <Zap className="w-5 h-5" />,
+                Illustration: IllustProblemFollower,
                 title: 'フォロワー依存',
                 desc: 'フォロワー数に左右される不安定な集客',
               },
               {
-                icon: <Activity className="w-5 h-5" />,
+                Illustration: IllustProblemReach,
                 title: 'リーチのブレ',
                 desc: '投稿の届き方は変わりやすく、同じ成果を出すために手間と試行が増えがち',
               },
               {
-                icon: <LayoutList className="w-5 h-5" />,
+                Illustration: IllustProblemScatter,
                 title: '情報の分散',
                 desc: 'メニュー・料金・アクセスがストーリーとハイライトに散らばり、決め手までたどり着きにくい',
               },
               {
-                icon: <Waypoints className="w-5 h-5" />,
+                Illustration: IllustProblemEntry,
                 title: '入口の偏り',
                 desc: 'LPや紹介ページがないと、新規との接点がSNS・口コミに寄り勝ちになる',
               },
             ].map((item, idx) => (
-              <ProblemCard key={idx} item={item} delay={idx} />
+              <ProblemCard key={item.title} item={item} delay={idx} />
             ))}
           </div>
         </div>
@@ -265,14 +283,17 @@ export default function Overview() {
               {
                 title: '地域密着',
                 desc: '大阪の個人店を専門に対応。現場で響く言い回しと料金・導線のバランスを一緒に詰めます。',
+                Illustration: IllustFeatureLocal,
               },
               {
                 title: '買い切り型',
                 desc: 'LP制作費3万円〜の買い切り（制作費の月額課金なし）。公開・ドメインは別途、月3,000円〜のランニングのみ。',
+                Illustration: IllustFeatureBuyout,
               },
               {
                 title: 'LPで注文までの設計',
                 desc: '誰が・何を読めば・次に何をすべきかを迷わせない並びへ。ヒアリングでゴールから逆算します。',
+                Illustration: IllustFeatureCta,
               },
             ].map((feature, idx) => (
               <FeatureCard key={idx} feature={feature} delay={idx} />
@@ -379,19 +400,26 @@ export default function Overview() {
   );
 }
 
-function ProblemCard({ item, delay }: { item: any; delay: number }) {
+function ProblemCard({
+  item,
+  delay,
+}: {
+  item: { Illustration: BlockIllustration; title: string; desc: string };
+  delay: number;
+}) {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.2 });
+  const Ill = item.Illustration;
 
   return (
     <div
       ref={ref}
-      className={`lp-card p-6 ${
+      className={`lp-card overflow-hidden p-6 ${
         isVisible ? 'animate-fade-in-up' : 'opacity-0'
       }`}
       style={{ animationDelay: `${0.08 * delay}s` }}
     >
-      <div className="mb-3 flex size-9 items-center justify-center rounded-xl bg-sky-50 text-accent [&_svg]:stroke-[1.75]">
-        {item.icon}
+      <div className="mb-4 flex justify-center rounded-xl bg-muted/70 px-3 py-4">
+        <Ill className="max-h-[108px] w-auto max-w-full" />
       </div>
       <h3 className="text-base font-semibold mb-1">{item.title}</h3>
       <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
@@ -399,19 +427,29 @@ function ProblemCard({ item, delay }: { item: any; delay: number }) {
   );
 }
 
-function FeatureCard({ feature, delay }: { feature: any; delay: number }) {
+function FeatureCard({
+  feature,
+  delay,
+}: {
+  feature: { title: string; desc: string; Illustration: BlockIllustration };
+  delay: number;
+}) {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.2 });
+  const Ill = feature.Illustration;
 
   return (
     <div
       ref={ref}
-      className={`lp-card p-7 text-center ${
+      className={`lp-card overflow-hidden p-7 text-center ${
         isVisible ? 'animate-fade-in-up' : 'opacity-0'
       }`}
       style={{ animationDelay: `${0.1 * delay}s` }}
     >
-      <div className="mx-auto mb-3 flex size-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-sm shadow-sky-200/60">
+      <div className="mx-auto mb-4 flex size-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-sm shadow-sky-200/60">
         <span className="text-base font-bold text-accent-foreground">{delay + 1}</span>
+      </div>
+      <div className="mx-auto mb-4 flex max-w-[200px] justify-center rounded-xl bg-muted/60 px-2 py-3">
+        <Ill className="h-auto w-full" />
       </div>
       <h3 className="text-base font-semibold mb-2">{feature.title}</h3>
       <p className="text-muted-foreground text-sm leading-relaxed">{feature.desc}</p>

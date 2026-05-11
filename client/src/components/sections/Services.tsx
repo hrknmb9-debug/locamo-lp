@@ -8,7 +8,7 @@ import { DM_URL } from '@/constants/locamo';
 import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { SERVICE_PLANS } from '@/data/servicePlans';
-import { LP_IMAGES } from '@/lp-images';
+import { IllustPlanHp, IllustPlanLp } from '@/components/lp/BespokeIllustrations';
 import { replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
 
 export default function Services() {
@@ -44,22 +44,11 @@ export default function Services() {
           が一次情報です。
         </p>
 
-        <figure className="mx-auto mb-12 max-w-5xl overflow-hidden rounded-[1.35rem] border border-sky-100 shadow-md shadow-sky-200/30">
-          <img
-            src={LP_IMAGES.servicesBanner}
-            alt="LP制作とホームページ制作など、Locamoのサービスラインアップを端的にまとめたヘッダー画像"
-            width={1728}
-            height={576}
-            loading="lazy"
-            decoding="async"
-            className="aspect-[21/9] max-h-[12rem] w-full object-cover sm:max-h-[13rem]"
-          />
-          <figcaption className="sr-only">サービスラインアップのイメージ</figcaption>
-        </figure>
-
         {/* Service Cards */}
         <div className="mx-auto mb-14 grid max-w-4xl grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
-          {plans.map((plan, idx) => (
+          {plans.map((plan, idx) => {
+            const PlanIllust = plan.id === 'hp' ? IllustPlanHp : IllustPlanLp;
+            return (
             <div
               key={plan.id}
               className={`relative flex flex-col overflow-hidden rounded-[1.25rem] border bg-card transition-shadow animate-fade-in-up ${
@@ -81,9 +70,16 @@ export default function Services() {
               )}
 
               {/* Card Header */}
-              <div className="p-5 pb-4 border-b border-border">
-                <h3 className="mb-2 pr-12 text-lg font-bold md:pr-0">{plan.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{plan.description}</p>
+              <div className="border-b border-border p-5 pb-4">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-5">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="mb-2 pr-12 text-lg font-bold md:pr-0">{plan.title}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{plan.description}</p>
+                  </div>
+                  <div className="mx-auto flex w-[min(100%,9rem)] shrink-0 justify-center sm:mx-0">
+                    <PlanIllust className="h-auto w-full" />
+                  </div>
+                </div>
               </div>
 
               {/* Card Body */}
@@ -142,7 +138,8 @@ export default function Services() {
                 </Button>
               </div>
             </div>
-          ))}
+          );
+          })}
         </div>
 
         {/* Comparison Table */}
