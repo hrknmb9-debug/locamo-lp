@@ -47,7 +47,7 @@ export default function Portfolio() {
               key={src}
               className="w-[calc(50%-0.375rem)] max-w-[9.25rem] overflow-hidden rounded-[1rem] border border-sky-100 bg-white shadow-sm shadow-sky-950/5 sm:w-[9.25rem]"
             >
-              <img src={src} alt="" className="aspect-[4/3] h-auto w-full object-cover" loading="lazy" decoding="async" />
+              <img src={src} alt="Locamo で制作した実績LP" className="aspect-[4/3] h-auto w-full object-cover" loading="lazy" decoding="async" />
             </div>
           ))}
         </div>

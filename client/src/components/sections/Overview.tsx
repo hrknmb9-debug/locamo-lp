@@ -40,6 +40,7 @@ import {
   SCOPE_INCLUDED_HEADING,
   WORKFLOW_SECTION_EYEBROW,
 } from '@/data/conversionMessaging';
+import { HERO_H1_SEO } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
 import { SCROLL_MARGIN_CLASS } from '@/data/siteNav';
 import { activateExternalHref } from '@/lib/openExternalUrl';
@@ -143,9 +144,11 @@ export default function Overview() {
             </div>
           </div>
 
+          <h1 className="sr-only">{HERO_H1_SEO}</h1>
           <h1
             className="mx-auto mb-6 max-w-full animate-fade-in-up text-balance text-center text-[1.875rem] font-bold leading-snug tracking-[-0.035em] sm:mb-5 sm:text-[2rem] md:mb-5 md:text-[2.625rem] md:leading-[1.12] lg:text-[2.85rem]"
             style={{ animationDelay: '0.2s' }}
+            aria-hidden="true"
           >
             <span className="block md:inline">
               Instagramを<span className="whitespace-nowrap">見た</span>お客様が

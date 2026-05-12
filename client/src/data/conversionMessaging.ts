@@ -136,3 +136,7 @@ export const APPLICATION_FLOW_STEPS: ApplicationFlowStep[] = [
       'LPまたはホームページが完成したら、ご確認いただき問題なければ公開します。サイト公開やドメインに伴う月額についてはご案内のとおりです。',
   },
 ];
+
+/** h1 用のメインキーワード含有テキスト（SEO 対策） */
+export const HERO_H1_SEO =
+  '大阪の個人店向けLP制作｜3万円から始める公式ランディングページ';
