@@ -20,7 +20,7 @@ export const COMPARISON_GRADE_ARIA: Record<ComparisonGrade, string> = {
 export const LP_COMPETITOR_COLUMNS = [
   { id: 'point', heading: '比較項目' },
   { id: 'locamo', heading: 'Locamo', highlight: true },
-  { id: 'mass', heading: '大手Web制作会社' },
+  { id: 'mass', heading: '大手テンプレ' },
   { id: 'system', heading: 'システム会社' },
   { id: 'freelancer', heading: '個人・フリーランス' },
 ] as const;

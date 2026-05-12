@@ -26,7 +26,7 @@ function ComparisonSymbol({ grade }: { grade: ComparisonGrade }) {
     <span
       role="img"
       aria-label={COMPARISON_GRADE_ARIA[grade]}
-      className="tabular-nums text-xl font-semibold tracking-tight text-primary sm:text-2xl"
+      className="tabular-nums text-base font-semibold tracking-tight text-primary sm:text-lg"
     >
       {grade}
     </span>
@@ -44,7 +44,7 @@ function CompetitorGradeCell({
   return (
     <td
       className={cn(
-        'w-[min(18vw,5.5rem)] min-w-[3.75rem] max-w-[5.75rem] border-b border-border px-2 py-4 text-center align-middle sm:w-auto sm:min-w-[5rem]',
+        'w-[12.5%] border-b border-border px-1 py-1.5 text-center align-middle sm:px-1.5 sm:py-2',
         zebra === 'odd' ? 'bg-slate-100/95' : 'bg-white'
       )}
     >
@@ -172,94 +172,97 @@ export default function Services() {
           </div>
         </div>
 
-        {/* 他タイプとの比較 */}
+        {/* 他タイプとの比較 — インフォグラフィック程度のコンパクト幅 */}
         <div className="animate-fade-in-up">
-          <h3 className="mb-4 text-xl font-bold text-pretty">{SERVICES_COMPARISON_SECTION_TITLE}</h3>
-          <p className="mb-5 max-w-3xl text-xs leading-relaxed text-muted-foreground text-pretty sm:text-sm">{LP_COMPETITOR_TABLE_CAPTION}</p>
-          <div className="overflow-hidden rounded-[1.35rem] border-2 border-sky-950/12 bg-white shadow-md shadow-sky-950/[0.08]">
-            <div className="overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch]">
-              <table className="w-full min-w-[min(100%,36rem)] border-collapse text-[13px] leading-snug sm:min-w-[42rem] sm:text-sm">
-                <caption className="sr-only">Locamo とよくある制作タイプの比較。記号◎○△×で相対評価を示します。</caption>
-                <thead>
-                  <tr className="bg-sky-950 text-white shadow-inner">
-                    {LP_COMPETITOR_COLUMNS.map(col => (
-                      <th
-                        key={col.id}
-                        scope="col"
-                        className={cn(
-                          'border-b border-sky-800/90 px-2.5 py-3 text-center text-[11px] font-semibold leading-tight sm:px-4 sm:text-sm',
-                          col.id === 'point' &&
-                            'sticky left-0 z-30 max-w-[7.75rem] min-w-[7.25rem] bg-sky-950 text-left text-white shadow-[4px_0_12px_-4px_rgb(15_23_42_/_0.45)] sm:max-w-none sm:min-w-[8.75rem]',
-                          col.id === 'locamo' &&
-                            'relative z-30 min-w-[10.75rem] border-x-2 border-amber-500/95 bg-sky-900 text-[13px] text-white shadow-[inset_0_-1px_0_0_rgb(248_250_252_/_0.12)] sm:min-w-[12rem] sm:text-base',
-                          col.id !== 'point' &&
-                            col.id !== 'locamo' &&
-                            'min-w-[4.75rem] text-[11px] font-medium text-white/92 sm:min-w-[5.75rem]'
-                        )}
-                      >
-                        {col.id === 'locamo' ? (
-                          <span className="block font-bold tracking-tight">{col.heading}</span>
-                        ) : (
-                          col.heading
-                        )}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {LP_COMPETITOR_ROWS.map((row, rowIdx) => {
-                    const zebra = rowIdx % 2 === 0 ? ('odd' as const) : ('even' as const);
-                    const rowBg = zebra === 'odd' ? 'bg-slate-100/92' : 'bg-white';
-
-                    return (
-                      <tr key={row.point} className="transition-colors hover:bg-sky-50/40">
+          <h3 className="mb-3 text-lg font-bold text-pretty sm:text-xl">{SERVICES_COMPARISON_SECTION_TITLE}</h3>
+          <p className="mb-4 max-w-3xl text-[11px] leading-relaxed text-muted-foreground text-pretty sm:text-xs">
+            {LP_COMPETITOR_TABLE_CAPTION}
+          </p>
+          <div className="mx-auto w-full max-w-[min(100%,26.5rem)] sm:max-w-[30rem]">
+            <div className="overflow-hidden rounded-xl border border-sky-950/15 bg-white shadow-sm shadow-sky-950/[0.07]">
+              <div className="overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch]">
+                <table className="w-full border-collapse table-fixed text-[10px] leading-snug sm:text-[11px]">
+                  <caption className="sr-only">Locamo とよくある制作タイプの比較。記号◎○△×で相対評価を示します。</caption>
+                  <thead>
+                    <tr className="bg-sky-950 text-white shadow-inner">
+                      {LP_COMPETITOR_COLUMNS.map(col => (
                         <th
-                          scope="row"
+                          key={col.id}
+                          scope="col"
                           className={cn(
-                            'sticky left-0 z-[5] max-w-[7.75rem] min-w-[7.25rem] border-b border-border px-2.5 py-3 text-left align-top font-medium text-sky-950 shadow-[4px_0_14px_-6px_rgb(15_23_42_/_0.35)] sm:max-w-none sm:min-w-[9.5rem]',
-                            rowBg,
-                            zebra === 'odd' && 'border-r border-border/70'
+                            'border-b border-sky-800/90 px-1 py-1.5 text-center text-[9px] font-semibold leading-tight sm:px-1.5 sm:py-2 sm:text-[10px]',
+                            col.id === 'point' &&
+                              'sticky left-0 z-30 w-[23%] min-w-0 bg-sky-950 text-left text-white shadow-[3px_0_8px_-3px_rgb(15_23_42_/_0.35)]',
+                            col.id === 'locamo' &&
+                              'relative z-30 w-[31%] min-w-0 border-x border-amber-500/90 bg-sky-900 text-[10px] text-white shadow-[inset_0_-1px_0_0_rgb(248_250_252_/_0.1)] sm:text-[11px]',
+                            col.id !== 'point' &&
+                              col.id !== 'locamo' &&
+                              'w-[15%] min-w-0 font-medium text-white/92'
                           )}
                         >
-                          {row.point}
+                          {col.id === 'locamo' ? (
+                            <span className="block font-bold tracking-tight">{col.heading}</span>
+                          ) : (
+                            col.heading
+                          )}
                         </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {LP_COMPETITOR_ROWS.map((row, rowIdx) => {
+                      const zebra = rowIdx % 2 === 0 ? ('odd' as const) : ('even' as const);
+                      const rowBg = zebra === 'odd' ? 'bg-slate-100/92' : 'bg-white';
 
-                        {/* Locamo：記号 + 短文（画像の LPジム列と同型） */}
-                        <td
-                          className={cn(
-                            'relative z-[1] min-w-[10.75rem] border-b border-primary/35 border-x-2 border-primary bg-white px-2.5 py-3.5 text-center align-top shadow-[inset_0_0_0_1px_rgb(254_252_232_/_0.45)] sm:min-w-[12rem] sm:px-4',
-                            zebra === 'odd' && 'bg-amber-50/45'
-                          )}
-                        >
-                          <ComparisonSymbol grade={row.locamo.grade} />
-                          <p className="mt-2.5 text-left text-[11px] leading-relaxed text-sky-900/92 text-pretty sm:text-xs">
-                            {row.locamo.note}
-                          </p>
-                        </td>
+                      return (
+                        <tr key={row.point} className="transition-colors hover:bg-sky-50/35">
+                          <th
+                            scope="row"
+                            className={cn(
+                              'sticky left-0 z-[5] w-[23%] min-w-0 border-b border-border px-1 py-1.5 text-left align-top text-[10px] font-medium text-sky-950 shadow-[3px_0_8px_-4px_rgb(15_23_42_/_0.28)] sm:py-2 sm:text-[11px]',
+                              rowBg,
+                              zebra === 'odd' && 'border-r border-border/60'
+                            )}
+                          >
+                            {row.point}
+                          </th>
 
-                        <CompetitorGradeCell grade={row.mass} zebra={zebra} />
-                        <CompetitorGradeCell grade={row.system} zebra={zebra} />
-                        <CompetitorGradeCell grade={row.freelancer} zebra={zebra} />
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                          <td
+                            className={cn(
+                              'relative z-[1] w-[31%] min-w-0 border-b border-primary/35 border-x border-primary bg-white px-1.5 py-2 text-center align-top shadow-[inset_0_0_0_1px_rgb(254_252_232_/_0.4)] sm:py-2.5',
+                              zebra === 'odd' && 'bg-amber-50/45'
+                            )}
+                          >
+                            <ComparisonSymbol grade={row.locamo.grade} />
+                            <p className="mt-1.5 text-left text-[9px] leading-snug text-sky-900/92 text-pretty sm:text-[10px] sm:leading-relaxed">
+                              {row.locamo.note}
+                            </p>
+                          </td>
+
+                          <CompetitorGradeCell grade={row.mass} zebra={zebra} />
+                          <CompetitorGradeCell grade={row.system} zebra={zebra} />
+                          <CompetitorGradeCell grade={row.freelancer} zebra={zebra} />
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-muted-foreground sm:text-xs">
-            <span>
-              <span className="font-semibold text-primary">◎</span> ひとつのタイプとして最も評価しやすい
-            </span>
-            <span>
-              <span className="font-semibold text-primary">○</span> バランス型
-            </span>
-            <span>
-              <span className="font-semibold text-primary">△</span> 条件依存・やや不利になりがち
-            </span>
-            <span>
-              <span className="font-semibold text-primary">×</span> 不向きになりやすい
-            </span>
+            <div className="mt-2.5 flex flex-wrap gap-x-2.5 gap-y-0.5 text-[9px] text-muted-foreground sm:text-[10px]">
+              <span>
+                <span className="font-semibold text-primary">◎</span> ひとつのタイプとして最も評価しやすい
+              </span>
+              <span>
+                <span className="font-semibold text-primary">○</span> バランス型
+              </span>
+              <span>
+                <span className="font-semibold text-primary">△</span> 条件依存・やや不利になりがち
+              </span>
+              <span>
+                <span className="font-semibold text-primary">×</span> 不向きになりやすい
+              </span>
+            </div>
           </div>
         </div>
 
