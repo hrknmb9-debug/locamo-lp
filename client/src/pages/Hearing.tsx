@@ -44,8 +44,8 @@ const HearingRedirect: FC = () => {
             公式LINEを開く
           </a>
         </Button>
-        <Link href="/#contact" className="text-sm text-accent underline underline-offset-2 hover:opacity-90">
-          お問い合わせセクションへ
+        <Link href="/#contact-faq" className="text-sm text-accent underline underline-offset-2 hover:opacity-90">
+          よくある質問・お問い合わせ欄へ
         </Link>
       </main>
     </div>

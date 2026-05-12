@@ -272,11 +272,11 @@ export default function Home() {
                 ))}
                 <li>
                   <a
-                    href="/#contact"
+                    href="#contact-faq"
                     className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors"
-                    onClick={(e) => onSiteAnchorNavClick(e, 'contact')}
+                    onClick={(e) => onSiteAnchorNavClick(e, 'contact-faq')}
                   >
-                    お問い合わせ（ページ内）
+                    お問い合わせ・FAQ（ページ内）
                   </a>
                 </li>
                 <li>
@@ -307,9 +307,9 @@ export default function Home() {
                 {PRIMARY_CTA_LINE}
               </a>
               <a
-                href="/#contact"
+                href="#contact-faq"
                 className="mb-3 block text-xs text-accent underline-offset-2 hover:underline"
-                onClick={(e) => onSiteAnchorNavClick(e, 'contact')}
+                onClick={(e) => onSiteAnchorNavClick(e, 'contact-faq')}
               >
                 ページ内の説明・FAQを見る
               </a>

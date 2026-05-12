@@ -15,6 +15,7 @@ import {
   PRIMARY_CTA_LINE_FULL,
   RESPONSE_SLA,
 } from '@/data/conversionMessaging';
+import { SCROLL_MARGIN_CLASS } from '@/data/siteNav';
 
 export default function Contact() {
   const faqs = [
@@ -112,7 +113,11 @@ export default function Contact() {
           </div>
         </section>
 
-        <section className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+        <section
+          id="contact-faq"
+          className={cn(SCROLL_MARGIN_CLASS, 'mb-12 animate-fade-in-up')}
+          style={{ animationDelay: '0.3s' }}
+        >
           <h3 className="text-xl font-bold mb-6 text-center">よくある質問</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {faqs.map((faq, idx) => (

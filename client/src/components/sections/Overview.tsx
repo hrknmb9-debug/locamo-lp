@@ -413,16 +413,21 @@ export default function Overview() {
                 <span className="text-center text-sm font-bold leading-tight sm:text-[15px]">{PRIMARY_CTA_LINE_FULL}</span>
                 <ArrowRight className="mt-0.5 size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
               </a>
-              <Link
-                href="/#contact"
+              <a
+                href="#contact-faq"
                 className={cn(
                   buttonVariants({ variant: 'outline', size: 'lg' }),
                   'h-auto min-h-12 w-full rounded-full border-sky-200 px-4 py-3 sm:min-h-14 sm:max-w-[14rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-1 text-balance text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]'
                 )}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSiteAnchor('contact-faq');
+                  replaceUrlHash('contact-faq');
+                }}
               >
                 お問い合わせの詳細・FAQ
                 <ArrowRight className="size-4 shrink-0 text-muted-foreground sm:hidden" aria-hidden />
-              </Link>
+              </a>
             </div>
             <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
               <Link href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">

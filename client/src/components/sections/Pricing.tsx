@@ -3,7 +3,6 @@ import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
-import { Link } from 'wouter';
 import { LINE_OFFICIAL_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import {
@@ -14,6 +13,7 @@ import {
   RESPONSE_SLA,
 } from '@/data/conversionMessaging';
 import { SCROLL_MARGIN_CLASS } from '@/data/siteNav';
+import { replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
 import {
   IllustFlowContract,
   IllustFlowDm,
@@ -203,15 +203,20 @@ export default function Pricing() {
                 {PRIMARY_CTA_LINE}
               </a>
             </Button>
-            <Link
-              href="/#contact"
+            <a
+              href="#contact-faq"
               className={cn(
                 buttonVariants({ variant: 'outline', size: 'lg' }),
-                'rounded-full border-sky-200 px-8 py-6 text-sm font-semibold'
+                'rounded-full border-sky-200 px-8 py-6 text-sm font-semibold inline-flex items-center justify-center'
               )}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSiteAnchor('contact-faq');
+                replaceUrlHash('contact-faq');
+              }}
             >
-              お問い合わせセクションへ
-            </Link>
+              よくある質問・お問い合わせ欄へ
+            </a>
           </div>
         </div>
       </div>

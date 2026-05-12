@@ -124,13 +124,13 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
                 <ArrowRight className="inline size-5" aria-hidden />
               </a>
               <a
-                href="/#contact"
+                href="/#contact-faq"
                 className={cn(
                   buttonVariants({ variant: 'outline', size: 'lg' }),
                   'inline-flex justify-center rounded-full border-sky-200'
                 )}
               >
-                サイト内のお問い合わせへ
+                よくある質問・お問い合わせ欄へ
               </a>
               <a
                 href="/"

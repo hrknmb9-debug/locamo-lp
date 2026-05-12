@@ -8,7 +8,6 @@ import { LINE_OFFICIAL_URL } from '@/constants/locamo';
 import { PRIMARY_CTA_LINE_FULL } from '@/data/conversionMessaging';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { SERVICE_PLANS } from '@/data/servicePlans';
-import { IllustPlanHp, IllustPlanLp } from '@/components/lp/BespokeIllustrations';
 import { LP_IMAGES } from '@/lp-images';
 import { replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
 
@@ -61,7 +60,11 @@ export default function Services() {
         {/* Service Cards */}
         <div className="mx-auto mb-14 grid max-w-4xl grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
           {plans.map((plan, idx) => {
-            const PlanIllust = plan.id === 'hp' ? IllustPlanHp : IllustPlanLp;
+            const planImageSrc = plan.id === 'hp' ? LP_IMAGES.servicePlanHp : LP_IMAGES.servicePlanLp;
+            const planImageAlt =
+              plan.id === 'hp'
+                ? 'ホームページ制作のイメージ（複数ページ構成のサイト例）'
+                : 'LP制作のイメージ（業種別モバイル向けランディングの一例）';
             return (
             <div
               key={plan.id}
@@ -90,8 +93,20 @@ export default function Services() {
                     <h3 className="mb-2 pr-12 text-lg font-bold md:pr-0">{plan.title}</h3>
                     <p className="text-xs text-muted-foreground leading-relaxed">{plan.description}</p>
                   </div>
-                  <div className="mx-auto flex w-[min(100%,9rem)] shrink-0 justify-center sm:mx-0">
-                    <PlanIllust className="h-auto w-full" />
+                  <div className="mx-auto h-[8.25rem] w-[min(100%,11rem)] shrink-0 overflow-hidden rounded-xl border border-sky-100/90 bg-secondary/40 sm:mx-0 sm:h-[8.75rem]">
+                    <img
+                      src={planImageSrc}
+                      alt={planImageAlt}
+                      width={440}
+                      height={360}
+                      loading="lazy"
+                      decoding="async"
+                      draggable={false}
+                      className={cn(
+                        'h-full w-full object-cover',
+                        plan.id === 'hp' ? 'object-top' : 'object-center'
+                      )}
+                    />
                   </div>
                 </div>
               </div>
@@ -217,10 +232,15 @@ export default function Services() {
             </a>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
               <a
-                href="/#contact"
+                href="#contact-faq"
                 className="inline-flex items-center justify-center gap-2"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSiteAnchor('contact-faq');
+                  replaceUrlHash('contact-faq');
+                }}
               >
-                サイト内のお問い合わせを見る
+                サイト内のお問い合わせ・FAQを見る
               </a>
             </Button>
           </div>

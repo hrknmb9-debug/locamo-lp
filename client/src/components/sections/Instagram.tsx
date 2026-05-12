@@ -5,6 +5,7 @@ import { Instagram, ArrowRight, TrendingUp, MessageCircle } from 'lucide-react';
 
 import { IG_URL, LINE_OFFICIAL_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
+import { replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
 import { LINE_CONTACT_FLOW_SHORT, PRIMARY_CTA_LINE_FULL } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
 
@@ -219,11 +220,16 @@ export default function InstagramPage() {
                 <ArrowRight className="size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
               </a>
               <a
-                href="/#contact"
+                href="#contact-faq"
                 className={cn(
                   buttonVariants({ variant: 'outline', size: 'lg' }),
                   'inline-flex h-auto min-h-12 w-full items-center justify-center rounded-full border-sky-200 px-6 py-4 sm:max-w-[20rem]'
                 )}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSiteAnchor('contact-faq');
+                  replaceUrlHash('contact-faq');
+                }}
               >
                 サイト内のお問い合わせ欄へ
               </a>
