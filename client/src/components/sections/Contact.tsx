@@ -102,7 +102,7 @@ export default function Contact() {
 
         <section className="mb-12 animate-fade-in-up jp-keep-all px-1 text-center" style={{ animationDelay: '0.1s' }}>
           <p className="mx-auto max-w-xl text-sm leading-relaxed text-muted-foreground text-pretty">
-            公開までの手順の詳細は、料金の
+            公開までの手順の詳細は料金は「制作の流れ」をご覧ください。
             <ProductionFlowJumpLink className="mx-0.5">「制作の流れ」</ProductionFlowJumpLink>
             をご覧ください。
           </p>

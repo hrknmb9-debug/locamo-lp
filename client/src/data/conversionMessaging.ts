@@ -47,7 +47,7 @@ export const SCOPE_EXCLUDED_HEADING = '標準には含まれないこと（ご�
 
 /** Landing ファーストビューの「約束」を一言にまとめた見出し */
 export const HERO_VALUE_HOOK =
-  '大阪の個人店向けに、公式の受け皿となる一枚LPをつくります（多くの店ではまずこれで十分です）。';
+  '大阪の個人店向けに、公式の受け皿となる一枚LPを制作いたします！！';
 
 /** ヒーロー直下リード（価格・手段を一段に収め、スクロール前の読了負荷を下げる） */
 export const HERO_PRIMARY_LEAD =
@@ -72,7 +72,7 @@ export const SERVICES_LP_STORY_BULLETS = [
 
 /** サービスセクション：他社（タイプ別）比較表タイトル */
 export const SERVICES_COMPARISON_SECTION_TITLE =
-  '他のつくり方と何がちがう？（名前は出さず、よくあるパターンで整理）';
+  '他社とは何が違う？？';
 
 /** お問い合わせ先頭の受付説明 */
 export const CONTACT_INTAKE_SUMMARY =
