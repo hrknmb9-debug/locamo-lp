@@ -1,4 +1,4 @@
-import { HEARING_PATH, LP_ILLUSTRATIONS_PREVIEW_PATH } from '@/constants/spaRoutes';
+import { LP_ILLUSTRATIONS_PREVIEW_PATH } from '@/constants/spaRoutes';
 import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 
@@ -20,8 +20,7 @@ function normalizePathname(pathname: string): string {
 function titleForPath(pathname: string): string {
   const p = normalizePathname(pathname);
 
-  if (p === HEARING_PATH) return `ヒアリング・お申込み｜Locamo`;
-  if (p === LP_ILLUSTRATIONS_PREVIEW_PATH) return `インラインSVG一覧（確認用）｜Locamo`;
+    if (p === LP_ILLUSTRATIONS_PREVIEW_PATH) return `インラインSVG一覧（確認用）｜Locamo`;
   if (p.startsWith('/services/')) return `プラン詳細｜Locamo`;
   if (p === '/privacy') return `プライバシーポリシー｜Locamo`;
   if (p === '/404') return `ページが見つかりません｜Locamo`;

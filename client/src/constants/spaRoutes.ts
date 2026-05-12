@@ -1,5 +1,4 @@
 /** クライアントルート（App.tsx の `<Route>` と完全一致させること） */
-export const HEARING_PATH = '/hearing' as const;
 
 /** デザイン確認用（検索に載せない想定） */
 export const LP_ILLUSTRATIONS_PREVIEW_PATH = '/lp-illustrations' as const;
@@ -16,19 +15,4 @@ export function getWouterRouterBase(): string | undefined {
   if (!t || t === '/' || t === './' || t === '.') return undefined;
   const noTrailing = t.replace(/\/+$/, '');
   return noTrailing || undefined;
-}
-
-/**
- * アドレスバーでのフルパス `<a>` 用（履歴復帳・SSR 直下 GET との兼ね合いで使う）。
- * 例: `base` が `/subdir/` のとき `/subdir/hearing`。
- */
-export function hearingLandingHref(): string {
-  const raw =
-    typeof import.meta.env.BASE_URL === 'string' ? import.meta.env.BASE_URL.trim() : '/';
-  if (raw === '/' || raw === '.' || raw === './') return HEARING_PATH;
-  const prefix = raw.endsWith('/') ? raw : `${raw}/`;
-  const rest = HEARING_PATH.startsWith('/') ? HEARING_PATH.slice(1) : HEARING_PATH;
-  const joined = `${prefix}${rest}`;
-  const normalized = joined.replace(/\/{2,}/g, '/');
-  return normalized.startsWith('/') ? normalized : `/${normalized}`;
 }
