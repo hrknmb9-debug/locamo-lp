@@ -4,7 +4,7 @@ import { Link } from 'wouter';
 
 import { Button } from '@/components/ui/button';
 import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
-import { IG_HANDLE, IG_URL } from '@/constants/locamo';
+import { IG_HANDLE, IG_URL, LINE_OFFICIAL_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 
@@ -40,18 +40,31 @@ const Privacy: FC = () => {
             <dt className="font-semibold text-sky-950">所在地</dt>
             <dd>大阪府大阪市</dd>
             <dt className="font-semibold text-sky-950">連絡先</dt>
-            <dd>
-              Instagram{' '}
-              <a
-                href={IG_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-accent underline-offset-2 hover:underline"
-                onClick={(e) => activateExternalHref(e, IG_URL)}
-              >
-                {IG_HANDLE}
-              </a>{' '}
-              （ダイレクトメッセージ）
+            <dd className="space-y-2">
+              <div>
+                公式LINE{' '}
+                <a
+                  href={LINE_OFFICIAL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-accent underline-offset-2 hover:underline"
+                  onClick={(e) => activateExternalHref(e, LINE_OFFICIAL_URL)}
+                >
+                  お問い合わせ・ご依頼
+                </a>
+              </div>
+              <div className="text-muted-foreground text-sm">
+                発信・アカウント確認：Instagram{' '}
+                <a
+                  href={IG_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-accent underline-offset-2 hover:underline"
+                  onClick={(e) => activateExternalHref(e, IG_URL)}
+                >
+                  {IG_HANDLE}
+                </a>
+              </div>
             </dd>
           </dl>
         </div>
@@ -65,8 +78,8 @@ const Privacy: FC = () => {
               <li>お名前、店舗名、屋号</li>
               <li>所在地、エリア情報</li>
               <li>電話番号、メールアドレス、SNSアカウント情報</li>
-              <li>当サイト内ヒアリング入力のうち、Instagramのダイレクトメッセージにてお送りいただいた内容</li>
-              <li>LINE などその他チャネルでのお問い合わせ内容</li>
+              <li>公式LINEのトークにおいてお預かりするお問い合わせ・ご依頼の内容</li>
+              <li>Instagram のダイレクトメッセージなど、その他チャネルでのお問い合わせ内容</li>
               <li>その他、お見積もりや制作業務遂行に必要な情報</li>
             </ul>
           </PolicySection>
@@ -77,7 +90,7 @@ const Privacy: FC = () => {
               <li>ランディングページ・ホームページ制作および関連するコンサルティング業務の遂行</li>
               <li>お見積もり・ご提案・進捗に関する連絡</li>
               <li>制作物の納品、公開後のご案内、アフターサポート</li>
-              <li>請求、決済、契約管理上のご連絡</li>
+              <li>請求および契約に関するご連絡</li>
               <li>サービス品質向上のための統計作成（個人が特定できない形式に限定）</li>
             </ul>
           </PolicySection>
@@ -87,7 +100,7 @@ const Privacy: FC = () => {
               当社は、法令に基づく場合、またはご本人の同意がある場合を除き、取得した個人情報を第三者に提供・開示しません。
             </p>
             <p className="text-muted-foreground">
-              決済サービス等の協力会社に業務を委託する際は、必要な範囲でのみ情報を預託し、適切な管理・監督を行います。
+              業務委託先に個人情報の取り扱いを委託する際は、必要な範囲でのみ情報を預託し、適切な管理・監督を行います。
             </p>
           </PolicySection>
 
@@ -105,7 +118,17 @@ const Privacy: FC = () => {
 
           <PolicySection title="第6条（開示・訂正・削除などの請求）">
             <p className="text-muted-foreground">
-              ご本人から、保有個人データの開示、訂正、追加、削除、利用停止等の請求があったときは、本人確認のうえ、法令に従い対応します。ご請求は、こちらの Instagram アカウントへのダイレクトメッセージにてご連絡ください。
+              ご本人から、保有個人データの開示、訂正、追加、削除、利用停止等の請求があったときは、本人確認のうえ、法令に従い対応します。ご請求は、
+              <a
+                href={LINE_OFFICIAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-accent underline-offset-2 hover:underline"
+                onClick={(e) => activateExternalHref(e, LINE_OFFICIAL_URL)}
+              >
+                公式LINE
+              </a>
+              または Instagram のダイレクトメッセージにてご連絡ください。
             </p>
           </PolicySection>
 
@@ -119,6 +142,16 @@ const Privacy: FC = () => {
             <p className="text-muted-foreground">
               本ポリシーに関するお問い合わせは、
               <a
+                href={LINE_OFFICIAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-accent underline-offset-2 hover:underline"
+                onClick={(e) => activateExternalHref(e, LINE_OFFICIAL_URL)}
+              >
+                公式LINE
+              </a>
+              （NANBA企画 / Locamo）または{' '}
+              <a
                 href={IG_URL}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -127,7 +160,7 @@ const Privacy: FC = () => {
               >
                 {IG_HANDLE}
               </a>
-              （NANBA企画 / Locamo）までダイレクトメッセージにてご連絡ください。
+              のダイレクトメッセージにてご連絡ください。
             </p>
           </PolicySection>
         </div>

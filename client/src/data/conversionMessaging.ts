@@ -1,18 +1,18 @@
 /**
- * 申込〜初回連絡までの説明・CTAを全LPで一致させるための共通文面
+ * お問い合わせ〜初回連絡までの説明・CTAを全LPで一致させるための共通文面（公式LINE統一）
  */
 
-export const HEARING_FLOW_SHORT =
-  'まずはLINEでお気軽にご連絡ください。担当よりヒアリングシートをお送りします。';
+export const LINE_CONTACT_FLOW_SHORT =
+  'ご依頼・ご質問はすべて公式LINEからお送りください。友だち追加後、トークでお店の状況やご希望をお書きいただければ大丈夫です。';
 
-export const HEARING_FLOW_LINES = [
-  'LINEで「ヒアリングシートをください」とお送りください。',
-  '担当よりヒアリングシートをお送りします。',
-  'ご記入いただき、LINEで返信いただいた時点で制作のご依頼として受け付けます。',
+export const LINE_CONTACT_FLOW_LINES = [
+  '公式LINEを開き、友だち追加します。',
+  'トーク画面にお店の名前・ご希望・質問などをそのまま送信してください。',
+  'いただいた内容をもとに、こちらから順にお返事し、お見立てまでご案内します。',
 ] as const;
 
 export const RESPONSE_SLA =
-  '内容を確認のうえ、原則2営業日以内にLINEでご返信します（混雑時は前後することがあります）。';
+  '内容を確認のうえ、原則2営業日以内に公式LINEでご返信します（混雑時は前後することがあります）。';
 
 export const SCOPE_INCLUDED_BULLETS = [
   'LP1枚の構成・文案のたたき・スマホ最適化・公開までの設定サポート（プランによる範囲は各ページを参照）。',
@@ -22,7 +22,7 @@ export const SCOPE_INCLUDED_BULLETS = [
 export const SCOPE_EXCLUDED_BULLETS = [
   '検索順位やアクセス数の「数値保証」。',
   '広告運用の単独代行、撮影や動画制作のみなど、ウェブ公開が主目的でない単発請負。',
-  '公開後の無制限な機能追加や全面リニューアル（規模に応じ都度お見積り）。',
+  '公開後の無制限な機能追加や全面リニューアル（規模に応じて都度お見積り）。',
 ] as const;
 
 export const MONITOR_SLOT_NOTE =
@@ -35,15 +35,12 @@ export const MONITOR_BADGE_LINES = [
   '（審査付き／先着）',
 ] as const;
 
-export const PRIMARY_CTA_HEARING = 'ヒアリングに進む';
+export const PRIMARY_CTA_LINE = '公式LINEで相談';
 
-export const PRIMARY_CTA_HEARING_FULL = 'LP制作のヒアリングに進む';
+export const PRIMARY_CTA_LINE_FULL = '公式LINEでお問い合わせ';
 
-/** 短め（オレンジ pill のはみ出し防止）— 長いラベルはボタン内で別表示可 */
-
-
-/** 「DMで相談」ボタンの補足（視覚的に短く） */
-
+/** ボタン内の短い補足（視覚用） */
+export const PRIMARY_CTA_LINE_SUBLINE = '友だち追加';
 
 export const SCOPE_INCLUDED_HEADING = 'ご依頼に含まれやすいこと';
 export const SCOPE_EXCLUDED_HEADING = '標準には含まれないこと（ご相談・別見積り）';
@@ -54,20 +51,18 @@ export const HERO_VALUE_HOOK =
 
 /** ヒーロー直下リード（価格・手段を一段に収め、スクロール前の読了負荷を下げる） */
 export const HERO_PRIMARY_LEAD =
-  'SNSとメニューを公式の一枚にそろえ、次の行動（問い合わせや予約）までを読み順で見せます。AIが構成と文案の素案を出し、担当がCTAまで整えます。';
+  'SNSとメニューを公式の一枚にそろえ、次の行動（問い合わせや予約）までを読む順で見せます。AIが構成と文案の素案を出し、担当がCTAまで整えます。';
 
 /** ヒーロー用の料金ハイライト（数値のみ短文） */
 export const HERO_PRICE_TEASER = 'LP制作費は買い切り3万円〜／公開・ドメインは別途・月3,000円〜。';
 
-/** お問い合わせ先頭：受付開始を前向きに言い切る（返信SLAは別途続ける） */
+/** お問い合わせ先頭の受付説明 */
 export const CONTACT_INTAKE_SUMMARY =
-  'LINEでお気軽にご連絡ください。担当よりヒアリングシートをお送りし、ご記入いただいた時点で制作のご依頼として受け付けます。';
+  '公式LINEでご連絡いただいたメッセージをもとに、制作のご依頼またはご質問として順にお取り扱いします。';
 
-/** メールのみ希望などInstagram中心で苦手な方向けの一文 */
-
-
-/** ヒアリングフォーム送信直前までの環境インフォメーション（Instagram 依存の開示） */
-export const HEARING_DM_PREREQUISITE = 'LINE送信前に必須項目が揃っているか確認します' as const;
+/** LINE が不安な方向けの一文（決済・ツール名は書かない） */
+export const LINE_CHANNEL_FLEX_NOTE =
+  'LINEがはじめての場合も、トーク画面に指示どおり入力いただければ大丈夫です。詳細なご質問はお問い合わせセクションのFAQもご覧ください。';
 
 /** 「お約束」（返信〜スコープ）の短いキャプション見出し */
 export const PROMISE_SECTION_EYEBROW = 'ご返信までの約束・範囲';
@@ -84,47 +79,45 @@ export const ABOUT_SECTION_EYEBROW = 'このサービスの考え方';
 /** サイト全体で共有するお申込み〜公開までの概要（一覧は `APPLICATION_FLOW_STEPS`）。 */
 export const APPLICATION_FLOW_HEADING = 'お申込み〜公開まで（ざっくりの流れ）';
 
-/** ヒーロー等の短文ラベル（改行しない）—詳細タイムラインは料金の「制作の流れ」へ集約 */
+/** ヒーロー等の短文ラベル — 詳細タイムラインは料金の「制作の流れ」へ集約 */
 export const APPLICATION_FLOW_VISUAL_LABELS = [
-  'LINEで相談',
-  'ヒアリング送信',
-  'ご返答',
-  '契約〜公開',
+  '公式LINE',
+  'ご返信',
+  'ご契約・制作',
+  '公開',
 ] as const;
 
 export type ApplicationFlowStep = {
   readonly num: string;
   readonly title: string;
-  /** スクロール量を抑える要約（トップなど） */
   readonly short: string;
-  /** 料金ページ・お問い合わせのカード詳細など */
   readonly detail: string;
 };
 
 export const APPLICATION_FLOW_STEPS: ApplicationFlowStep[] = [
   {
     num: '1',
-    title: 'LINEでご相談 → ヒアリングシート送信',
+    title: '公式LINEでご連絡',
     short:
-      'LINEで「ヒアリングシートをください」とお送りください。担当よりヒアリングシートをお送りし、ご記入いただいた時点で制作のご依頼として受け付けます。',
+      '友だち追加後、トークにお店の状況・ご希望・質問を送信してください。この時点でご依頼のお預かり、または質問へのご案内を開始します。',
     detail:
-      'LINEで「ヒアリングシートをください」とお送りください。担当よりヒアリングシートをお送りします。ご記入いただき、LINEで返信いただいた時点で制作のご依頼として受け付けます。',
+      '公式LINEのトークにお店名・業種・ご希望やお困りごとを書いていただければ結構です。写真やリンクがあるとよりスムーズです。',
   },
   {
     num: '2',
-    title: 'LINEでのご返信・お見立て',
+    title: '公式LINEでのご返信・お見立て',
     short:
-      '原則2営業日以内を目安に、LINEで構成の方向感や質問にお答えし、見立てまでご案内します。',
+      '原則2営業日以内を目安に、公式LINEで構成の方向感や確認事項にお答えし、お見立てまでご案内します。',
     detail:
-      '内容を確認のうえ、構成の方向感やご質問にお答えし、お見立てまでLINEを中心にご案内します。',
+      '内容を確認のうえ、構成の方向感やご質問にお答えし、お見立てまで公式LINEでご連絡します。',
   },
   {
     num: '3',
-    title: 'ご契約・お支払い・制作開始',
+    title: 'ご契約・制作開始',
     short:
-      '内容にご納得いただいたタイミングでご契約。お支払いはLINEでお送りする決済リンク（Stripe Payment Links／カード決済）からお手続きください。',
+      '内容にご納得いただいたタイミングでご契約となり、その後すぐに制作に着手します。手続きやご質問は公式LINEでサポートします。',
     detail:
-      'ご契約確定後、制作を開始します。決済はすべて送付するPayment Link上で完結し、銀行振込は受け付けていません。サイト内でカード番号を入力いただくページはありません。進捗は適宜ご共有します。',
+      'ご契約の確認がとれたら制作を開始します。進捗や確認事項は公式LINEで共有します。',
   },
   {
     num: '4',
@@ -137,4 +130,4 @@ export const APPLICATION_FLOW_STEPS: ApplicationFlowStep[] = [
 
 /** h1 用のメインキーワード含有テキスト（SEO 対策） */
 export const HERO_H1_SEO =
-  '大阪の個人店向けLP制作｜3万円から始める公式ランディングページ';
+  '大阪の個人店向けLP制作｜制作費3万円〜の公式ランディングページ';

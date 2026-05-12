@@ -1,14 +1,14 @@
-import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, MessageCircle } from 'lucide-react';
 import type { FC } from 'react';
 import { Link } from 'wouter';
 import type { RouteComponentProps } from 'wouter';
 
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { cn } from '@/lib/utils';
-import { LINE_URL,  DM_URL  } from '@/constants/locamo';
+import { LINE_OFFICIAL_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
-import { PRIMARY_CTA_HEARING_FULL } from '@/data/conversionMessaging';
+import { PRIMARY_CTA_LINE_FULL } from '@/data/conversionMessaging';
 import { getPlan } from '@/data/servicePlans';
 import { LP_IMAGES } from '@/lp-images';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
@@ -106,28 +106,32 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
 
           <div className="rounded-[1.25rem] border border-sky-100 bg-secondary/80 p-6 text-center md:p-8">
             <p className="mb-6 text-sm text-muted-foreground text-pretty">
-              LINEでヒアリングシートをお送りし、ご記入いただいた時点で制作のご依頼として受け付けます。先に質問だけの場合はLINEのみでも構いません。
+              ご依頼・ご質問は公式LINEからお送りください。トークにお店の状況やご希望を書いていただければ、こちらから順にお返事し、お見立てまでご案内します。
             </p>
             <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
-              <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
+              <a
+                href={LINE_OFFICIAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={cn(
                   buttonVariants({ size: 'lg' }),
-                  'btn-primary inline-flex justify-center px-6 text-primary-foreground'
+                  'btn-primary inline-flex items-center justify-center gap-2 px-6 text-primary-foreground'
+                )}
+                onClick={(e) => activateExternalHref(e, LINE_OFFICIAL_URL)}
+              >
+                <MessageCircle size={18} aria-hidden />
+                {PRIMARY_CTA_LINE_FULL}
+                <ArrowRight className="inline size-5" aria-hidden />
+              </a>
+              <a
+                href="/#contact"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'inline-flex justify-center rounded-full border-sky-200'
                 )}
               >
-                {PRIMARY_CTA_HEARING_FULL}
-                <ArrowRight className="ml-2 inline size-5" aria-hidden />
+                サイト内のお問い合わせへ
               </a>
-              <Button size="lg" variant="outline" className="rounded-full border-sky-200" asChild>
-                <a
-                  href={LINE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => activateExternalHref(e, LINE_URL)}
-                >
-                  LINEで質問のみ（任意）
-                </a>
-              </Button>
               <a
                 href="/"
                 className={cn(

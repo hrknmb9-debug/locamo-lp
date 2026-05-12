@@ -1,5 +1,8 @@
 /** クライアントルート（App.tsx の `<Route>` と完全一致させること） */
 
+/** 旧フォームURLのブックマーク互換（公式LINEへ誘導） */
+export const HEARING_PATH = '/hearing' as const;
+
 /** デザイン確認用（検索に載せない想定） */
 export const LP_ILLUSTRATIONS_PREVIEW_PATH = '/lp-illustrations' as const;
 

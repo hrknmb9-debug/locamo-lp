@@ -35,7 +35,7 @@ export function IllustFlowSiteInput(props: Svg) {
   );
 }
 
-/** ステップ② DM */
+/** ステップ② LINE（メッセージ） */
 export function IllustFlowDm(props: Svg) {
   return (
     <Base viewBox="0 0 200 136" {...props}>
@@ -52,7 +52,7 @@ export function IllustFlowDm(props: Svg) {
   );
 }
 
-/** ステップ③ 契約・決済 */
+/** ステップ③ ご契約 */
 export function IllustFlowContract(props: Svg) {
   return (
     <Base viewBox="0 0 200 136" {...props}>

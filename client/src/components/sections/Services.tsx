@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { cn } from '@/lib/utils';
-import { ChevronDown, Check } from 'lucide-react';
+import { ChevronDown, Check, MessageCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
-import { LINE_URL } from '@/constants/locamo';
-import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
+import { LINE_OFFICIAL_URL } from '@/constants/locamo';
+import { PRIMARY_CTA_LINE_FULL } from '@/data/conversionMessaging';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { SERVICE_PLANS } from '@/data/servicePlans';
 import { IllustPlanHp, IllustPlanLp } from '@/components/lp/BespokeIllustrations';
@@ -192,26 +192,35 @@ export default function Services() {
 
         {/* Monthly cost note */}
         <p className="text-xs text-muted-foreground text-center mt-4">
-          ※別途、サイト公開・ドメイン費用 月3,000円〜（込み）
+          ※別途、サイト公開・ドメインは月3,000円〜（初期設定サポート込み）。
         </p>
 
         {/* CTA */}
         <div className="text-center mt-12 animate-fade-in-up">
           <p className="text-muted-foreground text-sm mb-4 max-w-lg mx-auto text-pretty">
-            「まずLPで足りるか」迷う段階でも、ヒアリング内容をいただければ構成の方向性までお返しします。
+            「まずLPで足りるか」迷う段階でも、公式LINEで状況をお知らせいただければ構成の方向性までお返しします。
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
-            <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
+            <a
+              href={LINE_OFFICIAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ size: 'lg' }),
-                'btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground'
+                'btn-primary inline-flex items-center justify-center gap-2 px-8 py-6 text-sm font-semibold text-primary-foreground'
               )}
+              onClick={(e) => activateExternalHref(e, LINE_OFFICIAL_URL)}
             >
-              {PRIMARY_CTA_HEARING}
+              <MessageCircle size={18} aria-hidden />
+              {PRIMARY_CTA_LINE_FULL}
+              <ArrowRight size={16} aria-hidden />
             </a>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
-              <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}>
-                LINEで無料相談する
+              <a
+                href="/#contact"
+                className="inline-flex items-center justify-center gap-2"
+              >
+                サイト内のお問い合わせを見る
               </a>
             </Button>
           </div>

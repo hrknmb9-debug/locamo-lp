@@ -6,12 +6,13 @@ import { IllustContactHearingDm } from '@/components/lp/BespokeIllustrations';
 import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 
-import { LINE_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
+import { IG_HANDLE, IG_URL, LINE_OFFICIAL_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import {
   CONTACT_INTAKE_SUMMARY,
-  HEARING_FLOW_LINES,
-  PRIMARY_CTA_HEARING_FULL,
+  LINE_CHANNEL_FLEX_NOTE,
+  LINE_CONTACT_FLOW_LINES,
+  PRIMARY_CTA_LINE_FULL,
   RESPONSE_SLA,
 } from '@/data/conversionMessaging';
 
@@ -34,59 +35,62 @@ export default function Contact() {
   return (
     <div className="lp-section-y px-4">
       <div className="container mx-auto max-w-4xl">
-        {/* Header */}
         <LpSectionEyebrow>連絡と受付の窓口</LpSectionEyebrow>
         <h2 className="text-2xl md:text-3xl font-bold mb-3 text-center">
-          お問い合わせ
+          お問い合わせ（公式LINE）
         </h2>
         <p className="text-center text-muted-foreground mb-6 max-w-xl mx-auto text-sm leading-relaxed text-pretty">
           {CONTACT_INTAKE_SUMMARY}
           <span className="mt-3 block">{RESPONSE_SLA}</span>
         </p>
         <p className="text-center text-muted-foreground mb-10 mx-auto max-w-lg text-xs leading-relaxed text-pretty sm:text-sm">
-          
+          {LINE_CHANNEL_FLEX_NOTE}
         </p>
 
-        {/* Main CTA */}
         <section className="mb-12 animate-fade-in-up">
           <div className="lp-soft-band flex flex-col items-stretch rounded-[1.5rem] border border-sky-100 px-5 py-10 text-center shadow-sm shadow-sky-950/5 sm:px-8 md:p-12">
             <div className="mx-auto mb-7 flex max-w-md justify-center rounded-xl border border-sky-100/80 bg-white/80 px-5 py-6">
               <IllustContactHearingDm className="w-full max-w-[280px]" />
             </div>
-            <h3 className="text-xl md:text-2xl font-bold mb-3">{PRIMARY_CTA_HEARING_FULL}</h3>
+            <h3 className="text-xl md:text-2xl font-bold mb-3">{PRIMARY_CTA_LINE_FULL}</h3>
             <ol className="mb-8 max-w-lg mx-auto space-y-2 text-left text-sm leading-relaxed text-muted-foreground list-decimal list-inside">
-              {HEARING_FLOW_LINES.map(line => (
+              {LINE_CONTACT_FLOW_LINES.map(line => (
                 <li key={line}>{line}</li>
               ))}
             </ol>
             <div className="flex w-full justify-center px-2">
-              <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
+              <a
+                href={LINE_OFFICIAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={cn(
                   buttonVariants({ size: 'lg' }),
-                  'btn-primary inline-flex max-w-[min(100%,22rem)] w-full min-h-12 items-center justify-center px-6 py-[1.25rem] text-sm font-semibold text-primary-foreground sm:min-h-11 sm:py-6'
+                  'btn-primary inline-flex max-w-[min(100%,22rem)] w-full min-h-12 items-center justify-center gap-2 px-6 py-[1.25rem] text-sm font-semibold text-primary-foreground sm:min-h-11 sm:py-6'
                 )}
+                onClick={e => activateExternalHref(e, LINE_OFFICIAL_URL)}
               >
-                {PRIMARY_CTA_HEARING_FULL}
+                <MessageCircle size={18} aria-hidden />
+                {PRIMARY_CTA_LINE_FULL}
                 <ArrowRight size={16} className="shrink-0" aria-hidden />
               </a>
             </div>
             <div className="mt-6 flex flex-col items-center gap-3 text-center text-sm">
-              <a
-                href={LINE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-medium text-muted-foreground underline-offset-4 hover:text-accent hover:underline"
-                onClick={(e) => activateExternalHref(e, LINE_URL)}
-              >
-                <MessageCircle size={16} aria-hidden />
-                LINEでまず質問だけ送ることもできます
-              </a>
               <Link href="/services/lp" className="font-medium text-accent underline-offset-4 hover:underline">
                 LPプラン詳細のみ見る
               </Link>
               <Link href="/privacy" className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
                 プライバシーポリシー
               </Link>
+              <a
+                href={IG_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-muted-foreground hover:text-accent"
+                onClick={e => activateExternalHref(e, IG_URL)}
+              >
+                <Instagram size={16} aria-hidden />
+                {IG_HANDLE}（発信・参考）
+              </a>
             </div>
           </div>
         </section>
@@ -99,17 +103,15 @@ export default function Contact() {
           </p>
         </section>
 
-        {/* Highlight Banner */}
         <section className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <div className="rounded-[1.5rem] bg-accent p-7 text-center text-white shadow-lg shadow-sky-400/35 md:p-10">
-            <h3 className="text-xl font-bold mb-2">お問い合わせ・ヒアリングへの回答は無料です</h3>
+            <h3 className="text-xl font-bold mb-2">お問い合わせへのご返信は無料です</h3>
             <p className="text-white/85 text-sm max-w-lg mx-auto text-pretty">
-              ご契約または制作開始のタイミングまでは追加費用はかかりません。まずLINEでご相談いただければ結構です。
+              ご契約または制作開始のご判断前まで、ご相談内容の整理や方向性のお話に料金はかかりません。まずは公式LINEからお気軽にどうぞ。
             </p>
           </div>
         </section>
 
-        {/* FAQ */}
         <section className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
           <h3 className="text-xl font-bold mb-6 text-center">よくある質問</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -125,26 +127,28 @@ export default function Contact() {
           </div>
         </section>
 
-        {/* Final CTA */}
         <section className="text-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
           <div className="rounded-[1.5rem] border border-sky-100 bg-secondary p-8 md:p-12">
             <h3 className="text-xl font-bold mb-2">まず一枚のLPから始めませんか</h3>
             <p className="text-muted-foreground text-sm mb-7 text-pretty">
-              料金の目安だけ知りたい場合も、この流れで伺えれば順にご案内します。
+              料金の目安だけ知りたい場合も、公式LINEから順にご案内します。
             </p>
-            <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
+            <a
+              href={LINE_OFFICIAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ size: 'lg' }),
                 'btn-primary inline-flex px-8 py-6 text-sm font-semibold text-primary-foreground'
               )}
+              onClick={e => activateExternalHref(e, LINE_OFFICIAL_URL)}
             >
-              {PRIMARY_CTA_HEARING_FULL}
+              {PRIMARY_CTA_LINE_FULL}
               <ArrowRight className="ml-2 inline" size={16} aria-hidden />
             </a>
           </div>
         </section>
 
-        {/* Contact Info */}
         <section className="mt-12 text-center">
           <p className="text-muted-foreground text-xs mb-1">NANBA企画 · 大阪府</p>
           <a
@@ -152,7 +156,7 @@ export default function Contact() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-sm text-accent hover:underline transition-colors"
-            onClick={(e) => activateExternalHref(e, IG_URL)}
+            onClick={e => activateExternalHref(e, IG_URL)}
           >
             <Instagram size={15} />
             {IG_HANDLE}

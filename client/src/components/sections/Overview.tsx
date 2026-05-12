@@ -18,18 +18,20 @@ import { HeroFlowStrip } from '@/components/lp/HeroFlowStrip';
 import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { ProductionFlowJumpLink } from '@/components/lp/ProductionFlowJumpLink';
 import { cn } from '@/lib/utils';
-import { ArrowRight, ClipboardList, Instagram, Sparkles } from 'lucide-react';
+import { ArrowRight, MessageCircle, Sparkles } from 'lucide-react';
 import { Link } from 'wouter';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import {
   ABOUT_SECTION_EYEBROW,
   APPLY_SECTION_EYEBROW,
-  HEARING_FLOW_SHORT,
+  LINE_CONTACT_FLOW_SHORT,
   HERO_VALUE_HOOK,
   HERO_PRICE_TEASER,
   HERO_PRIMARY_LEAD,
+  HERO_H1_SEO,
   MONITOR_BADGE_LINES,
-  PRIMARY_CTA_HEARING_FULL,
+  PRIMARY_CTA_LINE_FULL,
+  PRIMARY_CTA_LINE_SUBLINE,
   PROMISE_SECTION_EYEBROW,
   RESPONSE_SLA,
   SCOPE_EXCLUDED_BULLETS,
@@ -38,12 +40,11 @@ import {
   SCOPE_INCLUDED_HEADING,
   WORKFLOW_SECTION_EYEBROW,
 } from '@/data/conversionMessaging';
-import { HERO_H1_SEO } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
 import { SCROLL_MARGIN_CLASS } from '@/data/siteNav';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
-import { LINE_URL } from '@/constants/locamo';
+import { LINE_OFFICIAL_URL } from '@/constants/locamo';
 
 type BlockIllustration = ComponentType<{ className?: string }>;
 
@@ -198,19 +199,24 @@ export default function Overview() {
             className="mb-8 flex animate-fade-in-up flex-col justify-center gap-3 sm:mb-10 sm:flex-row sm:gap-4"
             style={{ animationDelay: '0.5s' }}
           >
-            <a
-              href={LINE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Button
+              size="lg"
               className={cn(
                 buttonVariants({ size: 'lg' }),
-                'inline-flex min-h-12 w-full shrink-0 items-center justify-center px-8 py-[1.375rem] text-sm font-semibold text-white bg-[#06C755] hover:bg-[#05a148] sm:w-auto sm:min-h-11 sm:py-6 rounded-full',
+                'btn-primary inline-flex min-h-12 w-full shrink-0 items-center justify-center px-8 py-[1.375rem] text-sm font-semibold text-primary-foreground sm:w-auto sm:min-h-11 sm:py-6',
               )}
-              onClick={(e) => activateExternalHref(e, LINE_URL)}
+              asChild
             >
-              LINEで無料相談する
-              <ArrowRight className="ml-1.5 shrink-0" size={17} aria-hidden />
-            </a>
+              <a
+                href={LINE_OFFICIAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={e => activateExternalHref(e, LINE_OFFICIAL_URL)}
+              >
+                {PRIMARY_CTA_LINE_FULL}
+                <ArrowRight className="ml-1.5 shrink-0" size={17} aria-hidden />
+              </a>
+            </Button>
             <Button
               size="lg"
               variant="outline"
@@ -304,7 +310,7 @@ export default function Overview() {
               },
               {
                 title: 'LPで注文までの設計',
-                desc: '誰が・何を読めば・次に何をすべきかを迷わせない並びへ。ヒアリングでゴールから逆算します。',
+                desc: '誰が・何を読めば・次に何をすべきかを迷わせない並びへ。ご相談でゴールから逆算します。',
                 Illustration: IllustFeatureCta,
               },
             ].map((feature, idx) => (
@@ -354,15 +360,18 @@ export default function Overview() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
-              className={cn(
-                buttonVariants({ size: 'lg' }),
-                'btn-primary inline-flex px-8 py-6 text-sm font-semibold text-primary-foreground'
-              )}
-            >
-              {PRIMARY_CTA_HEARING_FULL}
-              <ArrowRight className="ml-1.5 shrink-0" size={17} aria-hidden />
-            </a>
+            <Button size="lg" className={cn(buttonVariants({ size: 'lg' }), 'btn-primary')} asChild>
+              <a
+                href={LINE_OFFICIAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={e => activateExternalHref(e, LINE_OFFICIAL_URL)}
+                className="inline-flex px-8 py-6 text-sm font-semibold text-primary-foreground"
+              >
+                {PRIMARY_CTA_LINE_FULL}
+                <ArrowRight className="ml-1.5 shrink-0" size={17} aria-hidden />
+              </a>
+            </Button>
             <Button variant="outline" size="lg" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
               <a href="#pricing">料金・フローを見る</a>
             </Button>
@@ -370,50 +379,50 @@ export default function Overview() {
         </div>
       </section>
 
-      {/* ヒアリング・クロージング（下部） */}
+      {/* 公式LINE・クロージング（下部） */}
       <section className="border-t border-sky-100/90 bg-gradient-to-b from-orange-50/80 via-[#fffaf5] to-white px-4 py-16 md:py-20">
         <div className="container mx-auto max-w-4xl">
           <div className="relative z-10 rounded-[1.65rem] border-2 border-primary/35 bg-white/95 px-7 py-10 shadow-lg shadow-orange-100/60 md:p-14">
             <LpSectionEyebrow className="mb-4 text-primary">{APPLY_SECTION_EYEBROW}</LpSectionEyebrow>
             <h2 className="mb-5 text-center text-2xl font-bold leading-snug md:text-[1.7rem]">
-              {HEARING_FLOW_SHORT}
+              {LINE_CONTACT_FLOW_SHORT}
             </h2>
             <p className="mx-auto mb-6 max-w-lg text-center text-sm leading-relaxed text-muted-foreground jp-keep-all">
               公開までの全体像は
               <ProductionFlowJumpLink className="mx-0.5">料金ページの制作の流れ</ProductionFlowJumpLink>
-              。ここでは、LINEでのご相談方法をご案内しています。
+              をご覧ください。お問い合わせは公式LINEからお願いします。
             </p>
             <div className="mx-auto mb-8 flex max-w-xs justify-center rounded-xl border border-sky-100/90 bg-sky-50/50 px-5 py-4">
               <IllustFlowDm className="h-auto w-full max-w-[200px]" />
             </div>
             <div className="relative z-[1] mx-auto flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
               <a
-                href={LINE_URL}
+                href={LINE_OFFICIAL_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
                   buttonVariants({ size: 'lg' }),
-                  'btn-primary h-auto min-h-12 w-full rounded-full px-4 py-3 shadow-md shadow-sky-300/35 text-primary-foreground sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-0.5 text-balance sm:gap-1'
+                  'btn-primary h-auto min-h-12 w-full rounded-full px-4 py-3 shadow-md shadow-sky-300/35 text-primary-foreground sm:min-h-14 sm:max-w-[14rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-0.5 text-balance sm:gap-1'
                 )}
-                onClick={(e) => activateExternalHref(e, LINE_URL)}
+                onClick={e => activateExternalHref(e, LINE_OFFICIAL_URL)}
               >
                 <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold leading-none tracking-wide opacity-95 sm:text-xs">
-                  <span className="size-4 shrink-0 sm:size-5 font-bold text-lg" aria-hidden>L</span>
-                  
+                  <MessageCircle className="size-4 shrink-0 sm:size-5" aria-hidden />
+                  {PRIMARY_CTA_LINE_SUBLINE}
                 </span>
-                <span className="text-center text-sm font-bold leading-tight sm:text-[15px]"></span>
+                <span className="text-center text-sm font-bold leading-tight sm:text-[15px]">{PRIMARY_CTA_LINE_FULL}</span>
                 <ArrowRight className="mt-0.5 size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
               </a>
-              <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
+              <Link
+                href="/#contact"
                 className={cn(
                   buttonVariants({ variant: 'outline', size: 'lg' }),
-                  'h-auto min-h-12 w-full rounded-full border-sky-200 px-4 py-3 sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-1 text-balance'
+                  'h-auto min-h-12 w-full rounded-full border-sky-200 px-4 py-3 sm:min-h-14 sm:max-w-[14rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-1 text-balance text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]'
                 )}
               >
-                <ClipboardList className="size-4 shrink-0 text-accent sm:size-5" aria-hidden />
-                <span className="text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]">{PRIMARY_CTA_HEARING_FULL}</span>
+                お問い合わせの詳細・FAQ
                 <ArrowRight className="size-4 shrink-0 text-muted-foreground sm:hidden" aria-hidden />
-              </a>
+              </Link>
             </div>
             <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
               <Link href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">

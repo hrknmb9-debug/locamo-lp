@@ -7,11 +7,10 @@ import {
 import { LP_IMAGES } from '@/lp-images';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { ArrowRight, ExternalLink } from 'lucide-react';
-import { LINE_URL } from '@/constants/locamo';
+import { ArrowRight, ExternalLink, MessageCircle } from 'lucide-react';
+import { MONITOR_SLOT_NOTE, PRIMARY_CTA_LINE_FULL } from '@/data/conversionMessaging';
+import { LINE_OFFICIAL_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
-import { Link } from 'wouter';
-import { MONITOR_SLOT_NOTE, PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
 
 const BAKERY_SAMPLE_LP_URL = 'https://bakerylp-l8mnzqhc.manus.space/' as const;
 
@@ -39,7 +38,7 @@ export default function Portfolio() {
         <LpSectionEyebrow className="mb-4 md:mb-3">公開事例の一例</LpSectionEyebrow>
         <h2 className="text-center text-[1.625rem] font-bold mb-4 sm:text-3xl md:text-4xl">納品事例（公開サイト）</h2>
         <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto text-sm leading-relaxed md:text-[15px] text-pretty">
-          ヒアリングを経て<strong className="font-semibold text-sky-950">制作・公開までを完了したLP</strong>
+          ご要件の整理から<strong className="font-semibold text-sky-950">制作・公開までを完了したLP</strong>
           の一例です（クライアントの公開許諾のもと、URLおよび画面を掲載）。
         </p>
 
@@ -178,7 +177,7 @@ export default function Portfolio() {
 
           <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
             {[
-              { title: 'お申込みまで', desc: 'LINE での流れで統一', Ill: IllustFlowDm },
+              { title: 'お申込みまで', desc: '公式LINEで受付', Ill: IllustFlowDm },
               { title: 'モニター', desc: '審査・先着あり', Ill: IllustGuideReply },
               { title: '制作の軸', desc: '構成とCTA設計', Ill: IllustFeatureCta },
             ].map((benefit, idx) => {
@@ -196,13 +195,18 @@ export default function Portfolio() {
           </div>
 
           <div className="flex w-full justify-center px-1 sm:px-3">
-            <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
+            <a
+              href={LINE_OFFICIAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ size: 'lg' }),
-                'btn-primary mx-auto inline-flex max-w-[min(100%,22rem)] min-w-0 w-full flex-nowrap justify-center gap-2 px-6 py-7 text-[15px] font-semibold text-primary-foreground sm:py-8'
+                'btn-primary mx-auto inline-flex max-w-[min(100%,22rem)] min-w-0 w-full flex-nowrap items-center justify-center gap-2 px-6 py-7 text-[15px] font-semibold text-primary-foreground sm:py-8'
               )}
+              onClick={(e) => activateExternalHref(e, LINE_OFFICIAL_URL)}
             >
-              {PRIMARY_CTA_HEARING}
+              <MessageCircle size={20} aria-hidden />
+              {PRIMARY_CTA_LINE_FULL}
               <ArrowRight className="size-5 shrink-0" aria-hidden />
             </a>
           </div>

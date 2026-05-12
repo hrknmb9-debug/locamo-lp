@@ -4,13 +4,13 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'wouter';
-import { LINE_URL } from '@/constants/locamo';
+import { LINE_OFFICIAL_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import {
   APPLICATION_FLOW_STEPS,
-  HEARING_FLOW_SHORT,
+  LINE_CONTACT_FLOW_SHORT,
   MONITOR_SLOT_NOTE,
-  PRIMARY_CTA_HEARING,
+  PRIMARY_CTA_LINE,
   RESPONSE_SLA,
 } from '@/data/conversionMessaging';
 import { SCROLL_MARGIN_CLASS } from '@/data/siteNav';
@@ -18,15 +18,14 @@ import {
   IllustFlowContract,
   IllustFlowDm,
   IllustFlowLaunch,
-  IllustFlowSiteInput,
   IllustGuideReply,
 } from '@/components/lp/BespokeIllustrations';
 import { LpProcessStepCard } from '@/components/lp/LpProcessStepCard';
 import { LP_IMAGES } from '@/lp-images';
 
 const APPLICATION_FLOW_ILLUSTRATIONS = [
-  IllustFlowSiteInput,
   IllustFlowDm,
+  IllustGuideReply,
   IllustFlowContract,
   IllustFlowLaunch,
 ] as const;
@@ -37,11 +36,11 @@ export default function Pricing() {
   const faqs = [
     {
       q: 'どのくらいで完成しますか？',
-      a: 'LP制作は2週間程度が目安です。ホームページ制作は3〜4週間。ヒアリング〜お見立てまでは原則2営業日以内にご返信します。',
+      a: 'LP制作は2週間程度が目安です。ホームページ制作は3〜4週間。ご連絡〜お見立てまでは原則2営業日以内にご返信します。',
     },
     {
-      q: 'お申し込みの流れを教えてください',
-      a: `このページの「制作の流れ」に全体の順序があります。${HEARING_FLOW_SHORT} ${RESPONSE_SLA}`,
+      q: 'お申込みの流れを教えてください',
+      a: `このページの「制作の流れ」に全体の順序があります。${LINE_CONTACT_FLOW_SHORT} ${RESPONSE_SLA}`,
     },
     {
       q: '制作後の修正や更新はできますか？',
@@ -49,7 +48,7 @@ export default function Pricing() {
     },
     {
       q: 'Instagramアカウントは必要ですか？',
-      a: 'LINEが主な連絡手段です。メールやその他の方法をご希望の場合はお気軽にお問い合わせください。',
+      a: 'お問い合わせ・ご依頼は公式LINEがメインです。Instagramアカウントがなくても問題ありません（Instagramは発信やプロフィール用としてご活用いただけます）。',
     },
     {
       q: 'サイト公開・ドメインは別途必要ですか？',
@@ -58,10 +57,6 @@ export default function Pricing() {
     {
       q: 'モニター無料枠は誰でも使えますか？',
       a: MONITOR_SLOT_NOTE,
-    },
-    {
-      q: '支払い方法は？',
-      a: 'すべて Stripe Payment Link（カード決済）のみです。条件のすり合わせ後、LINEでワンタイムリンクをお送りし、そのページで手続き完了まで行います。銀行振込は受け付けていません。',
     },
   ];
 
@@ -144,7 +139,7 @@ export default function Pricing() {
           <h3 className="text-xl font-bold mb-7 jp-keep-all">制作の流れ</h3>
           <div className="space-y-0">
             {APPLICATION_FLOW_STEPS.map((step, idx) => {
-              const Illustration = APPLICATION_FLOW_ILLUSTRATIONS[idx] ?? IllustFlowSiteInput;
+              const Illustration = APPLICATION_FLOW_ILLUSTRATIONS[idx] ?? IllustFlowDm;
               return (
                 <LpProcessStepCard
                   key={step.num}
@@ -195,22 +190,28 @@ export default function Pricing() {
         {/* CTA */}
         <div className="text-center animate-fade-in-up">
           <p className="text-muted-foreground text-sm mb-4">
-            料金だけ先に教えてほしい場合も、ヒアリング経由で順にお返しします。
+            料金だけ先に教えてほしい場合も、公式LINEから順にお返しします。
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
-              className={cn(
-                buttonVariants({ size: 'lg' }),
-                'btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground'
-              )}
-            >
-              {PRIMARY_CTA_HEARING}
-            </a>
-            <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
-              <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={e => activateExternalHref(e, LINE_URL)}>
-                LINEで無料相談する
+            <Button size="lg" className="btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground" asChild>
+              <a
+                href={LINE_OFFICIAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={e => activateExternalHref(e, LINE_OFFICIAL_URL)}
+              >
+                {PRIMARY_CTA_LINE}
               </a>
             </Button>
+            <Link
+              href="/#contact"
+              className={cn(
+                buttonVariants({ variant: 'outline', size: 'lg' }),
+                'rounded-full border-sky-200 px-8 py-6 text-sm font-semibold'
+              )}
+            >
+              お問い合わせセクションへ
+            </Link>
           </div>
         </div>
       </div>

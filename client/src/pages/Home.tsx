@@ -1,5 +1,5 @@
 import { useState, useEffect, type MouseEvent } from 'react';
-import { Menu, X, Instagram } from 'lucide-react';
+import { Menu, X, Instagram, MessageCircle } from 'lucide-react';
 import { Link } from 'wouter';
 
 import Overview from '@/components/sections/Overview';
@@ -11,8 +11,8 @@ import Contact from '@/components/sections/Contact';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ScrollLandmark } from '@/components/lp/ScrollLandmark';
-import { LINE_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
-import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
+import { IG_HANDLE, IG_URL, LINE_OFFICIAL_URL } from '@/constants/locamo';
+import { LINE_CHANNEL_FLEX_NOTE, PRIMARY_CTA_LINE } from '@/data/conversionMessaging';
 import { SITE_SCROLL_NAV } from '@/data/siteNav';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { prefersReducedMotion, replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
@@ -146,15 +146,19 @@ export default function Home() {
               <Instagram size={17} aria-hidden />
               <span className="max-w-[4.75rem] truncate sm:max-w-none">{IG_HANDLE}</span>
             </a>
-            <Link
-              href={LINE_URL}
+            <a
+              href={LINE_OFFICIAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ size: 'sm' }),
-                'btn-primary ml-2 inline-flex shrink-0 justify-center whitespace-nowrap px-4 text-xs font-semibold text-primary-foreground sm:text-sm'
+                'btn-primary ml-2 inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap px-4 text-xs font-semibold text-primary-foreground sm:text-sm'
               )}
+              onClick={(e) => activateExternalHref(e, LINE_OFFICIAL_URL)}
             >
-              {PRIMARY_CTA_HEARING}
-            </Link>
+              <MessageCircle size={15} aria-hidden />
+              {PRIMARY_CTA_LINE}
+            </a>
           </nav>
 
           <button
@@ -197,16 +201,21 @@ export default function Home() {
                 <Instagram size={18} aria-hidden className="shrink-0 text-sky-900/85" />
                 Instagram（プロフィール）
               </a>
-              <Link
-                href={LINE_URL}
-                onClick={closeMobile}
+              <a
+                href={LINE_OFFICIAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  if (activateExternalHref(e, LINE_OFFICIAL_URL)) closeMobile();
+                }}
                 className={cn(
                   buttonVariants({ size: 'default' }),
-                  'btn-primary mt-3 inline-flex min-h-11 w-full justify-center px-6 text-base font-semibold text-primary-foreground'
+                  'btn-primary mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 px-6 text-base font-semibold text-primary-foreground'
                 )}
               >
-                {PRIMARY_CTA_HEARING}
-              </Link>
+                <MessageCircle size={18} aria-hidden />
+                {PRIMARY_CTA_LINE}
+              </a>
             </div>
           </nav>
         )}
@@ -262,9 +271,13 @@ export default function Home() {
                   </li>
                 ))}
                 <li>
-                  <Link href={LINE_URL} className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors">
-                    {PRIMARY_CTA_HEARING}
-                  </Link>
+                  <a
+                    href="/#contact"
+                    className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors"
+                    onClick={(e) => onSiteAnchorNavClick(e, 'contact')}
+                  >
+                    お問い合わせ（ページ内）
+                  </a>
                 </li>
                 <li>
                   <Link href="/privacy" className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors">
@@ -275,30 +288,40 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="font-semibold text-sm mb-3">お問い合わせ・決済の進め方</h4>
+              <h4 className="font-semibold text-sm mb-3">お問い合わせ</h4>
               <p className="text-muted-foreground text-xs mb-3 leading-relaxed">
-                LINEでお気軽にご相談ください。担当よりヒアリングシートをお送りします。ご契約後のお支払いは<strong className="font-semibold text-sky-950">ご案内する決済リンクのみ</strong>
-                で完結します（カード決済・Stripe Payment Links。サイト内チェックアウト・銀行振込は扱いません）。
+                ご依頼・ご質問はすべて公式LINEからお受けしています。友だち追加後、トークにお店の状況やご希望をそのままお送りください。
               </p>
+              <p className="text-muted-foreground text-xs mb-4 leading-relaxed">{LINE_CHANNEL_FLEX_NOTE}</p>
               <a
-                href={LINE_URL}
+                href={LINE_OFFICIAL_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-[#06C755] hover:text-[#05a148] hover:underline transition-colors"
-                onClick={(e) => activateExternalHref(e, LINE_URL)}
+                className={cn(
+                  buttonVariants({ size: 'sm' }),
+                  'btn-primary mb-3 inline-flex items-center gap-1.5 text-primary-foreground'
+                )}
+                onClick={(e) => activateExternalHref(e, LINE_OFFICIAL_URL)}
               >
-                <span aria-hidden>L</span>
-                LINEで相談
+                <MessageCircle size={15} aria-hidden />
+                {PRIMARY_CTA_LINE}
+              </a>
+              <a
+                href="/#contact"
+                className="mb-3 block text-xs text-accent underline-offset-2 hover:underline"
+                onClick={(e) => onSiteAnchorNavClick(e, 'contact')}
+              >
+                ページ内の説明・FAQを見る
               </a>
               <a
                 href={IG_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent hover:underline transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent hover:underline transition-colors"
                 onClick={(e) => activateExternalHref(e, IG_URL)}
               >
                 <Instagram size={14} aria-hidden />
-                {IG_HANDLE}
+                Instagram（発信・参考）
               </a>
             </div>
           </div>
