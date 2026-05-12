@@ -1,60 +1,87 @@
 /**
  * LP特化サイト用：匿名カテゴリとの比較（特定の事業者名は載せない）。
- * 「一般的な傾向」を整理したサマリーであり、すべてのケースを保証しない旨をサイト側で明示する。
+ * 表示は「◎○△×」中心。補足テキストは主に自社列。
  */
 
 export const LP_COMPETITOR_TABLE_CAPTION =
-  '特定のサービス名は記載していません。世に多いタイプごとの一例です。料金や内容・納期は案件ごとに異なります。';
+  '特定のサービス名は記載していません。世に多いタイプごとの一例です。◎○△×は相対的な目安であり、案件ごとに異なります。';
 
-/** ヘッダー（先頭セルは行列のラベル用） */
+export type ComparisonGrade = '◎' | '○' | '△' | '×';
+
+/** 記号の読み上げ用 */
+export const COMPARISON_GRADE_ARIA: Record<ComparisonGrade, string> = {
+  '◎': '最も優れていると判断できる傾向',
+  '○': 'おおむね良いが条件あり',
+  '△': '弱くなりがち／要確認が多い',
+  '×': '合わない・負担がかかりがちになりやすい',
+};
+
+/** thead。先頭セルは行見出し用 */
 export const LP_COMPETITOR_COLUMNS = [
-  { id: 'point', heading: '比較ポイント' },
-  { id: 'mass', heading: '大手型テンプレ' },
-  { id: 'freelancer', heading: '全国フリーランス' },
-  { id: 'diy', heading: '自作・サイトツール' },
-  { id: 'locamo', heading: 'Locamo（LPのみ）' },
+  { id: 'point', heading: '比較項目' },
+  { id: 'locamo', heading: 'Locamo', highlight: true },
+  { id: 'mass', heading: '大手Web制作会社' },
+  { id: 'system', heading: 'システム会社' },
+  { id: 'freelancer', heading: '個人・フリーランス' },
 ] as const;
 
-export const LP_COMPETITOR_ROWS: {
+export interface LpComparisonRow {
   point: string;
-  mass: string;
-  freelancer: string;
-  diy: string;
-  locamo: string;
-}[] = [
+  locamo: { grade: ComparisonGrade; note: string };
+  mass: ComparisonGrade;
+  system: ComparisonGrade;
+  freelancer: ComparisonGrade;
+}
+
+export const LP_COMPETITOR_ROWS: LpComparisonRow[] = [
   {
-    point: '個人店の「並び順・CTA」まで寄り添えるか',
-    mass: '業種共通のひな型に当てはめる形になりやすく、伝え順は自分で並べ替え前提になりがち',
-    freelancer: '得意分野により差が大きい／丁寧に詰める人もいれば構成は丸投げになりがち',
-    diy: 'デザインテンプレの範囲内。迷うと読み順がぐちゃになりやすい',
-    locamo: '大阪の個人店前提で、「読んで次にどう動かすか」を一緒に組み立てます',
+    point: 'お値段・総額のわかりやすさ',
+    locamo: {
+      grade: '◎',
+      note: 'LPは買い切り3万円〜。制作費の月額課金なし。公開・ドメインは別途とセットで案内。',
+    },
+    mass: '○',
+    system: '△',
+    freelancer: '○',
   },
   {
-    point: '料金・範囲のわかりやすさ（LP一枚）',
-    mass: 'オプション追加で増えやすく、総額イメージが取りにくいことがある',
-    freelancer: '人によって単価・条件がバラツキ／見積りで擦り合わせ前提',
-    diy: '月額や機能でコスト構造がわかりにくくなりがち',
-    locamo: 'LP制作は買い切り・目安明示。公開・ドメインは別途実費の旨をセットでご案内',
+    point: '手直し・相談のしやすさ',
+    locamo: {
+      grade: '◎',
+      note: '公式LINEひとつに集約。簡易的な文言・表示修正は無料範囲で対応（大幅改修は別途）。',
+    },
+    mass: '○',
+    system: '△',
+    freelancer: '○',
   },
   {
-    point: '納期の目安感',
-    mass: '枠や手続きにより前後することが多い（案件による）',
-    freelancer: '受注状況で前後することが多い',
-    diy: '自分の時間がそのまま納期に直結／更新に追われがち',
-    locamo: 'LPは目安として約2週間。『まず一通り見せる』に寄せます',
+    point: 'デザイン・読みやすさ（一枚LP）',
+    locamo: {
+      grade: '◎',
+      note: '個人店向けに「読む順番」とCTAまで一緒に設計。',
+    },
+    mass: '◎',
+    system: '△',
+    freelancer: '○',
   },
   {
-    point: '相談窓口（初回〜制作中）',
-    mass: 'サポートチャットや問い合わせフォーム中心になりやすく、細かな悩みの往復が起きやすい',
-    freelancer: 'やりとりチャネルは個人運用により差があります',
-    diy: '基本は自分で調べながら。詰まると検索時間が増えがち',
-    locamo: '公式LINEに集約して、短文でも状況を送ってもらえればこちらから返します',
+    point: '周辺サポート・伴走の幅',
+    locamo: {
+      grade: '◎',
+      note: 'インスタとのつなぎ方や、LINE公式への導線づくりなど、公開までひと続きで相談しやすい。',
+    },
+    mass: '○',
+    system: '○',
+    freelancer: '△',
   },
   {
-    point: '“まず効きやすい”のはどれか（個人店）',
-    mass: '手早く形にしたいときに向く一方、細部の転換まで任せられるかは要確認',
-    freelancer: '合うクリエイターと出会えると強い／マッチしないと試行錯誤になりがち',
-    diy: '初期費は抑えやすくても、集客側の転換まで手が伸びないこともある',
-    locamo: '「公式リンクをひとつ」にするところまでを主戦場に設計しています',
+    point: '個人店への寄り添い・理解',
+    locamo: {
+      grade: '◎',
+      note: '大阪の個人店・小規模店のみを対象に、現場で使う言い回しまで詰める。',
+    },
+    mass: '△',
+    system: '△',
+    freelancer: '◎',
   },
 ];
