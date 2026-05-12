@@ -28,20 +28,6 @@ const PORTFOLIO_SITES = [
       role: '飲食ブランド・ご担当者様',
     },
   },
-  {
-    title: 'Chessenger',
-    subtitle: 'コミュニティ · マッチングLP',
-    url: 'https://chessenger.manus.space/',
-    summary:
-      'マッチングの価値を短いセクションで整理し、初見ユーザーが次のアクションに進みやすいブロック構成で納品しています。',
-    image: '/portfolio/chessenger.png',
-    imageAlt: 'Chessenger に納品したLPの画面キャプチャ',
-    testimonial: {
-      quote:
-        '初見のユーザーにも「何ができるか」がすぐ伝わる見出しとブロック構成で、意図どおりに仕上がりました。',
-      role: 'コミュニティ運営・ご担当者様',
-    },
-  },
 ] as const;
 
 export default function Portfolio() {
