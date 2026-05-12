@@ -4,10 +4,10 @@ import { useLocation } from 'wouter';
 
 /** クローラー／タブ表示共通。公開URLの title と矛盾しないよう大阪の個人店訴求に統一 */
 export const DEFAULT_SITE_TITLE =
-  'Locamo - 大阪の個人店向けLP・ホームページ制作サービス｜3万円〜' as const;
+  'Locamo - 大阪の個人店向けLP制作（公式ランディングページ）｜3万円〜' as const;
 
 const DEFAULT_DESCRIPTION =
-  '大阪府の個人店・小規模店向けに、公式LPとホームページを制作。制作費買い切り3万円〜。ご依頼・ご質問は公式LINEからお受けし、構成から公開まで伴走します。';
+  '大阪府の個人店・小規模店に特化したLP（1ページ）制作。複数ページのホームページ制作はお受けしていません。制作費買い切り3万円〜。ご依頼・ご質問は公式LINEからお受けし、構成から公開まで伴走します。';
 
 function normalizePathname(pathname: string): string {
   return pathname === '' || pathname === '/'
@@ -22,7 +22,7 @@ function titleForPath(pathname: string): string {
 
   if (p === HEARING_PATH) return `お問い合わせ（公式LINE）｜Locamo`;
   if (p === LP_ILLUSTRATIONS_PREVIEW_PATH) return `インラインSVG一覧（確認用）｜Locamo`;
-  if (p.startsWith('/services/')) return `プラン詳細｜Locamo`;
+  if (p.startsWith('/services/')) return `LP制作・プラン詳細｜Locamo`;
   if (p === '/privacy') return `プライバシーポリシー｜Locamo`;
   if (p === '/404') return `ページが見つかりません｜Locamo`;
 

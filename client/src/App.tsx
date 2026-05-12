@@ -8,7 +8,7 @@ import ServiceDetail from "@/pages/ServiceDetail";
 import LpIllustrationsPreview from "@/pages/LpIllustrationsPreview";
 import { HEARING_PATH, LP_ILLUSTRATIONS_PREVIEW_PATH, getWouterRouterBase } from "@/constants/spaRoutes";
 import { RouterMeta } from "@/components/seo/RouterMeta";
-import { Router as WouterRouter, Route, Switch } from "wouter";
+import { Router as WouterRouter, Route, Switch, Redirect } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
@@ -19,6 +19,12 @@ function AppRoutes() {
       <Route path={"/privacy"} component={Privacy} />
       <Route path={HEARING_PATH} component={Hearing} />
       <Route path={`${HEARING_PATH}/`} component={Hearing} />
+      <Route path="/services/hp">
+        <Redirect to="/services/lp" />
+      </Route>
+      <Route path="/services/hp/">
+        <Redirect to="/services/lp" />
+      </Route>
       <Route path="/services/:planId" component={ServiceDetail} />
       <Route path={LP_ILLUSTRATIONS_PREVIEW_PATH} component={LpIllustrationsPreview} />
       <Route path={`${LP_ILLUSTRATIONS_PREVIEW_PATH}/`} component={LpIllustrationsPreview} />

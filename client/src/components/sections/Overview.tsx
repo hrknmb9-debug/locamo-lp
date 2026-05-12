@@ -293,7 +293,7 @@ export default function Overview() {
             Locamoとは
           </h2>
           <p className="mx-auto mb-10 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
-            単発広告だけに頼らず、自分のお店として資産になるLPを用意。構成はAIとテンプレの型で素早く起こし、その上から担当が訴求の順番とCTAを磨いて「LPを見て動く状態」まで整えます。
+            個人店の公式の受け皿としては、多くの場合一枚のLPで足ります。単発広告だけに頼らず、メニューと次の行動がそろったLPを。構成はAIとテンプレで素早く起こし、担当が訴求の順番とCTAを磨いて「LPを見て動く状態」まで整えます。
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">

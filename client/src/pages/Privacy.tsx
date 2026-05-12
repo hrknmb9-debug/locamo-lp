@@ -87,7 +87,7 @@ const Privacy: FC = () => {
           <PolicySection title="第2条（利用目的）">
             <p className="text-muted-foreground">取得した情報は、次の目的のみに利用します。</p>
             <ul className="list-disc pl-5 text-muted-foreground">
-              <li>ランディングページ・ホームページ制作および関連するコンサルティング業務の遂行</li>
+              <li>ランディングページ制作および関連するコンサルティング業務の遂行</li>
               <li>お見積もり・ご提案・進捗に関する連絡</li>
               <li>制作物の納品、公開後のご案内、アフターサポート</li>
               <li>請求および契約に関するご連絡</li>

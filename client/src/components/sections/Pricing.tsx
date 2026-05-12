@@ -35,8 +35,12 @@ export default function Pricing() {
 
   const faqs = [
     {
+      q: '個人店ですが、LPだけで足りますか？',
+      a: '多くの個人店・小規模店では一枚に情報を集約したLPで「問い合わせ・予約・来店」までの導線をつくれます。Locamoでは複数ページのホームページ制作はお受けしておらず、一枚だからこその設計・コピーに集中しています。',
+    },
+    {
       q: 'どのくらいで完成しますか？',
-      a: 'LP制作は2週間程度が目安です。ホームページ制作は3〜4週間。ご連絡〜お見立てまでは原則2営業日以内にご返信します。',
+      a: 'LP制作は2週間程度が目安です。ご連絡〜お見立てまでは原則2営業日以内にご返信します。',
     },
     {
       q: 'お申込みの流れを教えてください',
@@ -103,32 +107,33 @@ export default function Pricing() {
 
         {/* Pricing Table */}
         <div className="mb-14 animate-fade-in-up">
-          <h3 className="text-xl font-bold mb-5">料金比較</h3>
+          <h3 className="text-xl font-bold mb-5">ご料金の内訳（LP制作）</h3>
           <div className="overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-sm shadow-sky-950/5">
             <div className="overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch]">
               <table className="min-w-[19rem] w-full text-sm sm:min-w-full">
-              <thead>
-                <tr className="bg-secondary/50 border-b border-border">
-                  <th className="text-left py-3.5 px-4 font-semibold">項目</th>
-                  <th className="text-center py-3.5 px-4 font-semibold">LP制作</th>
-                  <th className="text-center py-3.5 px-4 font-semibold">ホームページ制作</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { item: '制作費', lp: '3万円〜', hp: '要相談' },
-                  { item: '月額費用', lp: '0円', hp: '0円' },
-                  { item: '公開環境・ドメイン', lp: '月3,000円〜', hp: '月3,000円〜' },
-                  { item: '納期', lp: '2週間', hp: '3〜4週間' },
-                  { item: '修正対応', lp: '簡易修正無料', hp: '簡易修正無料' },
-                ].map((row, idx) => (
-                  <tr key={idx} className="border-b border-border last:border-0 hover:bg-secondary/30 transition-colors">
-                    <td className="py-3.5 px-4 font-medium">{row.item}</td>
-                    <td className="text-center py-3.5 px-4 text-muted-foreground">{row.lp}</td>
-                    <td className="text-center py-3.5 px-4 text-muted-foreground">{row.hp}</td>
+                <thead>
+                  <tr className="border-b border-border bg-secondary/50">
+                    <th className="px-4 py-3.5 text-left font-semibold">項目</th>
+                    <th className="px-4 py-3.5 text-left font-semibold text-accent">内容</th>
                   </tr>
-                ))}
-              </tbody>
+                </thead>
+                <tbody>
+                  {[
+                    { item: '制作費（LP1枚）', value: '3万円〜（買い切り）' },
+                    { item: '制作費の月額', value: '0円' },
+                    { item: '公開環境・ドメイン', value: '月3,000円〜（別途・初期設定サポート込み）' },
+                    { item: '納期の目安', value: '約2週間' },
+                    { item: '簡易修正', value: '納品後の軽微な修正は無料' },
+                  ].map(row => (
+                    <tr
+                      key={row.item}
+                      className="border-b border-border last:border-0 hover:bg-secondary/30"
+                    >
+                      <td className="px-4 py-3.5 font-medium">{row.item}</td>
+                      <td className="px-4 py-3.5 text-muted-foreground">{row.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
               </table>
             </div>
           </div>

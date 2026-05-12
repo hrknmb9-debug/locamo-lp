@@ -248,7 +248,7 @@ export default function Home() {
               <div className="text-lg font-bold mb-2">
                 Loca<span className="text-accent">mo</span>
               </div>
-              <p className="text-muted-foreground text-xs leading-relaxed">大阪の個人店向けLP・ホームページ制作サービス</p>
+              <p className="text-muted-foreground text-xs leading-relaxed">大阪の個人店向け・LP制作専門サービス</p>
             </div>
 
             <div>

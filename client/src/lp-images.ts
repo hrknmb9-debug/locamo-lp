@@ -2,10 +2,8 @@
 export const LP_IMAGES = {
   hero: '/manus-storage/locamo-hero_769daceb.png',
   servicesBanner: '/manus-storage/locamo-services-banner_3d057aad.png',
-  /** サービスカード（LP制作）— 業種別LPモバイルモックアップ */
+  /** サービスカード／詳細 — 業種別LPモバイルモックアップ */
   servicePlanLp: '/images/services/lp-showcase.png',
-  /** サービスカード（HP制作）— コーポレートサイトの一例 */
-  servicePlanHp: '/images/services/hp-showcase.png',
   /** Instagram 見出し下 — SNS→LP 連携（生成イラスト） */
   instagramSectionFigure: '/manus-storage/locamo-instagram-lp-link_0577a6f8.png',
   /** 料金見出し下 — 制作フロー概要（生成イラスト） */

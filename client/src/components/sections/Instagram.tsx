@@ -13,7 +13,7 @@ import { LP_IMAGES } from '@/lp-images';
  * Instagram Section
  * Design: Neo-Tokyo Minimal
  * - Risk illustration of Instagram-only strategy
- * - Benefits of combining with LP/HP
+ * - Benefits of combining Instagram with LP
  * - Instagram account link
  */
 

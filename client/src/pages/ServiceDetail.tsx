@@ -49,15 +49,15 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
 
           <figure className="mb-10 overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-md shadow-sky-200/25">
             <img
-              src={LP_IMAGES.servicesBanner}
-              alt={`${plan.title}に含まれる制作範囲のイメージを示す共通ヘッダー画像`}
-              width={1728}
-              height={576}
-              className="aspect-[21/9] max-h-[10rem] w-full object-cover"
+              src={LP_IMAGES.servicePlanLp}
+              alt="個人店向けLP制作のイメージ（モバイル向けランディングの一例）"
+              width={440}
+              height={360}
+              className="max-h-[12rem] w-full object-cover object-center sm:max-h-[14rem]"
               loading="eager"
               decoding="async"
             />
-            <figcaption className="sr-only">プランに共通するサービス概要のイメージ</figcaption>
+            <figcaption className="sr-only">LP制作サービスの概要イメージ</figcaption>
           </figure>
 
           <div className="mb-10 rounded-[1.25rem] border border-sky-100 bg-secondary/60 p-6">
@@ -139,7 +139,7 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
                   'inline-flex justify-center rounded-full border-sky-200'
                 )}
               >
-                サービス一覧に戻る
+                トップへ戻る
               </a>
             </div>
           </div>
