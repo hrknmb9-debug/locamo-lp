@@ -21,19 +21,19 @@ import { replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
 /** LPプランは1つのみだが、そのまま一覧のソースとする */
 const LP_PLAN = SERVICE_PLANS[0];
 
-function ComparisonSymbol({ grade }: { grade: ComparisonGrade }) {
+function ComparisonSymbol({ grade, className }: { grade: ComparisonGrade; className?: string }) {
   return (
     <span
       role="img"
       aria-label={COMPARISON_GRADE_ARIA[grade]}
-      className="tabular-nums text-base font-semibold tracking-tight text-primary sm:text-lg"
+      className={cn('tabular-nums text-lg font-semibold tracking-tight text-primary sm:text-xl', className)}
     >
       {grade}
     </span>
   );
 }
 
-/** 他タイプは記号のみ（参照表と同様にスキャンしやすく） */
+/** 他タイプは記号のみ。セル縦長化を避けるためnowrap */
 function CompetitorGradeCell({
   grade,
   zebra,
@@ -44,7 +44,7 @@ function CompetitorGradeCell({
   return (
     <td
       className={cn(
-        'w-[12.5%] border-b border-border px-1 py-1.5 text-center align-middle sm:px-1.5 sm:py-2',
+        'border-b border-border px-2 py-2 text-center align-middle whitespace-nowrap sm:px-3 sm:py-2.5',
         zebra === 'odd' ? 'bg-slate-100/95' : 'bg-white'
       )}
     >
@@ -172,17 +172,26 @@ export default function Services() {
           </div>
         </div>
 
-        {/* 他タイプとの比較 — インフォグラフィック程度のコンパクト幅 */}
+        {/* 他タイプとの比較 — 横幅を取って縦長化（過剰な折り返し）を防ぐ */}
         <div className="animate-fade-in-up">
-          <h3 className="mb-3 text-lg font-bold text-pretty sm:text-xl">{SERVICES_COMPARISON_SECTION_TITLE}</h3>
-          <p className="mb-4 max-w-3xl text-[11px] leading-relaxed text-muted-foreground text-pretty sm:text-xs">
-            {LP_COMPETITOR_TABLE_CAPTION}
-          </p>
-          <div className="mx-auto w-full max-w-[min(100%,26.5rem)] sm:max-w-[30rem]">
-            <div className="overflow-hidden rounded-xl border border-sky-950/15 bg-white shadow-sm shadow-sky-950/[0.07]">
+          <h3 className="mb-3 text-xl font-bold text-pretty">{SERVICES_COMPARISON_SECTION_TITLE}</h3>
+          <p className="mb-4 max-w-3xl text-xs leading-relaxed text-muted-foreground text-pretty sm:text-sm">{LP_COMPETITOR_TABLE_CAPTION}</p>
+
+          <div className="mx-auto w-full max-w-4xl">
+            <div className="overflow-hidden rounded-xl border border-sky-950/12 bg-white shadow-sm shadow-sky-950/[0.07]">
               <div className="overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch]">
-                <table className="w-full border-collapse table-fixed text-[10px] leading-snug sm:text-[11px]">
+                {/*
+                  狭いビューポートでは横スクロールで「横幅のある一枚」として読ませる（縦に伸びるテキスト縞を回避）
+                */}
+                <table className="w-full min-w-[42rem] border-collapse text-[11px] leading-tight text-foreground sm:min-w-0 sm:text-sm sm:leading-snug lg:table-fixed lg:w-full lg:min-w-0">
                   <caption className="sr-only">Locamo とよくある制作タイプの比較。記号◎○△×で相対評価を示します。</caption>
+                  <colgroup>
+                    <col className="lg:w-[19%]" />
+                    <col className="lg:w-[37%]" />
+                    <col className="lg:w-[11%]" />
+                    <col className="lg:w-[11%]" />
+                    <col className="lg:w-[11%]" />
+                  </colgroup>
                   <thead>
                     <tr className="bg-sky-950 text-white shadow-inner">
                       {LP_COMPETITOR_COLUMNS.map(col => (
@@ -190,14 +199,12 @@ export default function Services() {
                           key={col.id}
                           scope="col"
                           className={cn(
-                            'border-b border-sky-800/90 px-1 py-1.5 text-center text-[9px] font-semibold leading-tight sm:px-1.5 sm:py-2 sm:text-[10px]',
+                            'border-b border-sky-800/90 px-2 py-2 text-center text-[11px] font-semibold leading-tight sm:px-3 sm:py-2.5 sm:text-sm',
                             col.id === 'point' &&
-                              'sticky left-0 z-30 w-[23%] min-w-0 bg-sky-950 text-left text-white shadow-[3px_0_8px_-3px_rgb(15_23_42_/_0.35)]',
+                              'sticky left-0 z-30 bg-sky-950 text-left text-white shadow-[4px_0_12px_-4px_rgb(15_23_42_/_0.42)] min-w-[7.75rem]',
                             col.id === 'locamo' &&
-                              'relative z-30 w-[31%] min-w-0 border-x border-amber-500/90 bg-sky-900 text-[10px] text-white shadow-[inset_0_-1px_0_0_rgb(248_250_252_/_0.1)] sm:text-[11px]',
-                            col.id !== 'point' &&
-                              col.id !== 'locamo' &&
-                              'w-[15%] min-w-0 font-medium text-white/92'
+                              'relative z-30 border-x-2 border-amber-500/95 bg-sky-900 text-white shadow-[inset_0_-1px_0_0_rgb(248_250_252_/_0.12)]',
+                            col.id !== 'point' && col.id !== 'locamo' && 'font-medium text-white/92 whitespace-nowrap min-w-[4.75rem]'
                           )}
                         >
                           {col.id === 'locamo' ? (
@@ -215,13 +222,13 @@ export default function Services() {
                       const rowBg = zebra === 'odd' ? 'bg-slate-100/92' : 'bg-white';
 
                       return (
-                        <tr key={row.point} className="transition-colors hover:bg-sky-50/35">
+                        <tr key={row.point} className="transition-colors hover:bg-sky-50/30">
                           <th
                             scope="row"
                             className={cn(
-                              'sticky left-0 z-[5] w-[23%] min-w-0 border-b border-border px-1 py-1.5 text-left align-top text-[10px] font-medium text-sky-950 shadow-[3px_0_8px_-4px_rgb(15_23_42_/_0.28)] sm:py-2 sm:text-[11px]',
+                              'sticky left-0 z-[5] min-w-[7.75rem] max-w-[10rem] border-b border-border px-2 py-2 text-left align-middle text-[11px] font-medium text-sky-950 shadow-[4px_0_12px_-5px_rgb(15_23_42_/_0.3)] sm:max-w-none sm:px-3 sm:text-sm',
                               rowBg,
-                              zebra === 'odd' && 'border-r border-border/60'
+                              zebra === 'odd' && 'border-r border-border/65'
                             )}
                           >
                             {row.point}
@@ -229,14 +236,16 @@ export default function Services() {
 
                           <td
                             className={cn(
-                              'relative z-[1] w-[31%] min-w-0 border-b border-primary/35 border-x border-primary bg-white px-1.5 py-2 text-center align-top shadow-[inset_0_0_0_1px_rgb(254_252_232_/_0.4)] sm:py-2.5',
-                              zebra === 'odd' && 'bg-amber-50/45'
+                              'border-b border-primary/35 border-x-2 border-primary bg-white px-2 py-2 align-middle shadow-[inset_0_0_0_1px_rgb(254_252_232_/_0.45)] sm:px-3',
+                              zebra === 'odd' && 'bg-amber-50/40'
                             )}
                           >
-                            <ComparisonSymbol grade={row.locamo.grade} />
-                            <p className="mt-1.5 text-left text-[9px] leading-snug text-sky-900/92 text-pretty sm:text-[10px] sm:leading-relaxed">
-                              {row.locamo.note}
-                            </p>
+                            <div className="flex flex-row flex-wrap items-center gap-x-2 gap-y-0.5 sm:flex-nowrap sm:gap-x-3">
+                              <ComparisonSymbol grade={row.locamo.grade} className="shrink-0" />
+                              <p className="min-w-0 flex-1 text-left text-[10px] leading-snug text-sky-900/93 text-pretty sm:text-xs sm:leading-snug">
+                                {row.locamo.note}
+                              </p>
+                            </div>
                           </td>
 
                           <CompetitorGradeCell grade={row.mass} zebra={zebra} />
@@ -249,15 +258,18 @@ export default function Services() {
                 </table>
               </div>
             </div>
-            <div className="mt-2.5 flex flex-wrap gap-x-2.5 gap-y-0.5 text-[9px] text-muted-foreground sm:text-[10px]">
+            <p className="mt-2 text-[10px] text-muted-foreground sm:text-xs lg:hidden">
+              狭い画面では表を<strong className="font-medium text-sky-800">左右にスクロール</strong>すると全体が一望できます。
+            </p>
+            <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-muted-foreground sm:text-xs">
               <span>
-                <span className="font-semibold text-primary">◎</span> ひとつのタイプとして最も評価しやすい
+                <span className="font-semibold text-primary">◎</span> とても評価しやすい
               </span>
               <span>
                 <span className="font-semibold text-primary">○</span> バランス型
               </span>
               <span>
-                <span className="font-semibold text-primary">△</span> 条件依存・やや不利になりがち
+                <span className="font-semibold text-primary">△</span> 条件により不安
               </span>
               <span>
                 <span className="font-semibold text-primary">×</span> 不向きになりやすい

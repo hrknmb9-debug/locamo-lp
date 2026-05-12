@@ -35,50 +35,50 @@ export interface LpComparisonRow {
 
 export const LP_COMPETITOR_ROWS: LpComparisonRow[] = [
   {
-    point: 'お値段・総額のわかりやすさ',
+    point: '料金・総額のわかりやすさ',
     locamo: {
       grade: '◎',
-      note: 'LPは買い切り3万円〜。制作費の月額課金なし。公開・ドメインは別途とセットで案内。',
+      note: 'LP買い切り3万円〜。制作に月額なし／公開ドメインは別途セットで案内。',
     },
     mass: '○',
     system: '△',
     freelancer: '○',
   },
   {
-    point: '手直し・相談のしやすさ',
+    point: '手直し・相談',
     locamo: {
       grade: '◎',
-      note: '公式LINEひとつに集約。簡易的な文言・表示修正は無料範囲で対応（大幅改修は別途）。',
+      note: '公式LINE集約。簡易文言・表示の修正は無料範囲（大作り替えは別途）。',
     },
     mass: '○',
     system: '△',
     freelancer: '○',
   },
   {
-    point: 'デザイン・読みやすさ（一枚LP）',
+    point: 'デザイン・読みやすさ',
     locamo: {
       grade: '◎',
-      note: '個人店向けに「読む順番」とCTAまで一緒に設計。',
+      note: '個人店向けに読む順とCTAまで一緒に設計。',
     },
     mass: '◎',
     system: '△',
     freelancer: '○',
   },
   {
-    point: '周辺サポート・伴走の幅',
+    point: '伴走・周辺サポート',
     locamo: {
       grade: '◎',
-      note: 'インスタとのつなぎ方や、LINE公式への導線づくりなど、公開までひと続きで相談しやすい。',
+      note: 'インスタ→LP、LINE導線など公開までの相談がしやすい。',
     },
     mass: '○',
     system: '○',
     freelancer: '△',
   },
   {
-    point: '個人店への寄り添い・理解',
+    point: '個人店への理解',
     locamo: {
       grade: '◎',
-      note: '大阪の個人店・小規模店のみを対象に、現場で使う言い回しまで詰める。',
+      note: '大阪の個人店・小規模店のみ。現場の言い回しまで詰める。',
     },
     mass: '△',
     system: '△',
