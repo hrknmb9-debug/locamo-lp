@@ -147,7 +147,7 @@ export default function Home() {
               <span className="max-w-[4.75rem] truncate sm:max-w-none">{IG_HANDLE}</span>
             </a>
             <Link
-              href="/hearing"
+              href={LINE_URL}
               className={cn(
                 buttonVariants({ size: 'sm' }),
                 'btn-primary ml-2 inline-flex shrink-0 justify-center whitespace-nowrap px-4 text-xs font-semibold text-primary-foreground sm:text-sm'
@@ -198,7 +198,7 @@ export default function Home() {
                 Instagram（プロフィール）
               </a>
               <Link
-                href="/hearing"
+                href={LINE_URL}
                 onClick={closeMobile}
                 className={cn(
                   buttonVariants({ size: 'default' }),
@@ -262,7 +262,7 @@ export default function Home() {
                   </li>
                 ))}
                 <li>
-                  <Link href="/hearing" className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors">
+                  <Link href={LINE_URL} className="inline-block text-muted-foreground hover:text-accent text-xs transition-colors">
                     {PRIMARY_CTA_HEARING}
                   </Link>
                 </li>
