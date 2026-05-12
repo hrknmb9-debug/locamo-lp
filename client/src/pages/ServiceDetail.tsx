@@ -6,7 +6,7 @@ import type { RouteComponentProps } from 'wouter';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { cn } from '@/lib/utils';
-import { DM_URL } from '@/constants/locamo';
+import { LINE_URL,  DM_URL  } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { PRIMARY_CTA_HEARING_FULL } from '@/data/conversionMessaging';
 import { getPlan } from '@/data/servicePlans';
@@ -37,8 +37,8 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
             <span className="text-sm font-medium">戻る</span>
           </a>
           <Link href="/" className="text-lg font-bold tracking-tight text-sky-950">
-            Loca<span className="text-accent">mo</span>
-          </Link>
+                Loca<span className="text-accent">mo</span>
+              </Link>
         </div>
       </header>
 
@@ -109,8 +109,7 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
               LINEでヒアリングシートをお送りし、ご記入いただいた時点で制作のご依頼として受け付けます。先に質問だけの場合はLINEのみでも構いません。
             </p>
             <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
-              <Link
-                href="/hearing"
+              <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
                 className={cn(
                   buttonVariants({ size: 'lg' }),
                   'btn-primary inline-flex justify-center px-6 text-primary-foreground'
@@ -118,15 +117,15 @@ const ServiceDetail: FC<RouteComponentProps<{ planId: string }>> = ({ params }) 
               >
                 {PRIMARY_CTA_HEARING_FULL}
                 <ArrowRight className="ml-2 inline size-5" aria-hidden />
-              </Link>
+              </a>
               <Button size="lg" variant="outline" className="rounded-full border-sky-200" asChild>
                 <a
-                  href={DM_URL}
+                  href={LINE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={(e) => activateExternalHref(e, DM_URL)}
+                  onClick={(e) => activateExternalHref(e, LINE_URL)}
                 >
-                  DMで質問のみ（任意）
+                  LINEで質問のみ（任意）
                 </a>
               </Button>
               <a

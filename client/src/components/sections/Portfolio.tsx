@@ -8,6 +8,8 @@ import { LP_IMAGES } from '@/lp-images';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ArrowRight, ExternalLink } from 'lucide-react';
+import { LINE_URL } from '@/constants/locamo';
+import { activateExternalHref } from '@/lib/openExternalUrl';
 import { Link } from 'wouter';
 import { MONITOR_SLOT_NOTE, PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
 
@@ -176,7 +178,7 @@ export default function Portfolio() {
 
           <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
             {[
-              { title: 'お申込みまで', desc: 'Web ⇄ DM の流れで統一', Ill: IllustFlowDm },
+              { title: 'お申込みまで', desc: 'LINE での流れで統一', Ill: IllustFlowDm },
               { title: 'モニター', desc: '審査・先着あり', Ill: IllustGuideReply },
               { title: '制作の軸', desc: '構成とCTA設計', Ill: IllustFeatureCta },
             ].map((benefit, idx) => {
@@ -194,8 +196,7 @@ export default function Portfolio() {
           </div>
 
           <div className="flex w-full justify-center px-1 sm:px-3">
-            <Link
-              href="/hearing"
+            <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
               className={cn(
                 buttonVariants({ size: 'lg' }),
                 'btn-primary mx-auto inline-flex max-w-[min(100%,22rem)] min-w-0 w-full flex-nowrap justify-center gap-2 px-6 py-7 text-[15px] font-semibold text-primary-foreground sm:py-8'
@@ -203,7 +204,7 @@ export default function Portfolio() {
             >
               {PRIMARY_CTA_HEARING}
               <ArrowRight className="size-5 shrink-0" aria-hidden />
-            </Link>
+            </a>
           </div>
         </div>
       </div>

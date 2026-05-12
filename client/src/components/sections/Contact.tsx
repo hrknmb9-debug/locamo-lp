@@ -10,7 +10,6 @@ import { LINE_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import {
   CONTACT_INTAKE_SUMMARY,
-  DM_CHANNEL_FLEX_NOTE,
   HEARING_FLOW_LINES,
   PRIMARY_CTA_HEARING_FULL,
   RESPONSE_SLA,
@@ -45,7 +44,7 @@ export default function Contact() {
           <span className="mt-3 block">{RESPONSE_SLA}</span>
         </p>
         <p className="text-center text-muted-foreground mb-10 mx-auto max-w-lg text-xs leading-relaxed text-pretty sm:text-sm">
-          {DM_CHANNEL_FLEX_NOTE}
+          
         </p>
 
         {/* Main CTA */}
@@ -61,8 +60,7 @@ export default function Contact() {
               ))}
             </ol>
             <div className="flex w-full justify-center px-2">
-              <Link
-                href="/hearing"
+              <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
                 className={cn(
                   buttonVariants({ size: 'lg' }),
                   'btn-primary inline-flex max-w-[min(100%,22rem)] w-full min-h-12 items-center justify-center px-6 py-[1.25rem] text-sm font-semibold text-primary-foreground sm:min-h-11 sm:py-6'
@@ -70,7 +68,7 @@ export default function Contact() {
               >
                 {PRIMARY_CTA_HEARING_FULL}
                 <ArrowRight size={16} className="shrink-0" aria-hidden />
-              </Link>
+              </a>
             </div>
             <div className="mt-6 flex flex-col items-center gap-3 text-center text-sm">
               <a
@@ -134,8 +132,7 @@ export default function Contact() {
             <p className="text-muted-foreground text-sm mb-7 text-pretty">
               料金の目安だけ知りたい場合も、この流れで伺えれば順にご案内します。
             </p>
-            <Link
-              href="/hearing"
+            <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
               className={cn(
                 buttonVariants({ size: 'lg' }),
                 'btn-primary inline-flex px-8 py-6 text-sm font-semibold text-primary-foreground'
@@ -143,7 +140,7 @@ export default function Contact() {
             >
               {PRIMARY_CTA_HEARING_FULL}
               <ArrowRight className="ml-2 inline" size={16} aria-hidden />
-            </Link>
+            </a>
           </div>
         </section>
 

@@ -147,8 +147,8 @@ export default function Services() {
                   }`}
                 >
                   <Link href={`/services/${plan.id}`} className="inline-flex w-full justify-center px-6">
-                    詳細を見る
-                  </Link>
+                詳細を見る
+              </Link>
                 </Button>
               </div>
             </div>
@@ -201,18 +201,17 @@ export default function Services() {
             「まずLPで足りるか」迷う段階でも、ヒアリング内容をいただければ構成の方向性までお返しします。
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
-            <Link
-              href="/hearing"
+            <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
               className={cn(
                 buttonVariants({ size: 'lg' }),
                 'btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground'
               )}
             >
               {PRIMARY_CTA_HEARING}
-            </Link>
+            </a>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
               <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}>
-                LINEで相談したい（任意）
+                LINEで無料相談する
               </a>
             </Button>
           </div>

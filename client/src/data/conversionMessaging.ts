@@ -40,10 +40,10 @@ export const PRIMARY_CTA_HEARING = 'ヒアリングに進む';
 export const PRIMARY_CTA_HEARING_FULL = 'LP制作のヒアリングに進む';
 
 /** 短め（オレンジ pill のはみ出し防止）— 長いラベルはボタン内で別表示可 */
-export const PRIMARY_CTA_DM_CONTACT = 'LINEで無料相談する';
+
 
 /** 「DMで相談」ボタンの補足（視覚的に短く） */
-export const PRIMARY_CTA_DM_SUBLINE = 'LINE';
+
 
 export const SCOPE_INCLUDED_HEADING = 'ご依頼に含まれやすいこと';
 export const SCOPE_EXCLUDED_HEADING = '標準には含まれないこと（ご相談・別見積り）';
@@ -64,12 +64,10 @@ export const CONTACT_INTAKE_SUMMARY =
   'LINEでお気軽にご連絡ください。担当よりヒアリングシートをお送りし、ご記入いただいた時点で制作のご依頼として受け付けます。';
 
 /** メールのみ希望などInstagram中心で苦手な方向けの一文 */
-export const DM_CHANNEL_FLEX_NOTE =
-  'LINEのみでのご相談も可能です。ご契約・決済リンクのご案内はLINEを中心にお送りします。';
+
 
 /** ヒアリングフォーム送信直前までの環境インフォメーション（Instagram 依存の開示） */
-export const HEARING_DM_PREREQUISITE =
-  'LINEでお気軽にご連絡ください。ヒアリングシートをお送りし、ご記入いただいた内容をもとに制作を進めます。';
+export const HEARING_DM_PREREQUISITE = 'LINE送信前に必須項目が揃っているか確認します' as const;
 
 /** 「お約束」（返信〜スコープ）の短いキャプション見出し */
 export const PROMISE_SECTION_EYEBROW = 'ご返信までの約束・範囲';

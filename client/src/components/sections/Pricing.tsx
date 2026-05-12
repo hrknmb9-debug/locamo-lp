@@ -49,7 +49,7 @@ export default function Pricing() {
     },
     {
       q: 'Instagramアカウントは必要ですか？',
-      a: 'LINEが主な連絡手段ですが、メールやその他の方法をご希望の場合はお気軽にお問い合わせください。',
+      a: 'LINEが主な連絡手段です。メールやその他の方法をご希望の場合はお気軽にお問い合わせください。',
     },
     {
       q: 'サイト公開・ドメインは別途必要ですか？',
@@ -198,15 +198,14 @@ export default function Pricing() {
             料金だけ先に教えてほしい場合も、ヒアリング経由で順にお返しします。
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <Link
-              href="/hearing"
+            <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
               className={cn(
                 buttonVariants({ size: 'lg' }),
                 'btn-primary px-8 py-6 text-sm font-semibold text-primary-foreground'
               )}
             >
               {PRIMARY_CTA_HEARING}
-            </Link>
+            </a>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
               <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={e => activateExternalHref(e, LINE_URL)}>
                 LINEで無料相談する

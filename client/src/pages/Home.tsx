@@ -12,7 +12,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ScrollLandmark } from '@/components/lp/ScrollLandmark';
 import { LINE_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
-import { PRIMARY_CTA_HEARING, DM_CHANNEL_FLEX_NOTE } from '@/data/conversionMessaging';
+import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
 import { SITE_SCROLL_NAV } from '@/data/siteNav';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { prefersReducedMotion, replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
@@ -280,7 +280,6 @@ export default function Home() {
                 LINEでお気軽にご相談ください。担当よりヒアリングシートをお送りします。ご契約後のお支払いは<strong className="font-semibold text-sky-950">ご案内する決済リンクのみ</strong>
                 で完結します（カード決済・Stripe Payment Links。サイト内チェックアウト・銀行振込は扱いません）。
               </p>
-              <p className="text-muted-foreground text-xs mb-3 leading-relaxed">{DM_CHANNEL_FLEX_NOTE}</p>
               <a
                 href={LINE_URL}
                 target="_blank"

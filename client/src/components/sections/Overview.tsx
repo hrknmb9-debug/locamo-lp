@@ -29,8 +29,6 @@ import {
   HERO_PRICE_TEASER,
   HERO_PRIMARY_LEAD,
   MONITOR_BADGE_LINES,
-  PRIMARY_CTA_DM_CONTACT,
-  PRIMARY_CTA_DM_SUBLINE,
   PRIMARY_CTA_HEARING_FULL,
   PROMISE_SECTION_EYEBROW,
   RESPONSE_SLA,
@@ -356,8 +354,7 @@ export default function Overview() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href="/hearing"
+            <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
               className={cn(
                 buttonVariants({ size: 'lg' }),
                 'btn-primary inline-flex px-8 py-6 text-sm font-semibold text-primary-foreground'
@@ -365,7 +362,7 @@ export default function Overview() {
             >
               {PRIMARY_CTA_HEARING_FULL}
               <ArrowRight className="ml-1.5 shrink-0" size={17} aria-hidden />
-            </Link>
+            </a>
             <Button variant="outline" size="lg" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
               <a href="#pricing">料金・フローを見る</a>
             </Button>
@@ -402,13 +399,12 @@ export default function Overview() {
               >
                 <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold leading-none tracking-wide opacity-95 sm:text-xs">
                   <span className="size-4 shrink-0 sm:size-5 font-bold text-lg" aria-hidden>L</span>
-                  {PRIMARY_CTA_DM_SUBLINE}
+                  
                 </span>
-                <span className="text-center text-sm font-bold leading-tight sm:text-[15px]">{PRIMARY_CTA_DM_CONTACT}</span>
+                <span className="text-center text-sm font-bold leading-tight sm:text-[15px]"></span>
                 <ArrowRight className="mt-0.5 size-4 shrink-0 opacity-90 sm:hidden" aria-hidden />
               </a>
-              <Link
-                href="/hearing"
+              <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}
                 className={cn(
                   buttonVariants({ variant: 'outline', size: 'lg' }),
                   'h-auto min-h-12 w-full rounded-full border-sky-200 px-4 py-3 sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-1 text-balance'
@@ -417,7 +413,7 @@ export default function Overview() {
                 <ClipboardList className="size-4 shrink-0 text-accent sm:size-5" aria-hidden />
                 <span className="text-center text-[13px] font-bold leading-tight tracking-tight sm:text-[15px]">{PRIMARY_CTA_HEARING_FULL}</span>
                 <ArrowRight className="size-4 shrink-0 text-muted-foreground sm:hidden" aria-hidden />
-              </Link>
+              </a>
             </div>
             <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
               <Link href="/privacy" className="text-accent underline underline-offset-2 hover:opacity-90">
