@@ -4,7 +4,7 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'wouter';
-import { DM_URL } from '@/constants/locamo';
+import { LINE_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import {
   APPLICATION_FLOW_STEPS,
@@ -49,7 +49,7 @@ export default function Pricing() {
     },
     {
       q: 'Instagramアカウントは必要ですか？',
-      a: 'DMでお申し込み内容をお送りいただく形式のため、アプリからご連絡できるInstagramアカウントをおすすめします。アカウントをお持ちでない場合は、別途Instagramのご用意からご相談ください。',
+      a: 'LINEが主な連絡手段ですが、メールやその他の方法をご希望の場合はお気軽にお問い合わせください。',
     },
     {
       q: 'サイト公開・ドメインは別途必要ですか？',
@@ -61,7 +61,7 @@ export default function Pricing() {
     },
     {
       q: '支払い方法は？',
-      a: 'すべて Stripe Payment Link（カード決済）のみです。条件のすり合わせ後、DM等でワンタイムリンクをお送りし、そのページで手続き完了まで行います。銀行振込は受け付けていません。',
+      a: 'すべて Stripe Payment Link（カード決済）のみです。条件のすり合わせ後、LINEでワンタイムリンクをお送りし、そのページで手続き完了まで行います。銀行振込は受け付けていません。',
     },
   ];
 
@@ -208,8 +208,8 @@ export default function Pricing() {
               {PRIMARY_CTA_HEARING}
             </Link>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
-              <a href={DM_URL} target="_blank" rel="noopener noreferrer" onClick={e => activateExternalHref(e, DM_URL)}>
-                口頭での相談（DM任意）
+              <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={e => activateExternalHref(e, LINE_URL)}>
+                LINEで無料相談する
               </a>
             </Button>
           </div>

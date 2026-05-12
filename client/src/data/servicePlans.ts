@@ -45,7 +45,7 @@ export const SERVICE_PLANS: ServicePlanCopy[] = [
       {
         heading: '進め方',
         items: [
-          'サイト内ヒアリング入力 → コピーしてInstagramのDMで送信',
+          'LINEでヒアリングシートをお送り → ご記入・返信',
           '構成・ワイヤーとお見立て・お見積り',
           'デザイン・実装〜公開チェックまで一気通貫',
         ],

@@ -11,7 +11,7 @@ import Contact from '@/components/sections/Contact';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ScrollLandmark } from '@/components/lp/ScrollLandmark';
-import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
+import { LINE_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
 import { PRIMARY_CTA_HEARING, DM_CHANNEL_FLEX_NOTE } from '@/data/conversionMessaging';
 import { SITE_SCROLL_NAV } from '@/data/siteNav';
 import { activateExternalHref } from '@/lib/openExternalUrl';
@@ -277,31 +277,29 @@ export default function Home() {
             <div>
               <h4 className="font-semibold text-sm mb-3">お問い合わせ・決済の進め方</h4>
               <p className="text-muted-foreground text-xs mb-3 leading-relaxed">
-                まずヒアリングページで入力し、コピーのうえDMにお送りください。質問のみはDMでも可能です。ご契約後のお支払いは<strong className="font-semibold text-sky-950">ご案内する決済リンクのみ</strong>
+                LINEでお気軽にご相談ください。担当よりヒアリングシートをお送りします。ご契約後のお支払いは<strong className="font-semibold text-sky-950">ご案内する決済リンクのみ</strong>
                 で完結します（カード決済・Stripe Payment Links。サイト内チェックアウト・銀行振込は扱いません）。
               </p>
               <p className="text-muted-foreground text-xs mb-3 leading-relaxed">{DM_CHANNEL_FLEX_NOTE}</p>
-              <Link href="/hearing" className="inline-block text-xs text-accent underline-offset-2 hover:underline">
-                LP制作のヒアリングページへ
-              </Link>
               <a
-                href={DM_URL}
+                href={LINE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent hover:underline transition-colors"
-                onClick={(e) => activateExternalHref(e, DM_URL)}
+                className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-[#06C755] hover:text-[#05a148] hover:underline transition-colors"
+                onClick={(e) => activateExternalHref(e, LINE_URL)}
               >
-                <Instagram size={14} aria-hidden />
-                {IG_HANDLE}
+                <span aria-hidden>L</span>
+                LINEで相談
               </a>
               <a
                 href={IG_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 block text-xs text-muted-foreground hover:text-accent hover:underline"
+                className="mt-3 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent hover:underline transition-colors"
                 onClick={(e) => activateExternalHref(e, IG_URL)}
               >
-                プロフィールを見る →
+                <Instagram size={14} aria-hidden />
+                {IG_HANDLE}
               </a>
             </div>
           </div>

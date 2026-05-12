@@ -6,7 +6,7 @@ import { IllustContactHearingDm } from '@/components/lp/BespokeIllustrations';
 import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 
-import { DM_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
+import { LINE_URL, IG_HANDLE, IG_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import {
   CONTACT_INTAKE_SUMMARY,
@@ -74,14 +74,14 @@ export default function Contact() {
             </div>
             <div className="mt-6 flex flex-col items-center gap-3 text-center text-sm">
               <a
-                href={DM_URL}
+                href={LINE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 font-medium text-muted-foreground underline-offset-4 hover:text-accent hover:underline"
-                onClick={(e) => activateExternalHref(e, DM_URL)}
+                onClick={(e) => activateExternalHref(e, LINE_URL)}
               >
                 <MessageCircle size={16} aria-hidden />
-                先に質問だけ送りたい方はDMへ
+                LINEでまず質問だけ送ることもできます
               </a>
               <Link href="/services/lp" className="font-medium text-accent underline-offset-4 hover:underline">
                 LPプラン詳細のみ見る
@@ -106,7 +106,7 @@ export default function Contact() {
           <div className="rounded-[1.5rem] bg-accent p-7 text-center text-white shadow-lg shadow-sky-400/35 md:p-10">
             <h3 className="text-xl font-bold mb-2">お問い合わせ・ヒアリングへの回答は無料です</h3>
             <p className="text-white/85 text-sm max-w-lg mx-auto text-pretty">
-              ご契約または制作開始のタイミングまでは追加費用はかかりません。まず内容を書き込み・DM送信まで進めていただければ結構です。
+              ご契約または制作開始のタイミングまでは追加費用はかかりません。まずLINEでご相談いただければ結構です。
             </p>
           </div>
         </section>

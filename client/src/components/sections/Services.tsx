@@ -4,7 +4,7 @@ import { LpSectionEyebrow } from '@/components/lp/LpSectionEyebrow';
 import { cn } from '@/lib/utils';
 import { ChevronDown, Check } from 'lucide-react';
 import { Link } from 'wouter';
-import { DM_URL } from '@/constants/locamo';
+import { LINE_URL } from '@/constants/locamo';
 import { PRIMARY_CTA_HEARING } from '@/data/conversionMessaging';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { SERVICE_PLANS } from '@/data/servicePlans';
@@ -211,8 +211,8 @@ export default function Services() {
               {PRIMARY_CTA_HEARING}
             </Link>
             <Button size="lg" variant="outline" className="rounded-full border-sky-200 px-8 py-6 text-sm font-semibold" asChild>
-              <a href={DM_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, DM_URL)}>
-                追ってDMで話したい（任意）
+              <a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={(e) => activateExternalHref(e, LINE_URL)}>
+                LINEで相談したい（任意）
               </a>
             </Button>
           </div>

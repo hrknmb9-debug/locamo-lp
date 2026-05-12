@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import { Instagram, ArrowRight, TrendingUp, ClipboardList } from 'lucide-react';
 import { Link } from 'wouter';
 
-import { IG_URL, DM_URL } from '@/constants/locamo';
+import { IG_URL, LINE_URL } from '@/constants/locamo';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { PRIMARY_CTA_DM_CONTACT, PRIMARY_CTA_DM_SUBLINE, PRIMARY_CTA_HEARING_FULL } from '@/data/conversionMessaging';
 import { LP_IMAGES } from '@/lp-images';
@@ -204,14 +204,14 @@ export default function InstagramPage() {
             </p>
             <div className="relative z-[1] mx-auto flex max-w-xl flex-col gap-3 sm:flex-row sm:justify-center">
               <a
-                href={DM_URL}
+                href={LINE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
                   buttonVariants({ size: 'lg' }),
                   'btn-primary h-auto min-h-12 w-full rounded-full px-4 py-3 text-primary-foreground shadow-md shadow-orange-300/35 sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-0.5 text-balance sm:gap-1'
                 )}
-                onClick={(e) => activateExternalHref(e, DM_URL)}
+                onClick={(e) => activateExternalHref(e, LINE_URL)}
               >
                 <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold leading-none tracking-wide opacity-95 sm:text-xs">
                   <Instagram size={16} aria-hidden className="shrink-0 sm:h-[1.125rem] sm:w-[1.125rem]" />

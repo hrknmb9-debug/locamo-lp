@@ -3,16 +3,16 @@
  */
 
 export const HEARING_FLOW_SHORT =
-  '4ステップで回答し、ボタン一つでコピー。そのままInstagramのDMへ進みます。';
+  'まずはLINEでお気軽にご連絡ください。担当よりヒアリングシートをお送りします。';
 
 export const HEARING_FLOW_LINES = [
-  'サイト内の4ステップに沿ってお店の状況を入力します。',
-  '最後のボタンで回答全文がクリップボードにコピーされ、そのままInstagramのDMページへ進みます。',
-  'DMの入力欄に長押しで貼り付け、送信すると制作のご依頼として受け付けます。',
+  'LINEで「ヒアリングシートをください」とお送りください。',
+  '担当よりヒアリングシートをお送りします。',
+  'ご記入いただき、LINEで返信いただいた時点で制作のご依頼として受け付けます。',
 ] as const;
 
 export const RESPONSE_SLA =
-  '内容を確認のうえ、原則2営業日以内にInstagramのDMでご返信します（混雑時は前後することがあります）。';
+  '内容を確認のうえ、原則2営業日以内にLINEでご返信します（混雑時は前後することがあります）。';
 
 export const SCOPE_INCLUDED_BULLETS = [
   'LP1枚の構成・文案のたたき・スマホ最適化・公開までの設定サポート（プランによる範囲は各ページを参照）。',
@@ -40,10 +40,10 @@ export const PRIMARY_CTA_HEARING = 'ヒアリングに進む';
 export const PRIMARY_CTA_HEARING_FULL = 'LP制作のヒアリングに進む';
 
 /** 短め（オレンジ pill のはみ出し防止）— 長いラベルはボタン内で別表示可 */
-export const PRIMARY_CTA_DM_CONTACT = 'DMで相談';
+export const PRIMARY_CTA_DM_CONTACT = 'LINEで無料相談する';
 
 /** 「DMで相談」ボタンの補足（視覚的に短く） */
-export const PRIMARY_CTA_DM_SUBLINE = 'Instagram';
+export const PRIMARY_CTA_DM_SUBLINE = 'LINE';
 
 export const SCOPE_INCLUDED_HEADING = 'ご依頼に含まれやすいこと';
 export const SCOPE_EXCLUDED_HEADING = '標準には含まれないこと（ご相談・別見積り）';
@@ -61,15 +61,15 @@ export const HERO_PRICE_TEASER = 'LP制作費は買い切り3万円〜／公開�
 
 /** お問い合わせ先頭：受付開始を前向きに言い切る（返信SLAは別途続ける） */
 export const CONTACT_INTAKE_SUMMARY =
-  'ヒアリングをコピーしてInstagramのDMに貼り付け、送信いただいた時点で制作のご依頼として受け付けます。';
+  'LINEでお気軽にご連絡ください。担当よりヒアリングシートをお送りし、ご記入いただいた時点で制作のご依頼として受け付けます。';
 
 /** メールのみ希望などInstagram中心で苦手な方向けの一文 */
 export const DM_CHANNEL_FLEX_NOTE =
-  'InstagramのDMだけがご不安なときも、DM上で運び方をご相談できます（ご契約・決済リンクのご案内は主にInstagramのダイレクトメッセージになります）。';
+  'LINEのみでのご相談も可能です。ご契約・決済リンクのご案内はLINEを中心にお送りします。';
 
 /** ヒアリングフォーム送信直前までの環境インフォメーション（Instagram 依存の開示） */
 export const HEARING_DM_PREREQUISITE =
-  '最後のボタンで回答をコピーし、InstagramのDMが開きます。Instagramにログインできる環境でお進みください。まず質問だけなら、フォームを使わずDMでも構いません。DMのみがご不安な場合も、送信後にやりとりで調整できます。';
+  'LINEでお気軽にご連絡ください。ヒアリングシートをお送りし、ご記入いただいた内容をもとに制作を進めます。';
 
 /** 「お約束」（返信〜スコープ）の短いキャプション見出し */
 export const PROMISE_SECTION_EYEBROW = 'ご返信までの約束・範囲';
@@ -88,8 +88,8 @@ export const APPLICATION_FLOW_HEADING = 'お申込み〜公開まで（ざっく
 
 /** ヒーロー等の短文ラベル（改行しない）—詳細タイムラインは料金の「制作の流れ」へ集約 */
 export const APPLICATION_FLOW_VISUAL_LABELS = [
-  'サイトで入力',
-  'DM送信',
+  'LINEで相談',
+  'ヒアリング送信',
   'ご返答',
   '契約〜公開',
 ] as const;
@@ -106,25 +106,25 @@ export type ApplicationFlowStep = {
 export const APPLICATION_FLOW_STEPS: ApplicationFlowStep[] = [
   {
     num: '1',
-    title: 'サイトでヒアリング → DMで送信',
+    title: 'LINEでご相談 → ヒアリングシート送信',
     short:
-      '4ステップの入力のあとボタン一つでコピー。そのままInstagramのDMに貼り付けて送信すれば、この時点で制作のご依頼として受け付けます。',
+      'LINEで「ヒアリングシートをください」とお送りください。担当よりヒアリングシートをお送りし、ご記入いただいた時点で制作のご依頼として受け付けます。',
     detail:
-      'サイトの4ステップに入力し「コピーしてInstagramのDMへ」で全文がコピーされ、DM画面が開きます。入力欄に長押しで貼り付け、送信すると制作のご依頼として受け付けます。',
+      'LINEで「ヒアリングシートをください」とお送りください。担当よりヒアリングシートをお送りします。ご記入いただき、LINEで返信いただいた時点で制作のご依頼として受け付けます。',
   },
   {
     num: '2',
-    title: 'DMでのご返信・お見立て',
+    title: 'LINEでのご返信・お見立て',
     short:
-      '原則2営業日以内を目安に、InstagramのDMで構成の方向感や質問にお答えし、見立てまでご案内します。',
+      '原則2営業日以内を目安に、LINEで構成の方向感や質問にお答えし、見立てまでご案内します。',
     detail:
-      '内容を確認のうえ、構成の方向感やご質問にお答えし、お見立てまでInstagramのDMを中心にご案内します。',
+      '内容を確認のうえ、構成の方向感やご質問にお答えし、お見立てまでLINEを中心にご案内します。',
   },
   {
     num: '3',
     title: 'ご契約・お支払い・制作開始',
     short:
-      '内容にご納得いただいたタイミングでご契約。お支払いはDM等でお送りする決済リンク（Stripe Payment Links／カード決済）からお手続きください。',
+      '内容にご納得いただいたタイミングでご契約。お支払いはLINEでお送りする決済リンク（Stripe Payment Links／カード決済）からお手続きください。',
     detail:
       'ご契約確定後、制作を開始します。決済はすべて送付するPayment Link上で完結し、銀行振込は受け付けていません。サイト内でカード番号を入力いただくページはありません。進捗は適宜ご共有します。',
   },

@@ -45,7 +45,7 @@ import { LP_IMAGES } from '@/lp-images';
 import { SCROLL_MARGIN_CLASS } from '@/data/siteNav';
 import { activateExternalHref } from '@/lib/openExternalUrl';
 import { replaceUrlHash, scrollToSiteAnchor } from '@/lib/siteNavScroll';
-import { DM_URL } from '@/constants/locamo';
+import { LINE_URL } from '@/constants/locamo';
 
 type BlockIllustration = ComponentType<{ className?: string }>;
 
@@ -200,16 +200,19 @@ export default function Overview() {
             className="mb-8 flex animate-fade-in-up flex-col justify-center gap-3 sm:mb-10 sm:flex-row sm:gap-4"
             style={{ animationDelay: '0.5s' }}
           >
-            <Link
-              href="/hearing"
+            <a
+              href={LINE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ size: 'lg' }),
-                'btn-primary inline-flex min-h-12 w-full shrink-0 items-center justify-center px-8 py-[1.375rem] text-sm font-semibold text-primary-foreground sm:w-auto sm:min-h-11 sm:py-6',
+                'inline-flex min-h-12 w-full shrink-0 items-center justify-center px-8 py-[1.375rem] text-sm font-semibold text-white bg-[#06C755] hover:bg-[#05a148] sm:w-auto sm:min-h-11 sm:py-6 rounded-full',
               )}
+              onClick={(e) => activateExternalHref(e, LINE_URL)}
             >
-              {PRIMARY_CTA_HEARING_FULL}
+              LINEで無料相談する
               <ArrowRight className="ml-1.5 shrink-0" size={17} aria-hidden />
-            </Link>
+            </a>
             <Button
               size="lg"
               variant="outline"
@@ -381,24 +384,24 @@ export default function Overview() {
             <p className="mx-auto mb-6 max-w-lg text-center text-sm leading-relaxed text-muted-foreground jp-keep-all">
               公開までの全体像は
               <ProductionFlowJumpLink className="mx-0.5">料金ページの制作の流れ</ProductionFlowJumpLink>
-              。ここでは、コピーしてDMへ進む操作だけを案内しています。
+              。ここでは、LINEでのご相談方法をご案内しています。
             </p>
             <div className="mx-auto mb-8 flex max-w-xs justify-center rounded-xl border border-sky-100/90 bg-sky-50/50 px-5 py-4">
               <IllustFlowDm className="h-auto w-full max-w-[200px]" />
             </div>
             <div className="relative z-[1] mx-auto flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
               <a
-                href={DM_URL}
+                href={LINE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
                   buttonVariants({ size: 'lg' }),
                   'btn-primary h-auto min-h-12 w-full rounded-full px-4 py-3 shadow-md shadow-sky-300/35 text-primary-foreground sm:min-h-14 sm:max-w-[13.5rem] sm:px-5 sm:py-4 inline-flex min-w-0 max-w-full flex-col items-center justify-center gap-0.5 text-balance sm:gap-1'
                 )}
-                onClick={(e) => activateExternalHref(e, DM_URL)}
+                onClick={(e) => activateExternalHref(e, LINE_URL)}
               >
                 <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold leading-none tracking-wide opacity-95 sm:text-xs">
-                  <Instagram className="size-4 shrink-0 sm:size-5" aria-hidden />
+                  <span className="size-4 shrink-0 sm:size-5 font-bold text-lg" aria-hidden>L</span>
                   {PRIMARY_CTA_DM_SUBLINE}
                 </span>
                 <span className="text-center text-sm font-bold leading-tight sm:text-[15px]">{PRIMARY_CTA_DM_CONTACT}</span>
