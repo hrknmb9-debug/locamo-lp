@@ -31,8 +31,7 @@ export default function InstagramPage() {
         </p>
 
         <figure className="mx-auto mb-12 max-w-4xl overflow-hidden rounded-[1.25rem] border border-sky-100 shadow-lg shadow-sky-200/25">
-          <img
-            src={LP_IMAGES.instagramSectionFigure}
+          <img alt="Instagram連携の説明画像" src={LP_IMAGES.instagramSectionFigure}
             alt="SNSでの認知から公式ランディングページへの導線をつなぐイメージイラスト"
             loading="lazy"
             decoding="async"

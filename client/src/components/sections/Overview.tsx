@@ -143,7 +143,7 @@ export default function Overview() {
             </div>
           </div>
 
-          <h1 className="sr-only">{HERO_H1_SEO}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-center mb-6">{HERO_H1_SEO}</h1>
           <h1
             className="mx-auto mb-6 max-w-full animate-fade-in-up text-balance text-center text-[1.875rem] font-bold leading-snug tracking-[-0.035em] sm:mb-5 sm:text-[2rem] md:mb-5 md:text-[2.625rem] md:leading-[1.12] lg:text-[2.85rem]"
             style={{ animationDelay: '0.2s' }}
@@ -182,8 +182,7 @@ export default function Overview() {
 
           <figure className="mx-auto mb-8 max-w-[42rem] w-full animate-fade-in-up sm:mb-10" style={{ animationDelay: '0.42s' }}>
             <div className="overflow-hidden rounded-[1.375rem] border border-sky-200/50 bg-white shadow-[0_20px_50px_-22px_rgb(14_165_233_/_0.25)] ring-1 ring-slate-900/[0.04]">
-              <img
-                src={LP_IMAGES.hero}
+              <img alt="Locamo LP制作サービスのヒーロー画像" src={LP_IMAGES.hero}
                 alt="店舗の集客とSNS・Webを結ぶコンセプトイラスト"
                 width={1344}
                 height={756}

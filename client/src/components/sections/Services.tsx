@@ -92,8 +92,7 @@ export default function Services() {
         </div>
 
         <figure className="mx-auto mb-10 max-w-4xl overflow-hidden rounded-[1.35rem] border border-sky-100 bg-white shadow-sm shadow-sky-200/30">
-          <img
-            src={LP_IMAGES.servicesBanner}
+          <img alt="LP制作サービスの説明画像" src={LP_IMAGES.servicesBanner}
             alt="Locamoの個人店向けLP制作サービスのイメージ"
             width={1728}
             height={576}
@@ -121,8 +120,7 @@ export default function Services() {
                   <p className="text-xs text-muted-foreground leading-relaxed">{LP_PLAN.description}</p>
                 </div>
                 <div className="mx-auto h-[8.25rem] w-[min(100%,11rem)] shrink-0 overflow-hidden rounded-xl border border-sky-100/90 bg-secondary/40 sm:mx-0 sm:h-[8.75rem]">
-                  <img
-                    src={LP_IMAGES.servicePlanLp}
+                  <img alt="LP制作サービスの説明画像" src={LP_IMAGES.servicePlanLp}
                     alt="LP制作のイメージ（業種別モバイル向けランディングの一例）"
                     width={440}
                     height={360}
@@ -174,7 +172,7 @@ export default function Services() {
 
         {/* 他タイプとの比較 — 横幅を取って縦長化（過剰な折り返し）を防ぐ */}
         <div className="animate-fade-in-up">
-          <h3 className="mb-3 text-xl font-bold text-pretty">{SERVICES_COMPARISON_SECTION_TITLE}</h3>
+          <h2 className="mb-3 text-xl font-bold text-pretty">{SERVICES_COMPARISON_SECTION_TITLE}</h2>
           <p className="mb-4 max-w-3xl text-xs leading-relaxed text-muted-foreground text-pretty sm:text-sm">{LP_COMPETITOR_TABLE_CAPTION}</p>
 
           <div className="mx-auto w-full max-w-4xl">

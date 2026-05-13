@@ -48,7 +48,7 @@ export default function Portfolio() {
               key={src}
               className="w-[calc(50%-0.375rem)] max-w-[9.25rem] overflow-hidden rounded-[1rem] border border-sky-100 bg-white shadow-sm shadow-sky-950/5 sm:w-[9.25rem]"
             >
-              <img src={src} alt="Locamo で制作した実績LP" className="aspect-[4/3] h-auto w-full object-cover" loading="lazy" decoding="async" />
+              <img alt="制作実績・納品事例" src={src} alt="Locamo で制作した実績LP" className="aspect-[4/3] h-auto w-full object-cover" loading="lazy" decoding="async" />
             </div>
           ))}
         </div>
@@ -103,8 +103,7 @@ export default function Portfolio() {
               role="region"
               aria-label="ベーカリー参考LPの縦スクロールプレビュー"
             >
-              <img
-                src="/lp-examples/lp-sample-bakery.png"
+              <img alt="制作実績・納品事例" src="/lp-examples/lp-sample-bakery.png"
                 alt="ベーカリー向けサンプルLPの画面構成（参考キャプチャ）"
                 width={1200}
                 height={2400}
@@ -126,8 +125,7 @@ export default function Portfolio() {
               aria-labelledby={`portfolio-case-${idx}`}
             >
               <div className="relative h-48 w-full shrink-0 overflow-hidden bg-gradient-to-br from-sky-50 to-secondary">
-                <img
-                  src={item.image}
+                <img alt="制作実績・納品事例" src={item.image}
                   alt={item.imageAlt}
                   loading="lazy"
                   className="h-full w-full object-contain bg-white transition-transform duration-500 group-hover:scale-[1.04]"

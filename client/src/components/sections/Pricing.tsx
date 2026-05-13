@@ -77,8 +77,7 @@ export default function Pricing() {
         </p>
 
         <figure className="mx-auto mb-10 max-w-3xl overflow-hidden rounded-[1.35rem] border border-sky-100 shadow-md shadow-sky-200/30">
-          <img
-            src={LP_IMAGES.pricingHeaderFigure}
+          <img alt="料金プランの説明画像" src={LP_IMAGES.pricingHeaderFigure}
             alt="制作の流れと料金の概要を示すイメージ図"
             width={1728}
             height={576}
